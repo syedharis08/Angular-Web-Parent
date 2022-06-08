@@ -1,0 +1,159 @@
+<div class="container-fluid">
+    <div class="container contacts">
+
+        <div class="row rowPadding second">
+            <div class="offset-md-1 col-md-10 ">
+                <h2 class="font-28 proximanova-bold ">A few ways to get in touch with us:</h2>
+            </div>
+            <div class="col-md-4 offset-md-2" style="border-right: 1px solid #979797">
+                <h5>Parent:</h5>
+                <p>
+                    <span>Email us:</span>
+                    <span class='redtext'><a [href]="'mailto:'+parentEmail" (click)="parentSendEmail()" >{{parentEmail}}</a></span>
+                </p>
+                <p>
+                    <span>Give us a call: </span>
+                    <span class='redtext'><a [href]="'tel:'+tutorContact"  (click)="parentSendContact()" >{{parentContact}}</a></span>
+                </p>
+            </div>
+            <div class="col-md-4 offset-md-1">
+                <h5>Tutor:</h5>
+                <p>
+                    <span>Email us:</span>
+                    <span class='redtext'><a [href]="'mailto:'+tutorEmail" (click)="parentSendEmail()" >{{tutorEmail}}</a></span>
+                </p>
+                <p>
+                    <span>Give us a call: </span>
+                    <span class='redtext'><a [href]="'tel:'+tutorContact" (click)="parentSendContact()">{{tutorContact}}</a></span>
+                </p>
+            </div>
+            <div class="offset-md-3 col-md-8 third">
+                Or, send us a message using this short form and we’ll get right back to you!
+            </div>
+        </div>
+
+
+        <form [formGroup]="form" (ngSubmit)="onSubmit(form.value,$event)">
+            <div class="row">
+                <div class="col-md-8 offset-md-2 col-sm-12">
+                    <div class="row rowPadding">
+                        <div class="col-md-6">
+                            <mat-form-field class="payment-full-width">
+                                <input readonly matInput [formControl]="firstName" type="text" id="firstName" placeholder="First Name">
+                                <mat-error *ngIf="form.controls['firstName'].errors?.required && !form.controls['firstName'].pristine">
+                                    First Name is required.
+                                </mat-error>
+                            </mat-form-field>
+
+                        </div>
+                        <div class="col-md-6">
+                            <mat-form-field class="payment-full-width">
+                                <input readonly matInput [formControl]="lastName" type="text" id="lastName" placeholder="Last Name">
+                            </mat-form-field>
+
+                        </div>
+                    </div>
+                    <div class="row rowPadding">
+                            <div class="col-md-6">
+
+                                    <mat-form-field class="payment-full-width proxReg">
+                                      <input autocomplete="off"  matInput maxlength="10" [formControl]="mobile" id="mobile" placeholder="Phone Number" onkeyup="if (event.target.value.charAt(0) == '0') { event.target.value = event.target.value.slice(1);}" onkeypress='return ((event.charCode >= 48 && event.charCode <= 57) || (event.charCode == 0))'>
+                                      <mat-error *ngIf="form.controls['mobile'].hasError('required')">
+                                          Required
+                                      </mat-error>
+                                      <mat-error *ngIf="form.controls['mobile'].hasError('mobile') && !form.controls['mobile'].hasError('required')">
+                                          Phone Number is not valid
+                                      </mat-error>
+                      
+                                    </mat-form-field>
+                                  </div>
+                        <div class="col-md-6">
+                            <mat-form-field class="payment-full-width">
+                                <input readonly matInput [formControl]="email" id="email" placeholder="Email Address">
+                                <mat-error *ngIf="form.controls['email'].hasError('required')">
+                                    Email is Required.
+                                </mat-error>
+                                <mat-error *ngIf="form.controls['email'].hasError('email') && !form.controls['email'].hasError('required')">
+                                    Please enter a valid email address.
+                                </mat-error>
+
+                            </mat-form-field>
+
+                        </div>
+                       
+
+                    </div>
+                    <div class="row rowPadding">
+                            <div class="col-md-6">
+                                    <mat-form-field class="payment-full-width">
+                                        <!-- <mat-select placeholder="Select User" [formControl]="user" required>
+                                            <mat-option value="PARENT">I am a Parent</mat-option>
+                                            <mat-option value="TUTOR">I am a Tutor</mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="form.controls['user'].errors?.required && !form.controls['user'].pristine">
+                                            choose any one user
+                                        </mat-error> -->
+                                        <input readonly matInput placeholder="Are you a parent or tutor?" value="Parent">
+                                    </mat-form-field>
+        
+                                </div>
+                        <div class="col-md-6">
+                            <mat-form-field class="payment-full-width">
+                                <input readonly *ngIf="noEdit" matInput [formControl]="zipcode" id="zipcode" placeholder="Zip Code">
+                                <input [hidden]="noEdit" matInput [formControl]="zipcode" id="zipcode" placeholder="Zip Code">
+                                <mat-error *ngIf="form.controls['zipcode'].hasError('required')">
+                                    Zip code is required.
+                                </mat-error>
+                                <mat-error *ngIf="form.controls['zipcode'].hasError('zipcode') && !form.controls['zipcode'].hasError('required')">
+                                    Please enter a valid Zip code.
+                                </mat-error>
+
+                            </mat-form-field>
+
+                        </div>
+
+
+                    </div>
+                    <div class="row rowPadding">
+                        <div class="col-md-12">
+                            <mat-form-field style='width: 100%;'>
+                                <textarea maxlength="500" class="textarea" matInput [formControl]="message" placeholder="How can we help you?"></textarea>
+                            </mat-form-field>
+
+                        </div>
+                    </div>
+                    <div class="col-md-12 pr-0 mt-4" *ngIf="errorMessageCard">
+                        <p class="cardError">{{errorMessageCard}}</p>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="row">
+                <div class="col-md-10 offset-md-1">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="row pt-4 submit-center">
+                                <div class="col-4 paddLeftSmall ">
+                                    <button type="submit" class="loginButton arrow-btn min-width">Send Us a Message
+                                        <!-- <span style="color:white;margin-right:6px;float:right"> -->
+                                            <i aria-hidden="true" class="fa fa-lg fa-arrow-right" style="right: 20px;"></i>
+                                        <!-- </span> -->
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="height: 50px">
+
+                    </div>
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+
+
+</div>

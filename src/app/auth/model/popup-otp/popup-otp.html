@@ -1,0 +1,40 @@
+<div class="cls-popup-back" id="popup-surcharge-comp">
+    <div class="cls-popup-content" style="margin-top:90px;" id="popup-surcharge-cnt">
+        <div style="float:right;padding:0px;margin-bottom:0px;margin-top: -14px;" class="row">
+            <button (click)="hidePopup()" style="border:none" class="close-btn" mat-button mat-dialog-close="true">
+                <img src="assets/img/close.png">
+            </button>
+        </div>
+        <!-- <i class="fa fa-times close-reebook-popup" (click)="hidePopup()"></i> -->
+        <div style="padding: 0 10%; text-align: center" class="mt-4">
+            <div style="display: none" class="pop-icon-div">
+                <i id="pop-surcharge-icon" class="fa"></i>
+            </div>
+
+            <p class="otpText mt-4 mb-2">
+                <span id="popup-surcharge-message" class="pop-message"></span>
+            </p>
+            <p class="otpText mt-4 mb-2">
+                <span class="otpText pop-message" style="font-size:18px"> We texted you a 4-digit code. Please enter it below.</span>
+
+            </p>
+            <form [formGroup]="form2" (ngSubmit)="onSubmit(form2.value)">
+                <div class="form-group">
+                    <input maxlength="4" class="verifyOtp" [formControl]="otp" type="text">
+                </div>
+                <button [disabled]="!form2.valid" type="submit" class="pinkButton arrow-btn">Verify
+                    <!-- <span style="color:white;margin-right:6px;float:right"> -->
+                        <i class="fa fa-lg fa-arrow-right" aria-hidden="true"></i>
+                    <!-- </span> -->
+                </button>
+
+            </form>
+            <div class="text-center mt-4">
+                <a style="color:#3b8212;font-size:12px;" (click)="resendOTP()">Resend Verification Code</a>
+            </div>
+
+            <!--<button class="btn btn-lg btn-primary btn-block ok-button" (click)="action()">OK</button>-->
+        </div>
+
+    </div>
+</div>

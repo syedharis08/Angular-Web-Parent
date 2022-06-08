@@ -1,0 +1,35 @@
+<div style="float:right;padding:0px;margin-bottom:0px" class="row" mat-dialog-title>
+    <button (click)="closeDialog()" style="border:none" class="close-btn" mat-button mat-dialog-close="true">
+        <img src="assets/img/close.png">
+    </button>
+</div>
+<mat-dialog-content>
+    <!-- <div style="float:right" mat-dialog-title>
+        <button (click)="closeDialog()" style="border:none" mat-button mat-dialog-close="true">
+            <i class="fa fa-times fa-fw fa-3xCross crossButton" aria-hidden="true"> </i>
+        </button>
+    </div> -->
+    <div class="myContainer mb-2">
+        <h2 class="headings text-center font-28">Your request has been sent to the tutor</h2>
+        <div class="text-center">
+            <div class="row justify-content-center d-none d-sm-block">
+                <span class="col-12 col-sm-12">
+                    <img class="img-size" src="/assets/img/image.png" width="190px">
+                </span>
+            </div>
+
+            <div class="row">
+                <p class="dialogText" style="font-size:15px;"> You will receive a confirmation once the tutor responds to each request. If multiple sessions were requested, you will receive the tutor’s response for each individual session. If you need to contact the tutor directly, go to the session details in My Sessions and click Contact Tutor. </p>
+            </div>
+
+            <div class="row justify-content-center">
+                <button (click)="goToSessions()" class="pinkButton mt-2 mb-2 arrow-btn ">Got It
+                    <!-- <span style="color:white;margin-right:6px;float:right"> -->
+                        <i class="fa fa-lg fa-arrow-right" aria-hidden="true"></i>
+                    <!-- </span> -->
+                </button>
+            </div>
+        </div>
+
+    </div>
+</mat-dialog-content>

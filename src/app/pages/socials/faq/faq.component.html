@@ -1,0 +1,25 @@
+<div class="container-fluid">
+    <div id="faqs" class="container faq-align mt-4">
+        <h1 class="faqHead">Parent FAQ<span class="lightHead">s</span> - {{commonService.CONSTANT.PROJECT_NAME}}
+        </h1>
+        <br>
+        <span class="faqSubhead lightHead">Here are questions and answers to help you better understand how
+            {{commonService.CONSTANT.PROJECT_NAME}} works. As you’ll see, it’s easy to connect with a great tutor
+            and set your child up for success.</span>
+        <hr style="width:100%">
+        <mat-accordion *ngIf="faq && faq != undefined">
+            <mat-expansion-panel class="mt-4" *ngFor="let item of faq">
+                <mat-expansion-panel-header>
+                    <mat-panel-title (click)="faqGa(item.query)">
+                        {{item.query}}
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <p [innerHTML]="item.ans">
+                </p>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
+</div>
+
+
+<!--<button (click)="showloader()">store</button>-->

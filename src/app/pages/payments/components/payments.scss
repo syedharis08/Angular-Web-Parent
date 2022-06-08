@@ -1,0 +1,445 @@
+@import '../../../theme/sass/conf/conf';
+
+.payment-full-width {
+    width: 100%;
+}
+
+.payments {
+    h2 {
+        text-align: left;
+        border-bottom: 2px solid #ebebeb;
+        padding: 25px 0;
+        margin-bottom: 15px;
+        font-size: 28px;
+        font-weight: 100;
+        color: #222e82;
+        opacity: 0.7;
+    }
+
+    .mat-form-field-flex {
+        border: 1px solid #f3f3f3;
+        border-bottom: none;
+
+        input {
+            height: 39px;
+            padding: 0 13px;
+        }
+
+        span label {
+            padding-left: 16px;
+            box-sizing: border-box;
+            padding-top: 10px;
+        }
+    }
+
+    .mat-form-field-underline .mat-form-field-ripple {
+        height: 4px !important;
+    }
+
+    .mat-form-field-underline {
+        height: 4px !important;
+        background-color: #f3f3f3;
+    }
+
+    .rowPadding {
+        padding: 15px 0;
+    }
+
+    .mat-select-value-text {
+        span {
+            padding-left: 13px;
+        }
+    }
+
+    .mat-select-trigger {
+        padding: 10px 0;
+    }
+
+    .submit-center {
+        display: flex;
+        justify-content: center;
+    }
+
+    .mat-checkbox-label {
+        color: #4b5e71;
+        font-size: 18px;
+    }
+
+    .default-text {
+        color: #c8c8c8;
+        font-family: 'ProximaNova-Reg';
+        text-indent: 29px;
+    }
+}
+
+//form field
+.setHeaderImage {
+    background-image: url("./assets/img/greenline.png");
+    width: 100% !important;
+    height: 140px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.rowPaddTop {
+    padding-top: 3%;
+}
+
+.steps {
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 0.8px;
+    text-align: center;
+    color: #e1c79b;
+}
+
+.selectedBox {
+    width: 330px;
+    min-height: 180px;
+    max-height: auto;
+    background-color: #ffffff;
+    border: solid 2px #f4f0f0;
+    padding: 5% 5% 3% 5%;
+}
+
+.stepsHeadings {
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+    color: #ffffff;
+    padding-top: 2%;
+    letter-spacing: 1.6px;
+}
+
+.address {
+    font-size: 14px;
+    font-weight: normal;
+    letter-spacing: 0.4px;
+    text-align: left;
+    color: #2b2926;
+    opacity: 0.8;
+}
+
+.hrlinePayments {
+    border: solid 1px #f4f0f0;
+}
+
+.setPaddAddress {
+    padding-top: 2px;
+}
+
+textarea {
+    resize: none;
+}
+
+.applyPromoButton {
+    height: 50px;
+    border-radius: 3px;
+    border: none;
+    background-color: #00bab2;
+    font-size: 14px;
+    font-weight: 900;
+    letter-spacing: 0.5px;
+    text-align: center;
+    color: #ffffff;
+    width: 100%;
+    cursor: pointer;
+
+    &:hover {
+        background-color: #ffffff;
+        color: #00bab2;
+        border: 1px solid #00bab2;
+    }
+}
+
+.appliedPromoButton {
+    background-color: #ffffff;
+    color: #00bab2;
+    border: 1px solid #00bab2;
+    cursor: not-allowed;
+}
+
+.userImage {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+}
+
+.username {
+    font-size: 14px;
+    letter-spacing: 0.8px;
+    color: white;
+    // text-transform: capitalize;
+    padding-top: 5px;
+}
+
+.timeBooking {
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-align: center;
+    color: #335b68;
+    line-height: 1.6
+}
+
+button.btn.btn-primary {
+    background: #3cbeba !important;
+    border: none !important;
+}
+
+button.btn.btn-primary:hover,
+button.btn.btn-primary:focus,
+button.btn.btn-primary.focus,
+button.btn.btn-primary:active,
+button.btn.btn-primary.active {
+    background: #3cbeba !important;
+    border: none !important;
+}
+
+.inputHeadings {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: 1px;
+    text-align: left;
+    color: #335b68;
+}
+
+.addcard {
+    height: 35px;
+    line-height: 2.4;
+}
+
+.catName {
+    font-size: 14px;
+    letter-spacing: 0.4px;
+    text-align: left;
+    color: #2b2926;
+    // text-transform: capitalize;
+    opacity: 0.8;
+}
+
+.catCost {
+    text-align: right;
+}
+
+.align-radio {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.faPayment {
+    color: #f07244;
+    font-size: 16px;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.setBorderCard {
+    border: solid 2px #f4f0f0;
+    border-radius: 3px;
+    padding: 5%;
+    width: 100%;
+    height: 100%;
+
+    label {
+        color: #34495e;
+        display: block;
+        font-size: 16px;
+        font-weight: bold;
+        margin-top: 2px;
+        cursor: pointer;
+    }
+}
+
+.editbutton {
+    font-size: 10px;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+    text-align: left;
+    color: #00bab2;
+    cursor: pointer;
+    padding-top: 3%;
+    outline: 0;
+}
+
+.expDate {
+    width: 100%;
+}
+
+.cardSelect {
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.6px;
+    color: #000000;
+    opacity: 0.8;
+    color: #34495e;
+    font-family: 'ProximaNova-Reg';
+}
+
+.holderName {
+    font-size: 15px;
+    letter-spacing: 0.4px;
+    // text-transform: capitalize;
+    color: #34495e;
+    font-family: 'ProximaNova-Reg';
+}
+
+.addnewCard {
+    font-size: 14px;
+    letter-spacing: 0.4px;
+    text-align: right;
+    color: #ffffff;
+    padding-top: 3%;
+    cursor: pointer;
+}
+
+.cardError {
+    font-size: 14px;
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: 0.4px;
+    text-align: center;
+    color: #dd4c40;
+    padding: 1%;
+    border: solid 1px #df2f5a;
+}
+
+@media (max-width: 768px) {
+    .nopadding {
+        padding: 0px;
+    }
+    .stepsHeadings {
+        font-size: 20px;
+        line-height: 1.2;
+    }
+    .paddLeftSmall {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .selectedBox,
+    .setBorderCard {
+        width: 100%;
+    }
+    .setHeaderImage {
+        height: 180px;
+    }
+    // .bookPadding{
+    //   padding-left: 15px;
+    .booknowButton {
+        width: 100%;
+    }
+    // }
+    .expDate {
+        width: 100%;
+    }
+    .holderName {
+        font-size: 12px;
+    }
+    .cardSelect {
+        font-size: 10px;
+    }
+    .inputHeadings {
+        font-size: 14px;
+    }
+    .actions {
+        text-align: center !important;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .paddLeftSmall {
+        padding-left: 0;
+    }
+    .form-control {
+        width: 380px;
+    }
+    .stepsHeadings {
+        font-size: 20px;
+    }
+    .bookPadding {
+        padding-left: 15px;
+    }
+    .expDate {
+        width: 100%;
+    }
+    .holderName {
+        font-size: 12px;
+    }
+    .cardSelect {
+        font-size: 10px;
+    }
+    .inputHeadings {
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 300px) {
+    .payments .mat-checkbox-label {
+        font-size: 15px !important;
+        margin-top: 5px !important;
+    }
+    .payments .default-text {
+        text-align: center !important;
+        text-indent: 0px !important;
+    }
+    .payments .rowPadding {
+        padding: 0px !important
+    }
+}
+
+.addNewCard {
+    font-family: 'ProximaNova-Reg';
+}
+
+.save-card-btn {
+    max-width: 400px;
+    width: 100%;
+    font-size: 18px;
+    height: 44px;
+    border-radius: 22px;
+    background-color: $main-green;
+    color: #ffffff;
+    font-family: 'ProximaNova-Reg';
+}
+
+.cancel-btn {
+    max-width: 200px;
+    width: 100%;
+    height: 44px;
+    border-radius: 22px;
+    font-size: 18px;
+    background-color: $main-green;
+    color: #ffffff;
+    font-family: 'ProximaNova-Reg';
+}
+
+.billing-address-text {
+    font-family: 'ProximaNova-Reg';
+}
+
+@media screen and (min-width: 300px) and (max-width: 560px) {
+    .half-width-btn {
+        padding: 10px;
+        font-size: 18px;
+        height: auto !important;
+        border-radius: 30px;
+        max-width: 36vw !important;
+        min-width: 36vw !important;
+        line-height: .44
+    }
+}
+
+// .arrow-btn .fa-arrow-right {
+//     top: 16px !important;
+//     font-size: 15px !important;
+// }
+
+button:disabled {
+    background: #c5c5c5;
+    cursor: initial;
+}

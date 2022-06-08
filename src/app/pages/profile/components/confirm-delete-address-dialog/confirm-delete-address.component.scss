@@ -1,0 +1,139 @@
+@import "../../../../theme/sass/conf/conf";
+.datePicker .mat-icon {
+    display: none;
+}
+
+.datePickIcon {
+    background-repeat: no-repeat;
+    background-image: url('/assets/img/ic-calendar.png')
+}
+
+.mySelectOption .mat-select-arrow {
+    // background-image: url('/assets/img/ic-carat-down.png');
+    border: none;
+    margin-right: 2.8rem;
+}
+
+.mySelectOption .mat-select-trigger {
+    height: 2.125em;
+}
+
+.mySelectOption .mat-select .mat-select-trigger,
+.mat-select .mat-select-arrow {
+    color: white !important;
+}
+
+.mySelectOption .mat-select-arrow-wrapper {
+    background-image: url('/assets/img/ic-carat-down.png');
+    width: 0;
+    height: 0;
+    background-repeat: no-repeat;
+}
+
+.mySelectOption .mat-select-value {
+    text-align: left;
+    padding-left: 2%;
+}
+
+.docsText {
+    font-family: 'ProximaNova-Reg';
+    font-size: 16px;
+    color: #231f20;
+    line-height: 1.2;
+}
+
+.addonEdit {
+    right: 2.2rem;
+    top: 1.50rem;
+    position: absolute;
+}
+
+.upload-doc {
+    height: 50px;
+    background-color: #ffffff;
+    border: solid 1px #efefef;
+}
+
+.addonDoc {
+    right: 2.2rem;
+    top: 1.15rem;
+    position: absolute;
+}
+
+.myTrash {
+    color: #f15d25;
+    padding-right: 22px;
+    margin-top: 12px;
+}
+
+.mySelectOption {
+    .mat-select-placeholder {
+        font-size: 12px;
+    }
+    .mat-select {
+        // width: 80%;
+    }
+    .mat-select-placeholder.mat-floating-placeholder {
+        margin-top: 0px;
+    }
+}
+
+.disabledText {
+    color: #34495e;
+    font-size: 15px;
+    font-family: 'ProximaNova-Reg';
+}
+
+.addressDiv {
+    text-align: left;
+    background-color: #fcfcfc;
+}
+
+.blueText {
+    font-family: 'ProximaNova-Light';
+    font-size: 18px;
+    font-weight: 600;
+    color: #116DB4;
+}
+
+@media (max-width:768px) {
+    .nopadding {
+        padding: 0px !important
+    }
+    .text-center-mobile {
+        text-align: center
+    }
+    .mat-dialog-container {
+        max-width: 90vw !important;
+        padding: 10px !important;
+    }
+    .mat-dialog-container .mat-dialog-content {
+        max-width: 90vw;
+        padding: 10px;
+    }
+    .upload-doc {
+        label {
+            color: #34495e;
+            word-wrap: break-word;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            max-width: 51vw;
+        }
+    }
+    .mySelectOption .mat-select-arrow {
+        margin-right: 1.8rem !important
+    }
+    .addonDoc {
+        right: 1.8rem !important
+    }
+    .half-width-btn {
+        width: 100% !important
+    }
+    .docsTextParent {
+        margin: 0px !important;
+        text-align: center !important;
+    }
+}
+
+@media (min-width:769px) and (max-width:1024px) {}

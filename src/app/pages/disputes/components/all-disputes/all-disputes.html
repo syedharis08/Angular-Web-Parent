@@ -1,0 +1,209 @@
+<div class="text-center session-all " id="notifications" style="padding-bottom:3%;">
+    <div *ngIf="disputes && disputes !=undefined" class="container " style="padding-top:1%;">
+
+
+        <mat-card class="mt-2 mb-4 " *ngFor="let dispute of disputes | paginate: { itemsPerPage: limit, currentPage: page, totalItems: count }">
+
+            <mat-card-content style=" padding-left: 2%; padding-right: 2%;">
+
+
+                <div class="bookingView " style="cursor:pointer;">
+                    <div class="row">
+                        <div class="col-lg-9 col-12">
+                            <div class="row mt-3">
+
+                                <div class="col-12 col-lg-8">
+
+                                    <div class="row">
+
+                                        <div class="col-lg-4 col-4 text-left-address capitalize">
+                                            <span class="bookingSubHeading">Child:</span>
+                                            <br>
+                                            <br>
+                                            <span class="bookingSubHeading">Tutor:</span>
+                                            <br>
+                                            <br>
+                                            <span class="bookingSubHeading"> Date:</span>
+                                            <br>
+                                            <br>
+                                            <span class="bookingSubHeading">Time:</span>
+                                            <br>
+                                            <br>
+                                            <span class="bookingSubHeading">Subjects:</span>
+                                        </div>
+                                        <div class="col-8 text-left-address text-disputes capitalize">
+                                            <span class="BookingText2">{{dispute.studentId.firstName ? dispute.studentId.firstName :''}} {{dispute.studentId.lastName ? ((dispute.studentId.lastName.substr(0,1)) +'.') : ''}}</span>
+                                            <br>
+                                            <br>
+                                            <span class="BookingText2">{{dispute.tutorId.firstName ? dispute.tutorId.firstName :''}} {{dispute.tutorId.lastName ? dispute.tutorId.lastName : ''}}</span>
+                                            <br>
+                                            <br>
+                                            <span *ngIf="dispute.bookingId && dispute.bookingId != undefined" class="BookingText2">{{dispute.bookingId.startTime | datex: "MMM. D, YYYY"}}
+                                            </span>
+                                            <br>
+                                            <br>
+                                            <span *ngIf="dispute.bookingId && dispute.bookingId != undefined" class="BookingText2">{{dispute.bookingId.startTime | datex:"h:mmA"}}-{{dispute.bookingId.endTime | datex:"h:mmA"}} 
+                                            </span>
+                                            <br>
+                                            <br>
+                                            <span *ngIf="dispute.bookingId && dispute.bookingId !=undefined && dispute.bookingId.subjects !=undefined  " class="BookingText2"> <span *ngFor="let subject of dispute.bookingId.subjects" >
+                                                   <span *ngIf="subject.subcategories !=undefined && subject.subcategories.length >0">
+                                                            <span *ngFor="let subsubject of subject.subcategories;let last=last" class="BookingText2 " style="text-transform:none;" >
+                                                                {{subsubject.name}}{{last? '':','}}&nbsp;</span>
+                                            </span>
+                                            </span>
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                        </div>
+                        <div class="col-12 mt-4 col-lg-3" style="justify-content:center;display:flex;display:block">
+                            <!-- <button type="button" (click)="openDialog(booking.booking._id)"   class="contact justify" >Contact Parent
+                                      <span style="color:white;margin-right:24px; float:right">
+                                        <i class="fa fa-lg fa-arrow-right" aria-hidden="true"></i>
+                                      </span>
+                                    </button> -->
+                            <div *ngIf="dispute.status && dispute.status != undefined">
+                                <span [ngClass]="{'border-status': (dispute.status === 'RESOLVED'),'border-status-unresolved':(dispute.status === 'UNRESOLVED')}"> {{dispute.status}} </span>
+                            </div> <br> <br>
+                            <span>
+
+                            
+                            <span *ngIf="dispute.tutorId && dispute.tutorId != undefined && dispute.tutorId.tutor && dispute.tutorId.tutor != undefined" class="hour-rate" style="padding-right:2%"> $ {{(dispute.tutorId.tutor.hourlyRate).toFixed(2)}} </span>
+
+                            <a (click)="singleDispute(dispute._id)">
+
+                                <span> <img src="/assets/img/carat-orange-side.png"> </span> </a>
+                            </span>
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+
+
+
+                <!-- 
+                <div class="row ">
+                    <div class="offset-lg-1 offset-md-1 col-lg-3 col-md-3 col-sm-12 col-xs-12 text-left-address">
+                        <label class="status-title"> Child:</label >
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 col-sm-12 col-xs-12 text-left-address">
+                            <span class="tutor-place-text capitalize" > {{dispute.studentId.firstName ? dispute.studentId.firstName :''}} {{dispute.studentId.lastName ? ((dispute.studentId.lastName.substr(0,1)) +'.') : ''}} </span>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 col-sm-3 col-xs-3 text-center mt-2">
+                            <div *ngIf="dispute.status && dispute.status != undefined" >
+                                    <span [ngClass]="{'border-status': (dispute.status === 'RESOLVED'),'border-status-unresolved':(dispute.status === 'UNRESOLVED')}"  > {{dispute.status}} </span>
+                               </div>
+                    </div>
+
+                   
+                    </div> -->
+                <!-- 
+                    <div class="row mt-2">
+                            <div class="offset-lg-1 offset-md-1 col-lg-3 col-md-3 col-sm-12 col-xs-12 text-left-address">
+                                <label class="status-title"> Tutor:</label >
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 col-sm-12 col-xs-12 text-left-address">
+                                    <span class="tutor-place-text capitalize" >{{dispute.tutorId.firstName ? dispute.tutorId.firstName :''}} {{dispute.tutorId.lastName ? ((dispute.tutorId.lastName.substr(0,1)) +'.') : ''}} </span>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 col-sm-3 col-xs-3 text-center mt-2">
+                                 
+                                    <span  *ngIf="dispute.tutorId && dispute.tutorId != undefined && dispute.tutorId.tutor && dispute.tutorId.tutor != undefined" class="hour-rate" > $ {{dispute.tutorId.tutor.hourlyRate}} </span>
+                              
+                                    <a (click)="singleDispute(dispute._id)">
+                                                   
+                                            <span > <img src="/assets/img/carat-orange-side.png"> </span> </a>
+                            </div>
+        
+                           
+                            </div>
+                            <div class="row mt-2">
+                                    <div class="offset-lg-1 offset-md-1 col-lg-3 col-md-3 col-sm-12 col-xs-12 text-left-address">
+                                        <label class="status-title"> Date:</label >
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 col-sm-12 col-xs-12 text-left-address">
+                                            <span *ngIf="dispute.bookingId && dispute.bookingId != undefined" class="tutor-place-text capitalize" > {{dispute.bookingId.startTime | date: "MMM d, y "}} </span>
+                                    </div>
+                                  
+                
+                                   
+                                    </div>
+                                    <div class="row mt-2 ">
+                                            <div class="offset-lg-1 offset-md-1 col-lg-3 col-md-3 col-sm-12 col-xs-12 text-left-address">
+                                                <label class="status-title"> Time:</label >
+                                            </div>
+                                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 col-sm-12 col-xs-12 text-left-address">
+                                                    <span *ngIf="dispute.bookingId && dispute.bookingId != undefined" class="tutor-place-text capitalize" > {{dispute.bookingId.startTime | date:"h:mm a"}}-{{dispute.bookingId.endTime | date:"h:mm a"}}  </span>
+                                                    
+                                            </div>
+                                          
+                        
+                                           
+                                            </div>
+                                            <div class="row mt-2">
+                                                    <div class="offset-lg-1 offset-md-1 col-lg-3 col-md-3 col-sm-12 col-xs-12 text-left-address">
+                                                        <label class="status-title"> Subjects:</label >
+                                                    </div>
+                                                    <div *ngIf="dispute.bookingId && dispute.bookingId !=undefined && dispute.bookingId.subjects !=undefined "   class=" text-left-address col-lg-4 col-md-4 col-sm-6 col-xs-6 col-sm-12 col-xs-12">
+                                                           
+                                
+                                                              <span *ngFor="let subject of dispute.bookingId.subjects" class=" "> 
+                                                                            <span style="padding-left:2%" *ngFor="let subsubject of subject.subcategories" class="tutor-place-text " >
+                                                                                {{subsubject.name}} </span>
+                                                                    </span> 
+                                                                           
+                                                    
+                                                                    
+                                                    </div>
+                                                  
+                                
+                                                   
+                                                    </div> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+            </mat-card-content>
+
+        </mat-card>
+        <div *ngIf="count>5" style="float:right;">
+
+
+            <div *ngIf="limit >=5" class="col-lg-12 pagination col-sm-12 col-md-12 col-xs-12  mb-2">
+                <span class="perPage">Show</span>
+                <span class="perPage">
+                                <select class="selectBox" (change)="selectNo(device.value)" #device>
+                                        <option  value="5">5</option>
+                                        <option selected value="10">10</option>
+                                        <option value="15">15</option>
+                                        <option value="20">20</option>
+                                      </select> 
+                        </span>
+                <span class="perPage">items per page</span>
+                <span class="perPage">
+                                <pagination-controls class="inline-flx" (pageChange)="pageChanged($event)" maxSize="5" directionLinks="true" autoHide="false" previousLabel="Previous" nextLabel="Next" screenReaderPaginationLabel="Pagination" screenReaderPageLabel="page" screenReaderCurrentLabel="You're on page"></pagination-controls>
+                        </span>
+            </div>
+
+
+
+        </div>
+
+    </div>
+</div>

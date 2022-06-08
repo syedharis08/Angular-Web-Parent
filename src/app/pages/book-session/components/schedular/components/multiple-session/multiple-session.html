@@ -1,0 +1,55 @@
+<div class="overflow-content">
+    <!-- <div *ngIf="!web" class="date-content row timeDisplayContainer">
+        <span *ngIf="timeToDisplay">
+            {{timeToDisplay}}
+        </span>
+    </div> -->
+
+    <div class="all-schedule">
+
+        <div class="second row">
+            <p *ngIf="showTzMsg" style="margin-top: 11px; margin-bottom: 0;" class="timeZoneMsg timeZoneMsg1">PLEASE
+                NOTE: The calendar and session time below
+                reflect your <span style="font-style:italic">current</span> time zone of {{browserTz}}. Please
+                be sure to account for any time differences when selecting a time for your session.</p>
+        </div>
+
+        <div class="second row">
+            <div class="calendersection">
+                <div class="calenerheading">
+                    <h2 class="font-28 proximanova-light">Choose a Date</h2>
+                </div>
+                <div class="calenderComponent">
+                    <calender (onSelectDate)='dayValue($event)' [newDateSelected]="dataFromCalenderEvent"></calender>
+                </div>
+            </div>
+            <div class="schedularsection">
+                <div class="schedularheading">
+                    <h2 class="font-28 proximanova-light">Choose a Time</h2>
+                </div>
+                <div class="schedularComponent">
+                    <calendar-event [selectedDateUpdate]="currentSelectedDate" (dataToSend)='receiveData($event)'
+                                    *ngIf="showTimer">
+                    </calendar-event>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="date-content row timeDisplayContainer">
+        <span *ngIf='timeToDisplay'>
+            {{timeToDisplay}}
+        </span>
+    </div>
+    <div *ngIf="web" class="third row">
+        <button style="margin:11px;" type="button" (click)="cancel()">Cancel</button>
+        <button style="margin:11px" type="submit" (click)='selectedDate()' [disabled]="!timeToDisplay">Select</button>
+    </div>
+    <div *ngIf="!web" class="row mt-4" style="justify-content:space-around;">
+        <button class="cancelBtn" type="button" (click)="cancel()">Cancel</button>
+        <button [disabled]="!timeToDisplay" class="arrow-btn saveBtn" type="submit" (click)='selectedDate()'
+                [disabled]="!timeToDisplay">Save
+            <i style="right:19px" class="fa fa-lg fa-arrow-right " aria-hidden="true "></i>
+        </button>
+    </div>
+</div>

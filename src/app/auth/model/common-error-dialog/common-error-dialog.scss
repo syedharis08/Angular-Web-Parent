@@ -1,0 +1,70 @@
+@import "../../../theme/sass/conf/conf";
+
+.error-data {
+    font-family: 'ProximaNova-Reg';
+    color: #232f84;
+    font-size: 18px !important;
+    padding-top: 2%;
+}
+
+// #tutor-dialog {
+//     .mat-dialog-container .mat-dialog-content {
+//         min-height: 20vw;
+//         height: auto;
+//     }
+// }
+// .arrow-btn .arrow-button {
+//     top: 16px !important;
+//     font-size: 14px !important;
+// }
+@media only screen and (max-width: 767px) {
+    .margin {
+        margin-top: 0px;
+    }
+
+    .verifyOtp {
+        width: auto;
+    }
+
+    // .arrow-btn .fa-arrow-right {
+    //     top: 16px !important;
+    //     font-size: 14px !important;
+    // }
+}
+
+.loginButton1 {
+    margin: 0 10px;
+    border-radius: 22px;
+    background-color: $main-green;
+    color: white;
+    border-radius: 22px;
+    font-family: 'ProximaNova-Reg';
+    // min-width: 200px;
+    min-height: 44px;
+    max-height: 44px;
+    // max-width: 300px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.mobileBtn {
+    display: none;
+}
+
+.desktopBtn {
+    display: block;
+}
+
+@media (max-width: 620px) {
+    .mobileBtn {
+        display: block;
+    }
+
+    .desktopBtn {
+        display: none;
+    }
+}
+
+::ng-deep .mat-dialog-content {
+    max-height: 75vh !important;
+}

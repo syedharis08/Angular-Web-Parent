@@ -1,0 +1,134 @@
+$dayBase: 50px;
+$base: 5px;
+$concrete: #232f84;
+$orange: #ef6338;
+.calendar {
+    display: block;
+    width: 410px;
+    font-family: Roboto, Helvetica Neue, sans-serif;
+    padding: 10px 20px;
+    box-shadow: 0 5px 5px -3px rgba(0, 0, 0, .2), 0 8px 10px 1px rgba(0, 0, 0, .14), 0 3px 14px 2px rgba(0, 0, 0, .12);
+    border-radius: 8px;
+    background: white;
+    * {
+        box-sizing: border-box;
+    }
+    .p4 {
+        color: $concrete;
+        font-weight: bold;
+    }
+    .month-nav {
+        padding: 15px 0;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        button {
+            background: none;
+            border: none;
+            color: $orange;
+            margin-top: -2px;
+        }
+    }
+    .year-nav {
+        padding: $base;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    .month-grid {
+        .day-names {
+            display: flex;
+            flex-direction: row;
+            font-weight: bold;
+            border-bottom-right-radius: 3px;
+            border-bottom-left-radius: 3px;
+            padding: 10px 0;
+            font-size: 16px;
+            .day-name {
+                color: $concrete;
+            }
+        }
+        .weeks {
+            display: flex;
+            flex-direction: column;
+        }
+        .week {
+            display: flex;
+            flex-direction: row;
+        }
+        .week-date,
+        .day-name {
+            text-align: center;
+            padding: $base;
+            display: block;
+            width: $dayBase;
+            display: flex;
+            color: #4a5d70;
+            justify-content: center;
+            align-items: center;
+        }
+        .week-date {
+            height: 40px;
+            position: relative;
+            .date-text {
+                z-index: 10;
+                font-size: 14px;
+                font-family: 'Montserrat', sans-serif;
+            }
+            &::after {
+                content: '';
+                height: $dayBase * 0.7;
+                width: $dayBase * 0.7;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                transition: background-color 150ms linear, color 150ms linear;
+                z-index: 1;
+            }
+            &.enabled {
+                cursor: pointer;
+                &:hover {
+                    &:after {
+                        background-color: powderblue;
+                    }
+                }
+            }
+            &.selected {
+                color: white;
+                &:after {
+                    background-color: #232f84;
+                }
+                &:hover {
+                    &:after {
+                        background-color: #232f84;
+                    }
+                }
+            }
+            &.disabled {
+                color: #afafaf;
+            }
+        }
+        .today {
+            span {
+                font-weight: bold;
+                color: $orange;
+            }
+        }
+        .selected {
+            span {
+                font-weight: bold;
+                background: #232f84;
+                padding: 10px;
+                color: #fff;
+            }
+        }
+    }
+}
+
+@media (max-width: 450px) {
+    .calendar {
+        width: 270px;
+        max-width: calc(100vw - 10px);
+    }
+}

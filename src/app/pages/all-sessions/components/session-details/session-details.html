@@ -1,0 +1,271 @@
+<div class="text-center  session-all pb-4" id="session">
+
+
+    <mat-tab-group *ngIf="showTabs" [selectedIndex]="setIndex" class="pt-4 mobilePadding "
+        (selectChange)="changedTab($event)">
+        <mat-tab label="Upcoming">
+            <div class="container mt-4 mobileMargin nopadding" *ngIf="upcomingSessions && upcomingSessions!=undefined ">
+
+
+                <div class="tab-content col-12"
+                    *ngFor="let session of upcomingSessions | paginate: { itemsPerPage: up_limit, currentPage: up_page, id:'upcoming', totalItems: up_count }; let i=index">
+
+                    <div (click)="getDetails(session.Bookings._id)" class="bookingView " style="cursor:pointer;">
+                        <h5 [ngStyle]="{'background':  session.color }" style="line-height: 1;color:white"
+                            class="bookingHeading proximanova-bold ">{{session.statusMsg}}</h5>
+                        <div class="row mt-3">
+                            <div class="col-12" style="position:absolute">
+                                <img (click)="getDetails(session.Bookings._id)" class="bookingArrow"
+                                    src="/assets/img/carat-orange-side.png">
+                            </div>
+                            <div class="col-12 col-lg-5">
+                                <div class="row rightSpan">
+                                    <div class="col-4 text-left">
+                                        <span class="bookingSubHeading proximanova-bold ">Child:</span>
+                                       
+                                        <span class="bookingSubHeading proximanova-bold spaceAbove ">Tutor:</span>
+                                       
+                                        <span style="white-space: nowrap;" class="bookingSubHeading proximanova-bold spaceAbove">Date & Time:</span>
+                                       
+                                        <span class="bookingSubHeading proximanova-bold spaceAbove">Subjects:</span>
+                                    </div>
+                                    <div class="col-8 text-left proximanova-reg ">
+                                        <span
+                                            *ngIf="session.Bookings.studentId && session.Bookings.studentId !=null && session.Bookings.studentId !=undefined "
+                                            class="BookingText capitalize ">{{session.Bookings.studentId.firstName ? session.Bookings.studentId.firstName :''}}
+                                            {{session.Bookings.studentId.lastName ? ((session.Bookings.studentId.lastName.substr(0,1))
+                                            +'.') : ''}}</span>
+
+                                        
+                                        <span
+                                            *ngIf="session.Bookings.tutorId && session.Bookings.tutorId !=null  && session.Bookings.tutorId !=undefined && !session.past_show"
+                                            class=" capitalize BookingText spaceAbove">{{session.Bookings.tutorId.firstName ? session.Bookings.tutorId.firstName :''}}
+                                            {{session.Bookings.tutorId.lastName? ((session.Bookings.tutorId.lastName.substr(0,1))
+                                                +'.') : ''}} </span>
+                                        <span
+                                            *ngIf="session.Bookings.tutorId && session.Bookings.tutorId !=null  && session.Bookings.tutorId !=undefined && session.past_show"
+                                            class=" capitalize BookingText spaceAbove">{{session.Bookings.tutorId.firstName ? session.Bookings.tutorId.firstName
+                                                    :''}} {{session.Bookings.tutorId.lastName? session.Bookings.tutorId.lastName
+                                                    : ''}}
+                                        </span>
+                                        
+                                        <span *ngIf="session.endTime != undefined && session.startTime"
+                                            class="BookingText capitalize spaceAbove">
+                                            {{session.startTime  }}{{session.endTime ? '-' : ''}}{{session.endTime }}
+                                        </span>
+
+                                       <div class="spaceAbove">
+                                        <span class="BookingText  "
+                                        *ngFor="let subjects of session.Bookings.subjects;let last =last" >
+
+                                        <span *ngIf="subjects.subcategories && subjects.subcategories.length>0">
+                                            <span *ngFor="let subSubjects of subjects.subcategories;let comma=last "
+                                                class="BookingTextcomma">
+                                                {{subSubjects.name}}{{(last&& comma)?'':','}} </span>
+                                        </span>
+
+                                    </span>
+                                </div>
+                                      
+
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-12 col-lg-7">
+                                <div class="row rightSpan MarginT">
+                                    <div class="col-4  textleftaddress">
+                                        <span  style="line-height: 1;" class="bookingSubHeading proximanova-bold">Location:</span>
+
+                                    </div>
+                                    <div class="col-8  textleftaddress"
+                                        *ngIf="session.Bookings.locationDetails && session.Bookings.locationDetails != undefined">
+                                        <span class="BookingText proximanova-reg"
+                                            style="line-height: 1;">{{session.Bookings.locationDetails.addressLine1 }}
+                                        </span>
+                                        <span *ngIf="session.Bookings.locationDetails.addressLine2 != undefined"
+                                            class="BookingText proximanova-reg"
+                                            style="line-height: 1;">{{session.Bookings.locationDetails.addressLine2  }}
+                                        </span>
+                                        <span class="BookingText proximanova-reg"
+                                            style="line-height: 1;">{{session.Bookings.locationDetails.city}},
+                                            {{(session.Bookings.locationDetails.state && session.Bookings.locationDetails.state != undefined )? session.Bookings.locationDetails.state : '' }}
+                                            {{session.Bookings.locationDetails.zipCode}}
+                                        </span>
+
+                                    </div>
+                                    <div class="col-4 mt-3 text-left">
+                                        <span  style="white-space: nowrap;" class="bookingSubHeading proximanova-bold">Online Session:</span>
+                                    </div>
+                                    <div class="col-8 mt-3 text-left">
+                                        <span class="BookingText capitalize">
+                                            {{session.Bookings.isSessionOnline?'Yes':'No'}} </span>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+
+
+                </div>
+
+
+                <div *ngIf="up_count>=5" style="float:right;">
+
+
+                    <div class="col-lg-12 pagination col-sm-12 col-md-12 col-xs-12  mb-2">
+
+                        <pagination-controls class="inline-flx" (pageChange)="pageChangedUpcoming($event)" id="upcoming"
+                            maxSize="5" directionLinks="true" autoHide="false" previousLabel="Previous" nextLabel="Next"
+                            screenReaderPaginationLabel="Pagination" screenReaderPageLabel="up_page"
+                            screenReaderCurrentLabel="You're on page"></pagination-controls>
+
+                    </div>
+
+
+
+                </div>
+            </div>
+
+            <div class="status-title text-center mt-4" *ngIf="upcomingSessions && upcomingSessions.length ==0">
+                <h5> No upcoming sessions found</h5>
+            </div>
+        </mat-tab>
+
+        <mat-tab label="History">
+
+
+            <div class="container mt-4 mobileMargin" *ngIf="pastSessions && pastSessions!=undefined ">
+
+
+                <div class="tab-content col-12"
+                    *ngFor="let session of pastSessions | paginate: { itemsPerPage: past_limit, id:'past', currentPage: past_page, totalItems: past_count }; let i=index">
+
+                    <div (click)="getDetails(session.Bookings._id)" class="bookingView " style="cursor:pointer;">
+                        <h5 [ngStyle]="{'background':  session.color }" style="line-height: 1;color:white"
+                            class="bookingHeading">{{session.statusMsg}}</h5>
+                        <div class="row mt-3">
+                            <div class="col-12" style="position:absolute">
+                                <img (click)="getDetails(session.Bookings._id)" class="bookingArrow"
+                                    src="/assets/img/carat-orange-side.png">
+                            </div>
+                            <div class="col-12 col-lg-5 proximanova-reg">
+                                <div class="row rightSpan">
+                                    <div class="col-4 textleftaddress ">
+                                        <span class="bookingSubHeading proximanova-bold">Child:</span>
+                                        <span class="bookingSubHeading proximanova-bold spaceAbove">Tutor:</span>
+                                        <span style="white-space: nowrap;" class="bookingSubHeading proximanova-bold spaceAbove">Date & Time:</span>
+                                        <span class="bookingSubHeading proximanova-bold spaceAbove">Subjects:</span>
+                                    </div>
+                                    <div class="col-8  textleftaddress">
+                                        <span
+                                            *ngIf="session.Bookings.studentId && session.Bookings.studentId !=null && session.Bookings.studentId !=undefined"
+                                            class="BookingText capitalize">{{session.Bookings.studentId.firstName ? session.Bookings.studentId.firstName :''}}
+                                            {{session.Bookings.studentId.lastName ? ((session.Bookings.studentId.lastName.substr(0,1)) +'.') : ''}}</span>
+                                        <span
+                                            *ngIf="session.Bookings.tutorId && session.Bookings.tutorId !=null  && session.Bookings.tutorId !=undefined &&  !session.up_show"
+                                            class=" spaceAbove capitalize BookingText proximanova-reg">{{session.Bookings.tutorId.firstName ? session.Bookings.tutorId.firstName :''}} {{session.Bookings.tutorId.lastName?
+                                            ((session.Bookings.tutorId.lastName.substr(0,1)) +'.') : ''}}
+                                        </span>
+                                        <span
+                                            *ngIf="session.Bookings.tutorId && session.Bookings.tutorId !=null  && session.Bookings.tutorId !=undefined && session.up_show "
+                                            class=" spaceAbove capitalize BookingText proximanova-reg">{{session.Bookings.tutorId.firstName ? session.Bookings.tutorId.firstName :''}}
+                                            {{session.Bookings.tutorId.lastName? session.Bookings.tutorId.lastName :
+                                                ''}}
+                                        </span>
+                                        <span *ngIf="session.endTime && session.startTime"
+                                            class="spaceAbove BookingText capitalize">{{session.startTime  }}{{session.endTime ? '-' : ''}}{{session.endTime }}
+                                        </span>
+                                        <div class="spaceAbove">
+                                            <span class="BookingText "  *ngFor="let subjects of session.Bookings.subjects">
+
+
+                                                <span *ngIf="subjects.subcategories && subjects.subcategories.length>0">
+                                                    <span *ngFor="let subSubjects of subjects.subcategories;let i=index; "
+                                                        class="">
+                                                        {{subSubjects.name}}{{i === subjects.subcategories.length - 1 ? ' ' : ','}}
+                                                        &nbsp; </span>
+                                                </span>
+    
+                                            </span>
+                                        </div>
+                                       
+
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-12 col-lg-7">
+                                <div class="row rightSpan MarginT">
+                                    <div class="col-4 textleftaddress">
+                                        <span class="bookingSubHeading proximanova-bold">Location:</span>
+
+                                    </div>
+                                    <div class="col-8 text-left "
+                                        *ngIf="session.Bookings.locationDetails && session.Bookings.locationDetails != undefined">
+                                        <span
+                                            class="BookingText proximanova-reg">{{session.Bookings.locationDetails.addressLine1  }}
+                                        </span>
+                                        <span *ngIf="session.Bookings.locationDetails.addressLine2 != undefined"
+                                            class="BookingText proximanova-reg ">{{session.Bookings.locationDetails.addressLine2  }}
+                                        </span>
+                                        <span
+                                            class="BookingText proximanova-reg">{{session.Bookings.locationDetails.city}},
+                                            {{(session.Bookings.locationDetails.state && session.Bookings.locationDetails.state != undefined ) ? session.Bookings.locationDetails.state  : '' }}
+                                            {{session.Bookings.locationDetails.zipCode}}
+                                        </span>
+
+                                    </div>
+                                    <div class="col-4 mt-3 text-left">
+                                        <span style="white-space: nowrap;"
+                                            class="bookingSubHeading proximanova-bold">Online Session:</span>
+                                    </div>
+                                    <div class="col-8 mt-3 text-left">
+                                        <span class="BookingText capitalize">
+                                            {{session.Bookings.isSessionOnline?'Yes':'No'}} </span>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+
+
+                </div>
+                <div style="float:right;">
+
+
+                    <div *ngIf="past_count >5" class="col-lg-12 pagination col-sm-12 col-md-12 col-xs-12  mb-2">
+
+                        <pagination-controls class="inline-flx" (pageChange)="pageChangedPast($event)" id="past"
+                            maxSize="5" directionLinks="true" autoHide="false" previousLabel="Previous" nextLabel="Next"
+                            screenReaderPaginationLabel="Pagination" screenReaderPageLabel="past_page"
+                            screenReaderCurrentLabel="You're on page"></pagination-controls>
+
+                    </div>
+
+
+
+                </div>
+
+
+
+            </div>
+
+            <div class="status-title text-center mt-4" *ngIf="pastSessions && pastSessions.length ==0">
+                <h5>No past sessions found</h5>
+            </div>
+
+        </mat-tab>
+    </mat-tab-group>
+</div>

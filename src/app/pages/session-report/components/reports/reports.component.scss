@@ -1,0 +1,94 @@
+@import "../../../../theme/sass/conf/conf";
+
+.status-row {
+    min-height: 32px;
+}
+
+.outer-div {
+    border: solid 1px #dcdcdc;
+}
+
+.status {
+    background-color: $main-green;
+}
+
+.max-length {
+    max-height: 250px;
+    overflow: hidden;
+}
+
+#reports-head {
+    .blue-heading {
+        font-family: 'ProximaNova-Bold';
+        font-size: 16px;
+        font-weight: bold;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        text-align: left;
+        color: #116DB4;
+    }
+}
+
+.mt-6 {
+    margin-top: 2.5rem;
+}
+
+.feed-heading {
+    font-family: 'ProximaNova-Light';
+    font-size: 15px;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #000000;
+    opacity: 0.7;
+}
+
+.booking-text-black {
+    font-size: 15px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #34495e;
+}
+
+.view-feedback {
+    font-size: 18px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.15;
+    letter-spacing: normal;
+    text-align: left;
+    color: #116DB4;
+}
+
+.booking-text {
+    font-family: 'ProximaNova-Reg';
+    font-size: 18px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #34495e;
+}
+
+.greenButton {
+    background-color: $main-green;
+    color: white;
+    border-radius: 22px;
+    font-family: 'ProximaNova-Reg';
+    min-width: 200px;
+    min-height: 40px;
+    max-height: 40px;
+    max-width: 260px;
+    font-size: 18px;
+    cursor: pointer;
+}

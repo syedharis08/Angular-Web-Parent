@@ -1,0 +1,165 @@
+<div id="add-child" class="myContainer">
+    <div class="col-sm-12  col-md-12   col-xs-12 col-lg-12">
+        <label class="blueText mt-4"> My Child </label>
+        <div class="animated ">
+            <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" class="form-horizontal text-center mt-2 mb-2">
+                <div class="row mt-3 ">
+                    <div class="col-12 col-lg-6 col-sm-12">
+                        <div class="inputBox1">
+                            <label for="firstName" class="insideInput">First Name</label>
+                            <input maxlength="64" autocomplete="off" #inputFirstName type="text" [formControl]="firstName" [ngClass]="{'has-input-error': (!firstName.valid && (firstName.touched || submitted)),'has-success': (firstName.valid && firstName.touched)}" required class="form-control stepOneInput"
+                                placeholder="First Name">
+                        </div>
+                        <div class="error-message sub-little-text" *ngIf="(form.controls['firstName'].errors?.required && (form.controls['firstName'].dirty)) || showFirstnameError">
+                            First name is required.
+                        </div>
+                        <div class="error-message sub-little-text" *ngIf="form.controls['firstName'].errors?.maxlength && (form.controls['firstName'].dirty)">
+                            First name maximum length is 64
+                        </div>
+                        <div class="error-message sub-little-text" *ngIf="form.controls['firstName'].errors?.pattern && (form.controls['firstName'].dirty)">
+                            First name can contain letters, hyphens and apostrophes and must be no longer than 64 characters.
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-6 col-sm-12">
+                        <div class="inputBox1">
+                            <label for="lastName" class="insideInput">Last Name</label>
+                            <input autocomplete="off" #inputLastName maxlength="64" type="text" [formControl]="lastName" [ngClass]="{'has-input-error': (!lastName.valid && (lastName.touched || submitted)),'has-success': (lastName.valid && lastName.touched)}" required class="form-control stepOneInput"
+                                placeholder="Last Name">
+
+                        </div>
+                        <div class="error-message sub-little-text" *ngIf="(form.controls['lastName'].errors?.required && (form.controls['lastName'].dirty)) || showLastnameError">
+                            Last name is required.
+                        </div>
+                        <div class="error-message sub-little-text" *ngIf="form.controls['lastName'].errors?.maxlength && (form.controls['lastName'].dirty)">
+                            Last name maximum length is 64
+                        </div>
+                        <div class="error-message sub-little-text" *ngIf="form.controls['lastName'].errors?.pattern && (form.controls['lastName'].dirty)">
+                            Last name can contain letters, hyphens and apostrophes and must be no longer than 64 characters.
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-12 col-lg-6 col-sm-12">
+                        <div class="inputBox1 datePicker">
+                            <label for="age" class="insideInput">Date Of Birth</label>
+                            <input autocomplete="off" readonly rea [max]="maxDate" [(ngModel)]="dobModel" [matDatepicker]="picker" [formControl]="dob" [ngClass]="{'has-input-error': (!dob.valid && (dob.touched || submitted)),'has-success': (dob.valid && dob.touched)}" (dateChange)="addEvent('change', $event)"
+                                class="form-control stepOneInput" onkeypress='return ((event.charCode >= 47 && event.charCode <= 57) || (event.charCode == 0))' placeholder="Date of Birth" (click)="picker.open()">
+                            <mat-datepicker-toggle class="datePickIcon addonEdit" matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+
+                        </div>
+                        <div class="error-message sub-little-text" *ngIf="showAgeError">
+                            Please Select Date
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-6 col-sm-12">
+                        <div class="inputBox1">
+                            <label for="age" class="insideInput">Age (in years)</label>
+                            <input autocomplete="off" readonly #inputPhone type="text" [formControl]="age" required class="form-control stepOneInput" placeholder="Age" [ngClass]="{'has-input-error': (!age.valid && (age.touched || submitted)),'has-success': (age.valid && age.touched)}"
+                                onkeypress='return ((event.charCode >= 48 && event.charCode <= 57) || (event.charCode == 0))' onkeyup="if (event.target.value.charAt(0) == '0') { event.target.value = event.target.value.slice(1); }">
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-3">
+                    <div class="col-12 col-lg-6 col-sm-12">
+                        <div class="inputBox1 mySelectOption ">
+                            <label for="gender" class="insideInput">Gender</label>
+                            <mat-select class="disabledText" [formControl]="gender" [ngClass]="{'has-input-error': (!gender.valid && (gender.touched || submitted)),'has-success': (gender.valid && gender.touched)}">
+                                <mat-option disabled value="select"> Choose Gender </mat-option>
+                                <mat-option value="MALE">Male</mat-option>
+                                <mat-option value="FEMALE">Female</mat-option>
+                                 <mat-option value="OTHER">Other/No Response</mat-option>
+                            </mat-select>
+                            <div class="error-message sub-little-text" *ngIf="form.controls['gender'].errors?.required && form.controls['gender'].dirty">
+                                Please select option
+
+                            </div>
+                        </div>
+                        <div class="error-message sub-little-text" *ngIf="showGenderError">
+                            Please Select Gender
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-lg-6 col-sm-12">
+                        <div class="inputBox1 mySelectOption">
+                            <label for="grade" class="insideInput">Grade</label>
+                            <mat-select placeholder="Grade" [formControl]="grade" [ngClass]="{'has-input-error': (!grade.valid && (grade.touched || submitted)),'has-success': (grade.valid && grade.touched)}">
+                                <mat-option disabled value="select"> Choose Grade </mat-option>
+                                <mat-option value="K">K</mat-option>
+                                <mat-option value="1">1</mat-option>
+                                <mat-option value="2">2</mat-option>
+                                <mat-option value="3">3</mat-option>
+                                <mat-option value="4">4</mat-option>
+                                <mat-option value="5">5</mat-option>
+                                <mat-option value="6">6</mat-option>
+                                <mat-option value="7">7</mat-option>
+                                <mat-option value="8">8</mat-option>
+                                <mat-option value="9">9</mat-option>
+                                <mat-option value="10">10</mat-option>
+                                <mat-option value="11">11</mat-option>
+                                <mat-option value="12">12</mat-option>
+
+                            </mat-select>
+                        </div>
+                        <div class="error-message sub-little-text" *ngIf="showGradeError">
+                            Please Select Grade
+                        </div>
+                    </div>
+                </div>
+
+
+
+                 <div class="row mt-3 ">
+                    <div class="col-12 col-lg-12 col-sm-12">
+                        <div class="inputBox1">
+                            <label for="schoolName" class="insideInput" style="padding-left:2%;">School Name</label>
+                            <input autocomplete="off" #schoolName type="text" [formControl]="school"  class="form-control stepOneInput" placeholder="School Name">
+<!--                            <input autocomplete="off" #schoolName type="text" [formControl]="school" [ngClass]="{'has-input-error': (!school.valid && (school.touched || submitted)),'has-success': (school.valid && school.touched)}" required class="form-control stepOneInput" placeholder="School Name">-->
+                        </div>
+<!--                        <div class="error-message sub-little-text" *ngIf="showSchoolError">-->
+<!--                            School name is required.-->
+<!--                        </div>-->
+                    </div>
+                </div>
+
+
+
+                <div class="row  mt-4_0">
+                    <label class="blueText  col-lg-6 col-md-6 col-sm-12 text-left-address "> Academic Documents</label>
+                </div>
+                <div class="row  mt-4 col-lg-12 col-md-12 col-sm-12  text-left   ">
+                    <span class="docsText">    <span style="font-weight:bolder">  Optional </span> : Upload up to four documents that you think might be helpful for your tutor. This could include previous report cards, IEP/504 documents, etc.
+                    </span>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-12 col-lg-12 col-sm-12 col-xs-12 ">
+                        <div class=" col-12 col-lg-12 col-sm-12 col-xs-12 upload-doc text-left">
+                            <label for="schoolName" class="  addressText" style="color:#34495e;padding-top:1% !important;">Upload your academic documents here</label>
+                            <span class="addonDoc"> <a (click)="docFileSelector();" >  <img src="/assets/img/ic-upload.png"> </a>  </span>
+                            <input autocomplete="off" #docUpload type="file" style="display: none" (change)="fileChange($event)" placeholder="Upload file">
+                        </div>
+                        <div class=" " *ngIf="docArray && docArray !=undefined">
+                            <div class="  upload-doc col-lg-12 col-md-12 col-sm-12 col-xs-12 text-left" style="border-top:none" *ngFor="let docs of docArray ;let i = index">
+                                <label for="address" class="upload-doc-file" style="margin-top:10px;color:#232f84">{{docs.name ? docs.name  : ''}}  </label>
+                                <a (click)="deleteDoc(i)"> <span style="float:right"> <i class="fa fa-trash-o myTrash" aria-hidden="true"></i> </span> </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row  ">
+                    <div class="mt-4  col-lg-12 col-md-12 col-sm-12  ">
+                        <label *ngIf="showArrayError" class="  addressText" style="color:#34495e">You can upload a maximum of four documents.</label>
+                    </div>
+                </div>
+                <div class="row  ">
+                    <div class="mt-4  col-lg-12 col-md-12 col-sm-12 saveChildrens">
+                        <button class="loginButton">Save Child </button>
+                    </div>
+                </div>
+                <router-outlet></router-outlet>
+            </form>
+        </div>
+    </div>
+</div>

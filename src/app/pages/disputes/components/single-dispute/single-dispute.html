@@ -1,0 +1,125 @@
+<div class="text-center session-all " id="notifications" style="padding-bottom:3%;">
+    <div *ngIf="dispute && dispute !=undefined" class="container " style="padding-top:1%;">
+
+
+        <mat-card class="mt-2 mb-4 " style="box-shadow:none;border:1px solid #e6eaee;">
+            <mat-card-content style=" padding:2%; ">
+                <div style="border-bottom:1px #e6eaee solid">
+                    <div class="row mt-4 ">
+                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 text-left-address order2Mobile">
+                            <label class="status-title-blue"> Child:</label >
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 text-left-address order2Mobile">
+                            <div *ngIf="dispute.studentId && dispute.studentId != undefined" class="row  mobile-justify-left">
+                                <span class="status-data-blue capitalize "> {{dispute.studentId.firstName ? dispute.studentId.firstName :''}} {{dispute.studentId.lastName ? ((dispute.studentId.lastName.substr(0,1)) +'.') : ''}} </span>
+                            </div>       
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 text-left-address order1Mobile">
+                            <div *ngIf="dispute.status && dispute.status != undefined" >
+                                <span [ngClass]="{'border-status': (dispute.status === 'RESOLVED'),'border-status-unresolved':(dispute.status === 'UNRESOLVED')}" > {{dispute.status}} </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-4 ">
+                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 text-left-address order3Mobile">
+                             <label class="status-title-blue"> Tutor:</label >
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 text-left-address ">
+                            <div *ngIf="dispute.tutorId && dispute.tutorId != undefined" class="row  mobile-justify-left">
+                                <span class="status-data-blue capitalize "> {{dispute.tutorId.firstName ? dispute.tutorId.firstName :''}} {{dispute.tutorId.lastName ? dispute.tutorId.lastName : ''}} </span>
+                             </div>     
+                        </div>
+                    </div>
+                      <div class="row mt-4 ">
+                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 text-left-address">
+                            <label class="status-title-blue"> Session Date & Time:</label >
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 text-left-address">
+                            <div *ngIf="dispute.bookingId && dispute.bookingId != undefined" class="row  mobile-justify-left">
+                                <span class="status-data-blue capitalize"> {{dispute.bookingId.startTime | datex: "MMM. d, y "}} | {{dispute.bookingId.startTime |  datex:"h:mmA"}}-{{dispute.bookingId.endTime |  datex:"h:mmA"}} </span>
+                             </div>
+                        </div>
+                     </div>
+                     <div class="row mt-4">
+                         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 text-left-address  ">
+                             <label class="status-title-blue"> Subjects:</label >
+                         </div>
+                          <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 text-left-address">
+                            <div *ngIf="dispute.createdAt && dispute.createdAt != undefined" class="row  mobile-justify-left">
+                               
+                                        <span *ngFor="let subject of dispute.bookingId.subjects" class="status-data-blue "> 
+                                                <span style="padding-left:2%" *ngFor="let subsubject of subject.subcategories;let last=last;" class="tutor-place-text " >
+                                                    {{subsubject.name}}{{last?'':','}}&nbsp;</span>
+                                        </span>
+                              
+                             </div>
+                          </div>
+                      </div>
+                    <div class="row mt-4 ">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-left-address mt-2">
+                            <label class="status-title-orange"> Dispute Raised: </label > 
+                            <!-- <div class=" mt-2"> -->
+                                <span *ngIf="dispute && dispute != undefined"  class="status-title-orange capitalize"> #{{dispute.disputeId ? dispute.disputeId : ''}} </span>
+                           <!-- </div> -->
+                        </div>
+                     </div>
+                     <div class="row mt-4 mb-2">
+                         <div *ngIf="dispute.createdAt && dispute.createdAt != undefined" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-left-address">
+                                <label class="status-title-date"> ( {{dispute.createdAt | datex: "MMM. D, YYYY"}}, {{dispute.createdAt |  datex:"h:mmA"}}  ) </label > 
+                        </div>
+                     </div>
+                 </div>
+
+                  <div style="border-bottom:1px #e6eaee solid" >
+                     <div class="row mt-4 ">
+                         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 text-left-address">
+                            <label class="pinkText"> Reason:</label > 
+                          </div>
+                          <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 text-left-address">
+                             <div *ngIf="dispute.reason && dispute.reason != undefined" class="mobile-justify-left">
+                                <span class="status-data-blue capitalize" style="color:231f20"> {{dispute.reason}} </span>                                                                                                
+                               </div>
+                             </div>
+                     </div>
+                       <div class="row mt-4 ">
+                         <div *ngIf="dispute.additionalDetails && dispute.additionalDetails != undefined" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-left-address ">
+                                 <p class="status-data-text "> {{dispute.additionalDetails}} </p>
+                         </div>
+                         </div>
+                    </div>
+                    <div style="border-bottom:1px #e6eaee solid" >
+                         <div class="row mt-4">
+                            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 text-left-address">
+                                 <label class="status-data-blue " style="padding-left:0px"> Sylvan's Reply:</label >  
+                             </div>
+                            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 text-left-address">
+                               <div *ngIf="dispute.reason && dispute.reason != undefined" class=" mobile-justify-left">
+                                    <span class=" "> {{dispute.reason}} </span>
+                             
+                                 </div>
+                              </div>
+                       </div>
+                          <div class="row mt-4 ">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-left-address">                                  
+                                          <label class="blueText"> Method of  Resolution: </label >
+                                            <span *ngIf="dispute.comments && dispute.comments != undefined && dispute.comments[0] && dispute.comments[0] != undefined" class=" capitalize"> {{dispute.comments[0].createdAt | datex: "MMM. D, YYYY"}} , {{dispute.comments[0].createdAt  |  datex:"h:mmA"}}  </span>
+                                 </div>
+                            </div>
+                        <div class="row mt-4">
+                            <div   *ngIf="dispute.comments && dispute.comments != undefined &&  dispute.comments[0] && dispute.comments[0] != undefined"  class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-left">
+                                  
+                                         <span class="status-data-text " style="word-wrap: break-word;" > {{dispute.comments[0].comment}} </span>
+                                   
+                                   </div>
+                        </div>
+
+                        </div>
+                </mat-card-content>
+    
+            </mat-card>
+       <!-- <div class="mt-4 text-center">
+            <button (click)="cancel(cancelAdditionText.value)" class="loginButton  "> Close<span style="color:white;margin-right:6px;float:right"> <i class="fa fa-lg fa-arrow-right" aria-hidden="true"></i></span> </button>
+       </div> -->
+    
+        </div>
+    </div>

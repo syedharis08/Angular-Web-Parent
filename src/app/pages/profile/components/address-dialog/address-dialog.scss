@@ -1,0 +1,26 @@
+.inputBox1 {
+    background-color: #ffffff;
+    border: solid 1px #e5e5e5;
+}
+
+#addr-dialog {
+    .mat-dialog-content {
+        overflow: auto;
+    }
+}
+
+.contentHieght {
+    @media screen and (min-width: 768px) and (max-width: 1377px) {
+        max-height: 70vh !important;
+    }
+}
+// .arrow-btn .addressDialogArrow {
+//     top: 12px !important;
+//     font-size: 15px !important;
+// }
+@media screen and (max-width: 768px) {
+    // .arrow-btn .fa-arrow-right {
+    //     top: 15px !important;
+    //     font-size: 15px !important;
+    // }
+}

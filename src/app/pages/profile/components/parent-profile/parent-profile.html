@@ -1,0 +1,463 @@
+<div class="myContainer">
+
+    <div class="col-sm-12  col-md-12   col-12 col-lg-12 mt-4" #profileForm2>
+        <div class="row justify-content-center mb-2">
+            <a (click)="openModal(template)">
+                <img [(src)]="sp_image" class="roundImage">
+                <!-- <img [(src)]="sp_image" *ngIf="sp_image" style="width:100px;height:100px;border-radius: 50%;"> -->
+            </a>
+            <input #fileUpload ngFileSelect type="file" accept=".jpg,.png,.jpeg" style="display: none" class="pointer"
+                   [hidden]="true" (change)="get_sp_image($event)">
+        </div>
+
+        <div class="row justify-content-center mt-4">
+            <button (click)="openModal(template)" class="changeImage pointer justify-content-center">Change
+                Image
+            </button>
+        </div>
+        <div class="row mt-2 mb-2 error-message sub-little-text justify-content-center" *ngIf="showImageError">
+            Maximum size of image is 10Mb.
+
+        </div>
+        <ng-template #template>
+            <button (click)="modalRef.hide(); closeCropper()" style="background:transparent;border:none;z-index: 10000;"
+                    class="close-btn">
+                <img src="assets/img/close.png" style="float:right;padding:0px;margin-bottom:0px">
+            </button>
+            <div class="modal-body">
+                <div class="row" style="justify-content: center">
+                    <h2 *ngIf="checkImageAvail" class="modalHeading modal-heading-fix mt-4 max-width-902 max-width-325">
+                        Select Image</h2>
+                    <h2 *ngIf="!checkImageAvail"
+                        class="modalHeading modal-heading-fix mt-4 max-width-902 max-width-325">Adjust Image</h2>
+                    <div class="imgContent">
+                        <div id="jqueryCropper"></div>
+                    </div>
+                    <br/>
+                </div>
+            </div>
+            <div *ngIf="!checkImageAvail" class="row justify-content-center mt-2 mb-4">
+                <button (click)="modalRef.hide(); hideImagePop()" type="button"
+                        class="changeImage justify-content-center proxBold resizer-result" style="cursor: pointer;">Save
+                </button>
+            </div>
+            <div *ngIf="checkImageAvail" class="row justify-content-center mt-2 mb-4">
+                <button type="button" (click)="uploader()" class="changeImage justify-content-center proxBold"
+                        style="cursor: pointer; line-height: 1">Upload Image
+                </button>
+            </div>
+        </ng-template>
+        <label class="blueText mt-4" style="font-family: 'ProximaNova-Reg';"> Personal Information </label>
+
+        <div class="animated ">
+            <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" class="form-horizontal text-center mt-2 mb-2">
+                <div class="row  ">
+                    <div class="col-12 col-lg-12 col-sm-12">
+                        <div class="inputBox1">
+                            <label for="userName" class="insideInput" style="padding-left: 1.5%;">Username</label>
+
+                            <input #inputUserName readonly type="text" [formControl]="originalUserName" required
+                                   class="form-control stepOneInput" placeholder="User Name">
+
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row mt-3 ">
+                    <div class="col-12 col-lg-6 col-sm-12">
+                        <div class="inputBox1"
+                             [ngClass]="{'underline-blue': canEditFirstName && firstName.valid ,'underline-red': (!firstName.valid && (form.controls['firstName'].errors?.required|| form.controls['firstName'].errors?.pattern))}">
+                            <label for="firstName" class="insideInput">First Name</label>
+                            <input #inputFirstName type="text" [formControl]="firstName" maxlength="64" required
+                                   class="form-control stepOneInput" placeholder="First Name">
+                            <!-- <input *ngIf="canEditFirstName" id="editFirstNameId" type="text" [formControl]="firstName" maxlength="64" required class="form-control stepOneInput" style=" text-transform: capitalize;" placeholder="First Name"> -->
+                            <!-- <a (click)="editFirstName()"> <span class="addonEdit"><img src="/assets/img/ic-edit.png"></span></a> -->
+                        </div>
+                        <div class="error-message sub-little-text" *ngIf="form.controls['firstName'].errors?.required">
+                            First Name is required.
+                        </div>
+                        <div class="error-message sub-little-text"
+                             *ngIf="form.controls['firstName'].errors?.maxlength && (form.controls['firstName'].pristine)">
+                            First Name maximum length is 64
+                        </div>
+                        <div class="error-message sub-little-text"
+                             *ngIf="form.controls['firstName'].errors?.pattern && (form.controls['firstName'].dirty)">
+                            First name can contain letters, hyphens and apostrophes and must be no longer than 64
+                            characters.
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="col-12 col-lg-6 col-sm-12">
+                        <div class="inputBox1"
+                             [ngClass]="{'underline-blue': canEditLastName && lastName.valid  ,'underline-red': (!lastName.valid && (form.controls['lastName'].errors?.required|| form.controls['lastName'].errors?.pattern))}">
+                            <label for="lastName" class="insideInput">Last Name</label>
+                            <input #inputLastName maxlength="64" type="text" [formControl]="lastName" required
+                                   class="form-control stepOneInput" placeholder="Last Name">
+                            <!-- <input *ngIf="canEditLastName" #inputLastName maxlength="64" type="text" [formControl]="lastName" required class="form-control stepOneInput" style=" text-transform: capitalize;" placeholder="Last Name"> -->
+                            <!-- <a (click)="editLastName()"> <span class="addonEdit"><img src="/assets/img/ic-edit.png"></span></a> -->
+                        </div>
+                        <div class="error-message sub-little-text" *ngIf="form.controls['lastName'].errors?.required">
+                            Last Name is required.
+                        </div>
+                        <div class="error-message sub-little-text"
+                             *ngIf="form.controls['lastName'].errors?.maxlength && (form.controls['lastName'].pristine)">
+                            Last Name maximum length is 64
+                        </div>
+                        <div class="error-message sub-little-text"
+                             *ngIf="form.controls['lastName'].errors?.pattern && (form.controls['lastName'].dirty)">
+                            Last name can contain letters, hyphens and apostrophes and must be no longer than 64
+                            characters.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-3">
+                    <div class="col-12 col-lg-6 col-sm-12">
+                        <div class="inputBox1"
+                             [ngClass]="{'underline-blue': canEditEmail && email.valid  ,'underline-red': (!email.valid && (form.controls['email'].errors?.required ||  form.controls['email'].errors?.invalid && !form.controls['email'].pristine ))}">
+                            <label for="email" class="insideInput">Email</label>
+                            <input #inputEmail type="text" [formControl]="email" required
+                                   class="form-control stepOneInput" placeholder="Email">
+                            <!-- <input *ngIf="canEditEmail" #inputEmail type="text" [formControl]="email" required class="form-control stepOneInput" placeholder="Email"> -->
+                            <!-- <a (click)="editEmail()"> <span class="addonEdit"><img src="/assets/img/ic-edit.png"></span></a> -->
+                        </div>
+                        <div class="error-message sub-little-text" *ngIf="form.controls['email'].errors?.required">
+                            Email is required.
+                        </div>
+                        <div class="error-message sub-little-text"
+                             *ngIf="form.controls['email'].errors?.invalid && !form.controls['email'].pristine">
+                            Please enter a valid email address.
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-lg-6 col-sm-12">
+                        <div class="inputBox1"
+                             [ngClass]="{'underline-blue': canEditPhone && mobile.valid  ,'underline-red': (!mobile.valid && (form.controls['mobile'].errors?.maxlength  || form.controls['mobile'].errors?.minlength || form.controls['mobile'].errors?.minlength ))}">
+                            <label for="mobile" class="insideInput">Phone Number</label>
+                            <input #inputPhone type="text" minlength="8" [formControl]="mobile" required maxlength="10"
+                                   class="form-control stepOneInput" placeholder="Phone Number"
+                                   onkeyup="if (event.target.value.charAt(0) == '0') { event.target.value = event.target.value.slice(1); }"
+                                   onkeypress='return ((event.charCode >= 48 && event.charCode <= 57) || (event.charCode == 0))'>
+                            <!-- <input #inputPhone type="text" minlength="10" [formControl]="mobile" required class="form-control stepOneInput" placeholder="Phone Number" onkeypress='return ((event.charCode >= 48 && event.charCode <= 57) || (event.charCode == 0))' onkeyup="if (event.target.value.charAt(0) == '0') { event.target.value = event.target.value.slice(1); }" -->
+                            <!-- maxlength="10"> -->
+
+                            <!-- <a (click)="editPhone()"> <span class="addonEdit"><img src="/assets/img/ic-edit.png"></span> </a> -->
+                        </div>
+                        <div class="error-message sub-little-text" *ngIf="form.controls['mobile'].errors?.required">
+                            Mobile is required
+                        </div>
+                        <div class="error-message sub-little-text"
+                             *ngIf="form.controls['mobile'].errors?.maxlength && (form.controls['mobile'].touched)">
+                            Please enter a valid 10-digit mobile phone number.
+                        </div>
+                        <div class="error-message sub-little-text"
+                             *ngIf="form.controls['mobile'].errors?.pattern && (form.controls['mobile'].touched)">
+                            Please Enter a Valid Phone number
+                        </div>
+                        <div class="error-message sub-little-text"
+                             *ngIf="form.controls['mobile'].errors?.minlength && (form.controls['mobile'].touched)">
+                            <!-- Minimum phone number length is 10 digits -->
+                            Please enter a valid 10-digit mobile phone number.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-3" *ngIf="isRateChargeSuppress">
+                    <div class="col-12 col-lg-6 col-sm-12">
+                        <div class="inputBox1">
+                            <label class="insideInput">Tutoring Hours Available</label>
+                            <input type="text"
+                                   class="form-control stepOneInput" [readOnly]="true"
+                                   [formControl]="showNumberOfTutoringHours">
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-lg-6 col-sm-12 mt-3" *ngIf="availableHrs.value == 0 && !isCanada">
+                        <button class="loginButton full-width-btn set-tutor-btn" type="button"
+                                (click)="openOutoftutorModal()">
+                            Out of use for tutoring hours
+                        </button>
+                    </div>
+                </div>
+
+
+                <div class="row mt-3">
+                    <label class="blueText  col-lg-12 col-md-12 col-sm-12 text-left-address "
+                           style="font-family: 'ProximaNova-Reg';"> Interests </label>
+                    <div class="col-12 col-lg-6 col-sm-12">
+                        <div class="inputBox1 mt15">
+                            <label for="mobile" class="insideInput">Grades:</label>
+                            <div class="grade-radio-group text-left radioButton pb15">
+                                <mat-checkbox class="subjects-title" (change)="tutorGrade($event) "
+                                              [checked]="isCheckedGrade('K-2')" value="K-2"> K-2
+                                </mat-checkbox>
+                                <br>
+                                <mat-checkbox class="subjects-title" (change)="tutorGrade($event) "
+                                              [checked]="isCheckedGrade('3-5')" value="3-5"> 3-5
+                                </mat-checkbox>
+                                <br>
+
+                                <mat-checkbox class="subjects-title" (change)="tutorGrade($event) "
+                                              [checked]="isCheckedGrade('6-8')" value="6-8"> 6-8
+                                </mat-checkbox>
+                                <br>
+
+                                <mat-checkbox class="subjects-title" (change)="tutorGrade($event) "
+                                              [checked]="isCheckedGrade('9-12')" value="9-12"> 9-12
+                                </mat-checkbox>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-12 col-lg-6 col-sm-12">
+                        <div class="inputBox1 mt15">
+                            <label for="mobile" class="insideInput">Subjects:</label>
+                            <div class="grade-radio-group text-left radioButton pb15">
+                                <mat-checkbox class="subjects-title subDisp" [checked]="isCheckedSubject(data._id)"
+                                              (change)="tutorSubject($event) " [value]="data._id"
+                                              *ngFor='let data of subjectList'> {{ data.name }}
+                                </mat-checkbox>
+                                <mat-checkbox class="subjects-title " [checked]="otherSubject"
+                                              (change)="tutorSubject($event)" value="other"> Other
+                                </mat-checkbox>
+                                <input
+                                    [ngClass]="{'setVisibility': !otherSubject, 'underline-red': (!otherSbject.valid && (form.controls['otherSbject'].errors?.required|| form.controls['otherSbject'].errors?.pattern))}"
+                                    type="text"
+                                    [ngStyle]="otherSubject &&   {'border-bottom': '2px solid #232f84 !important'}"
+                                    [formControl]="otherSbject" class="form-control stepOneInput otherInput"
+                                    placeholder="">
+                            </div>
+                            <p *ngIf="otherSubject"
+                               style="text-align: left;margin: 0px 12px 13px; color:#232f84;font-size: 14px;">Please
+                                tell us more about what other
+                                subjects you're
+                                interested in.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- <label class="blueText mt-4" style="font-family: 'ProximaNova-Reg';"> Personal Information </label> -->
+                <!-- <div class="row mt-2">
+                    <div class="col-6">
+                        <div class="grade-radio-group ">
+                            <mat-checkbox class="subjects-title" (change)="tutorGrade($event, 'K-2',0) " value="K-2 "
+                                [(ngModel)]="kgrade "> K-2
+                            </mat-checkbox>
+                            <br>
+                            <mat-checkbox class="subjects-title" (change)="tutorGrade($event, '3-5',1) " value="3-5 "
+                                [(ngModel)]="threeGrade "> 3-5
+                            </mat-checkbox>
+                            <br>
+
+                            <mat-checkbox class="subjects-title" (change)="tutorGrade($event, '6-8',2) " value="6-8 "
+                                [(ngModel)]="sixGrade "> 6-8
+                            </mat-checkbox>
+                            <br>
+
+                            <mat-checkbox class="subjects-title" (change)="tutorGrade($event, '9-12',3) " value="9-12 "
+                                [(ngModel)]="nineGrade "> 9-12
+                            </mat-checkbox>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <mat-checkbox class="example-margin " (change)="selectSubject(subcategory, $event,i, subject)">
+                            dzgzzgxzxgzxgz</mat-checkbox>
+                    </div>
+                </div> -->
+                <div class="row  mt-3 ">
+                    <label class="blueText  col-lg-6 col-md-6 col-sm-12 text-left-address "
+                           style="font-family: 'ProximaNova-Reg';"> Address Information </label>
+                    <label class="blueText col-lg-6 col-md-6 col-sm-12 text-right-address"> <a class="blueText "
+                                                                                               (click)='addNewAddress()'> <span
+                        class="proximanova-semibold main-green-color"> <i
+                        class="fa fa-lg fa-plus " style="font-size:17px;" aria-hidden="true"></i> Add New
+                                Address </span> </a> </label>
+                </div>
+
+
+                <div class="row mt-3">
+                    <div class="col-12 col-lg-12 col-sm-12">
+                        <div class="addressDiv mt-2" *ngFor="let address of addresses">
+                            <div class="row pt-2">
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-6 text-left-address "
+                                     style="padding-left:4%;">
+                                    <label class="addressText capitalize proximanova-bold"
+                                           style="margin-top:0;color:#232f84">{{address.label ? address.label : ''}}
+                                    </label>
+                                </div>
+                                <!--<span class="d-none d-sm-block">-->
+                                <div
+                                    *ngIf="userData?.marketData?.marketName != 'Nationwide' || address.isDefault === false"
+                                    class="offset-lg-4 col-6 offset-md-4 col-lg-1 col-md-1 col-sm-6 col-xs-6 mt-2 mobile-text-center hidden-sm-down ">
+                                    <a (click)="editAddress(address)">
+                                        <span><img src="/assets/img/ic-edit.png"></span>
+                                    </a>
+                                </div>
+
+
+                                <div
+                                    *ngIf="userData?.marketData?.marketName == 'Nationwide' && address.isDefault === true"
+                                    class="offset-lg-1 col-6 offset-md-1 col-lg-4 col-md-4 col-sm-6 col-xs-6 mt-2 mobile-text-center hidden-sm-down ">
+                                    <a class="address-note" [routerLink]="'/pages/contact-us'"
+                                       *ngIf="userData?.marketData?.marketName == 'Nationwide' && address.isDefault === true">
+                                        Contact us to request an address change
+                                    </a>
+                                </div>
+
+
+                                <!---->
+
+                                <div *ngIf="address.isDefault === false"
+                                     class="col-lg-1 col-md-1 col-sm-6 col-6 mt-2 mobile-text-center margin-0 hidden-sm-down">
+                                    <a (click)="deleteAddress(address)"> <span style="color: #f15d25;"><i
+                                        class="fa fa-trash-o" aria-hidden="true"></i></span> </a>
+                                </div>
+                                <!--</span>-->
+
+                            </div>
+
+                            <div class="childDetailsInner">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-left-address">
+                                    <span class="capitalize"> {{address.addressLine1 ? address.addressLine1 : ''}}
+                                    </span>
+                                    <!-- <span style="float:right"><img src="/assets/img/ic-edit.png"></span> -->
+
+                                    <!-- <a (click)="deleteChild(child._id)"> <span style="color: #f15d25;float:right"><i class="fa fa-trash-o" aria-hidden="true"></i></span> </a> -->
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-left-address">
+                                    <span
+                                        class="capitalize">{{(address.addressLine2 && address.addressLine2 != undefined) ? address.addressLine2 : ''}}
+                                    </span>
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-left-address">
+                                    <span class="capitalize"> {{address.city ? (address.city + ',') : '' }}
+                                        {{address.state ? address.state : ''}}
+                                        {{ address.zipCode ? address.zipCode : ''}} </span>
+                                </div>
+                            </div>
+                            <span class="childDetailsInner hidden-md-up">
+                                <div class="row" style="margin: 0px">
+
+
+                                    <div
+                                        *ngIf="userData?.marketData?.marketName != 'Nationwide' || address.isDefault === false"
+                                        class="col-6 col-lg-2 col-sm-6 col-xs-12 text-right-address editIcon"
+                                        [ngClass]="{'editIcon': address.isDefault,'buttonGiven':!commonService?.isDesktop,
+                                        'desktop-icons-l':commonService?.isDesktop && !address.isDefault}">
+                                        <a (click)="editAddress(address)"> <span>
+                                            <img src="/assets/img/ic-edit.png"></span>
+                                        </a>
+                                    </div>
+
+                                    <div
+                                        *ngIf="userData?.marketData?.marketName == 'Nationwide' && address.isDefault === true"
+                                        class="col-6 col-lg-2 col-sm-6 col-xs-12 text-right-address editIcon"
+                                        [ngClass]="{'editIcon': address.isDefault}">
+                                        <a class="address-note" (click)="gotoContact()"
+                                           *ngIf="userData?.marketData?.marketName == 'Nationwide' && address.isDefault === true">
+                                            Contact us to request an address change
+                                        </a>
+                                    </div>
+
+                                    <div *ngIf="address.isDefault === false"
+                                         class="col-6 col-lg-2 col-sm-6 col-xs-12 text-right-address "
+                                         [ngClass]="{'buttonGiven':!commonService?.isDesktop,'desktop-icons-r':commonService?.isDesktop}">
+                                        <a (click)="deleteAddress(address)"> <span style="color: #f15d25;"><i
+                                            class="fa fa-trash-o" aria-hidden="true"></i></span> </a>
+                                    </div>
+
+
+
+                                </div>
+
+
+
+
+
+                            </span>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row  mt-3 ">
+                    <label class="blueText  col-lg-6 col-md-6 col-sm-12 text-left-address "
+                           style="font-family: 'ProximaNova-Reg';"> My Child/Children </label>
+                    <label class="blueText col-lg-6 col-md-6 col-sm-12 text-right-address"> <a class="blueText "
+                                                                                               (click)="addChild()"> <span
+                        class="proximanova-semibold main-green-color"> <i
+                        class="fa fa-lg fa-plus" style="font-size:17px;" aria-hidden="true"></i> Add New
+                                Child </span> </a> </label>
+                </div>
+                <div class="row  mt-3">
+                    <div class="col-12  col-lg-12 col-sm-12" *ngIf="children && children.length>0 ">
+
+                        <div class="mt-2 addressDiv p-4 " *ngFor="let child of children">
+                            <div class="row ">
+                                <div class="col-4  col-lg-3 col-md-3 col-sm-3  childHeading"> Full Name</div>
+                                <div class="col-4 col-lg-3 col-sm-3 childHeading col-xs-12">Date of Birth</div>
+                                <div class="col-4 col-lg-3 col-sm-3 childHeading col-xs-12">School Name</div>
+                                <div class="col-hidden col-lg-3 col-sm-3 childHeading col-xs-12"></div>
+                            </div>
+                            <div class="row childDetailsInner elips ">
+                                <div class="col-4 col-lg-3 col-sm-3 capitalize col-xs-12">
+                                    {{(child.firstName && child.lastName) ? (child.firstName + ' ' + child.lastName) : ' ' }}
+                                </div>
+                                <div class="col-4 col-lg-3 col-sm-3 col-xs-12">{{ checkTime(child.dob) }} </div>
+                                <div class="col-4 col-lg-3 col-sm-3 col-xs-12 capitalize">
+                                    {{child.school ? child.school : ''}} </div>
+
+
+                                <div class="col-6 col-lg-2 col-sm-6 col-xs-12 text-right-address buttonGiven"
+                                     [ngClass]="{'buttonGiven':!commonService?.isDesktop,
+                                        'desktop-icons-l':commonService?.isDesktop}">
+                                    <a (click)="editChild(child)"> <span><img src="/assets/img/ic-edit.png"></span>
+                                    </a>
+                                </div>
+
+                                <div class="col-6 col-sm-6 col-lg-1 col-xs-12 "
+                                     [ngClass]="{'buttonGiven':!commonService?.isDesktop,
+                                        'desktop-icons-r':commonService?.isDesktop}">
+                                    <a (click)="deleteChild(child)"> <span style="color: #f15d25;"><i
+                                        class="fa fa-trash-o" aria-hidden="true"></i></span> </a>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                </div>
+
+                <div class="row  ">
+                    <div class="mt-4  col-lg-6 col-md-6 col-sm-12 text-left-address ">
+                        <button class="loginButton full-width-btn" routerLink="/pages/profile/change-password">Change
+                            Password
+                        </button>
+                    </div>
+                    <div class="mt-4  col-lg-6 col-md-6 col-sm-12 text-right-address ">
+                        <button [disabled]="!form.valid" class="  loginButton full-width-btn" type="submit">Save Profile
+                            <i class="fa fa-size arrow-right-btn1 fa-arrow-right "></i></button>
+                    </div>
+
+
+                </div>
+
+
+                <router-outlet></router-outlet>
+
+
+            </form>
+
+        </div>
+
+
+    </div>
+
+</div>

@@ -1,0 +1,59 @@
+@import "../../../../theme/sass/conf/conf";
+
+.myContainerContact {
+    width: 550px;
+    padding: 25px 40px 0;
+    @media only screen and (max-width: 769px) {
+        width: auto;
+        padding: 1%;
+    }
+}
+
+.textareaContact {
+    resize: none;
+    width: 100%;
+    padding: 10px;
+    height: 100px;
+    border-color: $main-green;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.content-justify {
+    text-align: center;
+    color: #232f84;
+}
+
+.flex {
+    display: flex;
+    justify-content: center;
+}
+
+#disputeDialog {
+    .mat-form-field {
+        width: 100%;
+    }
+}
+
+.error {
+    color: red
+}
+
+.raisedispute {
+    width: 100%;
+}
+
+label {
+    font-size: 14px;
+    color: #232f84;
+}
+
+.additionalDetailDiv {
+    width: 100%;
+    margin: 0px;
+}
+
+.additionalDetailLabel {
+    width: 100%;
+    text-align: left;
+}

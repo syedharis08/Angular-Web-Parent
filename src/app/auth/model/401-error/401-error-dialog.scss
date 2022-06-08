@@ -1,0 +1,21 @@
+.error-data {
+    font-family: 'ProximaNova-Reg';
+    color: #232f84;
+    font-size: 18px !important;
+    padding-top: 2%;
+}
+
+// #tutor-dialog {
+//     .mat-dialog-container .mat-dialog-content {
+//         min-height: 20vw;
+//         height: auto;
+//     }
+// }
+@media only screen and (max-width: 767px) {
+    .margin {
+        margin-top: 0px;
+    }
+    .verifyOtp {
+        width: auto;
+    }
+}

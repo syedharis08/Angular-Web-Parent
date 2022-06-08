@@ -1,0 +1,54 @@
+<div style="float:right;padding:0px;margin-bottom:0px" class="row" mat-dialog-title>
+    <button (click)="closeDialog()" style="border:none" class="close-btn pointer" mat-button mat-dialog-close="true">
+        <img src="assets/img/close.png">
+    </button>
+</div>
+<mat-dialog-content>
+
+    <div *ngIf="message != undefined" class="myContainer mt-2 mb-4">
+
+        <div class="text-center">
+            <p class="error-data" [innerHTML]="message"></p>
+            <p *ngIf="distanceError" class="error-data">You can review the tutor’s profile page for more information on
+                their location and Travel Policy.</p>
+            <p *ngIf="distanceError" class="error-data">Would you like to continue with this session request?</p>
+
+        </div>
+    </div>
+    <div *ngIf="!distanceError && !OnlyClose" class="row" style="justify-content: center;">
+        <div class="mt-2" style="margin-bottom:30px;">
+            <button (click)="closeDialog()" class="pinkButton arrow-btn">OK
+                <i class="fa fa-lg fa-arrow-right" aria-hidden="true"></i>
+            </button>
+        </div>
+    </div>
+
+    <div *ngIf="distanceError || OnlyClose ">
+
+        <div class="row justify-content-center text-center ">
+            <div class="mt-4 col-lg-12 col-md-12 col-sm-12 "
+                 style="margin:auto;display:inline-table; margin-bottom:1rem">
+                <div class="mobileBtn">
+                    <button style="height:44px; width:200px;" class="loginButton1 mb-2 "
+                            (click)="continueBooking()">Yes
+                    </button>
+                    <button style="height:44px; width:200px;background: #e1134f" class=" loginButton1   mb-2"
+                            (click)="closeDialog1()">No
+                    </button>&nbsp;
+
+                </div>
+                <div class="desktopBtn">
+
+                    <button style="height:44px; width:200px;background: #e1134f" class=" loginButton1   mb-2"
+                            (click)="closeDialog1()">No
+                    </button>
+                    <button style="height:44px; width:200px;" class="loginButton1 mb-2 "
+                            (click)="continueBooking()">Yes
+                    </button>&nbsp;
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</mat-dialog-content>

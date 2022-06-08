@@ -1,0 +1,19 @@
+<div class="container-fluid margin">
+    <div class="row mt-2 reschedule-row text-center">
+        <label class="res-top-title"> Reschedule Session </label>
+    </div>
+    <div class="row mt-4 ">
+        <label class="reschedule-text"> To reschedule your session, please choose a new date/time below: </label>
+    </div>
+    <div class="container">
+        <p *ngIf="endDateCode" style="margin-top: 11px;" class="timeZoneMsg ">The reservation used for this session
+            request expires on {{endDateCode |date:'MM/dd/yyyy'}}. Please select a new session date that occurs on or
+            before the expiration
+            date.</p>
+
+        <p *ngIf="showTzMsg" style="margin-top: 11px;" class="timeZoneMsg ">PLEASE NOTE: The calendar and session time
+            below reflect your <span style="font-style:italic">current</span> time zone of {{browserTz}}. Please
+            be sure to account for any time differences when selecting a time for your session.</p>
+        <reschedule></reschedule>
+    </div>
+</div>

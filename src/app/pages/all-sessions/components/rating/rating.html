@@ -1,0 +1,116 @@
+<div style="float:right;padding:0px;margin-bottom:0px" mat-dialog-title>
+    <button (click)="closeDialog()" style="border:none" class="close-btn" mat-button mat-dialog-close="true">
+        <img src="assets/img/close.png">
+    </button>
+</div>
+<mat-dialog-content>
+    <!-- <div style="float:right" mat-dialog-title>
+        <button (click)="closeDialog()" style="border:none" mat-button mat-dialog-close="true">
+            <i class="fa fa-times fa-fw fa-3xCross crossButton" aria-hidden="true"> </i>
+        </button>
+    </div> -->
+    <div class="myContainerContact" style="margin-bottom:3rem;"
+         *ngIf="Data && Data !=undefined && Data.data !=undefined ">
+        <h2 *ngIf="!ratedTutor && !tutorApproved" class="headings topSpace text-center mb-4">Session Summary <br> Review
+            and Approve
+        </h2>
+        <h2 *ngIf="!ratedTutor && tutorApproved " class="headings text-center mb-4"> Rate Your Tutor</h2>
+        <div class="col-sm-12  col-md-12   col-xs-12 col-lg-12 mt-4 bookinginfo">
+            <p> {{originalStartTime}}-{{originalEndTime}}</p>
+            <p *ngIf="Data.data.studentId && Data.data.studentId !=undefined " class="capitalize"> Child:
+                {{Data.data.studentId.firstName }} {{Data.data.studentId.lastName ? Data.data.studentId.lastName : ''}}
+            </p>
+            <p *ngIf="Data.data.tutorId && Data.data.tutorId !=undefined " class="capitalize">Tutor:
+                {{Data.data.tutorId.firstName }} {{Data.data.tutorId.lastName ? Data.data.tutorId.lastName : ''}}</p>
+            <p *ngIf="Data.data && Data.data !=undefined ">Subject:
+                <span *ngFor="let subjects of Data.data.subjects;let comma=last; " class="status-data font-16 ">
+                    <span class="status-data font-16 "
+                          *ngIf="subjects.subcategories && subjects.subcategories.length>0">
+                        <span *ngFor="let subSubjects of subjects.subcategories;let last=last "
+                              class="status-data font-16 "> {{subSubjects.name}}{{( last && comma ) ? '' : ','}} </span>
+                    </span>
+                </span>
+            </p>
+            <p>Start Time: {{startTime }}</p>
+            <p>End Time: {{endTime }}</p>
+            <p>Actual Session Length: {{sessionlength}} {{hours}}</p>
+
+            <!--            {{Data.data.booking.payments.paymentStatus}}-->
+<!--            {{Data.data.payments.paymentStatus}}-->
+
+
+            <ng-container *ngIf="!Data?.data?.isBookingUseCredits">
+                <p>Total Amount: ${{( totalAmount.toFixed(2) )}} </p>
+            </ng-container>
+
+        </div>
+        <div class="col-sm-12 col-md-12  col-xs-12 col-lg-12 mt-4 flexvertical">
+
+            <h2 class="headings text-center mb-2" style='font-size: 30px;'>Feedback</h2>
+            <br>
+            <p style="font-size: 13px;">
+                <strong>Would you hire this tutor again or recommend him or her to a friend? Your rating will appear on
+                    {{Data.data.tutorId.firstName}}
+                    {{Data.data.tutorId.lastName ? ( Data.data.tutorId.lastName.substr(0, 1) + '.' ) : ''}}'s profile
+                    page.</strong>
+            </p>
+            <ngb-rating [(rate)]="currentRate" max="5">
+                <ng-template let-fill="fill" let-index="index">
+                    <span class="star1" (click)="checkRating()" [class.filled]="fill === 100">&#9733;</span>
+                </ng-template>
+            </ngb-rating>
+            <br>
+            <p style="font-size: 13px;">
+                <strong>Would you like to share a review on our site to support your local tutor and help other families
+                    find the right tutor for their child?
+
+                </strong>
+            </p>
+
+        </div>
+
+        <div class="col-sm-12  col-md-12  col-xs-12 col-lg-12 mt-1 mb-4">
+            <textarea maxlength="500" class="textareaContact1" [(ngModel)]="message"
+                      placeholder="Not sure what to say? No problem! Here’s an example of what another parent wrote: “My son loved working with Kristen. She was fun, engaging, and managed to teach a good bit of math while playing games and keeping it light. We will be booking again!”
+"></textarea>
+        </div>
+        <!-- <div *ngIf="showError" class="flex error-message sub-little-text mt-4 mb-2">
+            Please give ratings to approve tutor
+        </div> -->
+        <div *ngIf="showError2" class="flex error-message sub-little-text mt-4 mb-2">
+            Oops! Please select a star rating to submit your feedback.
+        </div>
+        <div *ngIf="!ratedTutor && !tutorApproved" class="flex mt-4 mb-2">
+            <button (click)="rateTutor()" class="loginButton">Approve & Submit
+                <span style="color:white;margin-right:6px;float:right">
+                    <i class="fa fa-lg fa-arrow-right" aria-hidden="true"></i>
+                </span>
+            </button>
+
+        </div>
+        <div *ngIf="!ratedTutor && tutorApproved " class="flex mt-4 mb-2" style="height: 70px">
+            <button (click)="onlyRateTutor()" class="loginButton">Submit
+                <span style="color:white;margin-right:6px;float:right">
+                    <i class="fa fa-lg fa-arrow-right" aria-hidden="true"></i>
+                </span>
+            </button>
+
+        </div>
+        <div *ngIf="!ratedTutor && !tutorApproved" class="flex freetext mt-4 mb-2">
+            After you click approve, your card will be charged for your session total. If you do not approve within 24
+            hours, your card
+            will be charged. If you need to dispute any of the session details, please click below to raise a dispute
+            and
+            the Sylvan team will respond as soon as possible.
+        </div>
+        <div *ngIf="Data.data != undefined && !ratedTutor && !tutorApproved " class="flex text-center mt-2  mb-2"
+             style="height: 70px">
+            <a (click)="raiseDispute(Data.data._id)" class="blue-heading"
+               style="color:#e1134f;margin:auto; font-family:'ProximaNova-Bold';font-size:18px;">
+                Raise Dispute</a>
+
+        </div>
+
+
+    </div>
+</mat-dialog-content>

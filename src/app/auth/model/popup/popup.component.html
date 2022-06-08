@@ -1,0 +1,40 @@
+<div class="cls-popup-back" id="popup-comp">
+    <div class="cls-popup-content" id="popup-cnt">
+        <!-- <i class="fa fa-times-circle close-popup" (click)="hidePopup()"></i>
+        <i style="display: none" class="fa fa-spinner fa-spin close-popup"></i> -->
+        <div style="float:right;padding:0px;margin-bottom:0px;margin-top: -14px;" class="row">
+            <button (click)="hidePopup()" style="border:none" class="close-btn" mat-button mat-dialog-close="true">
+                <img src="assets/img/close.png">
+            </button>
+        </div>
+        <div class="mt-4 pad10">
+            <div style="display: none" class="pop-icon-div">
+                <i id="pop-icon" class="fa"></i>
+            </div>
+            <div class="mt-2 mb-4">
+
+
+                <p>
+                    <span id="popup-message" class="otpText pop-message" style="font-size:38px"> </span>
+                </p>
+                <p>
+                    <!-- <span class="otpText " style="font-size:18px">
+                        An activation mail has been sent to your the entered email address. <br>
+                        Kindly click on the link in the mail to activate your account.
+                    </span> -->
+                    <span class="otpText " style="font-size:18px">
+                        An activation email has been sent to your new email address.<br> Please click on the link in the email to verify your account.<br>If you do not see the email within a few minutes, please check your spam folder.
+                         
+                    </span>
+
+                </p>
+                <button class="pinkButton arrow-btn" (click)="goToHome()"> OK
+                    <!-- <span style="color:white;margin-right:6px;float:right"> -->
+                        <i class="fa fa-lg fa-arrow-right" aria-hidden="true"></i>
+                    <!-- </span> -->
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>

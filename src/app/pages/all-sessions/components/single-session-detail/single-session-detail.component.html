@@ -1,0 +1,440 @@
+<div class="container-fluid " style="position: relative">
+
+    <div id="hideDiv" *ngIf="bookingDetails && bookingDetails != undefined">
+        <div class="row  mt-4 mb-4 padding-ie status proximanova-bold"
+             [ngStyle]="{'background':  color? color :'#d9ab28' }" style="min-height:30px;color:white;">
+            <label [hidden]="statusMsg === 'ON THE WAY' " style="margin:auto ;color:white;font-size: 16px;">
+                {{statusMsg ? statusMsg : 'PENDING'}} </label>
+            <label *ngIf="statusMsg === 'ON THE WAY'  " style="margin:auto;color:white;font-size: 16px;">
+                {{statusMsg ? ((ETA_duration != undefined ? (statusMsg + ' , ' + ETA_duration) : statusMsg)) : 'PENDING'}}
+            </label>
+        </div>
+
+        <div class="row">
+        </div>
+
+        <div class="row text-center">
+            <div class=" offset-lg-2 col-lg-8 col-12 text-right-address" style=" margin-top: 5px; margin-bottom: 15px;">
+                <button (click)="bookAgain(bookingDetails)"
+                        class="greenButton pointer full-width-btn ">Book Again
+                    <span style="color:white;margin-right:6px;float:right"> <i class="fa fa-lg fa-arrow-right"
+                                                                               aria-hidden="true"></i></span>
+                </button>
+                <button class="greenButton pointer full-width-btn mt-2 "
+                        (click)='contactTutor(bookingDetails._id)'>Contact
+                    Tutor<span style="color:white;margin-right:6px;float:right"> <i class="fa fa-lg fa-arrow-right"
+                                                                                    aria-hidden="true"></i></span>
+                </button>
+            </div>
+            <div class="offset-lg-2 offset-lg-2  col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                <div class="outer-div">
+                    <div class="row mt-4">
+                        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 pl-6 text-left-address">
+                            <span class="blue-heading "> Child Name: </span>
+                        </div>
+                        <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 text-left-address ">
+                            <span class="booking-text">
+                                {{bookingDetails.studentId ? bookingDetails.studentId.firstName : ''  }}
+                                {{bookingDetails.studentId ? (bookingDetails.studentId.lastName.substr(0, 1) + '.') : '' }}
+                            </span>
+                        </div>
+                        <!-- <div *ngIf="bookAgainShow" class=" col-lg-4 col-md-4 col-sm-12 col-xs-12 ">
+                            <button (click)="bookAgain(bookingDetails)" class="greenButton pointer full-width-btn ">Book
+                                Again<span style="color:white;margin-right:6px;float:right"> <i
+                                        class="fa fa-lg fa-arrow-right" aria-hidden="true"></i></span> </button>
+                        </div> -->
+                    </div>
+
+                    <div class="row mt-4 mb-4">
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 pl-6 text-left-address">
+                            <span class="blue-heading"> Tutor Name: </span>
+                        </div>
+                        <div class="col-lg-9 col-md-9 col-sm-6 col-xs-6 text-left-address">
+                            <span *ngIf="!showFullName" class="booking-text">
+                                {{bookingDetails.tutorId ? bookingDetails.tutorId.firstName : ''  }}
+                                {{bookingDetails.tutorId ? (bookingDetails.tutorId.lastName.substr(0, 1) + '.') : '' }}
+                            </span>
+                            <span *ngIf="showFullName" class="booking-text">
+                                {{bookingDetails.tutorId ? bookingDetails.tutorId.firstName : ''  }}
+                                {{bookingDetails.tutorId ? bookingDetails.tutorId.lastName : '' }} </span>
+                            <br>
+
+                            <!-- <span class="row" id="detail-stars">    <star-rating-comp  [readOnly]="true" [staticColor]="'ok'" [starType]="'svg'" [rating]="5"></star-rating-comp> </span> -->
+                            <div id="starRatingDetail" *ngIf=" statusMsg && statusMsg == 'Completed'"
+                                 class="setSideWidth mobile-justify-center" style="margin-top: .5em; line-height: 1">
+                                <span class="booking-text"> ( </span>
+                                <!-- <star-rating style="margin-left: -5px;" [showHalfStars]="true" [disabled]="true"
+                                    [starType]="'svg'" [rating]="tutorRating"></star-rating> -->
+                                <ng-template #t let-fill="fill">
+                                    <span class="starSessionDetail" [class.full]="fill === 100">
+                                        <span class="halfSessionDetail" [style.width.%]="fill">&#9733;</span>&#9733;
+                                    </span>
+                                </ng-template>
+
+                                <ngb-rating style="pointer-events: none;" [rate]="roundOff(tutorRating)"
+                                            [starTemplate]="t" [readonly]="true" max="5">
+                                </ngb-rating>
+                                <span class="booking-text"> &nbsp;{{tutorRating ? (tutorRating.toFixed(1)) : ''}}
+                                    ) &nbsp; </span>
+                                <span style=" color: #34495e;" class="booking-text" *ngIf="showAmount">
+                                    {{rate ? ('$' + rate.toFixed(2)) : ''}}/hr </span> <br> <br>
+                                <a *ngIf="canRateTutor && (showApproveTutor === false)"
+                                   (click)="rateTutor(bookingDetails)">
+                                    <span class='ratingTutor'>Rate Tutor</span>
+                                </a>
+
+                                <!-- <span *ngIf=" tutorRating && tutorRating != undefined"
+                                style="display:inline-flex;margin-top: 2px"> <span class="booking-text"> ( </span>
+                                <star-rating-comp id="starSsessionDetails" *ngIf="tutorRating >0"
+                                    class="margin-left-start session-stars" [readOnly]="true" [staticColor]="'ok'"
+                                    [starType]="'icon'" [rating]="tutorRating" style="margin-top: -2px;">
+                                </star-rating-comp>
+                                <span class="booking-text"> &nbsp;{{tutorRating ? (tutorRating.toFixed(1)): ''}}
+                                    ) &nbsp; </span>
+                            </span>
+                            <span style=" color: #34495e;" class="booking-text">
+                                {{rate ? ('$'+rate.toFixed(2)) : ''}}/hr </span> <br> <br>
+                            <a *ngIf="canRateTutor && (showApproveTutor === false)" (click)="rateTutor(bookingDetails)">
+                                <span class='ratingTutor'>Rate Tutor</span> </a> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="offset-lg-2 offset-lg-2  col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                <div class="outer-div" style="border-top:none;">
+                    <div *ngIf="actualOrignalTime" class="row pt-4">
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 pl-6 text-left-address">
+                            <span class="blue-heading"> Original Date & Time: </span>
+
+                        </div>
+                        <div *ngIf="actualStartTime !=undefined &&  actualEndTime !=undefined "
+                             class="col-lg-9 col-md-9 col-sm-6 col-xs-6 text-left-address">
+                            <!-- <span class="booking-text"> {{startTime |date: "MMM. d, y "}} | {{startTime | date:"h:mma" }} {{endTime? '-': ''}} {{endTime | date:"h:mma"}},&nbsp;{{durationToshow>1 ? (durationToshow + ' hours') :(durationToshow + ' hour')  }}  session </span> -->
+                            <span class="booking-text">{{actualStartTime}} - {{actualEndTime}} </span>
+                        </div>
+                    </div>
+                    <div *ngIf="actualOrignalTime" class="row pt-4">
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 pl-6 text-left-address">
+                            <span [hidden]="reschedule_heading" class="blue-heading"> Actual Date & Time: </span>
+                            <span *ngIf="reschedule_heading" class="blue-heading"> Proposed Date & Time: </span>
+
+                        </div>
+                        <div *ngIf="startTime !=undefined &&  endTime !=undefined "
+                             class="col-lg-9 col-md-9 col-sm-6 col-xs-6 text-left-address">
+                            <!-- <span class="booking-text"> {{startTime |date: "MMM. d, y "}} | {{startTime | date:"h:mma" }} {{endTime? '-': ''}} {{endTime | date:"h:mma"}},&nbsp;{{durationToshow>1 ? (durationToshow + ' hours') :(durationToshow + ' hour')  }}  session </span> -->
+                            <span class="booking-text">{{startTime}} {{endTime ? '-' : ''}} {{endTime}} </span>
+                        </div>
+                    </div>
+                    <div [hidden]="actualOrignalTime" class="row pt-4">
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 pl-6 text-left-address">
+                            <span class="blue-heading"> Date & Time: </span>
+                        </div>
+                        <div *ngIf="startTime !=undefined &&  endTime !=undefined "
+                             class="col-lg-9 col-md-9 col-sm-6 col-xs-6 text-left-address">
+                            <!-- <span class="booking-text"> {{startTime |date: "MMM. d, y "}} | {{startTime | date:"h:mma" }} {{endTime? '-': ''}} {{endTime | date:"h:mma"}},&nbsp;{{durationToshow>1 ? (durationToshow + ' hours') :(durationToshow + ' hour')  }}  session </span> -->
+                            <span class="booking-text">{{startTime}} {{endTime ? '-' : ''}} {{endTime}} </span>
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 pl-6 text-left-address">
+                            <span class="blue-heading"> Subjects: </span>
+                        </div>
+                        <div class="col-lg-9 col-md-9 col-sm-6 col-xs-6 text-left-address">
+                            <span class="booking-text"> <span
+                                *ngFor="let subjects of bookingDetails.subjects;let comma=last;"> <span
+                                *ngIf="subjects.subcategories && subjects.subcategories.length>0"> <span
+                                *ngFor="let subSubjects of subjects.subcategories;let i=index;let last=last "
+                                class=" "> {{subSubjects.name}}{{(last && comma) ? '' : ','}}&nbsp; </span>
+                                    </span>
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 pl-6 text-left-address">
+                            <span class="blue-heading"> Location: </span>
+                        </div>
+                        <div class="col-lg-9 col-md-9 col-sm-6 col-xs-6 text-left-address" style="line-height:2">
+
+                            <span class="booking-text"> {{bookingDetails?.locationDetails?.addressLine1  }} </span> <br>
+                            <span *ngIf="bookingDetails?.locationDetails?.addressLine2  != undefined"
+                                  class="booking-text"> {{bookingDetails?.locationDetails?.addressLine2  }} </span> <br>
+                            <span
+                                class="booking-text">{{bookingDetails?.locationDetails?.city ? (bookingDetails?.locationDetails?.city + ',') : ''}}
+                                {{bookingDetails?.locationDetails?.state ? bookingDetails?.locationDetails?.state : ''   }}
+                                {{ bookingDetails?.locationDetails?.zipCode ? bookingDetails?.locationDetails?.zipCode : ''}}
+                            </span>
+
+                        </div>
+                    </div>
+
+
+                    <div class="row mt-4">
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 pl-6 text-left-address">
+                            <span class="blue-heading"> Online Session: </span>
+                        </div>
+                        <div class="col-lg-9 col-md-9 col-sm-6 col-xs-6 text-left-address">
+                            <span style="text-transform: capitalize;"
+
+                                  class="booking-text">{{bookingDetails.isSessionOnline ? 'Yes' : 'No'}}</span>
+
+                        </div>
+                    </div>
+
+
+                    <div class="row mt-4"
+                         *ngIf="bookingDetails?.tutorId?.tutor?.onlineSessionLink && checkBookingStatus(bookingDetails.status) && bookingDetails.isSessionOnline">
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 pl-6 text-left-address">
+                            <span class="blue-heading"> Online Session Link: </span>
+                        </div>
+                        <div class="col-lg-9 col-md-9 col-sm-6 col-xs-6 text-left-address">
+                            <span class="booking-text">
+                                <a (click)="commonService.openLinkInNewTab(bookingDetails?.tutorId?.tutor?.onlineSessionLink)"
+                                   class="open-link">{{bookingDetails?.tutorId?.tutor?.onlineSessionLink}}</a>
+                            </span>
+                        </div>
+                    </div>
+
+
+                    <div class="row mt-4">
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 pl-6 text-left-address">
+                            <span class="blue-heading"> Session Requested By: </span>
+                        </div>
+                        <div class="col-lg-9 col-md-9 col-sm-6 col-xs-6 text-left-address">
+                            <span style="text-transform: capitalize;"
+                                  *ngIf="bookingDetails.sessionRequestedBy=='PARENT'" class="booking-text">Parent</span>
+                            <span style="text-transform: capitalize;" *ngIf="bookingDetails.sessionRequestedBy=='TUTOR'"
+                                  class="booking-text">Tutor</span>
+                            <span style="text-transform: capitalize;" *ngIf="!bookingDetails.sessionRequestedBy"
+                                  class="booking-text">Parent</span>
+                        </div>
+                    </div>
+
+
+                    <div class="row mt-4" *ngIf="bookingDetails?.payments?.parentReferral">
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 pl-6 text-left-address">
+                            <span class="blue-heading"> Referral Discount: </span>
+                        </div>
+                        <div class="col-lg-9 col-md-9 col-sm-6 col-xs-6 text-left-address">
+                            <span class="booking-text">
+                            <ng-container *ngIf="bookingDetails?.payments?.parentReferral?.type == 'FLAT'">
+                                {{bookingDetails?.payments?.parentReferral?.discount |  currency:'USD':true:'1.2-2'}}
+                            </ng-container>
+                            <ng-container *ngIf="bookingDetails?.payments?.parentReferral?.type != 'FLAT'">
+                                {{bookingDetails?.payments?.parentReferral?.discount}}%
+                                ({{(bookingDetails?.payments?.parentReferral?.discount * bookingDetails?.payments?.projectedAmountPayableToTutor) / 100 |  currency:'USD':true:'1.2-2'}}
+                                )
+                            </ng-container>
+                            </span>
+                        </div>
+                    </div>
+
+
+                    <div class="row mt-4" *ngIf="bookingDetails?.payments?.parentPromoDiscount?.type">
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 pl-6 text-left-address">
+                            <span class="blue-heading"> Promo Code: </span>
+                        </div>
+                        <div class="col-lg-9 col-md-9 col-sm-6 col-xs-6 text-left-address">
+                            <span class="booking-text">{{bookingDetails?.payments?.promocode}}
+
+                                <ng-container *ngIf="bookingDetails?.payments?.parentPromoDiscount?.type == 'FLAT'">
+                                ({{bookingDetails?.payments?.parentPromoDiscount?.discount |  currency:'USD':true:'1.2-2'}}
+                                    off)
+                            </ng-container>
+
+                            <ng-container *ngIf="bookingDetails?.payments?.parentPromoDiscount?.type != 'FLAT'">
+                                ({{bookingDetails?.payments?.parentPromoDiscount?.discount}}% off)
+                            </ng-container>
+                            </span>
+                        </div>
+                    </div>
+
+
+                    <div class="row mt-4" *ngIf="bookingDetails?.partnershipCode?.partnercodeId?.partnercode">
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 pl-6 text-left-address">
+                            <span class="blue-heading"> Partnership: </span>
+                        </div>
+                        <div class="col-lg-9 col-md-9 col-sm-6 col-xs-6 text-left-address">
+                            <span class="booking-text">{{bookingDetails?.partnershipCode?.partnercodeId?.partnercode}}
+                                <ng-container *ngIf="showAmount">
+                                    ({{bookingDetails?.partnershipCode?.partnercodeId?.hourlyRate | currency:'USD':true:'1.2-2'}}
+                                    /hr. rate)
+                                </ng-container>
+                            </span>
+                        </div>
+                    </div>
+
+
+                    <ng-container *ngIf="showAmount">
+                        <div *ngIf="projectedAmount != undefined && showEstimated" class="row mt-4 mb-4">
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 pl-6 text-left-address">
+                                <span class="blue-heading"> Estimated Session Rate: </span>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-left-address">
+
+                            <span class="booking-text">
+                                {{projectedAmount ? (projectedAmount | currency:'USD':true:'1.2-2') : 0 | currency:'USD':true:'1.2-2'}}
+                            </span>
+                            </div>
+                        </div>
+                    </ng-container>
+
+                    <ng-container *ngIf="showAmount">
+                        <div *ngIf="showAdjustment" class="row mt-4 mb-4">
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 pl-6 text-left-address">
+                                <span class="blue-heading"> Rate Adjustment: </span>
+                            </div>
+                            <div *ngIf="bookingDetails.status != 'DISPUTE_RAISED'"
+                                 [hidden]=" bookingDetails != undefined && bookingDetails.payments != undefined && bookingDetails.isDisputeResolved && bookingDetails.status === 'COMPLETED' "
+                                 class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-left-address">
+                                <span class="booking-text"> {{adjustedAmount| currency:'USD':true:'1.2-2'}} </span>
+                            </div>
+                            <div
+                                *ngIf="bookingDetails.status === 'COMPLETED' && bookingDetails != undefined && bookingDetails.isDisputeResolved "
+                                class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-left-address">
+                            <span class="booking-text">
+                                {{(bookingDetails.payments != undefined) ? ((bookingDetails.payments.amountCharged - bookingDetails.payments.projectedAmount) | currency:'USD':true:'1.2-2') : 0 | currency:'USD':true:'1.2-2'}}
+                            </span>
+                            </div>
+                            <div *ngIf="bookingDetails.status === 'DISPUTE_RAISED'"
+                                 class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-left-address">
+                                <span class="booking-text"> {{adjustedAmount }} </span>
+                            </div>
+                        </div>
+                    </ng-container>
+
+                    <ng-container *ngIf="showAmount">
+                        <div *ngIf="showFinalAmount" class="row mt-4 mb-4">
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 pl-6 text-left-address">
+                                <span class="blue-heading"> Final Session Rate: </span>
+                            </div>
+
+
+                            <div *ngIf="bookingDetails.status != 'DISPUTE_RAISED'"
+                                 [hidden]=" bookingDetails != undefined && bookingDetails.isDisputeResolved && bookingDetails.status === 'COMPLETED' "
+                                 class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-left-address">
+
+                            <span class="booking-text">
+<!--                              {{( totalAmount != undefined ) ? ( totalAmount | currency:'USD':true:'1.2-2' ) : 0 | currency:'USD':true:'1.2-2'}}-->
+                                {{(totalAmount != undefined) ? (totalAmount | currency:'USD':true:'1.2-2') : 0 | currency:'USD':true:'1.2-2'}}
+                            </span>
+
+                            </div>
+
+                            <div
+                                *ngIf="bookingDetails.status === 'COMPLETED' && bookingDetails != undefined && bookingDetails.isDisputeResolved "
+                                class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-left-address">
+                            <span class="booking-text">
+                                {{(bookingDetails.payments != undefined) ? (bookingDetails.payments.amountCharged + bookingDetails.payments.partialAmountCharged | currency:'USD':true:'1.2-2') : 0 | currency:'USD':true:'1.2-2'}}
+                            </span>
+                            </div>
+
+                            <div *ngIf="bookingDetails.status === 'DISPUTE_RAISED'"
+                                 class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-left-address">
+                            <span class="booking-text">
+                                {{(totalAmount != undefined) ? totalAmount : 0 | currency:'USD':true:'1.2-2'}} </span>
+                            </div>
+
+                        </div>
+                    </ng-container>
+
+                    <div
+                        *ngIf="(  showChangePayment &&  hold_fail && twentyFourCheck && checkPaymentStatus!=1) ||  (showChangePayment && checkPaymentStatus!=1) "
+                        class="offset-lg-6 mb-4">
+
+
+                        <!--                        {{bookingDetails?.paymentStatus: "CREDIT_USED"}}-->
+                        <ng-container *ngIf="bookingDetails?.payments?.paymentStatus != 'CREDIT_USED'">
+                            <a (click)="goToPayment(bookingDetails)">
+                            <span class="blue-heading" style="color:#e1134f;font-family:'ProximaNova-Bold'">
+                                <b *ngIf="ouside48hrs && checkPaymentStatus != 2">Change Payment Method</b>
+                                <b *ngIf="!ouside48hrs && checkPaymentStatus == 2"> Review Payment Options</b>
+                            </span>
+                            </a>
+                        </ng-container>
+
+
+                        <!--    <a (click)="goToPayment(bookingDetails)"> <span class="blue-heading"-->
+                        <!--                                style="color:#e1134f;font-family:'ProximaNova-Bold'"> <b> Change Payment Method-->
+                        <!--                                </b></span>-->
+                        <!--                        </a>-->
+
+
+                    </div>
+                    <div class="mb-4" *ngIf="!showAmount"></div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div *ngIf="bookingDetails && bookingDetails != undefined" class="row text-center mt-4 mb-4">
+        <div class="offset-lg-2 offset-md-2 mt-2 col-lg-4 col-md-4 col-sm-12 col-xs-12" style="display:flex">
+            <a *ngIf="raiseDisputeVisible" (click)="raiseDispute(bookingDetails._id)" class="blue-heading padding-left"
+               style="color:#e1134f;margin:auto; font-family:'ProximaNova-Bold';font-size:18px;"> Raise Dispute</a>
+            <a (click)="approveTutor(bookingDetails)" *ngIf="canApproveTutor" class="blue-heading padding-left"
+               style="color:#e1134f;margin:auto; font-family:'ProximaNova-Bold';font-size:18px;"> Review and Approve
+            </a>
+            <a (click)="viewDispute(bookingDetails)"
+               *ngIf=" bookingDetails.disputeRaisedAt != undefined && (bookingDetails.status === 'DISPUTE_RAISED' || bookingDetails.status === 'COMPLETED') "
+               class="blue-heading padding-left"
+               style="color:#e1134f;margin:auto; font-family:'ProximaNova-Bold';font-size:18px;"> View Dispute</a>
+            <a *ngIf="cancelVisible" (click)="cancelSession()" class="blue-heading"
+               style="color:#e1134f;margin:auto; font-family:'ProximaNova-Bold';font-size:18px"> Cancel Session </a>
+        </div>
+
+        <div *ngIf="rescheduleVisible && rescheduleTimeDifference "
+             class=" col-lg-4 col-md-4 col-sm-12 col-xs-12 mt-2 text-left-address">
+            <button style="width: 250px" (click)="reschedule()" class="loginButton pointer">Reschedule Session<span
+                style="color:white;margin-right:6px;float:right"> <i class="fa fa-lg fa-arrow-right"
+                                                                     aria-hidden="true"
+                                                                     style="margin-left: 10px"></i></span></button>
+        </div>
+        <div *ngIf="bookingDetails != undefined && feedbackVisible "
+             class=" col-lg-4 col-md-4 col-sm-12 col-xs-12 mt-2 ">
+
+
+            <button (click)="assesment(bookingDetails._id)" class="loginButton pointer full-width-btn ">View
+                Feedback<span style="color:white;margin-right:6px;float:right"> <i class="fa fa-lg fa-arrow-right"
+                                                                                   aria-hidden="true"></i></span>
+            </button>
+
+        </div>
+    </div>
+
+    <div *ngIf="bookingDetails && bookingDetails != undefined && acceptDeclineVisible "
+         class="row text-center mt-4 mb-4">
+        <div class="offset-lg-2 offset-md-2 mt-2 col-lg-4 col-md-4 col-sm-12 col-xs-12" style="display:flex">
+            <a class="pink-link" style="text-decoration:none;"
+               style="color:#e1134f;margin:auto; font-family:'ProximaNova-Bold';font-size:18px;"
+               (click)="declineReschedule(bookingDetails._id)"> Decline Reschedule </a>
+        </div>
+
+        <div class=" col-lg-4 col-md-4 col-sm-12 col-xs-12 mt-2 ">
+            <button (click)="acceptReschedule(bookingDetails._id)" class="pinkButton pointer">Accept Reschedule <span
+                style="color:white;margin-right:6px;float:right;"> <i class="fa fa-lg fa-arrow-right"
+                                                                      aria-hidden="true"></i> </span>
+            </button>
+        </div>
+
+    </div>
+    <div *ngIf="bookingDetails && bookingDetails != undefined && statusMsg=='Pending Request from Tutor' "
+         class="row text-center mt-4 mb-4">
+        <div class="offset-lg-2 offset-md-2 mt-2 col-lg-4 col-md-4 col-sm-12 col-xs-12" style="display:flex">
+            <a class="pink-link" style="text-decoration:none;"
+               style="color:#e1134f;margin:auto; font-family:'ProximaNova-Bold';font-size:18px;"
+               (click)="givePaymentForTutor(bookingDetails,'reject')"> Decline Request </a>
+        </div>
+
+        <div class=" col-lg-4 col-md-4 col-sm-12 col-xs-12 mt-2 ">
+            <button (click)="givePaymentForTutor(bookingDetails,'accept')" class="pinkButton pointer">
+                Accept Request
+                <span class="right-arrow-icon"> <i class="fa fa-lg fa-arrow-right"
+                                                   aria-hidden="true"></i> </span>
+            </button>
+        </div>
+
+    </div>
+</div>

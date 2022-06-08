@@ -1,0 +1,43 @@
+<div  class="row modal-title-new" mat-dialog-title>
+    <button (click)="closeDialog()" style="border:none" class="close-btn pointer" mat-button mat-dialog-close="true">
+        <img src="assets/img/close.png">
+    </button>
+</div>
+<mat-dialog-content>
+
+    <div class="myContainer mt-2 mb-4">
+
+        <div class="text-center">
+            <p class="error-data">
+                We’re sorry! There are no tutoring credit hours available.
+                <br><br>
+
+                If you wish to book more tutoring sessions, please visit your Bright Horizons Backup Care account and
+                request additional tutoring hours.
+
+                <ng-container *ngIf="!isCanada">
+                     If you are out of use please indicate this on your Profile and select
+                    My Wallet to add a credit card. You will then be able to purchase future sessions.
+                </ng-container>
+                <br><br>
+
+                If you've placed a request for tutoring hours in your Bright Horizons account, please allow
+                <!--                {{isCanada ? 'up to 24' : '1-2'}}-->
+                up to 24 hours
+                <!--                1-2 hours-->
+
+                for processing before attempting to {{data?.bookAgainText ? 'create' : 'accept'}} this session request
+                again.
+            </p>
+        </div>
+
+
+    </div>
+    <div class="row" style="justify-content: center;">
+        <div class="mt-2" style="margin-bottom:30px;">
+            <button (click)="closeDialog()" class="pinkButton arrow-btn">OK
+            </button>
+        </div>
+    </div>
+
+</mat-dialog-content>

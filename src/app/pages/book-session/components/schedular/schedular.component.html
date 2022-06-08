@@ -1,0 +1,76 @@
+<div *ngIf="web" class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt-6">
+        <p class="session-title proximanova-light setHeading">Choose a date and time for each session</p>
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt-3 table-responsive">
+        <table class="table table-bordered table-align">
+            <thead>
+                <tr>
+                    <th>Session</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th></th>
+                    <th style="border: none !important; border-width: 0px;border: 1px solid #ffffff !important;"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let data of sessionDatalength; let i = index">
+                    <td>{{i+1}}</td>
+                    <td class="th-width">{{data.date}}</td>
+                    <td class="th-width">{{data.time}}</td>
+                    <td class="btn-th-width">
+                        <button mat-button class="back-btn pointer btn-align" type="button"
+                            (click)="gotoScheduler(i,data)">Schedule Session</button>
+                    </td>
+                    <td *ngIf="sessionDatalength.length == 1" class="pt-2 removeBorder"></td>
+                    <td *ngIf="sessionDatalength.length > 1" class="pt-2 removeBorder"><i class="fa fa-times pointer"
+                            aria-hidden="true" style="color: orange;font-size: 19px;" (click)="showPopup(i, data)"></i>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+<div *ngIf="!web" class="row mt-3">
+    <div class="col-12" >
+        <div class="row">
+            <div class="sessionCard col-12 mt-2 mb-2" *ngFor="let data of sessionDatalength; let i = index">
+                    <p class="scHead" (click)="gotoScheduler(i,data)">
+                        Session {{i+1}}
+                    </p>
+                    <p *ngIf="data.date" class="sDateAndTime" (click)="gotoScheduler(i,data)">
+                        {{data.date}} {{data.time}}
+                    </p>
+                    <p (click)="gotoScheduler(i,data)" *ngIf="!data.date" class="sDateAndTime">
+                       <span style="margin-top: 2px;">Add Date and Time</span>
+                    </p>
+                    <span style="position: absolute;top: 13px;
+                cursor: pointer;
+                    right: 30px; ">
+                        <!-- <img (click)="gotoScheduler(i,data)" style="margin-left: 15px;" *ngIf="data.date" src="/assets/img/ic-edit.svg"> -->
+                        <img (click)="showPopup(i, data)" *ngIf="sessionDatalength.length > 1"
+                            src="/assets/img/ic-trash.svg">
+                    </span>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="text-center pinkText mt-4" *ngIf="stopForward">
+    <h4>Oops! Please select a date and time for each session requested. Otherwise, click X to remove any blank sessions
+        and then click Proceed to Session Review to move forward with booking the sessions.</h4>
+</div>
+<div class="text-center pinkText mt-4" *ngIf="errorMessage">
+    <h4>Oops! Please select a date and time for this session request.</h4>
+</div>
+
+<div class="third row mt-4">
+    <button type="submit" class="marginL" (click)='setAvailabilty()'>Proceed to Session Review<span class="btn-arrow">
+            <i aria-hidden="true" class="fa fa-md fa-arrow-right"></i></span> </button>
+</div>

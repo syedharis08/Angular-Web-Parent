@@ -1,0 +1,27 @@
+<mat-dialog-content id="tutor-dialog">
+    <div class="myContainer mt-4 mb-4" style="padding:2%;">
+        <h2 class="headings text-center" style="margin-top:0px;">Find Your Tutor</h2>
+        <div class="text-center mt-4">
+            <p class="dialogText mb-2"> Please enter your zip code to find a tutor near you.</p>
+            <form [formGroup]="form2" (ngSubmit)="onSubmit(form2.value)">
+                <div class="form-group mt-4">
+                        <input placeholder="Enter zip code " [ngClass]="{'has-zipCodeInput-error': (!zipcode.valid && (zipcode.touched || submitted)),'has-success': (zipcode.valid && zipcode.touched)}" class="verifyOtp zipCodeInput" [formControl]="zipcode" type="text" inputmode="numeric" pattern="[0-9]*">
+
+                </div>
+                <div class="zipCodeError sub-little-text text-center" *ngIf="form2.controls['zipcode'].errors?.pattern && (form2.controls['zipcode'].dirty)">
+                    Please enter a valid zip code.
+                </div>
+
+
+
+                <button type="submit" class="pinkButton arrow-btn mt-4">Submit
+                    <!-- <span style="color:white;margin-right:6px;float:right"> -->
+                    <i class="fa fa-lg fa-arrow-right" aria-hidden="true"></i>
+                    <!-- </span> -->
+                </button>
+                <br>
+            </form>
+
+        </div>
+    </div>
+</mat-dialog-content>

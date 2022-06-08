@@ -1,0 +1,75 @@
+<!-- <div id="map">
+</div>
+<div class="searchBox col-lg-12 col-sm-12 col-xs-12 col-md-12 ">
+
+
+    <input id="autocomplete" class="searchInput">
+    <span class="addonSearch" (click)="changePassType2() "> <i  class="fa fa-search"></i> </span>
+
+
+</div>// #map {
+//     height: 500px;
+//     width: 100%;
+//     position: relative;
+// }
+// .searchInput {
+//     width: 100%;
+//     height: 100%;
+//     border: none;
+//     padding-left: 2%;
+//     outline: none;
+//     box-shadow: none !important;
+//     font-family: 'ProximaNova-Reg';
+// }
+// .addonSearch {
+//     top: 0.95rem;
+//     right: 2rem;
+//     position: absolute;
+//     color: #c6c9cf;
+// }
+// .autoComplete:focus {
+//     border: none !important;
+//     outline: none;
+// }
+// .searchBox {
+//     width: 50%;
+//     top: 60px;
+//     right: 25%;
+//     height: 10%;
+//     background-color: #ffffff;
+//     box-shadow: 0 11px 15px 0 rgba(0, 0, 0, 0.14);
+//     border: solid 1px #d2d2d2;
+//     position: absolute;
+// }
+// .saveAddress {
+//     // margin-top: 95%;
+//     // position: absolute;
+//     width: auto;
+//     min-width: 200px;
+//     bottom: 4%;
+//     margin: auto;
+// }
+<div style="display:flex" class="mt-2">
+<button mat-button class=" loginButton saveAddress" (click)="openDialog()">Select Location <span  style="color:white;margin-right:4px;float:right" class="hide"> <i class="fa fa-lg fa-arrow-right " aria-hidden="true"></i></span>  </button>
+</div> -->
+<div class="main-div mt-3">
+    <div id="map"></div>
+    <div class="middle">
+        <div class="searchBox">
+            <span>
+              <i style="padding-top: 5%;
+            padding-right: 3%;padding-left: 4%; color: lightgray;" class="fa fa-search"></i>
+            </span> <input id="autocomplete" placeholder="Enter the address" [(ngModel)]="addrsesInput">
+        </div>
+    </div>
+
+    <!-- <button mat-raised-button (click)="openDialog()">Pick one</button> -->
+    <div class="middle pointer">
+        <button mat-button class="saveAddress pointer arrow-btn" (click)="openDialog()">Select Location
+            <!-- <span style="color:white;;"> -->
+              <i class="fa fa-lg fa-arrow-right"  aria-hidden="true"></i>
+            <!-- </span> -->
+          </button>
+    </div>
+
+</div>

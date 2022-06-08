@@ -1,0 +1,206 @@
+<div class="session-all">
+
+    <div class="container  mobileMargin nopadding pt-4" *ngIf="upcomingSessions && upcomingSessions!=undefined ">
+
+        <div class="col-md-121">
+
+            <h3 class="top-text">Invoice</h3>
+
+            <p class="bottom-text">
+                This page allows you to review the charges applied to the credit card(s) on file within a selected date
+                range. <b class="note-text">NOTE: invoices reflect the charges assessed for completed sessions,
+                cancelation policies,
+                no-shows,
+                or additional time beyond the original session length.</b>
+            </p>
+
+
+            <p class="bottom-text">
+                To generate a PDF of your search results, click on the “Generate PDF” button at the top. Follow
+                your browser’s print commands for a PDF printout.
+            </p>
+            <!--            <p class="bottom-text">-->
+            <!--                This page allows you to review the charges applied to the credit card(s) on file within a selected date-->
+            <!--                range. To generate a PDF of your search results, click on the “Generate PDF” button at the top. Follow-->
+            <!--                your browser’s print commands for a PDF printout.-->
+            <!--            </p>-->
+            <!--            -->
+            <!--            <p class="bottom-text">This page allows you to review the charges applied to the credit card(s) on file-->
+            <!--                within a selected date range. To generate a PDF of your search results, click on the “Generate PDF”-->
+            <!--                button at the top. Follow your browser’s print commands for a PDF printout.</p>-->
+
+
+            <div class="my-top-box">
+
+                <div class="row">
+
+                    <div class="col-12 col-lg-9 col-sm-12">
+
+                        <div class="row">
+                            <div class="col-12 col-lg-3 col-sm-12 text-right" style="    margin-right: -32px;">
+                                <div class="session-range">
+                                    Select a session date range:
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-lg-2 col-sm-12">
+
+                                <div class="dateBox">
+                                    <div style="position:relative;">
+                                        <label></label>
+                                        <input (ngModelChange)="onChangeDate($event,'start')" autocomplete="off"
+                                               [(ngModel)]="filterObj.startTime" type="text" placeholder="MM/DD/YYYY"
+                                               readonly [matDatepicker]="picker" (click)="picker.open()"
+                                               class="form-control"/>
+                                        <img class="calImg pointerClass" (click)="picker.open()"
+                                             src="/assets/img/ic-calendar.png">
+                                        <mat-datepicker #picker></mat-datepicker>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-lg-3 col-sm-12" style=" margin-left: 18px;">
+                                <div class="dateBox">
+                                    <div style="position:relative;">
+                                        <label></label>
+                                        <input (ngModelChange)="onChangeDate($event,'end')" autocomplete="off"
+                                               [(ngModel)]="filterObj.endTime" type="text" placeholder="MM/DD/YYYY"
+                                               readonly [matDatepicker]="picker1" (click)="picker1.open()"
+                                               class="form-control"/>
+                                        <img class="calImg pointerClass" (click)="picker1.open()"
+                                             src="/assets/img/ic-calendar.png">
+                                        <mat-datepicker #picker1></mat-datepicker>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-lg-4 col-sm-12">
+                                <div class="row">
+                                    <div class="col-lg-3 text-right">
+                                        <div class="session-range">
+                                            Student:
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-9">
+
+                                        <select class="form-control inputBox1" [(ngModel)]="filterObj.studentId"
+                                                disabled
+                                                *ngIf="students?.length == 1">
+                                            <option selected
+                                                    [value]="filterObj.studentId">{{students[0]?.firstName}}</option>
+                                        </select>
+
+                                        <select class="form-control inputBox1" [(ngModel)]="filterObj.studentId"
+                                                *ngIf="students?.length > 1">
+                                            <option value="">All Students</option>
+                                            <option *ngFor="let val of students"
+                                                    [value]="val._id">{{val?.firstName}}</option>
+                                            <!--                                                    [value]="val._id">{{val?.firstName}} {{val?.lastName}}</option>-->
+                                        </select>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-lg-3 col-sm-12 filter-btn">
+                        <button class="create-pdf-btn2 full-width-btn" (click)="searchFun()">Search</button>
+                        <button class="clear-btn" (click)="clearSearchFun()">Clear</button>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <ng-container *ngIf="invoices?.length">
+                <div class="sec-box">
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <button class="create-pdf-btn2 full-width-btn gen-pdf" (click)="genPdfFun()">Generate PDF
+                            </button>
+                        </div>
+
+                        <div class="col-md-6">
+
+
+                            <span
+                                class="amount-text">Total Paid: <b>{{totalAmount | currency:'USD':true:'1.2-2'}}</b>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table cus-table">
+                        <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th style="text-align: left">Description</th>
+                            <th style="text-align: right;">Session Cost</th>
+                            <th style="text-align: right;">Promotions/Discounts</th>
+                            <th style="text-align: right;">Amount Charged</th>
+                        </tr>
+                        </thead>
+
+                        <tbody class="set-body">
+                        <tr *ngFor="let data of invoices | paginate: { itemsPerPage: filterObj.limit, currentPage: filterObj.page, id:'upcoming', totalItems: totalItems }; let i=index">
+                            <td>
+                                <span class="parixnova-bold"> {{data?.startTime |date:'MM/dd/yyyy'}}</span>
+                            </td>
+                            <td style="text-align: left">
+                                Session for {{data?.studentId?.firstName | titlecase}}
+                                with {{data?.tutorId?.firstName | titlecase}}  {{data?.tutorId.lastName ? ( data?.tutorId?.lastName.substr(0, 1) + '.' | titlecase ) : ''}}&nbsp;for
+                                <ng-container
+                                    *ngFor="let val of data?.mySubjects;let last = last">{{val}}{{last ? '' : ', '}}
+                                </ng-container>
+                                <!--                            {{data?.subjects |json}},-->
+                                <!--                            Session for James with Jessica Parker for Session1, Session2.-->
+                            </td>
+                            <!--                            <td>-$20.10</td>-->
+                            <td class="set-right-align">{{( data?.amount ) | currency:'USD':true:'1.2-2'}}</td>
+                            <td class="set-right-align">
+                                -{{data?.promoDiscount | currency:'USD':true:'1.2-2'}}</td>
+                            <td class="set-right-align"
+                                style="    padding-right: 9px; !important;">{{data?.myTotalAmount | currency:'USD':true:'1.2-2'}}</td>
+
+
+                            <!--                            <td>-->
+                            <!--                                -{{( data?.payments?.promoDiscount + data?.payments?.referralDiscount ) | currency:'USD':true:'1.2-2'}}</td>-->
+                            <!--                            <td>{{( data?.payments?.actualAmount + data?.payments?.partialAmountLeft ) | currency:'USD':true:'1.2-2'}}</td>-->
+                        </tr>
+
+
+                        </tbody>
+
+                    </table>
+                </div>
+                <br>
+                <br>
+                <br>
+            </ng-container>
+
+        </div>
+
+
+        <div class="col-lg-12 pagination col-sm-12 col-md-12 col-xs-12 " *ngIf="totalItems > 10">
+            <div style="float:right;margin-top: -40px;width: 100%;">
+                <div style="float:right;">
+
+
+                    <pagination-controls class="inline-flx" (pageChange)="pageChangedUpcoming($event)" id="upcoming"
+                                         maxSize="5" directionLinks="true" autoHide="false" previousLabel="Previous"
+                                         nextLabel="Next"
+                                         screenReaderPaginationLabel="Pagination" screenReaderPageLabel="up_page"
+                                         screenReaderCurrentLabel="You're on page"></pagination-controls>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+
+</div>

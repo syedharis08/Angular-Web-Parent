@@ -1,0 +1,22 @@
+<div class="container-fluid margin">
+
+
+    <div class=" mt-4 row">
+
+        <div class="offset-lg-2 offset-lg-2  col-lg-8 col-md-8 col-sm-12 col-xs-12  " style="padding:1%;display:inline-flex;">
+            <h1 class="sessionHeading proximanova-light "> Session Report </h1>
+            <button (click)="downloadReport()"type="button" *ngIf="report && report !=undefined  " class="loginButton">      <span class="addonDownload">  <img src="/assets/img/ic-downloadwhite.png"> Download  </span> </button>
+        </div>
+
+    </div>
+    <div *ngIf="comments && comments != undefined" class=" mt-4 row">
+
+        <div class="offset-lg-2 offset-lg-2  col-lg-8 col-md-8 col-sm-12 col-xs-12 outer-div " style="padding:1%;">
+            <p class="grey-text proximanova-reg">
+                {{comments ? comments : ''}}
+            </p>
+        </div>
+
+    </div>
+
+</div>

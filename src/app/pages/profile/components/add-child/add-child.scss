@@ -1,0 +1,128 @@
+        @import "../../../../theme/sass/conf/conf";
+        .datePicker .mat-icon {
+            display: none;
+        }
+
+        .datePickIcon {
+            background-repeat: no-repeat;
+            background-image: url('/assets/img/ic-calendar.png')
+        }
+
+        #add-child {
+            .has-input-error {
+                border-bottom: 2px solid red !important;
+            }
+        }
+
+        .upload-doc-file {
+            font-family: 'ProximaNova-Reg';
+            font-size: 16px;
+            font-weight: normal;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: normal;
+            letter-spacing: 0.5px;
+            text-align: left;
+            color: #231f20;
+        }
+
+        .mySelectOption .mat-select-arrow {
+            // background-image: url('/assets/img/ic-carat-down.png');
+            border: none;
+            margin-right: 2.8rem;
+        }
+
+        .mySelectOption .mat-select-trigger {
+            height: 2.125em;
+        }
+
+        .mySelectOption .mat-select .mat-select-trigger,
+        .mat-select .mat-select-arrow {
+            color: white !important;
+        }
+
+        .mySelectOption .mat-select-arrow-wrapper {
+            background-image: url('/assets/img/ic-carat-down.png');
+            width: 0;
+            height: 0;
+            background-repeat: no-repeat;
+        }
+
+        .mySelectOption .mat-select-value {
+            text-align: left;
+            padding-left: 2%;
+        }
+
+        .docsText {
+            font-family: 'ProximaNova-Reg';
+            font-size: 16px;
+            color: #231f20;
+            line-height: 1.2;
+        }
+
+        .addonEdit {
+            right: 2.2rem;
+            top: 1.50rem;
+            position: absolute;
+        }
+
+        .upload-doc {
+            height: 60px;
+            background-color: #ffffff;
+            border: solid 1px #efefef;
+        }
+
+        .addonDoc {
+            right: 2.2rem;
+            top: 1.15rem;
+            position: absolute;
+        }
+
+        .myTrash {
+            color: #f15d25;
+            padding-right: 22px;
+            margin-top: 12px;
+        }
+
+        .mySelectOption {
+            .mat-select-placeholder {
+                font-size: 12px;
+            }
+            .mat-select {
+                // width: 80%;
+            }
+            .mat-select-placeholder.mat-floating-placeholder {
+                margin-top: 0px;
+            }
+        }
+
+        .disabledText {
+            color: #34495e;
+            font-size: 15px;
+            font-family: 'ProximaNova-Reg';
+        }
+
+        .addressDiv {
+            text-align: left;
+            background-color: #fcfcfc;
+        }
+
+        .blueText {
+            font-family: 'ProximaNova-Light';
+            font-size: 18px;
+            font-weight: 600;
+            color: #116DB4;
+        }
+
+        @media (max-width: 460px) {
+            .upload-doc>label.addressText {
+                font-size: 12px;
+            }
+            .saveChildrens {
+                text-align: center;
+                width: 100% !important;
+                max-width: 100% !important;
+            }
+        }
+
+        @media screen and (min-width: 461px) and (max-width: 768px) {}

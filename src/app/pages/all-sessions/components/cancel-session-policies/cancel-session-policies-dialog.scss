@@ -1,0 +1,68 @@
+@import "../../../../theme/sass/conf/conf";
+
+.padding-l-r {
+    padding-left: 32px;
+    padding-right: 32px;
+}
+
+.grades-expansion {
+    text-align: left;
+    overflow: hidden;
+}
+
+#cancel {
+    .mat-action-row {
+        justify-content: left !important;
+    }
+    .mat-radio-button {
+        display: block;
+    }
+}
+
+.text-area {
+    width: 100%;
+    border-radius: 4px;
+    background-color: #ffffff;
+    border: solid 1px $main-green;
+    min-height: 130px;
+    height: auto;
+}
+
+#cancelText {
+    .mat-form-field-underline {
+        display: none;
+    }
+    .mat-action-row {
+        justify-content: left !important;
+    }
+    textarea.mat-input-element {
+        resize: none;
+        min-height: 100px;
+        height: auto;
+    }
+    .mat-form-field-infix {
+        margin-top: 2%;
+        margin-left: 2%;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .padding-l-r {
+        padding-left: 22px;
+        padding-right: 22px;
+    }
+}
+.go-cancel-pop{
+    right:20px;
+}
+@media only screen and (max-width: 940px) {
+    .go-cancel-pop{
+        right:5px !important;
+    }
+}
+@media (max-width: 460px) {
+    .half-width-btn1 {
+        max-width: 66vw !important;
+        min-width: 66vw !important;
+    }
+}

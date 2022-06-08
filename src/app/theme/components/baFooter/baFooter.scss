@@ -1,0 +1,319 @@
+// .footerStyle {
+//     background-color: #116DB4;
+//     height: auto;
+//     font-family: 'ProximaNova-Reg';
+//     font-size: 16px;
+// }
+// .text-center {
+//     text-align: center
+// }
+// .textStyle {
+//     font-family: 'ProximaNova-Light';
+//     font-size: 16px;
+//     color: white;
+//     font-weight: lighter;
+//     line-height: 1.5;
+// }
+// .textStyle1
+// {
+//     font-size: 18px;
+//     color: white;
+//     font-weight: 500;
+// }
+// .footerIcons {
+//     padding-left: 10px;
+// }
+// .underline {
+//     text-decoration: underline
+// }
+// .line {
+//     height: 2px;
+//     border: solid 1px #16a8d1;
+// }
+// .lineHeight {
+//     line-height: 30px;
+// }
+// .text-right {
+//     text-align: right;
+// }
+// .text-left {
+//     text-align: left
+// }
+// .footer .footer-last ul.footer-nav {
+//     padding: 0;
+//     margin: 0;
+// }
+// .footer .footer-last ul.footer-nav li {
+//     display: inline-block;
+//     padding: 0 12px 0 5px;
+//     list-style: none;
+//     background: url("assets/img/footer-bdr.jpg") no-repeat 100% 7px;
+// }
+// .footer .footer-last ul.footer-nav li:last-child {
+//     background: none;
+// }
+// .footer .footer-last ul.footer-nav li a {
+//     border-bottom: 1px solid #73bdd1;
+//     color: #ffffff;
+//     font-size: 16px;
+// }
+// .footer .footer-last ul.footer-nav li a:hover {
+//     border-bottom: 0px;
+// }
+// .footer .footer-last p.copy-text {
+//     color: #ffffff;
+//     font-size: 16px;
+//     font-family: 'ProximaNova-Light';
+// }
+// @media only screen and (max-width: 767px) and (min-width: 312px) {
+//     .h4 {
+//         font-size: 16px;
+//     }
+//     .mobCenter {
+//         text-align: center;
+//     }
+//     .footerIcons {
+//         padding-left: 0px;
+//         text-align: center;
+//     }
+//     .padLeftPhone {
+//         padding-left: 28px;
+//     }
+//     .footer-nav {
+//         text-align: center
+//     }
+//     .footer .footer-last ul.footer-nav li {
+//         background: none;
+//         display: block;
+//         padding: 8px 0px 0px 0px;
+//     }
+//     .footer .footer-last ul.footer-nav li a {
+//         border-bottom: none;
+//     }
+//     .phone-center {
+//         text-align: center;
+//     }
+//     .textStyle {
+//         font-size: 15px;
+//     }
+// }
+// @media only screen and (min-width: 768px) and (max-width: 1024px) {
+//     .house {
+//         width: 100%;
+//     }
+//     .textStyle {
+//         font-size: 14px;
+//     }
+//     .h4 {
+//         font-size: 16px;
+//     }
+//     .footer .footer-last ul.footer-nav li a {
+//         font-size: 14px;
+//     }
+//     .footer .footer-last p.copy-text {
+//         font-size: 11px;
+//     }
+// }
+// @media only screen and (min-width: 599px) and (max-width: 966px) {
+//     .house {
+//         width: 100%;
+//     }
+//     .textStyle {
+//         font-size: 14px;
+//         line-height: 1.6;
+//     }
+//     .h4 {
+//         font-size: 14px;
+//     }
+//     .footer .footer-last ul.footer-nav li a {
+//         font-size: 14px;
+//     }
+//     .footer .footer-last p.copy-text {
+//         font-size: 11px;
+//     }
+// }
+// @media screen and (max-width: 767px){
+// 	.become-a-tutor{
+// 		padding-bottom: 10px;
+// 	}
+// 	ul.app-link{
+// 			display: flex;
+// 			justify-content: center;
+// 	}
+// }
+// ul.app-link li{
+// 	margin-bottom: 10px;
+// }
+.footerStyle {
+    background-color: #116DB4;
+    height: auto;
+    font-family: 'ProximaNova-Reg';
+    font-size: 16px;
+}
+
+.text-center {
+    text-align: center
+}
+
+.textStyle {
+    font-family: 'ProximaNova-Light';
+    font-size: 16px;
+    color: white;
+    font-weight: lighter;
+}
+
+.textStyle1 {
+    font-size: 18px;
+    color: white;
+    font-weight: 500;
+}
+
+.footerIcons {
+    padding-left: 10px;
+}
+
+.underline {
+    text-decoration: underline
+}
+
+.line {
+    height: 2px;
+    //border: solid 1px #16a8d1;
+    border: solid 1px #fff;
+}
+
+.lineHeight {
+    line-height: 30px;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.text-left {
+    text-align: left
+}
+
+.footer .footer-last ul.footer-nav {
+    padding: 0;
+    margin: 0;
+}
+
+.footer .footer-last ul.footer-nav li {
+    display: inline-block;
+    padding: 0 12px 0 5px;
+    list-style: none;
+    background: url("assets/img/footer-bdr.jpg") no-repeat 100% 7px;
+}
+
+.footer .footer-last ul.footer-nav li:last-child {
+    background: none;
+}
+
+.footer .footer-last ul.footer-nav li a {
+    border-bottom: 1px solid #73bdd1;
+    color: #ffffff;
+    font-size: 16px;
+}
+
+.footer .footer-last ul.footer-nav li a:hover {
+    border-bottom: 0px;
+}
+
+.footer .footer-last p.copy-text {
+    color: #ffffff;
+    font-size: 16px;
+    font-family: 'ProximaNova-Light';
+}
+
+@media screen and (max-width: 767px) {
+    .footer-logo {
+        margin-top: -20px;
+    }
+}
+
+@media only screen and (max-width: 767px) and (min-width: 312px) {
+    .h4 {
+        font-size: 16px;
+    }
+    .mobCenter {
+        text-align: center;
+    }
+    .footerIcons {
+        padding-left: 0px;
+        text-align: center;
+    }
+    .padLeftPhone {
+        padding-left: 28px;
+    }
+    .footer-nav {
+        text-align: center
+    }
+    .footer .footer-last ul.footer-nav li {
+        background: none;
+        display: block;
+        padding: 8px 0px 0px 0px;
+    }
+    .footer .footer-last ul.footer-nav li a {
+        border-bottom: none;
+    }
+    .phone-center {
+        text-align: center;
+    }
+    .textStyle {
+        font-size: 15px;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+    .house {
+        width: 100%;
+    }
+    .textStyle {
+        font-size: 14px;
+    }
+    .h4 {
+        font-size: 16px;
+    }
+    .footer .footer-last ul.footer-nav li a {
+        font-size: 14px;
+    }
+    .footer .footer-last p.copy-text {
+        font-size: 11px;
+    }
+}
+
+@media only screen and (min-width: 599px) and (max-width: 966px) {
+    .house {
+        width: 100%;
+    }
+    .textStyle {
+        font-size: 14px;
+        line-height: 1.6;
+    }
+    .h4 {
+        font-size: 14px;
+    }
+    .footer .footer-last ul.footer-nav li a {
+        font-size: 14px;
+    }
+    .footer .footer-last p.copy-text {
+        font-size: 11px;
+    }
+}
+
+.fbIcon{
+    width: 35px;
+    height: 35px;
+    border: 1px white solid;
+    border-radius: 5px;
+}
+
+
+.youIcon{
+    width: 35px;
+    height: 35px;
+    border: 1px white solid;
+    border-radius: 5px;
+    margin-left: 10px;
+}

@@ -1,0 +1,89 @@
+<!-- FOOTER -->
+<div style="letter-spacing: 0.3px;" class="container-fluid footerStyle pb-4">
+    <div class="container footer">
+
+        <br>
+        <div class=" mt-4  text-center col-xs-12 col-lg-12 col-sm-12 col-md-12 ">
+        </div>
+        <div class="row mt-4 textStyle lineHeight mobCenter">
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center ">
+                <img [src]="commonService.CONSTANT.footerLogo" class="img-responsive house footer-logo"
+                     alt="{{commonService.CONSTANT.PROJECT_NAME}}"
+                     title="{{commonService.CONSTANT.PROJECT_NAME}}"/>
+                <!--                <img src="assets/icon/32/house.png" class="img-responsive house" alt="House" title="House"/>-->
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                <a (click)="aboutUs()">
+                    <h4 class="underline ">About Us</h4>
+                </a>
+                <p style="text-align:left" class="textStyle "> Discover how {{commonService.CONSTANT.PROJECT_NAME}} can
+                    easily connect you with
+                    talented, local tutors that will bring proven results right to your door!
+                </p>
+                <div class="mt-1 mb-4 social-btns">
+                    <a class="pt-2" (click)="fb()">
+                        <img src="assets/images/facebook-logo.png"  alt="FB" title="FB"/>
+                    </a>
+                    <a class="pt-2" (click)="youTube()">
+                        <img src="assets/images/youtube-logo.png" alt="You Tube" title="You Tube"/>
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 become-a-tutor">
+                <a (click)="becomeTutor()">
+                    <h4 class="underline ">Become a Tutor</h4>
+                </a>
+                <p style="text-align:left" class="textStyle "> Find out how you can help more students by joining the
+                    team that understands the challenges of teaching — and will pay you more for it.
+                </p>
+
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                <h4 class="underline ">Download our App</h4>
+
+                <ul style="list-style: none;padding-left:0; line-height: 35px;" class="app-link">
+                    <li>
+                        <a (click)="tutorAppIos()">
+                            <img style="margin-bottom:4px;" src="assets/img/apple-white-logo.png" alt="Apple"
+                                 title="Apple"/>
+                            <span style="margin-left:9px" class="underline">Available for iOS</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a (click)="tutorAppAnd()">
+                            <img style="margin-bottom:4px;" src="assets/img/android-white-logo.png" alt="Android"
+                                 title="Android"/>
+                            <span style="margin-left:5px" class="underline">Available for Android</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class=" mt-4  text-center col-lg-12  col-md-12 ">
+            <div class="line">
+
+            </div>
+        </div>
+
+        <div style="letter-spacing:0.6px" class="footer-last mt-4 ">
+            <div class="row">
+                <div class="col-lg-5 offset-lg-1 col-md-7 col-sm-7 col-12 mb-2">
+                    <ul class="footer-nav">
+                        <li>
+                            <a (click)="hq()">Contact Us</a>
+                        </li>
+                        <li>
+                            <a (click)="policy()">Privacy Policy</a>
+                        </li>
+                        <li>
+                            <a (click)="terms()">Terms of Use </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class=" col-lg-5 col-md-5 col-sm-5 col-12">
+                    <p class="copy-text"> © {{dateYear}} Sylvan In-Home, LLC. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

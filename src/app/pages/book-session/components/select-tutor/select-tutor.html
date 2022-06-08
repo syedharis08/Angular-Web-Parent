@@ -1,0 +1,1064 @@
+<div id="eventId" [hidden]="true"></div>
+<div *ngIf="web" class="container-fluid mt-4 mycontainer-fluid margin-top-select">
+
+    <div class="row mb-2 max-width  mobile_responsive">
+        <div class="filterTimeBox col-12">
+            <div class="row mt-4 mobileHidden" style="background:white;padding: 20px">
+                <div class="dateBox">
+                    <!-- <div class="inputBoxRec">
+                        <label for="Username" class="insideInputFull">Date:</label>
+                        <input autocomplete="off" type="text" [min]="minDate" [max]="max" rea readonly
+                            [matDatepicker]="picker" (click)="picker.open()" class="form-control stepOneInput" />
+                        <img class="calImg pointerClass" (click)="picker.open()" src="/assets/img/ic-calendar.png">
+                        <mat-datepicker #picker></mat-datepicker>
+                    </div> -->
+                    <div class="mt-2" style="position:relative;">
+                        <label>Date:</label>
+                        <input [ngStyle]="{'border-bottom': filtersErrorDate ? '2px solid red': ''}"
+                               (ngModelChange)="onChangeDate($event)" autocomplete="off" [(ngModel)]="date" type="text"
+                               [min]="minDate" [max]="max" rea readonly [matDatepicker]="picker" (click)="picker.open()"
+                               class="form-control"/>
+                        <img class="calImg pointerClass" (click)="picker.open()" src="/assets/img/ic-calendar.png">
+                        <!-- <mat-datepicker-toggle class="datePickIcon addonEdit" matSuffix [for]="picker"></mat-datepicker-toggle> -->
+                        <mat-datepicker #picker></mat-datepicker>
+                    </div>
+
+                </div>
+                <div class="from">
+                    <p style="margin-top: 41px;font-size: 15px; margin-left: 4px">from</p>
+                </div>
+                <div class="sTimeBox">
+                    <!-- <ngb-timepicker [meridian]=true [minuteStep]=30 style="margin:auto;left:0;right:0"
+                        [(ngModel)]="startTime"></ngb-timepicker> -->
+                    <div class="mt-2 sTimeBoxPart" style="display:flex">
+
+                        <div>
+                            <label class="sTimeBoxPart " style="display:block;">Start Time:</label>
+                            <!-- <ngb-timepicker (ngModelChange)="onChange($event)" meridian=true; [(ngModel)]="startTime">
+                            </ngb-timepicker> -->
+                            <div class="inline selectCheck">
+                                <select [ngClass]="{'disabledColor':disabledH, 'errorClass':errorClass}"
+                                        (change)="startTimeHoursChange()" [(ngModel)]=" startTimeHours"
+                                        style="box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12); width: 53px !important;"
+                                        class="form-control selectClass ">
+                                    <option value="HH" disabled selected>HH</option>
+                                    <option *ngFor="let h of hours" [value]="h">{{h}}</option>
+                                </select>
+                                <div style="line-height: 2.5;
+                                margin: 0 3%;">:
+                                </div>
+                                <select [(ngModel)]="startTimeMinutes"
+                                        [ngClass]="{'disabledColor':disabledM, 'errorClass':errorClass}"
+                                        (change)="startTimeHoursChange()"
+                                        style="box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);width: 55px !important;"
+                                        class="form-control selectClass">
+                                    <option value="MM" disabled selected>MM</option>
+                                    <option *ngFor="let min of minutes" [value]="min">{{min}}</option>
+                                </select>
+                                <select (change)="checkstartTimeAp()" [(ngModel)]="startTimeAp"
+                                        style="color: #0275d8 !important;border-color: #0275d8; margin-left: 5%; border-radius: 5px; cursor: pointer;width: 53px !important;"
+                                        class="form-control selectClass">
+                                    <option value="AM">AM</option>
+                                    <option value="PM">PM</option>
+                                </select>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+                <div class="to">
+                    <p style="margin-top: 41px;font-size: 15px; margin-left: 4px">to</p>
+                </div>
+                <div class="sTimeBox">
+                    <!-- <ngb-timepicker [meridian]=true [minuteStep]=30 style="margin:auto;left:0;right:0"
+                                [(ngModel)]="startTime"></ngb-timepicker> -->
+                    <div class="mt-2 sTimeBoxPart" style="display:flex">
+
+                        <div>
+                            <label class=" sTimeBoxPart" style="display:block;">End Time:</label>
+                            <!-- <ngb-timepicker meridian=true; (ngModelChange)="onChange1($event)" [(ngModel)]="endTime">
+                            </ngb-timepicker> -->
+                            <div class="inline selectCheck">
+                                <select [ngClass]="{'disabledColor':disabledH1,'errorClass':errorClass1}"
+                                        (change)="endTimeHoursChange()" [(ngModel)]=" endTimeHours"
+                                        style="box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);width: 53px !important;"
+                                        class="form-control selectClass ">
+                                    <option value="HH" disabled selected>HH</option>
+                                    <option *ngFor="let h of hours" [value]="h">{{h}}</option>
+                                </select>
+                                <div style="line-height: 2.5;
+                                    margin: 0 3%;">:
+                                </div>
+                                <select [(ngModel)]="endTimeMinutes"
+                                        [ngClass]="{'disabledColor':disabledM1, 'errorClass':errorClass1}"
+                                        (change)="endTimeHoursChange()"
+                                        style="box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);width: 55px !important;"
+                                        class="form-control selectClass">
+                                    <option value="MM" disabled selected>MM</option>
+                                    <option *ngFor="let min of minutes" [value]="min">{{min}}</option>
+                                </select>
+                                <select [(ngModel)]="endTimeAp"
+                                        style="color: #0275d8 !important;border-color: #0275d8; margin-left: 5%; border-radius: 5px; cursor: pointer; width: 53px !important;"
+                                        class="form-control selectClass">
+                                    <option value="AM">AM</option>
+                                    <option value="PM">PM</option>
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="applyBtn">
+                    <div class="applyBtnText"><u (click)="applyTutorAvailFilters()">Apply</u></div>
+                    <i style="font-size: 6px;color:black;margin:5px;cursor: default;" class="fa fa-circle"
+                       aria-hidden="true"></i>
+                    <div class="applyBtnText"><u (click)="clearFilters()">Clear</u></div>
+                </div>
+                <div class="sortBox">
+                    <div class="mt-2">
+                        <label>Sort:</label>
+                        <select [(ngModel)]="sortFilter" (change)="sort($event)"
+                                style="box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12)"
+                                class="form-control selectBox">
+                            <option value="RELEVANCE">Relevance</option>
+                            <option value="LOWEST_HOURLY_RATE">Lowest Hourly Rate</option>
+                            <option value="HIGHEST_HOURLY_RATE">Highest Hourly Rate</option>
+                            <option value="RATING">Rating</option>
+                            <option value="CLOSEST_TO_ME">Closest to me</option>
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <!-- tutors detials -->
+        <div *ngIf="tutors" class="col-lg-9 col-md-8 col-sm-6 col-xs-6 mt-4 mb-4 float-left-mobile-two">
+            <div
+                *ngFor="let tutor of tutors | paginate: { itemsPerPage: limit, currentPage: page ,totalItems: count};  let i = index"
+                class="row mb-2"
+                style="padding:1rem 2.5rem 1rem 2.5rem;padding-left:1rem;background-color:white; box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.11);min-height:170px;">
+
+
+                <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12 text-center">
+                    <div class=" justify-content-center ">
+                        <img
+                            [(src)]="(tutor.profilePicture && tutor.profilePicture != null && tutor.profilePicture.thumbnail !=null) ? tutor.profilePicture.thumbnail:tutor_image"
+                            class="roundImage-tutor">
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                    <div class="row setSideWidth">
+                        <h2 class="select-tutor-heading" style="text-align:left; margin: 0;">
+                            <span class="tutor-name proximanova-bold font-24 pointer"
+                                  (click)="tutorDetails(tutor._id,tutor)">
+                                {{tutor.firstName  }}
+                                {{tutor.lastName ? ( tutor.lastName.substr(0, 1) + '.' ) : ''}} </span>
+                            <span style="display:block; margin-top: 10px">
+
+                                <span class="mr-2"> <img class="certificate-icons   " [(src)]="certi_bgCheck"> </span>
+                                <span
+                                    *ngIf="tutor.tutor && tutor.tutor.educationalDegrees && tutor.tutor.educationalDegrees.length>0"
+                                    class="mr-2 "> <img class="certificate-icons" [(src)]="certi_degCheck"> </span>
+                                <span *ngIf="tutor.tutor && tutor.tutor.sylvanSyncEnabled == true" class="mr-2 "> <img
+                                    class="certificate-icons" [(src)]="certi_sylCheck"> </span>
+                                <span *ngIf="tutor.tutor && tutor.tutor.adminCertified == true" class="mr-2 "> <img
+                                    style="margin-top: -5px;" class="certificate-icons"
+                                    [(src)]="certi_stateCheck"> </span>
+                                    <span *ngIf="tutor.tutor && tutor.tutor.isTutorOfferOnlineClasses == true"
+                                          class="mr-2 "> <img class="certificate-icons"
+                                                              [(src)]="onlineSessions"> </span>
+                            </span>
+
+                        </h2>
+
+                        <!-- <span> <img [(src)]="/assets/img/degree-icon-1.png" > </span> -->
+                    </div>
+                    <div *ngIf="tutor.tutor.ratedCount >0" id="starRatingSelect"
+                         class="row setSideWidth mobile-justify-center" style="margin-top: .5em; line-height: 1">
+                        <!-- <ngb-rating *ngIf="tutor.tutor.ratedCount >0" class="filter-stars"
+                            [rate]="roundOff(tutor.tutor.avgRating)" [max]="5" [readonly]="true"></ngb-rating> -->
+                        <ng-template #t let-fill="fill">
+                            <span class="starSelect" [class.full]="fill === 100">
+                                <span class="halfSelect" [style.width.%]="fill">&#9733;</span>&#9733;
+                            </span>
+                        </ng-template>
+
+                        <ngb-rating [rate]="roundOff(tutor.tutor.avgRating)" [starTemplate]="t" [readonly]="true"
+                                    max="5">
+                        </ngb-rating>
+                        <!-- <star-rating style="margin-left: -5px;" [showHalfStars]="true" [disabled]="true"    [starType]="'svg'" [rating]="tutor.tutor.avgRating"></star-rating> -->
+
+                        <!-- <star-rating-comp *ngIf="tutor.tutor.avgRating >0" [readOnly]="true" [staticColor]="'ok'" [starType]="'svg'" [rating]="roundOff(tutor.tutor.avgRating)"></star-rating-comp> -->
+
+                        <!-- <span
+                            *ngIf="tutor.tutor && tutor.tutor != undefined && tutor.tutor.ratedCount != undefined && tutor.tutor.ratedCount > 0"
+                            class="pinkText" style="line-height: 1.3"> ( {{tutor.tutor ? tutor.tutor.ratedCount : ''}}
+                            {{(tutor.tutor.ratedCount>1 )? 'Reviews' : 'Review'}} ) </span> -->
+                        <span
+                            *ngIf="tutor.tutor && tutor.tutor != undefined && tutor.tutor.ratedCount != undefined && tutor.tutor.ratedCount > 0"
+                            class="pinkText marginMobileSelectTutor" style=" color: black">
+                            &nbsp;{{tutor.tutor.avgRating | number:'1.1-1'}} ({{tutor.tutor.ratedCount}}) </span>
+                        <!-- <span *ngIf="tutor.tutor && tutor.tutor != undefined && (!tutor.tutor.ratedCount) " class="pinkText" style="line-height: 1.3; margin-top: 5px">  &nbsp;( No Reviews ) </span> -->
+
+                        <!-- <span *ngIf="tutor.tutor && tutor.tutor != undefined && (!tutor.tutor.ratedCount) " class="pinkText" style="line-height: 1.3">  &nbsp;( No Reviews ) </span> -->
+                    </div>
+                    <div *ngIf="tutor && tutor != undefined && tutor.newTutor != undefined && (tutor.newTutor ===true)"
+                         class=" setSideWidth row tutor-place-text mobile-justify-center mt-1 proximanova-semibold font-16">
+                        <span class="royal-blue-text font-16 proximanova-semibold"> New Tutor! </span>
+                    </div>
+                    <div
+                        class="row setSideWidth tutor-place-text mobile-justify-center mt-1 proximanova-semibold font-16">
+                        {{( tutor.tutor && tutor.tutor.locationDetails && tutor.tutor.locationDetails.city != undefined ) ? ( tutor.tutor.locationDetails.city + ',' ) : '' }}
+                        {{( tutor.tutor && tutor.tutor.locationDetails ) ? tutor.tutor.locationDetails.state : '' }}
+                    </div>
+                    <div class="row setSideWidth mobile-justify-center profile-text mt-2">
+                        <span style="max-width:100%;word-wrap:break-word;">
+                            {{( tutor.tutor && tutor.tutor.profileHeadLine != undefined ) ? tutor.tutor.profileHeadLine : ''}}
+                        </span>
+                        <!-- <span> {{(tutor.tutor && tutor.tutor.aboutMe !=undefined) ? tutor.tutor.aboutMe :''}} </span> -->
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 text">
+                    <div class="row text-center">
+                        <br *ngIf="isRateChargeSuppressNow">
+
+                        <h2 class="select-tutor-heading" style="text-align:right; margin: 0px"
+                            *ngIf="!isRateChargeSuppressNow">
+                            <span *ngIf="!hasPartnerCode" class="tutor-name font-24 parixnova-bold">
+                                ${{( tutor.tutor && tutor.tutor.hourlyRate != undefined ) ? ( tutor.tutor.hourlyRate ).toFixed(2) : ''}}
+                                /hr
+                            </span>
+                            <span *ngIf="hasPartnerCode" class="tutor-name font-24 parixnova-bold">
+                                ${{( tutor.partnershipCode[0] && tutor.partnershipCode[0].hourlyRate ) ? ( tutor.partnershipCode[0].hourlyRate ).toFixed(2) : ' '}}
+                                /hr
+                               </span>
+                        </h2>
+                    </div>
+                    <div class="row subjects-text tutor-place-text-family mobilemiddle"
+                         style="display:inline-block;margin-top:.5em">
+                        <!-- Subjects Offered: -->
+                        <span *ngIf="tutor.tutor.subjects && tutor.tutor.subjects.length >0"
+                              style="color: #232f84; text-align:right" class="proximanova-semibold"> Subjects
+                            Offered:&nbsp;</span>
+                        <span class="word-break" style="width:auto;">
+                            <span style="color:#231f20"
+                                  *ngFor="let subject of tutor.tutor.subjects;let i = index;let comma=last"
+                                  class="proximanova-semibold">
+                                <span *ngFor="let subsubject of subject.subcategories; let last=last"
+                                      style="color:#231f20; text-align:right;" class="proximanova-semibold">
+                                    {{subsubject.name}}{{( last && comma ) ? '' : ','}}&nbsp;
+                                </span>
+                            </span>
+                        </span>
+                        <!-- <span class="comma" style="color:#231f20" *ngFor="let subject of tutor.tutor.subjects"> {{ subject.name  ? subject.name : '' }} </span> -->
+                    </div>
+                    <div class="row text-right mt-2 mobileButton" style="float:right;display:block;width:115%;">
+                        <button class=" view-detail" style="cursor: pointer;"
+                                (click)="tutorDetails(tutor._id,tutor)">View Profile
+                        </button>
+                        <button class=" view-detail" style="cursor: pointer;"
+                                (click)="selectTutor(tutor,tutor._id)">Select Tutor
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- <div *ngIf="tutors.length == 0" class="text-center mt-4">
+
+                <span style="color: #232f84; text-align:center"> No results found. </span>
+            </div> -->
+            <div *ngIf="tutors.length == 0 && !showSearching" class="text-center mt-4 mb-4 ml-2">
+
+                <span style="color: #232f84; text-align:center"> No results found. </span>
+            </div>
+            <!-- {{showSearching}} -->
+            <div *ngIf="!tutors.length && showSearching" class="text-center mt-4 mb-4 ml-2">
+
+                <span style="color: #232f84; text-align:center"> Searching ... </span>
+            </div>
+
+
+            <div *ngIf="count > 10 && !showSearching " class="col-lg-12 col-xs-10 text-right">
+                <pagination-controls (pageChange)="pageChanged($event)" maxSize="5" directionLinks="true" autoHide=true
+                                     previousLabel="Previous" nextLabel="Next" screenReaderPaginationLabel="Pagination"
+                                     screenReaderPageLabel="page"
+                                     screenReaderCurrentLabel="You're on page"></pagination-controls>
+            </div>
+        </div>
+
+
+        <!-- filters down -->
+        <div class=" mt-4 col-lg-2 col-md-3 col-sm-6 col-xs-6 mb-4 float-left-mobile-one"
+             style="background-color:white;  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.05);border-radius:5px; margin-left:2.5%;max-width:22%; height:100%;">
+            <div class="row text-center mt-2 filters">
+                <div id="filterSection" class="col-lg-12 tutor-details-text " style="border-bottom:2px solid #f5f5f5;">
+
+
+                    <!-- <mat-form-field class="example-full-width" style="width:100%;">
+                        <input matInput placeholder=" Search tutors by name" [formControl]="search" (keyup)="searchByName($event)">
+                        <mat-icon matSuffix>
+                            <i class="fa fa-search" style="font-size:16px;color:#c6c9cf;" aria-hidden="true"></i>
+                        </mat-icon>
+                    </mat-form-field> -->
+
+                    <mat-form-field class="example-full-width" style="width:100%; position: relative;">
+                        <input style="max-width: 88%;" matInput placeholder="Search tutors by keyword" id="searchByName"
+                               [formControl]="search" (keyup)="searchByName($event)">
+                        <mat-icon matPrefix>
+                            <i class="fa fa-search searchIcon" (click)="searchByNameMobile()" style="font-size:19px;color:#c6c9cf; margin-right: 7px;
+                            cursor: pointer;" aria-hidden="true"></i>
+                        </mat-icon>
+                        <img *ngIf="filters.tutorName || search.value" (click)="clearSearchName()"
+                             style="position: absolute;width: 15px;height: 21px; top: 5px;left: 93%;cursor: pointer;"
+                             src="/assets/img/error.svg">
+                    </mat-form-field>
+                </div>
+
+                <mat-accordion style="width:100%;" *ngIf="!isRateChargeSuppressNow">
+                    <mat-expansion-panel [expanded]="openedgrade === 0" id="rates" class="grades-expansion"
+                                         style="text-align:left">
+                        <mat-expansion-panel-header class="expansion-height">
+                            <mat-panel-title class="tutor-place-text proximanova-semibold">
+                                Hourly Rate
+
+                            </mat-panel-title>
+
+                        </mat-expansion-panel-header>
+                        <mat-action-row style="display:block">
+                            <p-slider [(ngModel)]="rangeValues" [min]=10 [max]=200 [range]="true"
+                                      (onChange)="handleChange($event)"></p-slider>
+                            <!-- <p-slider [(ngModel)]="rangeValues" [range]="true" (onChange)="handleChange($event)"></p-slider> -->
+                        </mat-action-row>
+                        <mat-action-row>
+                            <mat-form-field>
+                                <input class="range-text" [formControl]="lowerRange" readonly matInput>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <input class="range-text" [formControl]="upperRange" readonly matInput>
+                            </mat-form-field>
+                        </mat-action-row>
+                    </mat-expansion-panel>
+                </mat-accordion>
+
+
+                <mat-accordion style="width:100%;">
+                    <mat-expansion-panel [expanded]="openedRate === 0" id="rates" class="grades-expansion"
+                                         style="text-align:left">
+                        <mat-expansion-panel-header class="expansion-height">
+                            <mat-panel-title class="tutor-place-text proximanova-semibold">
+                                Distance
+
+                            </mat-panel-title>
+
+                        </mat-expansion-panel-header>
+                        <mat-action-row style="display:block">
+                            <p-slider [(ngModel)]="distanceValues" [min]=0 [max]=100
+                                      (onChange)="distanceChange($event)">
+                            </p-slider>
+                            <!-- <p-slider [(ngModel)]="distanceValues" [range]="true" [min]=0 [max]=30 (onChange)="distanceChange($event)"></p-slider> -->
+
+
+                        </mat-action-row>
+
+
+                        <mat-action-row>
+
+                            <mat-form-field>
+                                <input class="range-text" [formControl]="lowerDistance" readonly matInput>
+                            </mat-form-field>
+
+                            <mat-form-field>
+                                <input class="range-text" [formControl]="upperDistance" readonly matInput>
+                            </mat-form-field>
+
+                        </mat-action-row>
+
+                    </mat-expansion-panel>
+                </mat-accordion>
+                <!-- <div class="col-lg-12 mt-2" style="border-bottom:2px solid #f5f5f5;"> -->
+                <mat-accordion style="width:100%; ">
+                    <mat-expansion-panel [expanded]="expandedTutorQual" id="grades " class="grades-expansion "
+                                         style="text-align:left ">
+                        <mat-expansion-panel-header class="expansion-height ">
+                            <mat-panel-title class="tutor-place-text proximanova-semibold ">
+                                Tutor Attributes
+
+                            </mat-panel-title>
+
+                        </mat-expansion-panel-header>
+                        <div class="grade-radio-group ">
+                            <mat-checkbox class="subjects-title " id="qualField" [formControl]="sylvanCertifiedValue"
+                                          (click)="sylvanCertified(true) " [value]="true"> Certified in the Sylvan
+                                Method
+                            </mat-checkbox>
+                            <span
+                                style=" width: 76%;margin-left: 27px;font-size: 12px; line-height: 1.2; margin-top: -10px;">
+                                Not sure what it means to be certified in the Sylvan Method? Click
+                                <a (click)="learnMore()" style="color: #116DB4; text-decoration:underline">here </a> to
+                                learn more.</span>
+                            <mat-checkbox id="qualField1" class="subjects-title " (click)="stateCertified($event) "
+                                          [formControl]="stateCertifiedValue" [value]=true> State Certified Teacher
+                            </mat-checkbox>
+                            <!-- <mat-checkbox class="subjects-title " (click)="onlineSession($event) "
+                                [formControl]="onlineSessionValue" [value]=true>Offers Online Tutoring</mat-checkbox> -->
+                        </div>
+
+
+                    </mat-expansion-panel>
+                </mat-accordion>
+
+                <mat-accordion style="width:100%;">
+                    <mat-expansion-panel id="stars">
+                        <mat-expansion-panel-header class="expansion-height">
+                            <mat-panel-title class="tutor-place-text proximanova-semibold">
+                                Ratings
+
+                            </mat-panel-title>
+
+                        </mat-expansion-panel-header>
+                        <!-- <div id="browse-ratings" class="text-left ">
+                            <mat-checkbox class="subjects-title" [checked]="selected === 5" (change)="selected = 5;tutorRatings($event,selected)" value="5">
+                                <ngb-rating class="filter-stars" [rate]="5" [max]="5" [readonly]="true"></ngb-rating> <span class="tutor-details-text font-15 margin-up "> & Up</span>
+
+                            </mat-checkbox>
+                            <mat-checkbox class="subjects-title" [checked]="selected === 4" (change)="selected = 4;tutorRatings($event,selected)" value="4">
+                                <ngb-rating class="filter-stars" [rate]="4" [max]="5" [readonly]="true"></ngb-rating> <span class="tutor-details-text font-15 margin-up "> & Up</span>
+
+                            </mat-checkbox>
+                            <mat-checkbox class="subjects-title" [checked]="selected === 3" (change)="selected = 3;tutorRatings($event,selected)" value="3">
+                                <ngb-rating class="filter-stars" [rate]="3" [max]="5" [readonly]="true"></ngb-rating> <span class="tutor-details-text font-15 margin-up "> & Up</span>
+
+                            </mat-checkbox>
+                            <mat-checkbox class="subjects-title" [checked]="selected === 2" (change)="selected = 2;tutorRatings($event,selected)" value="2">
+
+                                <ngb-rating class="filter-stars" [rate]="2" [max]="5" [readonly]="true"></ngb-rating> <span class="tutor-details-text font-15 margin-up "> & Up</span>
+
+                            </mat-checkbox>
+                            <mat-checkbox class="subjects-title" [checked]="selected === 1" (change)="selected = 1;tutorRatings($event,selected)" value="1">
+                                <ngb-rating class="filter-stars" [rate]="1" [max]="5" [readonly]="true"></ngb-rating> <span class="tutor-details-text font-15 margin-up "> & Up</span>
+
+                            </mat-checkbox>
+
+
+                        </div> -->
+                        <div id="browse-ratings" class="text-left " style="display: grid;">
+                            <mat-checkbox class="subjects-title " (change)="selected=5 ;tutorRatings($event,selected) "
+                                          value="5 " [checked]="selected === 5 ">
+                                <ngb-rating class="filter-stars" [rate]="5" [max]="5" [readonly]="true"></ngb-rating>
+                                <span class="tutor-details-text font-15 margin-up "> & Up</span>
+                            </mat-checkbox>
+                            <mat-checkbox class="subjects-title " (change)="selected=4 ;tutorRatings($event,selected) "
+                                          value="4 " [checked]="selected === 4 ">
+                                <ngb-rating class="filter-stars" [rate]="4" [max]="5" [readonly]="true"></ngb-rating>
+                                <span class="tutor-details-text font-15 margin-up "> & Up</span>
+
+                            </mat-checkbox>
+                            <mat-checkbox class="subjects-title " (change)="selected=3 ;tutorRatings($event,selected) "
+                                          value="3 " [checked]="selected === 3 ">
+                                <ngb-rating class="filter-stars" [rate]="3" [max]="5" [readonly]="true"></ngb-rating>
+                                <span class="tutor-details-text font-15 margin-up "> & Up</span>
+                            </mat-checkbox>
+                            <mat-checkbox class="subjects-title " (change)="selected=2 ;tutorRatings($event,selected) "
+                                          value="2 " [checked]="selected === 2 ">
+                                <ngb-rating class="filter-stars" [rate]="2" [max]="5" [readonly]="true"></ngb-rating>
+                                <span class="tutor-details-text font-15 margin-up "> & Up</span>
+                            </mat-checkbox>
+                            <mat-checkbox class="subjects-title " (change)="selected=1 ;tutorRatings($event,selected) "
+                                          value="1 " [checked]="selected === 1 ">
+                                <ngb-rating class="filter-stars" [rate]="1" [max]="5" [readonly]="true"></ngb-rating>
+                                <span class="tutor-details-text font-15 margin-up "> & Up</span>
+                            </mat-checkbox>
+                        </div>
+                    </mat-expansion-panel>
+                </mat-accordion>
+
+
+                <!-- </div> -->
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+</div>
+<!-- <router-outlet></router-outlet> -->
+<mat-sidenav-container *ngIf="!web" id="matSideNav" class="example-container mobileSite">
+    <!-- mobile Filters -->
+    <mat-sidenav id='filterSec' #sidenav mode="push" class="example-sidenav" [fixedInViewport]="true" [fixedTopGap]="0"
+                 position="end" [fixedBottomGap]="0">
+        <div class="filtersDiv">
+            <div style="height:calc(93vh - 58px); overflow-y: scroll; width: 100vw; overflow-x: hidden; ">
+                <div class="tutor-place-text proximanova-semibold col-12" style="display: inline-flex;
+            justify-content: space-between; border-bottom: 2px solid #f5f5f5;padding:14px 12px 0px 12px;">
+                    <p style="font-size:17px">Filters</p>
+                    <p (click)="clearMobileFilters()"
+                       style="font-size:15px;color: #7f7f7f; font-family: 'ProximaNova-Reg'; margin-top: 5px !important;">
+                        Clear All
+                    </p>
+                </div>
+                <!-- <p><button mat-button >Toggle</button></p> -->
+                <div class=" text-center mt-2 filters" style="display: block;width: 100vw;">
+                    <mat-accordion style="width:100%;">
+                        <mat-expansion-panel [expanded]="openedgrade === 0" id="rates" class="grades-expansion"
+                                             style="text-align:left; border-top: none !important; position: relative;">
+                            <mat-expansion-panel-header class="expansion-height">
+                                <mat-panel-title [ngStyle]="rangeValues && {'color':'#116DB4'}"
+                                                 class="tutor-place-text proximanova-semibold">
+                                    Hourly Rate
+                                    <span style="
+                                width: 90px;
+                                color: #34495e;
+                                height: 22px;
+                                text-align: center;
+                            border-radius: 14.5px;
+                            top: 14px;
+                            font-size: 12px;
+                            right: 35px;
+                            border-radius: 14.5px;
+                            background-color: #e8e9f1; position: absolute"><span
+                                        style="line-height: 2">${{rangeValues[0]}}-{{rangeValues[1]}}</span></span>
+                                </mat-panel-title>
+
+                            </mat-expansion-panel-header>
+                            <mat-action-row style="display:block">
+
+                                <p-slider [(ngModel)]="rangeValues" [min]=10 [max]=200 [range]="true"
+                                          (onChange)="handleChange($event)"></p-slider>
+                            </mat-action-row>
+                            <mat-action-row>
+                                <mat-form-field>
+                                    <input class="range-text" [formControl]="lowerRange" readonly matInput>
+                                </mat-form-field>
+                                <mat-form-field>
+                                    <input class="range-text" [formControl]="upperRange" readonly matInput>
+                                </mat-form-field>
+                            </mat-action-row>
+                        </mat-expansion-panel>
+                    </mat-accordion>
+                    <mat-accordion style="width:100%;">
+                        <mat-expansion-panel [expanded]="openedRate === 0" id="rates" class="grades-expansion"
+                                             style="text-align:left">
+                            <mat-expansion-panel-header style="position: relative" class="expansion-height">
+                                <mat-panel-title [ngStyle]="distanceValues && {'color':'#116DB4'}"
+                                                 class="tutor-place-text proximanova-semibold">
+                                    Distance<span style="
+                                width: 90px;
+                                color: #34495e;
+                                height: 22px;
+                                text-align: center;
+                            border-radius: 14.5px;
+                            top: 14px;
+                            font-size: 12px;
+                            right: 35px;
+                            border-radius: 14.5px;
+                            background-color: #e8e9f1; position: absolute"><span
+                                    style="line-height: 2">0-{{distanceValues}} Miles</span></span>
+                                </mat-panel-title>
+
+                            </mat-expansion-panel-header>
+                            <mat-action-row style="display:block">
+
+                                <p-slider (onChange)="distanceChange($event)" [(ngModel)]="distanceValues" [min]=0
+                                          [max]=100>
+                                </p-slider>
+
+                            </mat-action-row>
+
+
+                            <mat-action-row style="padding-right:10px">
+
+                                <mat-form-field>
+                                    <input class="range-text" [formControl]="lowerDistance" readonly matInput>
+                                </mat-form-field>
+
+                                <mat-form-field>
+                                    <input class="range-text" [formControl]="upperDistance" readonly matInput>
+                                </mat-form-field>
+
+                            </mat-action-row>
+
+                        </mat-expansion-panel>
+                    </mat-accordion>
+                    <!-- //tutorQualificatin -->
+                    <mat-accordion style="width:100%; ">
+                        <mat-expansion-panel [expanded]="closeMobileFilters" id="grades " class="grades-expansion "
+                                             style="text-align:left; position: relative; ">
+                            <mat-expansion-panel-header class="expansion-height ">
+                                <mat-panel-title
+                                    [ngStyle]="(filters.sylvanCertifiedValue || filters.stateCertifiedValue || filters.onlineSessionValue) && {'color':'#116DB4'}"
+                                    class="tutor-place-text proximanova-semibold ">
+                                    Tutor Attributes
+                                    <span
+                                        *ngIf="filters.sylvanCertifiedValue || filters.stateCertifiedValue || filters.onlineSessionValue"
+                                        style="
+                                width: 22px;
+                                color: #34495e;
+                                height: 22px;
+                                text-align: center;
+                            border-radius: 14.5px;
+                            top: 14px;
+                            font-size: 12px;
+                            right: 35px;
+                            border-radius: 14.5px;
+                            background-color: #e8e9f1; position: absolute">
+                                        <span
+                                            *ngIf="filters.sylvanCertifiedValue && !filters.stateCertifiedValue && !filters.onlineSession "
+                                            style="line-height: 2">1</span>
+
+                                        <span
+                                            *ngIf="!filters.sylvanCertifiedValue && filters.stateCertifiedValue && !filters.onlineSession "
+                                            style="line-height: 2">1</span>
+                                        <span
+                                            *ngIf="filters.onlineSession && !filters.sylvanCertifiedValue && !filters.stateCertifiedValue"
+                                            style="line-height: 2">1</span>
+
+                                        <span
+                                            *ngIf="filters.sylvanCertifiedValue && filters.stateCertifiedValue && !filters.onlineSession "
+                                            style="line-height: 2">2</span>
+                                        <span
+                                            *ngIf="!filters.sylvanCertifiedValue && filters.stateCertifiedValue && filters.onlineSession "
+                                            style="line-height: 2">2</span>
+                                        <span
+                                            *ngIf="filters.sylvanCertifiedValue && !filters.stateCertifiedValue && filters.onlineSession "
+                                            style="line-height: 2">2</span>
+
+                                        <span
+                                            *ngIf="filters.sylvanCertifiedValue && filters.stateCertifiedValue && filters.onlineSession "
+                                            style="line-height: 2">3</span>
+                                    </span>
+                                    <!-- </span> -->
+                                </mat-panel-title>
+
+                            </mat-expansion-panel-header>
+                            <div class="grade-radio-group ">
+                                <mat-checkbox class="subjects-title" id="qualField" [formControl]="sylvanCertifiedValue"
+                                              (click)="sylvanCertified(true) " [value]="true"> Certified in the Sylvan
+                                    Method
+                                </mat-checkbox>
+                                <span
+                                    style=" width: 76%;margin-left: 27px;font-size: 12px; line-height: 1.2; margin-top: -10px;">
+                                    Not sure what it means to be certified in the Sylvan Method? Click
+                                    <a (click)="learnMore()" style="color: #116DB4; text-decoration:underline">here </a>
+                                    to
+                                    learn more.</span>
+                                <mat-checkbox class="subjects-title " (click)="stateCertified($event) "
+                                              [formControl]="stateCertifiedValue" [value]=true> State Certified Teacher
+                                </mat-checkbox>
+                                <!-- <mat-checkbox class="subjects-title " (click)="onlineSession($event) "
+                                    [formControl]="onlineSessionValue" [value]=true> Offers Online Tutoring
+                                </mat-checkbox> -->
+                            </div>
+                        </mat-expansion-panel>
+                    </mat-accordion>
+
+
+                    <mat-accordion style="width:100%; ">
+                        <mat-expansion-panel [expanded]="closeMobileFilters" id="stars" style="position: relative;">
+                            <mat-expansion-panel-header class="expansion-height ">
+                                <mat-panel-title [ngStyle]="(filters.ratings ) && {'color':'#116DB4'}"
+                                                 class="tutor-place-text proximanova-semibold ">
+                                    Ratings
+                                    <span *ngIf="filters.ratings" style="
+                                width: 22px;
+                                color: #34495e;
+                                height: 22px;
+                                text-align: center;
+                            border-radius: 14.5px;
+                            top: 14px;
+                            font-size: 12px;
+                            right: 35px;
+                            border-radius: 14.5px;
+                            background-color: #e8e9f1; position: absolute">
+                                        <span *ngIf="filters.ratings" style="line-height: 2">{{filters.ratings}}+
+                                        </span>
+                                        <span *ngIf="!filters.ratings" style="line-height: 2">0 </span></span>
+                                </mat-panel-title>
+
+                            </mat-expansion-panel-header>
+                            <div id="browse-ratings" class="text-left " style="display: grid; margin-bottom: 60px;">
+                                <mat-checkbox class="subjects-title "
+                                              (change)="selected=5 ;tutorRatings($event,selected) " value="5 "
+                                              [checked]="selected === 5 ">
+                                    <ngb-rating class="filter-stars" [rate]="5" [max]="5" [readonly]="true">
+                                    </ngb-rating>
+                                    <span class="tutor-details-text font-15 margin-up "> & Up</span>
+                                </mat-checkbox>
+                                <mat-checkbox class="subjects-title "
+                                              (change)="selected=4 ;tutorRatings($event,selected) " value="4 "
+                                              [checked]="selected === 4 ">
+                                    <ngb-rating class="filter-stars" [rate]="4" [max]="5" [readonly]="true">
+                                    </ngb-rating>
+                                    <span class="tutor-details-text font-15 margin-up "> & Up</span>
+
+                                </mat-checkbox>
+                                <mat-checkbox class="subjects-title "
+                                              (change)="selected=3 ;tutorRatings($event,selected) " value="3 "
+                                              [checked]="selected === 3 ">
+                                    <ngb-rating class="filter-stars" [rate]="3" [max]="5" [readonly]="true">
+                                    </ngb-rating>
+                                    <span class="tutor-details-text font-15 margin-up "> & Up</span>
+                                </mat-checkbox>
+                                <mat-checkbox class="subjects-title "
+                                              (change)="selected=2 ;tutorRatings($event,selected) " value="2 "
+                                              [checked]="selected === 2 ">
+                                    <ngb-rating class="filter-stars" [rate]="2" [max]="5" [readonly]="true">
+                                    </ngb-rating>
+                                    <span class="tutor-details-text font-15 margin-up "> & Up</span>
+                                </mat-checkbox>
+                                <mat-checkbox class="subjects-title "
+                                              (change)="selected=1 ;tutorRatings($event,selected) " value="1 "
+                                              [checked]="selected === 1 ">
+                                    <ngb-rating class="filter-stars" [rate]="1" [max]="5" [readonly]="true">
+                                    </ngb-rating>
+                                    <span class="tutor-details-text font-15 margin-up "> & Up</span>
+                                </mat-checkbox>
+                            </div>
+                        </mat-expansion-panel>
+                    </mat-accordion>
+                </div>
+            </div>
+            <div class="btnRow">
+                <div
+                    style="display: flex; justify-content: space-around; width: 100%; height: -webkit-fill-available; ">
+                    <button class="mTextBtn" (click)="sidenav.toggle();enableBody();defaultFilters()"
+                            style="color:#e1134f">Cancel
+                    </button>
+                    <button class="proximanova-bold mBtn" (click)="applyMobileFilters();enableBody();"
+                            style="position: relative;width:156px;margin-right: 2%"> Apply
+                        <span style="color:white;"> <i class="fa fa-lg fa-arrow-right right-arrow "
+                                                       style="font-size:16px;" aria-hidden="true"></i></span></button>
+                </div>
+
+            </div>
+        </div>
+
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+        <div *ngIf="!web" class=" borderM row ">
+
+            <div class="col-12 ">
+                <div class="mZip">
+                    <!-- <img (click)="searchByNameMobile()" style="cursor: pointer;" class="mZipImg"
+                        src="/assets/mobile-img/search.svg">
+                    <input style="width:200px" class="mZipText" value="" id="searchByName" type="text"
+                        placeholder="Search tutor by Keywords"> -->
+                    <form action=".">
+                        <!-- <img (click)="searchByNameMobile()" style="cursor: pointer;" class="mZipImg"
+                            src="/assets/mobile-img/search.svg"> -->
+                        <i class="fa fa-search mZipImg" (click)="searchByNameMobile()" style="font-size:19px;color:#c6c9cf;
+                            cursor: pointer;" aria-hidden="true"></i>
+                        <input type="search" name="search" style="width:270px;height:37px;"
+                               (keypress)="searchByName($event)" class="mZipText" [(ngModel)]="searchValue" value=""
+                               id="searchByName" placeholder="Search tutors by keyword">
+                        <img *ngIf="filters.tutorName || searchValue" (click)="clearSearchName()" style="position: absolute;width: 15px;height: 21px; top: 9px;
+                            left: 86%;cursor: pointer;" src="/assets/img/error.svg">
+
+                    </form>
+                </div>
+            </div>
+            <mat-accordion style="width:100vw; background: white; ">
+                <mat-expansion-panel [expanded]="panelOpenState" id="grades " class="grades-expansion "
+                                     style="text-align:left;overflow: hidden; ">
+                    <mat-expansion-panel-header class="expansion-height availHead  ">
+                        <mat-panel-title class="tutor-place-text proximanova-semibold ">
+                            Tutor Availability
+                        </mat-panel-title>
+
+                    </mat-expansion-panel-header>
+                    <div class="dateDurationRow">
+                        <div [ngStyle]="{'border-bottom': filtersErrorDate ? '2px solid red': ''}" class="mDateBox"
+                             style="position:relative; width: 100% !important;">
+                            <label>Date</label>
+                            <input placeholder="Select Date" (ngModelChange)="onChangeDate($event)" autocomplete="off"
+                                   [(ngModel)]="date" type="text" [min]="minDate" [max]="max" rea readonly
+                                   [matDatepicker]="picker" (click)="picker.open()" class="form-control mDate"/>
+                            <img class="calImg pointerClass" (click)="picker.open()" src="/assets/img/ic-calendar.png">
+                            <mat-datepicker #picker></mat-datepicker>
+                        </div>
+
+                    </div>
+                    <div class="dateDurationRow mt-2">
+                        <div [ngStyle]="{'border-bottom': errorClass ? '2px solid red': ''}" class="mDateBox">
+                            <label>Start Time</label>
+                            <ng-template #content let-modal let-c="close" let-d="dismiss">
+                                <div class="modal-header">
+                                    <h4 class="modal-title" id="modal-basic-title">Select Time</h4>
+                                    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body mb-4">
+                                    <div class="w-100 inline selectCheck" style="justify-content: center">
+                                        <select [ngClass]="{'disabledColor':disabledH, 'errorClass':errorClass}"
+                                                (change)="startTimeHoursChange()" [(ngModel)]=" startTimeHours"
+                                                style="box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12); width: 53px !important;padding-left: 13px;"
+                                                class=" form-control selectClass ">
+                                            <option value="HH" disabled selected>HH</option>
+                                            <option *ngFor="let h of hours" [value]="h">{{h}}</option>
+                                        </select>
+                                        <div style="line-height: 2.5;
+                                            margin: 0 3%;">:
+                                        </div>
+                                        <select [(ngModel)]="startTimeMinutes"
+                                                [ngClass]="{'disabledColor':disabledM, 'errorClass':errorClass}"
+                                                (change)="startTimeHoursChange()"
+                                                style="width: 55px !important; box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);padding-left: 13px;"
+                                                class="form-control selectClass">
+                                            <option value="MM" disabled selected>MM</option>
+                                            <option *ngFor="let min of minutes" [value]="min">{{min}}</option>
+                                        </select>
+                                        <select (change)="checkstartTimeAp();startTimeHoursChange();"
+                                                [(ngModel)]="startTimeAp"
+                                                style="width: 53px !important; color: #0275d8 !important;border-color: #0275d8; margin-left: 5%; border-radius: 5px;padding-left: 13px;"
+                                                class="form-control selectClass">
+                                            <option value="AM">AM</option>
+                                            <option value="PM">PM</option>
+                                        </select>
+                                        <button (click)="c('success')" class="selectBtn">Select</button>
+                                    </div>
+                                </div>
+
+                            </ng-template>
+
+                            <!-- <button class="btn btn-lg btn-outline-primary" (click)="open(content)">Launch demo modal</button> -->
+                            <input placeholder="Select Time" autocomplete="off" [(ngModel)]="timeToShowStart"
+                                   type="text" rea readonly (click)="open(content)" class="form-control mDate"/>
+                            <img class="calImg pointerClass" (click)="open(content)"
+                                 src="/assets/mobile-img/ic-clock.svg">
+                        </div>
+                        <div [ngStyle]="{'border-bottom': errorClass1 ? '2px solid red': ''}" class="mDateBox"
+                             style="width: 49%">
+                            <label>End Time</label>
+                            <ng-template #content2 let-modal let-c="close" let-d="dismiss">
+                                <div class="modal-header">
+                                    <h4 class="modal-title" id="modal-basic-title">Select Time</h4>
+                                    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body mb-4">
+                                    <div class="inline selectCheck w-100 " style="justify-content: center">
+                                        <select [ngClass]="{'disabledColor':disabledH1,'errorClass':errorClass1}"
+                                                (change)="endTimeHoursChange()" [(ngModel)]=" endTimeHours"
+                                                style="box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12); width: 53px !important;padding-left: 13px;"
+                                                class="form-control selectClass ">
+                                            <option value="HH" disabled selected>HH</option>
+                                            <option *ngFor="let h of hours" [value]="h">{{h}}</option>
+                                        </select>
+                                        <div style="line-height: 2.5;
+                                                margin: 0 3%;">:
+                                        </div>
+                                        <select [(ngModel)]="endTimeMinutes"
+                                                [ngClass]="{'disabledColor':disabledM1, 'errorClass':errorClass1}"
+                                                (change)="endTimeHoursChange()"
+                                                style="box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);width: 55px !important;padding-left: 13px;"
+                                                class="form-control selectClass">
+                                            <option value="MM" disabled selected>MM</option>
+                                            <option *ngFor="let min of minutes" [value]="min">{{min}}</option>
+                                        </select>
+                                        <select (change)="endTimeHoursChange()" [(ngModel)]="endTimeAp"
+                                                style="width: 53px !important; color: #0275d8 !important;border-color: #0275d8; margin-left: 5%; border-radius: 5px; cursor: pointer;padding-left: 13px;"
+                                                class="form-control selectClass">
+                                            <option value="AM">AM</option>
+                                            <option value="PM">PM</option>
+                                        </select>
+
+                                        <button (click)="c('success')" class="selectBtn">Select</button>
+                                    </div>
+                                </div>
+
+                            </ng-template>
+
+                            <!-- <button class="btn btn-lg btn-outline-primary" (click)="open(content)">Launch demo modal</button> -->
+                            <input placeholder="Select Time" autocomplete="off" style="padding-right: 0;"
+                                   [(ngModel)]="timeToShowEnd" type="text" rea readonly (click)="open2(content2)"
+                                   class="form-control mDate"/>
+                            <img class="calImg pointerClass" (click)="open2(content2)"
+                                 src="/assets/mobile-img/ic-clock.svg">
+                        </div>
+                    </div>
+                    <div class="dateDurationRow mt-3" style="justify-content: space-between;">
+                        <button class="mTextBtn" (click)="clearFilters()">Clear All</button>
+                        <button class="mBtn proximanova-bold" (click)="applyTutorAvailFilters()">Apply</button>
+
+                    </div>
+                </mat-expansion-panel>
+            </mat-accordion>
+            <div>
+                <div class="col-12 sortRow fixedElement" id="fixedElement" style="width: 100vw;">
+                    <div style="position: relative">
+                        <p style="position: absolute;pointer-events: none;" class="proximanova-semibold">Sort</p>
+                        <select style="width: 54px !important;
+                        background: transparent;
+                        color: transparent !important;border: transparent;" [(ngModel)]="sortFilter" id="sortClick"
+                                #sortClick (change)="sort($event)" class="form-control selectBox">
+                            <option value="RELEVANCE">Relevance</option>
+                            <option value="LOWEST_HOURLY_RATE">Lowest Hourly Rate</option>
+                            <option value="HIGHEST_HOURLY_RATE">Highest Hourly Rate</option>
+                            <option value="RATING">Rating</option>
+                            <option *ngIf="!marketAvail" value="CLOSEST_TO_ME">Closest to me</option>
+                        </select>
+                    </div>
+
+                    <p *ngIf="count" class="mCount"><span>{{count}}</span> Tutor<span *ngIf="count>1">s</span></p>
+                    <p *ngIf="!count" class="mCount"><span>No Tutors</span></p>
+                    <p class="proximanova-semibold" (click)="disableBody()">Filter
+                        ({{filterCountShow}})</p>
+                    <p class="proximanova-semibold" hidden #sidenav1 (click)="sidenav.toggle()">Filter
+                    </p>
+                </div>
+
+            </div>
+        </div>
+        <div class="container-fluid">
+
+
+            <div class="row">
+                <div class="col-12 tutorRow" style="background: #f2f4f5;">
+                    <div class="search-results upfromFixed" infinite-scroll [infiniteScrollDistance]="2"
+                         [infiniteScrollUpDistance]="1.5" [infiniteScrollThrottle]="500" (scrolled)="onScrollDown()">
+                        <div *ngFor="let tutor of tutors" class="tutorCard mb-3">
+                            <div class="row">
+                                <div class="col-4 col-md-2">
+                                    <img
+                                        [(src)]="(tutor.profilePicture && tutor.profilePicture != null && tutor.profilePicture.thumbnail !=null) ? tutor.profilePicture.thumbnail:tutor_image"
+                                        class="mobileImg">
+                                </div>
+                                <div class="col-8">
+                                    <span (click)="tutorDetails(tutor._id)" style="cursor: pointer"
+                                          class="nText proximanova-bold"> {{tutor.firstName  }}
+                                        {{tutor.lastName ? ( tutor.lastName.substr(0, 1) + '.' ) : ''}}</span>
+                                    <br>
+
+                                    <br *ngIf="isRateChargeSuppressNow">
+                                    <ng-container *ngIf="!isRateChargeSuppressNow">
+                                        <p *ngIf="!hasPartnerCode" class="hText proximanova-bold mt-2">
+                                            ${{( tutor.tutor && tutor.tutor.hourlyRate != undefined ) ? ( tutor.tutor.hourlyRate ).toFixed(2) : ''}}
+                                            /hr
+                                        </p>
+                                        <p *ngIf="hasPartnerCode" class="hText proximanova-bold mt-2">
+                                            ${{( tutor.partnershipCode[0] && tutor.partnershipCode[0].hourlyRate ) ? ( tutor.partnershipCode[0].hourlyRate ).toFixed(2) : ' '}}
+                                            /hr
+                                        </p>
+                                    </ng-container>
+
+                                    <div *ngIf="tutor.tutor.ratedCount >0">
+                                        <ng-template #t let-fill="fill">
+                                            <span class="starBrowseMobile" [class.full]="fill === 100">
+                                                <span class="halfBrowseMobile"
+                                                      [style.width.%]="fill">&#9733;</span>&#9733;
+                                            </span>
+                                        </ng-template>
+
+                                        <ngb-rating *ngIf="tutor.tutor.ratedCount >0"
+                                                    [rate]="roundOff(tutor.tutor.avgRating)" [starTemplate]="t"
+                                                    [readonly]="true" max="5">
+                                        </ngb-rating>
+                                        <span style="font-size: 12px;"
+                                              *ngIf="tutor.tutor && tutor.tutor != undefined && tutor.tutor.ratedCount != undefined && tutor.tutor.ratedCount > 0">
+                                            &nbsp;{{tutor.tutor.avgRating | number:'1.1-1'}}
+                                            ({{tutor.tutor.ratedCount}})
+                                        </span>
+                                    </div>
+                                    <span style="display:inline-block; margin-top: 5px;">
+                                        <span class="mr-2 tutorAchivment"> <img class="certificate-iconsM"
+                                                                                [(src)]="certi_bgCheck">
+                                        </span>
+                                        <span
+                                            *ngIf="tutor.tutor && tutor.tutor.educationalDegrees && tutor.tutor.educationalDegrees.length>0"
+                                            class="mr-2 tutorAchivment"> <img class="certificate-iconsM"
+                                                                              [(src)]="certi_degCheck">
+                                        </span>
+                                        <span *ngIf="tutor.tutor && tutor.tutor.sylvanSyncEnabled == true"
+                                              class="mr-2 tutorAchivment"> <img class="certificate-iconsM"
+                                                                                [(src)]="certi_sylCheck">
+                                        </span>
+                                        <span *ngIf="tutor.tutor && tutor.tutor.adminCertified == true"
+                                              class="mr-2 tutorAchivment">
+                                            <img style="margin-top: 3px;" class="certificate-iconsM"
+                                                 [(src)]="certi_stateCheck">
+                                        </span>
+                                        <span *ngIf="tutor.tutor && tutor.tutor.isTutorOfferOnlineClasses == true"
+                                              class="mr-2 tutorAchivment"> <img class="certificate-iconsM"
+                                                                                [(src)]="onlineSessions">
+                                        </span>
+                                    </span>
+                                </div>
+                                <!-- <hr>
+                                <div class="col-12">
+                                    <hr class="mobileHr">
+                                    <span *ngFor="let subject of tutor.tutor.subjects;"
+                                        class="subjectsMobile">{{subject.name}}</span>
+                                    <p class="mt-3" style="color: #34495e;font-size: 14px;">
+                                        {{(tutor.tutor && tutor.tutor.profileHeadLine !=undefined) ? tutor.tutor.profileHeadLine :''}}
+                                    </p>
+                                </div>
+                                <div class="col-6">
+                                    <button (click)="tutorDetails(tutor._id)" class="detailsMobile">
+                                        View Profile
+                                    </button>
+                                </div>
+                                <div class="col-6">
+                                    <button (click)="selectTutor(tutor)" class="bookSession">
+                                        Select Tutor <span style="color:white;"> <i
+                                                class="fa fa-lg fa-arrow-right right-arrow " style="font-size:16px;"
+                                                aria-hidden="true"></i></span>
+                                    </button>
+                                </div> -->
+                                <!-- <div style="padding: 0 14px;" class="row"> -->
+
+                                <div class="col-12">
+                                    <hr class="mobileHr">
+                                </div>
+                                <div class="row" style="padding: 0 27px">
+                                    <span *ngFor="let subject of tutor.tutor.subjects;"
+                                          class="subjectsMobile">{{subject.name}}</span>
+                                </div>
+                                <div class="col-12">
+                                    <p class="mt-2" style="color: #34495e;font-size: 14px;">
+                                        {{( tutor.tutor && tutor.tutor.profileHeadLine != undefined ) ? tutor.tutor.profileHeadLine : ''}}
+                                    </p>
+                                </div>
+
+                                <div class="col-6">
+                                    <button style="max-width: 350px;" (click)="tutorDetails(tutor._id,tutor)"
+                                            class="detailsMobile">
+                                        View Profile
+                                    </button>
+                                </div>
+                                <div class="col-6">
+                                    <button style="max-width: 350px;" (click)="selectTutor(tutor,tutor._id)"
+                                            class="bookSession">
+                                        Select
+                                    </button>
+                                </div>
+                            </div>
+                            <!-- </div> -->
+                        </div>
+                    </div>
+                    <div *ngIf="tutors.length == 0 && !showSearching" style="width: 100%;"
+                         class="text-center mt-4 mb-4 ml-2">
+
+                        <span style="color: #232f84; text-align:center"> No results found. </span>
+                    </div>
+
+                    <div *ngIf="!tutors.length && showSearching" style="width: 100%;"
+                         class="text-center mt-4 mb-4 ml-2">
+
+                        <span style="color: #232f84; text-align:center"> Searching ... </span>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </mat-sidenav-content>
+
+</mat-sidenav-container>

@@ -1,0 +1,207 @@
+<div style="float:right;padding:0px;margin-bottom:0px" class="row" mat-dialog-title>
+    <button (click)="closeDialog()" style="border:none" class="close-btn" mat-button mat-dialog-close="true">
+        <img src="assets/img/close.png">
+    </button>
+</div>
+<mat-dialog-content>
+    <!-- <div style="float:right" mat-dialog-title>
+        <button style="border:none" mat-button mat-dialog-close="true">
+            <i class="fa fa-times fa-fw fa-3xCross crossButton" aria-hidden="true"> </i>
+        </button>
+    </div> -->
+    <div class="myContainer mb-4">
+        <h2 class="headings text-center">Edit Child Details</h2>
+        <div class="col-sm-12  col-md-12 nopadding text-center-mobile  col-xs-12 col-lg-12">
+            <label class="blueText mt-4"> My Child </label>
+            <div class="animated ">
+                <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)"
+                      class="form-horizontal text-center mt-2 mb-2">
+                    <div class="row mt-3 ">
+                        <div class="col-12 col-lg-6 col-sm-12">
+                            <div class="inputBox1"
+                                 [ngClass]="{'underline-red': (form.controls['firstName'].errors?.required || form.controls['firstName'].errors?.maxlength || form.controls['firstName'].errors?.pattern) && (form.controls['firstName'].dirty) }">
+                                <label class="insideInput">First Name</label>
+                                <input #inputFirstName type="text" [formControl]="firstName" required
+                                       class="form-control stepOneInput" placeholder="First Name">
+                            </div>
+                            <div class="error-message sub-little-text"
+                                 *ngIf="form.controls['firstName'].errors?.required && (form.controls['firstName'].dirty)">
+                                First name is required.
+                            </div>
+                            <div class="error-message sub-little-text"
+                                 *ngIf="form.controls['firstName'].errors?.maxlength && (form.controls['firstName'].dirty)">
+                                First name maximum length is 64
+                            </div>
+                            <div class="error-message sub-little-text"
+                                 *ngIf="form.controls['firstName'].errors?.pattern && (form.controls['firstName'].dirty)">
+                                First name can contain letters, hyphens and apostrophes and must be no longer than 64
+                                characters.
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 col-sm-12">
+                            <div class="inputBox1"
+                                 [ngClass]="{'underline-red': (form.controls['lastName'].errors?.required || form.controls['lastName'].errors?.maxlength || form.controls['lastName'].errors?.pattern) && (form.controls['lastName'].dirty) }">
+                                <label  class="insideInput">Last Name</label>
+                                <input #inputLastName maxlength="64" type="text" [formControl]="lastName" required
+                                       class="form-control stepOneInput" placeholder="Last Name">
+
+                            </div>
+                            <div class="error-message sub-little-text"
+                                 *ngIf="form.controls['lastName'].errors?.required && (form.controls['lastName'].dirty)">
+                                Last name is required.
+                            </div>
+                            <div class="error-message sub-little-text"
+                                 *ngIf="form.controls['lastName'].errors?.maxlength && (form.controls['lastName'].dirty)">
+                                Last name maximum length is 64
+                            </div>
+                            <div class="error-message sub-little-text"
+                                 *ngIf="form.controls['lastName'].errors?.pattern && (form.controls['lastName'].dirty)">
+                                Last name can contain letters, hyphens and apostrophes and must be no longer than 64
+                                characters.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-12 col-lg-6 col-sm-12">
+                            <div class="inputBox1 datePicker" [ngClass]="{'underline-red': showAgeError}">
+                                <label for="age" class="insideInput">Date Of Birth</label>
+                                <input readonly rea [max]="maxDate" [matDatepicker]="picker" [formControl]="dob"
+                                       (dateChange)="addEvent('change', $event)" class="form-control stepOneInput"
+                                       onkeypress='return ((event.charCode >= 47 && event.charCode <= 57) || (event.charCode == 0))'
+                                       placeholder="Date of Birth" (click)="picker.open()">
+                                <mat-datepicker-toggle class="datePickIcon addonEdit" matSuffix
+                                                       [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker #picker></mat-datepicker>
+                            </div>
+                            <div class="error-message sub-little-text" *ngIf="showAgeError">
+                                Please Select Date
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 col-sm-12">
+                            <div class="inputBox1">
+                                <label for="age" class="insideInput">Age (in years)</label>
+                                <input readonly #inputPhone type="text" [formControl]="age" required
+                                       class="form-control stepOneInput" placeholder="Age"
+                                       onkeypress='return ((event.charCode >= 48 && event.charCode <= 57) || (event.charCode == 0))'
+                                       onkeyup="if (event.target.value.charAt(0) == '0') { event.target.value = event.target.value.slice(1); }">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col-12 col-lg-6 col-sm-12">
+                            <div class="inputBox1 mySelectOption ">
+                                <label class="insideInput">Gender</label>
+                                <mat-select class="disabledText" [formControl]="gender">
+                                    <mat-option disabled value="select"> Choose Gender</mat-option>
+                                    <mat-option value="MALE">Male</mat-option>
+                                    <mat-option value="FEMALE">Female</mat-option>
+                                    <mat-option value="OTHER">Other/No Response</mat-option>
+                                </mat-select>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-lg-6 col-sm-12">
+                            <div class="inputBox1 mySelectOption">
+                                <label for="grade" class="insideInput">Grade</label>
+                                <mat-select placeholder="Grade" [formControl]="grade">
+                                    <mat-option disabled value="select"> Choose Grade</mat-option>
+                                    <mat-option value="K">K</mat-option>
+                                    <mat-option value="1">1</mat-option>
+                                    <mat-option value="2">2</mat-option>
+                                    <mat-option value="3">3</mat-option>
+                                    <mat-option value="4">4</mat-option>
+                                    <mat-option value="5">5</mat-option>
+                                    <mat-option value="6">6</mat-option>
+                                    <mat-option value="7">7</mat-option>
+                                    <mat-option value="8">8</mat-option>
+                                    <mat-option value="9">9</mat-option>
+                                    <mat-option value="10">10</mat-option>
+                                    <mat-option value="11">11</mat-option>
+                                    <mat-option value="12">12</mat-option>
+
+                                </mat-select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3 ">
+                        <div class="col-12 col-lg-12 col-sm-12">
+                            <div class="inputBox1">
+                                <label  class="insideInput" style="padding-left:2%;">School Name</label>
+                                <input #schoolName type="text" [formControl]="school" class="form-control stepOneInput"
+                                       placeholder="School Name">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--                    <div class="row mt-3 ">-->
+                    <!--                        <div class="col-12 col-lg-12 col-sm-12">-->
+                    <!--                            <div class="inputBox1" [ngClass]="{'underline-red': form.controls['school'].errors?.required && (form.controls['school'].dirty)}">-->
+                    <!--                                <label for="schoolName" class="insideInput" style="padding-left:2%;">School Name</label>-->
+                    <!--                                <input #schoolName type="text" [formControl]="school" required class="form-control stepOneInput" placeholder="School Name">-->
+                    <!--                            </div>-->
+                    <!--                        </div>-->
+                    <!--                    </div>-->
+
+                    <div class="row  mt-4 ">
+                        <label class="blueText  col-lg-6 col-md-6 col-sm-12 text-left-address "> Academic
+                            Documents</label>
+                    </div>
+                    <div class="row  mt-4 col-lg-12 col-md-12 col-sm-12  text-left  docsTextParent ">
+                        <span class="docsText">
+                            <span style="font-weight:bolder"> Optional </span> : Upload up to four documents that you think might be helpful for your tutor. This could include previous report cards, IEP/504 documents, etc.
+                        </span>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-12 col-lg-12 col-sm-12 col-xs-12 ">
+                            <div class=" col-12 col-lg-12 col-sm-12 col-xs-12 upload-doc text-left">
+                                <label for="schoolName" class="  addressText" style="color:#34495e">Upload your academic
+                                    documents here</label>
+                                <span class="addonDoc">
+                                    <a (click)="docFileSelector();">
+                                        <img src="/assets/img/ic-upload.png"> </a>
+                                </span>
+                                <input #docUpload type="file" style="display: none" (change)="fileChange($event)"
+                                       placeholder="Upload file">
+                            </div>
+                            <div class=" " *ngIf="childDocArray && childDocArray !=undefined">
+                                <div class="  upload-doc col-lg-12 col-md-12 col-sm-12 col-xs-12 text-left"
+                                     style="border-top:none" *ngFor="let docs of childDocArray ;let i = index">
+                                    <label for="address" class="addressText"
+                                           style="margin-top:10px;color:#232f84">{{docs.name ? docs.name : ''}} </label>
+                                    <a (click)="deleteDoc(i)">
+                                        <span style="float:right">
+                                            <i class="fa fa-trash-o myTrash" aria-hidden="true"></i>
+                                        </span>
+                                    </a>
+                                </div>
+                            </div>
+                            <!-- <div class=" " *ngIf="docArray && docArray !=undefined">
+                                <div class="  upload-doc col-lg-12 col-md-12 col-sm-12 col-xs-12 text-left" style="border-top:none" *ngFor="let docs of docArray ;let id = index">
+                                    <label for="address" class="addressText" style="margin-top:10px;color:#232f84">{{docs.name ? docs.name : ''}} </label>
+                                    <a (click)="deleteDocArrayDoc(id)">
+                                        <span style="float:right">
+                                            <i class="fa fa-trash-o myTrash" aria-hidden="true"></i>
+                                        </span>
+                                    </a>
+                                </div>
+                            </div> -->
+                            <div class="row  ">
+                                <div class="mt-4  col-lg-12 col-md-12 col-sm-12  ">
+                                    <label *ngIf="showArrayError" class="  addressText" style="color:#34495e">You can
+                                        upload a maximum of four documents.</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row  ">
+                        <div class="mt-4  col-lg-12 col-md-12 col-sm-12">
+                            <button class="loginButton">Save Child</button>
+                        </div>
+                    </div>
+                    <!-- <router-outlet></router-outlet> -->
+                </form>
+            </div>
+        </div>
+    </div>
+</mat-dialog-content>

@@ -1,0 +1,87 @@
+<div class="container-fluid feedback-container ">
+    <div *ngIf="reports && reports !=undefined" class="offset-lg-1 offset-md-1 col-lg-10 col-md-10 col-sm-12 col-xs-12 container " style="padding:1% 4% 4% 4%;">
+        <div class="mt-2 row">
+            <h3 class="headings" style="font-family: 'ProximaNova-Light'; letter-spacing: 0.4px;"> Session Feedback </h3>
+        </div>
+        <div *ngFor="let report of reports | paginate: { itemsPerPage: limit, currentPage: page ,totalItems: count};" class="row feedback-outer mt-4 " style="padding:3%;">
+            <div class="row" style="width:100%;">
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6" style="display:inline-flex">
+                    <label class="feedback-titles proximanova-bold">
+                    Child:
+                </label>
+                    <label class="feedback-values">
+                       <span class="feedback-values proximanova-reg">     {{report.studentId ? report.studentId.firstName : ''  }} 
+                                    {{report.studentId ? (report.studentId.lastName.substr(0,1) + '.'): '' }}</span>   
+                    </label>
+                </div>
+                <div class="col-lg-4 col-md-5 col-sm-6 col-xs-6" style="display:inline-flex">
+                    <label class="feedback-titles proximanova-bold">
+                                Tutor:
+                            </label>
+                    <label class="feedback-values">
+                            <span class="feedback-values proximanova-reg">    {{report.tutorId ? report.tutorId.firstName : ''  }} 
+                            {{report.tutorId ? report.tutorId.lastName: '' }} </span>
+                                </label>
+                </div>
+            </div>
+            <div class="row" style="width:100%;">
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6" style="display:inline-flex">
+                    <label class="feedback-titles proximanova-bold">
+                        Date:
+                    </label>
+                    <label *ngIf="report.sessionStartTime && report.sessionStartTime !=undefined" class="feedback-values">
+                            <span class="feedback-values proximanova-reg">   {{checkDate(report.sessionStartTime)}}    </span>
+                        </label>
+                </div>
+                <div *ngIf="report.sessionStartTime && report.sessionStartTime !=undefined && report.sessionEndTime && report.sessionEndTime !=undefined" class="col-lg-4 col-md-4 col-sm-6 col-xs-6" style="display:inline-flex">
+                    <label class="feedback-titles proximanova-bold">
+                                    Time:
+                                </label>
+                    <label class="feedback-values">
+                            <span class="feedback-values proximanova-reg">      {{checkTime(report.sessionStartTime)}}-{{checkEndTime(report.sessionEndTime)}} </span>
+                            
+                                    </label>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 text-right d-none d-sm-block">
+                    <a (click)="singleReport(report._id)" class="viewSessions">
+                        <label class="view-feedback pointer">  View Session Feedback    </label>
+                        <span style="margin-left:25px;" class="pointer"> <img src="/assets/img/carat-orange-side.png"> </span> </a>
+                </div>
+            </div>
+            <div class="row" style="width:100%;">
+                <div *ngIf="report.subjects && report.subjects !=undefined" class="col-lg-4 col-md-4 col-sm-6 col-xs-6" style="display:inline-flex">
+                    <label class="feedback-titles proximanova-bold">
+                            Subject/s:
+                        </label>
+                    <label class="feedback-values proximanova-reg">
+                               <span  *ngFor="let subject of report.subjects "> 
+                                    <span *ngIf="subject.subcategories && subject.subcategories != undefined">    <span *ngFor="let subsubjects of subject.subcategories;let last=last"  > 
+                                            {{subsubjects ? subsubjects.name : ''}}{{last?'':','}}&nbsp;</span>
+                                       </span>
+
+                               </span>
+                            </label>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6" style="display:inline-flex">
+
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-6 col-12 text-right d-block d-sm-none">
+                    <a (click)="singleReport(report._id)">
+                        <label class="view-feedback ">  View Session Feedback    </label>
+                        <span style="margin-left:25px;"> <img src="/assets/img/carat-orange-side.png"> </span> </a>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+    <div *ngIf="reports != undefined && reports.length === 0 " class="text-center">
+        No feedback from tutor
+    </div>
+    <div *ngIf="count >5" class="offset-lg-1 mt-2 mb-2 offset-md-1 col-lg-10 col-md-10 col-sm-12 col-xs-12  text-right">
+
+        <pagination-controls (pageChange)="pageChanged($event)" maxSize="5" directionLinks="true" previousLabel="Previous" nextLabel="Next" screenReaderPaginationLabel="Pagination" screenReaderPageLabel="page" screenReaderCurrentLabel="You're on page"></pagination-controls>
+    </div>
+
+</div>

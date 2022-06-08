@@ -1,0 +1,230 @@
+@import "src/app/theme/sass/conf/variables";
+
+.first.row {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    p {
+        width: 500px;
+        margin: 0 auto;
+        color: #222e82;
+        word-spacing: 1px;
+        line-height: 20px;
+    }
+}
+
+.second.row {
+    display: flex;
+    justify-content: space-evenly;
+    // margin-top: 5%;
+    h2 {
+        font-size: 28px;
+        text-align: center;
+        font-weight: 100;
+        color: #222e82;
+        margin-bottom: 30px;
+        opacity: 0.7;
+    }
+    .calenderComponent,
+    .schedularComponent {
+        background: #f2f2f2;
+        padding: 20px;
+    }
+}
+
+.date-content.row {
+    display: flex;
+    justify-content: center;
+    padding: 30px 0;
+    font-size: 20px;
+    color: #231f20;
+    @media only screen and (max-width: 767px) {
+        font-size: 17px;
+    }
+}
+
+.third.row {
+    display: flex;
+    justify-content: center;
+    padding: 10px 0 24px 0;
+    text-align: center;
+    button {
+        border-radius: 22px;
+        width: 281px;
+        background-color: $main-green;
+        color: white;
+        border: none;
+        // padding: 10px 25px 12px 35px;
+        font-size: 18px;
+        line-height: 16px;
+        height: 44px;
+        cursor: pointer;
+        .btn-arrow {
+            color: white;
+            position: relative;
+            top: 0;
+            left: 10px;
+            .fa-arrow-right {
+                // position: absolute;
+                // left: 8px;
+                // top: 4px;
+                font-size: 15px;
+            }
+        }
+    }
+    button:disabled {
+        background: #c5c5c5;
+        cursor: initial;
+    }
+}
+
+.headerBooking {
+    margin-left: -22%;
+    margin-right: -22%;
+    background-color: #5a5a5a;
+    margin-bottom: 2%;
+    height: 25px;
+}
+
+.setHeading
+{
+    margin-left: 20%;
+}
+
+.greenColor {
+    background: $main-green;
+}
+
+.headerContent {
+    padding: 4px;
+    display: flex;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #ffffff;
+}
+
+.timeDisplayContainer{
+    height: 1rem
+}
+@media screen and (max-width: 460px) {
+    .third.row {
+        display: block;
+    }
+    .date-content.row{
+        display: inline-block;
+        text-align: center;
+        width: 100%;
+    }
+}
+
+@media screen and (max-width:1100px) and (min-width:801px)
+{
+    .btn-th-width
+    {
+        min-width: 200px;
+    }
+
+    .th-width
+    {
+        min-width: 100px;
+    }
+    .session-title
+    {
+        font-size: 22px !important;
+    }
+}
+
+@media screen and (max-width:800px) and (min-width:521px)
+{
+    .btn-th-width
+    {
+        min-width: 200px;
+    }
+
+    .th-width
+    {
+        min-width: 100px;
+    }
+
+    .setHeading
+    {
+        margin-left: 0 !important;
+    }
+
+
+    .session-title
+    {
+        text-align: center !important;
+        font-size: 20px !important;
+    }
+}
+
+
+@media screen and (max-width: 520px) and (min-width:300px)
+{
+    .btn-th-width
+    {
+        min-width: 200px;
+    }
+
+    .th-width
+    {
+        min-width: 100px;
+    }
+
+    .session-title
+    {
+        text-align: center !important;
+        font-size: 12px !important;
+    }
+
+    .setHeading
+    {
+        margin-left: 7% !important;
+    }
+
+}
+
+
+
+.removeBorder
+{
+    border: none !important;
+    border-color: #ffffff !important;
+    border-width: 0px;
+    border: 1px solid #ffffff !important;
+}
+.sessionCard
+{
+    box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.09);
+    background-color: #ffffff;
+    border-radius: 4px;
+    height: 65px;
+    position: relative;
+    text-align: left;
+}
+.scHead
+{
+    font-size: 15px;
+    letter-spacing: 0.3px;
+    color: #9b9b9b;
+    margin-top: 12px;
+    margin-bottom: 5px;
+    width: 80%;
+}
+.sDateAndTime
+{
+    letter-spacing: 0.33px;
+    color: #5a6c7d;
+    font-size: 16px;
+    font-family: 'ProximaNova-Bold';
+    cursor: pointer;
+
+
+}

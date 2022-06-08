@@ -1,0 +1,70 @@
+.forgotPassInput {
+    width: 100%;
+    height: 50px;
+    border: none;
+    outline: none;
+    padding: 12px;
+}
+
+.verifyOtp {
+    min-height: 10vh;
+    max-height: 12vh;
+    width: 50%;
+    border: 1px solid #e5e5e5;
+    border-radius: 0px;
+    padding-left: 2%;
+}
+
+.zipCodeInput {
+    min-height: 7vh !important;
+    max-height: 9vh !important;
+}
+
+#tutor-dialog {
+    .mat-dialog-container {
+        background-color: #ffffff;
+        border-radius: 3px;
+        .mat-dialog-content {
+            margin: 0px;
+            min-height: 20vw;
+            height: auto;
+            min-width: 50vw;
+            background-color: #ffffff;
+            border-radius: 3px;
+            //box-shadow: 0 0 18px 0 rgba(0, 0, 0, 0.11);
+        }
+    }
+}
+
+// #tutor-dialog {
+//     .mat-dialog-container .mat-dialog-content {
+//         min-height: 20vw;
+//         height: auto;
+//     }
+// }
+@media only screen and (max-width: 767px) {
+    .margin {
+        margin-top: 0px;
+    }
+    .verifyOtp {
+        width: auto;
+    }
+}
+
+.zipCodeError {
+    color: red;
+}
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+.has-zipCodeInput-error {
+    outline: none;
+    border: red 2px solid !important;
+    // box-shadow: 0 3px 1px -2px rgba(217, 73, 89, 0.6), 0 2px 2px 0 rgba(217, 73, 89, 0.42), 0 1px 5px 0 rgba(217, 73, 89, 0.36) !important;
+}
+// .arrow-btn .fa-arrow-right {
+//     top: 16px !important;
+//     font-size: 15px !important;
+// }

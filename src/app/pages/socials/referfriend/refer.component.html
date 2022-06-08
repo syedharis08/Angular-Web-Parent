@@ -1,0 +1,72 @@
+<div class="container-fluid">
+    <div class="container refer-align mt-4">
+        <img class="mobileScreenNo" src="./assets/images/refer-voice.png" alt="Voice Image">
+
+        <h2 class="mt-4"><span style="font-family: 'JennaSue';">Refer a</span> <span class="proximanova-bold "
+                                                                                     style="color:#232f84"> Friend </span>
+        </h2>
+        <p id='codeValue'>{{referralCode}}</p>
+        <p id='codeText' class="width100">Spread the word about {{commonService.CONSTANT.PROJECT_NAME}}, and we’ll <b>
+            give you 50% off</b> a
+            session for every new family you refer who completes their first session.
+            Plus, we'll give the new, referred family<b>
+                50% off
+            </b> their first tutoring session.
+        </p>
+        <div style="position:relative !important" class="tooltip">
+            <span class='tooltiptext' id='myTooltip'>
+            </span>
+        </div>
+        <span (click)='copyCode("#codeValue")' class="copy">
+            Copy Code
+        </span>
+    </div>
+    <div class="mt-4">
+        <div class="row text-center">
+            <h3><b> Here's how it works: </b>
+            </h3>
+
+        </div>
+        <div class="row padding-left-right-10 mb-4 pb-4">
+            <div class="col-lg-12 mobileScreenYes ">
+                <ol class="referalList">
+                    <li id='codeText2' class="proximanova-reg">
+                        When a new family signs up for {{commonService.CONSTANT.PROJECT_NAME}} using your referral code,
+                        they will receive 50%
+                        off their first tutoring session, and you will receive 50% off your next session (after that
+                        family’s tutoring session has been completed).
+                    </li>
+                    <li id='codeText2' class="proximanova-reg">
+                        When a new tutor applies to {{commonService.CONSTANT.PROJECT_NAME}} using your referral code,
+                        you will receive 50% off
+                        your next tutoring session after they are approved and deliver their first tutoring session to a
+                        {{commonService.CONSTANT.PROJECT_NAME}} Family.
+                    </li>
+                </ol>
+            </div>
+            <div class="col-lg-1 mobileScreenNo">
+                <span id='codeText2' class="proximanova-reg"> 1. </span>
+            </div>
+            <div class="col-lg-11 mobileScreenNo">
+                <span id='codeText2' class="proximanova-reg">
+                    When a new family signs up for {{commonService.CONSTANT.PROJECT_NAME}} using your referral code, they will receive 50% off
+                    their first tutoring session, and you will receive 50% off your next session (after that family’s
+                    tutoring session has been completed).
+                </span>
+            </div>
+            <div class="col-lg-1 mobileScreenNo mt-2">
+                <span id='codeText2' class="proximanova-reg"> 2. </span>
+
+            </div>
+            <div class="col-lg-11 mobileScreenNo mt-2">
+                <span id='codeText2' class="proximanova-reg">
+                    When a new tutor applies to {{commonService.CONSTANT.PROJECT_NAME}} using your referral code, you will receive 50% off your
+                    next tutoring session after they are approved and deliver their first tutoring session to a
+                    {{commonService.CONSTANT.PROJECT_NAME}} Family.
+                </span>
+            </div>
+
+
+        </div>
+    </div>
+</div>

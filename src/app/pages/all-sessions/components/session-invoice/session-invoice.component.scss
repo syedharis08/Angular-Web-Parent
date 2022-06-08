@@ -1,0 +1,392 @@
+@import "../../../../theme/sass/conf/conf";
+
+#session {
+    .mat-tab-label-container {
+        border-radius: 30px;
+        display: inline-flex;
+        box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.11);
+    }
+
+    #mat-tab-label-0-0 {
+        border-radius: 30px 0px 0px 30px;
+    }
+
+    #mat-tab-label-0-1 {
+        border-radius: 0px 30px 30px 0px;
+    }
+
+    .mat-ink-bar {
+        visibility: hidden;
+        display: none;
+    }
+
+    .mat-tab-label {
+        color: #c0c0c0;
+        background-color: #ffffff;
+    }
+
+    .mat-tab-header {
+        display: block;
+    }
+
+    .mat-tab-nav-bar,
+    .mat-tab-header {
+        border: none;
+    }
+
+    .mat-tab-label:hover {
+        background-color: $main-green;
+        color: white;
+    }
+
+    .mat-tab-label-active {
+        background-color: $main-green;
+        color: white;
+    }
+
+    .mat-tab-label {
+        opacity: 1;
+    }
+}
+
+.pl-8 {
+    padding-left: 15%;
+}
+
+.pl-6 {
+    padding-left: 5%;
+}
+
+.session-all {
+    background-color: #f2f4f5;
+    // margin-top: -70px;
+    min-height: 490px;
+}
+
+.status-details {
+    background-color: #ffffff;
+    box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.11);
+}
+
+.status-title {
+    font-family: 'ProximaNova-Light';
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #000000;
+    // text-transform: capitalize
+}
+
+.statusData {
+    display: inline;
+}
+
+.status-data {
+    font-family: 'ProximaNova-Reg';
+    font-size: 15px;
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #232f84;
+}
+
+.bookingView {
+    min-height: 200px;
+    background-color: #ffffff;
+    padding-bottom: 20px;
+    box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.09);
+}
+
+.bookingHeading {
+    background-color: #d9ab28;
+    padding: 0.8%;
+    text-align: center;
+    font-size: 16px;
+    color: white;
+}
+
+// .line-height-2 {
+//     line-height: 2 !important;
+// }
+.bookingSubHeading {
+    padding-left: 25%;
+    font-size: 15px;
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    opacity: 0.6;
+    // line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #000000;
+}
+
+.bookingArrow {
+    float: right;
+    margin-right: 4%;
+    margin-top: 4%;
+}
+
+.BookingText {
+    font-size: 15px;
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #232f84;
+}
+
+.textleftaddress {
+    text-align: left
+}
+
+@media (max-width: 460px) {
+    .nopadding {
+        padding: 0px !important
+    }
+
+    .bookingSubHeading {
+        font-size: 13px !important;
+    }
+
+    .BookingText {
+        font-size: 13px !important;
+    }
+
+    .textleftaddress {
+        text-align: left !important
+    }
+
+    .BookingText {
+        text-align: left !important
+    }
+    .bookingView {
+        min-height: 175px;
+    }
+}
+
+.rightSpan {
+    span {
+        display: block;
+        line-height: 1;
+    }
+}
+
+.BookingText {
+    span {
+        display: inline;
+    }
+}
+
+.spaceAbove {
+    margin-top: 20px;
+}
+
+@media (max-width: 900px) {
+    #session .mat-tab-label {
+        height: 33px;
+    }
+
+    .mobileMargin {
+        margin-top: .1rem !important;
+    }
+
+    .mobilePadding {
+        padding-top: 1rem !important;
+    }
+
+    .rightSpan {
+        span {
+            // line-height: 0.5;
+        }
+    }
+
+}
+
+@media(max-width: 750px) {
+    .MarginT {
+        margin-top: 10px;
+    }
+    .spaceAbove {
+        margin-top: 10px;
+    }
+
+}
+
+
+.top-text {
+    color: #223083;
+    font-size: 30px;
+}
+
+.my-top-box {
+    background: white;
+}
+
+
+.calImg {
+    position: absolute;
+    right: 2%;
+    top: 29px;
+    width: 25px;
+    // z-index: 999;
+}
+
+.dateBox {
+    width: 175px;
+    padding: 1px 20px 20px 21px;
+    display: inline-block;
+}
+
+.create-pdf-btn2 {
+    background-color: $main-green;
+    color: white;
+    border-radius: 22px;
+    font-family: 'ProximaNova-Reg';
+    min-width: 137px;
+    min-height: 40px;
+    max-height: 38px;
+    max-width: 300px;
+    font-size: 16px;
+    margin-top: 16px;
+    cursor: pointer;
+    margin-right: 15px;
+}
+
+.set-body {
+    background: white;
+    border: solid 0.6px #d5d5d5;
+}
+
+.bottom-text {
+    font-family: 'ProximaNova-Reg';
+    font-size: 13px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 18px;
+    letter-spacing: normal;
+    color: #6b6c6e;
+    margin: 18px 0;
+}
+
+.session-range {
+    opacity: 0.9;
+    font-family: 'ProximaNova-Reg';
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 72px;
+    vertical-align: middle;
+    color: #223083;
+    display: inline-block;
+}
+
+.filter-btn {
+    text-align: right;
+    right: 8px;
+}
+
+.clear-btn {
+    color: #116DB4;
+    justify-content: space-around;
+    text-decoration: underline;
+}
+
+.calImg {
+    position: absolute;
+    right: 2%;
+    top: 21px;
+    width: 25px;
+}
+
+.inputBox1 {
+    box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    line-height: 34px;
+    margin-top: 16px;
+}
+
+.payment-full-width {
+    width: 100%;
+}
+
+/* Border */
+.mat-form-field-appearance-outline .mat-form-field-outline {
+    color: white;
+    border: none;
+}
+
+/* Font color */
+//input.mat-input-element {
+//    color: white;
+//    border: none;
+//}
+
+.sec-box {
+    background: white;
+    margin: 10px 0;
+}
+
+.gen-pdf {
+    margin: 10px !important;
+}
+
+.amount-text {
+    color: #223083;
+    float: right;
+    margin: 21px 10px;
+    font-size: 15px;
+}
+
+.cus-table > thead > tr > th {
+    //text-align: left !important;
+    padding: 10px;
+}
+
+.cus-table > thead > tr {
+    border-radius: 2px;
+    border: solid 0.6px #d5d5d5;
+    background-color: #fafafa;
+    color: #202224;
+}
+
+.cus-table.table > tbody > tr > td:last-child {
+    padding-right: 12px !important;
+}
+
+.cus-table > tbody > tr > td {
+    font-family: 'ProximaNova-SemiBold';
+    //text-align: left !important;
+    padding: 10px;
+    border-top: 1px solid #eceeef !important;
+    font-size: 14px;
+    opacity: 0.7;
+    color: #202224;
+}
+
+.set-right-align {
+    text-align: right !important;
+    padding-right: 13px !important;
+}
+
+
+.note-text {
+    font-family: 'ProximaNova-SemiBold';
+    font-size: 13px;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.79;
+    letter-spacing: normal;
+    text-align: left;
+    color: #34495e;
+}
+

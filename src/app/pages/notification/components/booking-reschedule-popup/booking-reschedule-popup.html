@@ -1,0 +1,131 @@
+<div style="float:right;padding:0px;margin-bottom:0px" class="row" mat-dialog-title>
+    <button (click)="closeDialog()" style="border:none" class="close-btn" mat-button mat-dialog-close="true">
+        <img src="assets/img/close.png">
+    </button>
+</div>
+<mat-dialog-content>
+    <!-- <div style="float:right" mat-dialog-title>
+        <button style="border:none" mat-button mat-dialog-close="true">
+                    <i class="fa fa-times fa-fw fa-3xCross crossButton" aria-hidden="true"> </i>
+                </button>
+    </div> -->
+    <div class="myContainer mb-4">
+        <h2 class="headings text-center">
+            {{notificationData.header}}
+        </h2>
+        <div *ngIf="notificationData && notificationData !=undefined" class="text-center">
+            <!-- <div class="row" *ngIf="notificationData.tutor && notificationData.tutor != undefined " class="dialogText mb-2 capitalize">
+                Your tutor ( {{notificationData.tutor.firstName }} {{notificationData.tutor.lastName? (notificationData.tutor.lastName.substr(0,1)
+                +'.') : ''}} ) has accepted your request</div> -->
+
+            <div class="row" *ngIf="notificationData.student && notificationData.student != undefined ">
+                <div class="col-12 col-sm-12 notification-data capitalize"> Child:
+                    {{notificationData.student.firstName}}
+                    {{notificationData.student.lastName ? ( notificationData.student.lastName.substr(0, 1) + '.' ) : ''}}
+                </div>
+            </div>
+            <div class="row" *ngIf="notification_type=='CREATE_BOOKING_BY_TUTOR'">
+                <div class="col-12 col-sm-12 notification-data capitalize"> Child Grade:
+                    {{notificationData.student.gradeLevel}}
+                </div>
+            </div>
+            <div
+                *ngIf="notificationData.booking && notificationData.booking !=undefined && notificationData.booking.subjects && notificationData.booking.subjects !=undefined && notification_type=='CREATE_BOOKING_BY_TUTOR'"
+                class="row ">
+                <div class="col-12 col-sm-12  notification-data"> Subjects:
+                    <span *ngFor="let subjects of notificationData.booking.subjects;let comma=last">
+                    <span *ngIf="subjects.subcategories && subjects.subcategories.length>0">
+                        <span *ngFor="let subSubjects of subjects.subcategories;let i=index;let last=last "
+                              class="status-data">
+                            {{subSubjects.name}}{{( last && comma ) ? '' : ',' }}&nbsp; </span>
+                    </span>
+                </span>
+                </div>
+            </div>
+            <div *ngIf="notificationData.booking && notificationData.booking != undefined " class="row">
+                <div class="col-12 col-sm-12 notification-data"> <span
+                    *ngIf=" notification_type!='CREATE_BOOKING_BY_TUTOR'">Original</span> Date & Time:
+                    {{startTime }}{{endTime ? '-' : '' }}{{ endTime }} </div>
+            </div>
+            <div
+                *ngIf="notificationData.booking && notificationData.booking != undefined && notification_type!='CREATE_BOOKING_BY_TUTOR'"
+                class="row">
+                <div class="col-12 col-sm-12 notification-data"> Proposed Date & Time: <span style="color: #e1134f">
+                        {{rescheduleStartTime }}{{rescheduleEndTime ? '-' : '' }}{{ rescheduleEndTime }} </span></div>
+            </div>
+            <div
+                *ngIf="notificationData.booking && notificationData.booking !=undefined && notificationData.booking.subjects && notificationData.booking.subjects !=undefined && notification_type!='CREATE_BOOKING_BY_TUTOR'"
+                class="row ">
+                <div class="col-12 col-sm-12  notification-data"> Subjects:
+                    <span *ngFor="let subjects of notificationData.booking.subjects;let comma=last">
+                        <span *ngIf="subjects.subcategories && subjects.subcategories.length>0">
+                            <span *ngFor="let subSubjects of subjects.subcategories;let i=index;let last=last "
+                                  class="status-data">
+                                {{subSubjects.name}}{{( last && comma ) ? '' : ',' }}&nbsp; </span>
+                        </span>
+                    </span>
+                </div>
+            </div>
+            <div *ngIf="notification_type=='CREATE_BOOKING_BY_TUTOR'" class="row">
+                <div class="col-lg-12 col-12 mt-2  text-center">
+                    <div class="notification-data">{{notificationData.booking.locationDetails.addressLine1}}</div>
+                    <div class="notification-data mt-2">{{notificationData.booking.locationDetails.addressLine2}}</div>
+                    <div class="notification-data mt-2">{{notificationData.booking.locationDetails.city}}
+                        , {{notificationData.booking.locationDetails.state}} {{notificationData.booking.locationDetails.zipCode}}
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div
+                *ngIf="notificationData.booking && notificationData.booking !=undefined && notificationType === 'RESCHEDULE_REQUEST_BY_TUTOR' "
+                class="row" style="display:flex;">
+                <div class="col-lg-12 col-md-12 col-sm-12 " style="margin: auto; vertical-align: middle; top: 12px;">
+                    <a class="pink-link" style="text-decoration:none !important;"
+                       (click)="declineReschedule(notificationData.booking._id)">
+                        Decline reschedule </a>
+
+                    <button (click)="acceptReschedule(notificationData.booking._id)"
+                            style="margin-left:15px;text-align:left" class="pinkButton mt-4 arrow-btn">&nbsp;&nbsp;Accept
+                        reschedule
+                        <!-- <span style="color:white;margin-right:6px;float:right"> -->
+                        <i class="fa fa-lg fa-arrow-right" style="right:10px" aria-hidden="true"></i>
+                        <!-- </span> -->
+                    </button>
+                </div>
+            </div>
+            <div
+                *ngIf="notificationData.booking && notificationData.booking !=undefined && notificationType === 'NEW_TUTOR' "
+                class="row" style="display:flex;">
+                <div class="col-lg-12 col-md-12 col-sm-12 " style="margin: auto; vertical-align: middle; top: 12px;">
+                    <a class="pink-link" style="text-decoration:none !important;"
+                       (click)="givePaymentForTutor(notificationData,'reject')">Decline Request</a>
+
+                    <button (click)="givePaymentForTutor(notificationData,'accept')"
+                            style="margin-left:15px;" class="pinkButton mt-4 arrow-btn">Accept
+                        Request
+                        <!-- <span style="color:white;margin-right:6px;float:right"> -->
+                        <i class="fa fa-lg fa-arrow-right" style="right:10px" aria-hidden="true"></i>
+                        <!-- </span> -->
+                    </button>
+                </div>
+            </div>
+
+            <div
+                *ngIf="notificationData.booking && notificationData.booking !=undefined && notificationType === 'RESCHEDULE_REQUEST_BY_TUTOR' || notification_type === 'CREATE_BOOKING_BY_TUTOR' || notificationType === 'REJECTED_BY_PARENT'   "
+                class="row justify-content-center mt-4">
+                <a (click)="contact()" class="pink-link"> Contact Tutor </a>
+            </div>
+            <div
+                *ngIf="notificationData.booking && notificationData.booking !=undefined && notificationType != 'RESCHEDULE_REQUEST_BY_TUTOR' && notification_type!='CREATE_BOOKING_BY_TUTOR' && notificationType!='REJECTED_BY_PARENT'  "
+                class="row justify-content-center mt-4">
+                <button (click)="closeDialog()" class="pinkButton mt-4 arrow-btn">OK
+                    <!-- <span style="color:white;margin-right:6px;float:right"> </span> -->
+                    <i class="fa fa-lg fa-arrow-right" aria-hidden="true"></i>
+                </button>
+            </div>
+
+        </div>
+    </div>
+</mat-dialog-content>

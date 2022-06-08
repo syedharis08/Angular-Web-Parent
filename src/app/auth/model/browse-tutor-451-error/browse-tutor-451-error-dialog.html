@@ -1,0 +1,34 @@
+<div style="float:right;padding:0px" class="row" mat-dialog-title>
+    <button (click)="closeDialog()" style="border:none" class="close-btn pointer" mat-button mat-dialog-close="true">
+        <img (click)="closeDialog()" src="assets/img/close.png">
+    </button>
+</div>
+<mat-dialog-content>
+    <!-- <div style="float:right" mat-dialog-title>
+        <button (click)="closeDialog()" style="border:none" mat-button mat-dialog-close="true">
+            <i class="fa fa-times fa-fw fa-3xCross crossButton" aria-hidden="true"> </i>
+        </button>
+    </div> -->
+    <div class="myContainer">
+        <h3 class="headings text-center">No Tutors Available</h3>
+        <div class="col-sm-12  col-md-12  text-center col-xs-12 col-lg-12">
+            <label class="mt-4 dialogText">
+                Oops! It doesn’t look like we have tutors that meet the criteria you entered. Try adjusting your preferences to increase your chances for a match! Or, you can call the
+                {{commonService.CONSTANT.PROJECT_NAME}}
+                team at (888) 997-0145 if you would like assistance finding a tutor near you.
+            </label>
+
+        </div>
+        <div class="row text-center mt-4 mb-4">
+
+            <div class=" col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <button mat-dialog-close="true" style="max-width:230px" class="pinkButton half-width-btn arrow-btn">OK
+                    <!-- <span style="color:white;margin-right:6px;float:right"> -->
+                    <i class="fa fa-lg fa-arrow-right" aria-hidden="true"></i>
+                    <!-- </span> -->
+                </button>
+            </div>
+        </div>
+
+    </div>
+</mat-dialog-content>

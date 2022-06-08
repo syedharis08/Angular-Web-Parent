@@ -1,0 +1,39 @@
+<div style="float:right;padding:0px;margin-bottom:0px" mat-dialog-title>
+    <button (click)="closeDialog()" style="border:none" class="close-btn pointer" mat-button mat-dialog-close="true">
+        <img src="assets/img/close.png">
+    </button>
+</div>
+<mat-dialog-content><!--style="width:75vw"-->
+    <div class="myContainer" style="margin-bottom:3rem">
+        <h2 class="headings text-center" style="font-size:xx-large">Contact Tutor</h2>
+        <div class="text-center mt-4">
+            <form [formGroup]="form" style="padding-right: 15%;padding-left: 15%;" (ngSubmit)="onSubmit(form.value)">
+                <textarea #inputUserName maxlength="800"
+                          [ngStyle]="{'border':form.controls['contactText'].touched && form.controls['contactText'].errors?.required ? '2px solid red' :'2px solid green' }"
+                          [formControl]="contactText" required class="form-control textareaContact"
+                          style="height:150px;" placeholder="Please type your message here...">
+            </textarea>
+
+                <div class="text-center">
+                    <span style="color: gray;" class="default-text font-14">
+
+
+                            Text messages are identified as {{commonService.CONSTANT.PROJECT_NAME}} messages and include your name for the recipient – so no need
+                                to repeat these details in your text!
+
+<!--                        Your text message will include a note to let-->
+<!--                        the recipient know your name and that this is from {{commonService.CONSTANT.PROJECT_NAME}} - -->
+<!--                        so no need to repeat those details in your message!-->
+<!--                    -->
+                    </span>
+                </div>
+                <br>
+                <button class="pinkButton arrow-btn right12">Send
+
+                    <i class="fa fa-lg fa-arrow-right" aria-hidden="true"></i>
+                </button>
+            </form>
+
+        </div>
+    </div>
+</mat-dialog-content>

@@ -1,0 +1,150 @@
+$popup_back:#fff;
+.cls-popup-back {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.2);
+    display: none;
+    z-index: 999;
+    text-align: center;
+}
+
+.pinkButton {
+    margin-top: 15px;
+    background-color: #e1134f;
+    color: white;
+    border-radius: 22px;
+    font-family: 'ProximaNova-Reg';
+    min-width: 200px;
+    min-height: 44px;
+    max-height: 44px;
+    max-width: 250px;
+    font-size: 18px;
+}
+
+@media screen and (max-width: 767px)
+{
+    // .arrow-btn .fa-arrow-right {
+    //     top: 15px !important;
+    //     font-size: 15px !important;
+    // }
+}
+
+.verifyOtp {
+    min-height: 10vh;
+    max-height: 12vh;
+    width: 285px;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 5px;
+}
+
+.otpText {
+    color: #232f84;
+    line-height: 1.04;
+    text-align: center;
+    font-size: 32px;
+    font-family: 'ProximaNova-Reg';
+}
+
+.cls-popup-content {
+    background-color: $popup_back;
+    min-height: 50%;
+    width: 45%;
+    left: 30%;
+    top: 50px;
+    color: #454545;
+    position: absolute;
+    margin: 0px 0px 6px;
+    padding: 15px;
+    -moz-border-radius: 3px 3px 3px 3px;
+    -webkit-border-radius: 3px 3px 3px 3px;
+    border-radius: 3px 3px 3px 3px;
+    background-position: 15px center;
+    background-repeat: no-repeat;
+    -moz-box-shadow: 0 0 12px #514b4b;
+    -webkit-box-shadow: 0 0 12px #514b4b;
+    box-shadow: 0 0 12px #514b4b;
+    // -ms-filter: progid: DXImageTransform.Microsoft.Alpha(Opacity=80);
+    filter: alpha(opacity=80);
+    -webkit-transition: opacity 2s ease .15s;
+    -moz-transition: opacity 2s ease .15s;
+    -o-transition: opacity 2s ease .15s;
+    -ms-transition: opacity 2s ease .15s;
+    transition: opacity 2s ease .15s;
+    opacity: 1;
+}
+
+.cls-popup-content.active {
+    opacity: 1;
+}
+
+.success {
+    background-color: white;
+}
+
+.info {
+    background-color: #2f96b4;
+}
+
+.error-custom {
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+}
+
+.error-custom p {
+    font-size: 1.2em;
+    color: #4A4A4A;
+    margin-bottom: 1.5em;
+    line-height: 1.7;
+    font-weight: 100;
+}
+
+.close-reebook-popup {
+    cursor: pointer;
+    position: absolute;
+    right: 8px;
+    top: 5px;
+    font-size: large;
+    color: #000;
+    opacity: 0.3;
+}
+
+.ok-button {
+    cursor: pointer;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.pop-icon-div {
+    font-size: 26px;
+    display: inline-block;
+    width: 35px;
+    vertical-align: top;
+    padding: 5px 0 0;
+}
+
+.pop-message {
+    display: inline-block;
+    vertical-align: text-bottom;
+    word-wrap: break-word;
+    color: #232f84;
+    line-height: 1.04;
+    text-align: center;
+    font-size: 30px;
+    font-family: 'ProximaNova-Reg';
+    /* font-size: 15px;
+    line-height: 20px; */
+}
+
+@media screen and (max-width: 767px) {
+    .cls-popup-content {
+        width: 90%;
+        left: 10px;
+    }
+    .verifyOtp {
+        width: auto;
+    }
+}

@@ -1,0 +1,67 @@
+@import "../../../../theme/sass/conf/conf";
+// .margin {
+//     margin-top: -92px;
+// }
+.status-row {
+    min-height: 32px;
+}
+
+.outer-div {
+    border: solid 1px #dcdcdc;
+}
+
+.blue-heading {
+    font-family: 'ProximaNova-Light';
+    font-size: 16px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #116DB4;
+}
+
+#reschedule-detail {
+    .td-text {
+        width: 93px;
+        height: 30px;
+        font-size: 14px;
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: 2.14;
+        letter-spacing: normal;
+        text-align: left;
+        color: #34495e;
+    }
+
+}
+
+.tutor-name-res {
+    width: 25%;
+    color: #116DB4;
+    font-family: 'ProximaNova-Reg';
+    font-weight: bold;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    font-size: 17px;
+}
+
+.booking-text {
+    font-family: 'ProximaNova-Reg';
+    font-size: 18px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #34495e;
+}
+
+.last-step-outer-div {
+    background-color: #ffffff;
+    border: solid 1px #dcdcdc;
+}

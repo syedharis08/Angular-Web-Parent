@@ -1,0 +1,649 @@
+@import '../../../../../theme/sass/conf/conf';
+
+.payment-full-width {
+    width: 100%;
+}
+
+.auto-margin {
+    margin: auto;
+}
+
+.hoursText {
+    font-family: 'ProximaNova-Reg';
+    font-size: 18px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #34495e;
+}
+
+.promoCodeField::-ms-clear {
+    display: none;
+}
+
+.promo-values {
+    color: #222e82;
+    text-align: center;
+    font-size: 15px;
+    font-family: 'ProximaNova-Reg';
+}
+
+.addon2 {
+    right: 0.2rem;
+    top: 0.15rem;
+    position: absolute;
+}
+
+.arrowColor {
+    color: #ff1a5d;
+}
+
+.apply-promo {
+    font-family: 'JennaSue';
+    color: #ff1a5d;
+    font-size: 18px;
+    background: transparent;
+}
+
+.payments {
+    h2 {
+        text-align: left;
+        border-bottom: 2px solid #ebebeb;
+        padding: 25px 0;
+        margin-bottom: 15px;
+        font-size: 28px;
+        font-weight: 100;
+        color: #222e82;
+        opacity: 0.7;
+    }
+
+    .mat-form-field-flex {
+        border: 1px solid #f3f3f3;
+        border-bottom: none;
+
+        input {
+            height: 39px;
+            padding: 0 13px;
+        }
+
+        span label {
+            padding-left: 16px;
+            box-sizing: border-box;
+            padding-top: 10px;
+        }
+    }
+
+    .mat-form-field-underline .mat-form-field-ripple {
+        height: 4px !important;
+    }
+
+    .mat-form-field-underline {
+        height: 4px !important;
+        background-color: #f3f3f3;
+    }
+
+    .rowPadding {
+        padding: 15px 0;
+    }
+
+    .mat-select-value-text {
+        span {
+            padding-left: 13px;
+        }
+    }
+
+    .total-price {
+        font-size: 15px;
+        color: #bebebe !important;
+        font-weight: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        font-family: 'ProximaNova-Reg';
+    }
+
+    .mat-select-trigger {
+        padding: 10px 0;
+    }
+
+    .submit-center {
+        display: flex;
+        justify-content: center;
+    }
+
+    .mat-checkbox-label {
+        color: #4b5e71;
+        font-size: 18px;
+    }
+
+    .default-text {
+        color: #c8c8c8;
+        text-indent: 29px;
+    }
+}
+
+//form field
+.setHeaderImage {
+    background-image: url("./assets/img/greenline.png");
+    width: 100% !important;
+    height: 140px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.rowPaddTop {
+    padding-top: 3%;
+}
+
+.steps {
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 0.8px;
+    text-align: center;
+    color: #e1c79b;
+}
+
+.selectedBox {
+    width: 330px;
+    min-height: 180px;
+    max-height: auto;
+    background-color: #ffffff;
+    border: solid 2px #f4f0f0;
+    padding: 5% 5% 3% 5%;
+}
+
+.stepsHeadings {
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+    color: #ffffff;
+    padding-top: 2%;
+    letter-spacing: 1.6px;
+}
+
+.address {
+    font-size: 14px;
+    font-weight: normal;
+    letter-spacing: 0.4px;
+    text-align: left;
+    color: #2b2926;
+    opacity: 0.8;
+}
+
+.hrlinePayments {
+    border: solid 1px #f4f0f0;
+}
+
+.setPaddAddress {
+    padding-top: 2px;
+}
+
+textarea {
+    resize: none;
+}
+
+.applyPromoButton {
+    height: 50px;
+    border-radius: 3px;
+    border: none;
+    background-color: #00bab2;
+    font-size: 14px;
+    font-weight: 900;
+    letter-spacing: 0.5px;
+    text-align: center;
+    color: #ffffff;
+    width: 100%;
+    cursor: pointer;
+
+    &:hover {
+        background-color: #ffffff;
+        color: #00bab2;
+        border: 1px solid #00bab2;
+    }
+}
+
+.appliedPromoButton {
+    background-color: #ffffff;
+    color: #00bab2;
+    border: 1px solid #00bab2;
+    cursor: not-allowed;
+}
+
+.userImage {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+}
+
+.username {
+    font-size: 14px;
+    letter-spacing: 0.8px;
+    color: white; // text-transform: capitalize;
+    padding-top: 5px;
+}
+
+.timeBooking {
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-align: center;
+    color: #335b68;
+    line-height: 1.6
+}
+
+button.btn.btn-primary {
+    background: #3cbeba !important;
+    border: none !important;
+}
+
+button.btn.btn-primary:hover,
+button.btn.btn-primary:focus,
+button.btn.btn-primary.focus,
+button.btn.btn-primary:active,
+button.btn.btn-primary.active {
+    background: #3cbeba !important;
+    border: none !important;
+}
+
+.inputHeadings {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: 1px;
+    text-align: left;
+    color: #335b68;
+}
+
+.addcard {
+    height: 35px;
+    line-height: 2.4;
+}
+
+.catName {
+    font-size: 14px;
+    letter-spacing: 0.4px;
+    text-align: left;
+    color: #2b2926; // text-transform: capitalize;
+    opacity: 0.8;
+}
+
+.catCost {
+    text-align: right;
+}
+
+.align-radio {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.faPayment {
+    color: #f07244;
+    font-size: 16px;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.setBorderCard {
+    border: solid 2px #f4f0f0;
+    border-radius: 3px;
+    padding: 5%;
+    width: 100%;
+    height: 100%;
+
+    label {
+        color: #34495e;
+        display: block;
+        font-size: 16px;
+        font-weight: bold;
+        margin-top: 2px;
+        cursor: pointer;
+    }
+}
+
+.editbutton {
+    font-size: 10px;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+    text-align: left;
+    color: #00bab2;
+    cursor: pointer;
+    padding-top: 3%;
+    outline: 0;
+}
+
+.expDate {
+    width: 100%;
+}
+
+.cardSelect {
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.6px;
+    color: #34495e;
+    font-family: 'ProximaNova-Reg';
+    opacity: 0.8;
+}
+
+.holderName {
+    font-size: 14px;
+    letter-spacing: 0.2px;
+    color: #34495e;
+    font-family: 'ProximaNova-Reg'; // text-transform: capitalize;
+}
+
+.addnewCard {
+    font-size: 14px;
+    letter-spacing: 0.4px;
+    text-align: right;
+    color: #ffffff;
+    padding-top: 3%;
+    cursor: pointer;
+}
+
+.cardError {
+    font-size: 14px;
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: 0.4px;
+    text-align: center;
+    color: #dd4c40;
+    padding: 1%;
+    border: solid 1px #df2f5a;
+}
+
+@media (max-width: 768px) {
+    .stepsHeadings {
+        font-size: 20px;
+        line-height: 1.2;
+    }
+
+    .paddLeftSmall {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .selectedBox,
+    .setBorderCard {
+        width: 100%;
+    }
+
+    .setHeaderImage {
+        height: 180px;
+    }
+
+    // .bookPadding{
+    //   padding-left: 15px;
+    .booknowButton {
+        width: 100%;
+    }
+
+    // }
+    .expDate {
+        width: 100%;
+    }
+
+    .holderName {
+        font-size: 12px;
+    }
+
+    .cardSelect {
+        font-size: 10px;
+    }
+
+    .inputHeadings {
+        font-size: 14px;
+    }
+
+    .requestButtonSend {
+        font-size: 16px;
+        height: 2.7rem;
+        border-radius: 30px;
+    }
+
+    .cancelPaymentadd {
+        margin-bottom: 10px;
+
+        .button {
+            font-size: 16px;
+            height: 2.7rem;
+            border-radius: 30px;
+        }
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .paddLeftSmall {
+        padding-left: 0;
+    }
+
+    .form-control {
+        width: 380px;
+    }
+
+    .stepsHeadings {
+        font-size: 20px;
+    }
+
+    .bookPadding {
+        padding-left: 15px;
+    }
+
+    .expDate {
+        width: 100%;
+    }
+
+    .holderName {
+        font-size: 12px;
+    }
+
+    .cardSelect {
+        font-size: 10px;
+    }
+
+    .inputHeadings {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 460px) {
+
+    // .loginButton {
+    //     width: 200px !important
+    // }
+    .discount {
+        padding-left: 10px
+    }
+
+    .referral_bonus {
+        padding-left: 10px
+    }
+
+    .nopadding {
+        padding: 0px !important
+    }
+
+    #mat-checkbox-1 label span {
+        font-size: 15px;
+    }
+
+    .default-text-mobile {
+        font-size: 10px;
+    }
+
+    .mobileButton {
+        text-align: center !important;
+        display: block !important;
+        width: auto !important;
+        float: none !important;
+    }
+}
+
+@media screen and (min-width: 461px) and (max-width: 767px) {
+}
+
+.addNewCard {
+    font-family: 'ProximaNova-Reg';
+}
+
+.promo-arrow-size {
+    font-size: 12px;
+}
+
+
+.promo-icon {
+    position: absolute;
+    top: 51px;
+    left: 450px;
+}
+
+#promo-input {
+    .mat-form-field-flex {
+        // border: 1px solid #f3f3f3;
+        border-bottom: none;
+
+        input {
+            height: 29px;
+            padding: 0 13px;
+        }
+
+        span label {
+            padding-left: 16px;
+            box-sizing: border-box;
+            padding-top: 10px;
+        }
+    }
+
+    .mat-form-field-underline .mat-form-field-ripple {
+        height: 0px !important;
+    }
+
+    .mat-form-field-infix {
+        padding: 0 !important;
+        border-top: 0.5em solid transparent;
+    }
+
+    .mat-form-field-wrapper {
+        padding: 0px !important;
+    }
+
+    .mat-form-field-underline {
+        height: 0px !important;
+        // background-color: #f3f3f3;
+    }
+
+    .rowPadding {
+        padding: 15px 0;
+    }
+
+    .mat-select-value-text {
+        span {
+            padding-left: 13px;
+        }
+    }
+}
+
+
+@media screen and (max-width: 800px) and (min-width: 300px) {
+    .btn-th-width {
+        min-width: 200px;
+    }
+
+    .th-width {
+        min-width: 100px;
+    }
+}
+
+.set-border {
+    border: 1px solid black !important;
+    padding-right: 50px !important;
+}
+
+.underline-red {
+    border-bottom: 2px solid red !important;
+}
+
+.text-align-class {
+    text-align: left !important;
+}
+
+label > input + .checkImage {
+    /* IMAGE STYLES */
+    cursor: pointer; // content: url('/assets/img/ic-no.svg')
+    background: url("/assets/img/ic-no.svg") no-repeat;
+    display: inline-block; // height: 41px;
+    // width: 34px;
+    height: 38px;
+    width: 37px;
+    padding: 18px;
+}
+
+label > input:checked + .checkImage {
+    /* (RADIO CHECKED) IMAGE STYLES */
+    background: url('/assets/img/ic-yes.svg') no-repeat; // background: url("/assets/img/ic-no.svg") no-repeat;
+    display: inline-block; // height: 41px;
+    // width: 34px;
+    height: 38px;
+    width: 37px;
+    padding: 18px;
+    margin-left: 89%;
+    margin-top: 8%;
+}
+
+label > input {
+    /* HIDE RADIO */
+    visibility: hidden;
+    -moz-appearance: none;
+    width: 40px;
+    height: 40px;
+    /* Makes input not-clickable */
+    position: absolute;
+    /* Remove input from document flow */
+}
+
+.datePayment {
+    color: #333e8e;
+    font-size: 14px;
+}
+
+.applyPromoMobile {
+    background-color: #ffffff;
+    height: 44px;
+    width: 100%;
+    outline: none;
+    margin-bottom: 20px;
+    padding: 0 0 0 4%;
+    border: 1px;
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.15) !important;
+    -webkit-appearance: none;
+}
+
+.cancelPromoBtn {
+    height: 46.9px;
+    border-radius: 22px;
+    border: solid 2px #e1134f;
+    background-color: #ffffff;
+    color: #e1134f;
+    font-size: 18px;
+    font-family: 'ProximaNova-Bold';
+    text-align: center;
+    width: 50%;
+    margin: 3px;
+}
+
+.applyPromoBtn {
+    font-size: 18px;
+    font-family: 'ProximaNova-Bold';
+    text-align: center;
+    background-color: $main-green;
+    height: 46.9px;
+    color: white;
+    width: 50%;
+    border-radius: 22px;
+    margin: 3px;
+}

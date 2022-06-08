@@ -1,0 +1,53 @@
+.reschedule-row {
+    min-height: 32px;
+    background-color: #5a5a5a;
+    color: white;
+    font-family: 'ProximaNova-Reg';
+    font-size: 16px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    justify-content: center;
+}
+
+.reschedule-text {
+    font-family: 'ProximaNova-Light';
+    font-size: 16px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: 0.4px;
+    text-align: center;
+    color: #34495e;
+    margin: auto;
+}
+
+.timeZoneMsg {
+    color: red !important;
+    font-size: 16px;
+    line-height: 1.4;
+    position: inherit;
+    text-align: center;
+    padding: 0 2%;
+    letter-spacing: 0.4px;
+    margin-bottom: 0;
+
+}
+
+@media only screen and (min-width: 2000px) {
+    .timeZoneMsg1 {
+        max-width: 80%;
+        padding: 0 2%;
+    }
+}
+
+.res-top-title {
+    min-height: 30px;
+    color: white;
+    margin: auto 0;
+    font-size: 16px;
+    padding: 5px
+}

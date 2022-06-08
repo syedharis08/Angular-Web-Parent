@@ -1,0 +1,157 @@
+<!-- change request from design change -->
+
+<div class="text-center session-all " id="dispute-detail" style="padding-bottom:3%;">
+    <div *ngIf="dispute && dispute !=undefined" class="container " style="padding-top:1%;">
+        <mat-card class="mt-2 mb-4 " style="box-shadow:none;border:1px solid #e6eaee;">
+            <mat-card-content style=" padding:2%; ">
+                <div class="row mt-4 ">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-left-address mt-2">
+                        <label class="status-title-orange"> Dispute Raised </label>
+                        <span *ngIf="dispute && dispute != undefined" class="status-title-orange capitalize">
+                            #{{dispute.disputeId ? dispute.disputeId : ''}} </span>
+                        <span *ngIf="dispute.createdAt && dispute.createdAt != undefined" class="status-title-date"> (
+                            {{dispute.createdAt | datex: "MMM. D, YYYY"}} | {{dispute.createdAt |  datex:"h:mmA"}} )
+                        </span>
+                    </div>
+                </div>
+                <div style="border-bottom:1px #e6eaee solid">
+                    <div class="row mt-4 ">
+                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 text-left-address order2Mobile">
+                            <label class="blue-heading "> Child:</label>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 text-left-address order2Mobile">
+                            <div *ngIf="dispute.studentId && dispute.studentId != undefined"
+                                 class="row  mobile-justify-left">
+                                <span class="booking-text ">
+                                    {{dispute.studentId.firstName ? dispute.studentId.firstName : ''}}
+                                    {{dispute.studentId.lastName ? ( ( dispute.studentId.lastName.substr(0, 1) ) + '.' ) : ''}}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 text-left-address order1Mobile">
+                            <div *ngIf="dispute.status && dispute.status != undefined">
+                                <span
+                                    [ngClass]="{'border-status': (dispute.status === 'RESOLVED'),'border-status-unresolved':(dispute.status === 'UNRESOLVED')}">
+                                    {{dispute.status}} </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-4 ">
+                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 text-left-address order3Mobile">
+                            <label class="blue-heading "> Tutor:</label>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 text-left-address ">
+                            <div *ngIf="dispute.tutorId && dispute.tutorId != undefined"
+                                 class="row  mobile-justify-left">
+                                <span class="booking-text ">
+                                    {{dispute.tutorId.firstName ? dispute.tutorId.firstName : ''}}
+                                    {{dispute.tutorId.lastName ? dispute.tutorId.lastName : 'N/A'}} </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-4 ">
+                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 text-left-address">
+                            <label class="blue-heading "> Session Date & Time:</label>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 text-left-address">
+                            <div *ngIf="dispute.bookingId && dispute.bookingId != undefined"
+                                 class="row  mobile-justify-left">
+                                <span class="booking-text"> {{startTime}}-{{endTime}} </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 text-left-address  ">
+                            <label class="blue-heading "> Subjects:</label>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 text-left-address">
+                            <div *ngIf="dispute.bookingId && dispute.bookingId != undefined"
+                                 class="row  mobile-justify-left">
+                                <span class="word-break booking-text" style="width:auto;">
+                                    <span style="color:#231f20; text-align:right;   letter-spacing: 0.4px;"
+                                          *ngFor="let subject of  dispute.bookingId.subjects;let i = index;let comma=last">
+                                        <span *ngFor="let subsubject of subject.subcategories;let last=last"
+                                              class="booking-text">
+                                            {{subsubject.name}}{{( last && comma ) ? '' : ', '}}</span>
+                                    </span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div style="border-bottom:1px #e6eaee solid">
+                    <div class="row mt-4 ">
+                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 text-left-address">
+                            <label class="blue-heading "> Reason for dispute:</label>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 text-left-address">
+                            <div *ngIf="dispute.reason && dispute.reason != undefined" class="row  mobile-justify-left">
+                                <span class="booking-text"> {{dispute.reason ? dispute.reason : 'N/A' }} </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-4 ">
+                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 text-left-address">
+                            <label class="blue-heading "> Comments:</label>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 text-left-address">
+                            <div *ngIf="dispute.additionalDetails && dispute.additionalDetails != undefined"
+                                 class="row  mobile-justify-left">
+                                <span class="booking-text">
+                                    {{dispute.additionalDetails ? dispute.additionalDetails : 'N/A'}} </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div style="border-bottom:1px #e6eaee solid">
+                    <div class="row mt-4">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-left-address">
+                            <label class="status-title-orange " style="padding-left:0px">Response from Sylvan</label>
+                        </div>
+                    </div>
+                    <div class="row mt-4 ">
+                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 text-left-address">
+                            <label class="blue-heading "> Method of Resolution:</label>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 text-left-address">
+                            <div *ngIf="dispute.reason && dispute.reason != undefined" class="row  mobile-justify-left">
+                                <span class="booking-text"> {{dispute.method ? dispute.method : ''}} </span>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row mt-4 " *ngIf="!dispute.bookingId.isBookingUseCredits">
+                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 text-left-address">
+                            <label class="blue-heading "> Total Charge:</label>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 text-left-address">
+                            <div *ngIf=" dispute.amount != undefined" class="row  mobile-justify-left">
+                                <span *ngIf="dispute.amount > 0"
+                                      class="booking-text"> ${{dispute.amount > 0 ? ( dispute.amount ).toFixed(2) : ''}}
+                                </span>
+                                <span *ngIf="dispute.amount == 0"
+                                    class="booking-text"> $0.00
+                              </span>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row mt-4 mb-4">
+                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 text-left-address">
+                            <label class="blue-heading "> Comment from Sylvan:</label>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 text-left-address">
+                            <div *ngIf="dispute.comment && dispute.comment != undefined "
+                                 class="row  mobile-justify-left">
+                                <span class="booking-text" style="word-wrap: break-word;">
+                                    {{dispute.comment ? dispute.comment : 'N/A'}} </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>

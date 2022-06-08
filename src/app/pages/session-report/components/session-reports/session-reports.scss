@@ -1,0 +1,73 @@
+.feedback-container {
+    background-color: #f2f4f5;
+    box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.11);
+    min-height: 600px;
+    padding-bottom: 1%;
+}
+
+.feedback-outer {
+    background-color: #ffffff;
+    box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.11);
+}
+
+.feedback-titles {
+    opacity: 0.6;
+    width: 50%;
+    font-family: 'ProximaNova-Light';
+    font-size: 15px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #0c0c0c;
+}
+
+.feedback-values {
+    width: 100%;
+    // text-transform: capitalize;
+    font-family: 'ProximaNova-Bold';
+    font-size: 15px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #34495e;
+}
+
+.view-feedback {
+    margin: auto;
+    font-family: 'ProximaNova-Bold';
+    font-size: 18px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: 0.3px;
+    text-align: right;
+    color: #f15d25;
+}
+
+.pt-6 {
+    padding-top: 2.5rem;
+}
+
+.pb-6 {
+    padding-bottom: 2.5rem;
+}
+
+@media screen and (min-width: 461px) and (max-width: 768px) {
+    .viewSessions {
+        display: inline-flex;
+        span {
+            margin-left: 25px;
+            margin-top: 10px;
+        }
+    }
+    .view-feedback {
+        font-size: 14px;
+    }
+}

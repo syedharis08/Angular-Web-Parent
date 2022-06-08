@@ -1,0 +1,94 @@
+@import "src/app/theme/sass/conf/variables";
+
+agm-map {
+    height: 300px;
+    width: 100%;
+}
+
+.middle {
+    display: -webkit-flex !important;
+    /* Safari */
+    -webkit-justify-content: center !important;
+    /* Safari 6.1+ */
+    display: flex;
+    justify-content: center;
+}
+
+#map {
+    height: 500px;
+    width: 100%;
+    position: relative;
+}
+
+#autocomplete {
+    // position: absolute;
+    // background-color: #ffffff;
+    // // box-shadow: 0 11px 15px 0 rgba(0, 0, 0, 0.14);
+    // border: none;
+    // padding-top: 4%;
+    // padding-right: 38%;
+    // padding-bottom: 5%;
+    outline: none;
+    position: absolute;
+    box-shadow: none !important;
+    border: none;
+    height: 100%;
+    width: 80%;
+}
+
+.autoComplete:focus {
+    border: none !important;
+    outline: none;
+}
+
+// .cdk-overlay-pane {
+//     width: 80vw;
+// }
+.searchBox {
+    top: 24px;
+    // right: 36%;
+    width: 300px;
+    height: 55px;
+    background-color: #ffffff;
+    box-shadow: none;
+    border: solid 1px #d2d2d2;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+.saveAddress {
+    width: 230px;
+    bottom: 8%;
+    // right: 43%;
+    min-height: 44px;
+    max-height: 44px;
+    position: absolute;
+    border-radius: 22px;
+    background-color: $main-green;
+    font-family: 'ProximaNova-Reg';
+    font-size: 18px;
+    // font-weight: bold;
+    letter-spacing: 0.3px;
+    text-align: center;
+    color: #ffffff;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+.gmnoprint {
+    display: none;
+}
+
+// .arrow-btn .fa-arrow-right {
+//     top: 15px !important;
+//     font-size: 16px !important;
+// }
+@media screen and (max-width: 767px) {
+    // .arrow-btn .fa-arrow-right {
+    //     top: 16px !important;
+    //     font-size: 16px !important;
+    // }
+}

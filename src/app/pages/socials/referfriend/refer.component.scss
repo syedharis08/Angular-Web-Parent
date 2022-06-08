@@ -1,0 +1,160 @@
+@import "../../../theme/sass/conf/conf";
+
+.refer-align {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+h2 {
+    text-align: center;
+    margin: 20px 0;
+    font-size: 35px;
+}
+
+#codeValue {
+    margin: 20px 0;
+    background-image: url(./assets/img/code-bg.png);
+    background-size: 100% 100%;
+    padding: 5px 25px;
+    background-repeat: no-repeat;
+    font-size: 24px;
+    line-height: 40px;
+    text-align: center;
+    color: #f15d25;
+}
+
+.padding-left-right-10 {
+    padding-left: 15%;
+    padding-right: 15%;
+}
+
+#codeText {
+    margin: 20px 0;
+    color: #34495e;
+    font-size: 20px;
+    line-height: 30px;
+    padding: 0 20%;
+    text-align: center;
+}
+
+#codeText2 {
+    color: #34495e;
+    // margin: 2% 0;
+    font-size: 16px;
+    line-height: normal;
+}
+
+span.copy {
+    margin: 20px 0;
+    background: $main-green;
+    font-size: 18px;
+    padding: 10px 20px;
+    border-radius: 20px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.referalList {
+    padding: 0px !important;
+
+    #codeText2 {
+        span {
+            margin-right: 20px;
+            margin-bottom: 30px;
+            display: inline-block;
+            width: 20px;
+            float: left;
+        }
+
+    }
+
+}
+
+.mobileScreenYes {
+    display: none !important
+}
+
+.mobileScreenNo {
+    display: block !important
+}
+
+@media (max-width: 460px) {
+    .padding-left-right-10 {
+        text-align: justify;
+        padding-left: 10%;
+        padding-right: 10%;
+    }
+    #codeText {
+        text-align: justify;
+        padding: 0px !important
+    }
+    .mobileScreenYes {
+        display: block !important
+    }
+    .mobileScreenNo {
+        display: none !important
+    }
+    .tooltip .tooltiptext {
+        top: -55px !important;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .tooltip .tooltiptext {
+        top: -49px;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .tooltip .tooltiptext {
+        top: -42px;
+    }
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    opacity: 10 !important;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 234px;
+    background-color: #fff;
+    color: #232f84;
+    text-align: center;
+    // border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    left: -112px;
+    z-index: 1;
+    bottom: 150%;
+    left: 50%;
+    margin-left: -116px;
+    // top:-32px;
+    padding-bottom: 35px;
+    padding-top: 17px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    box-shadow: 1px 5px 32px -6px #ccc;
+    font-family: 'ProximaNova-Reg';
+    font-weight: bolder;
+    font-size: 15px;
+}
+
+.tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #fff transparent transparent transparent;
+}
+
+.width100 {
+    width: 100%
+}

@@ -1,0 +1,38 @@
+<div class="row top-data" mat-dialog-title>
+    <button (click)="closeDialog()" style="border:none" class="close-btn" mat-button mat-dialog-close="true">
+        <img src="assets/img/close.png">
+    </button>
+</div>
+
+<mat-dialog-content>
+
+    <div class="myContainerReminder">
+
+        <div class="col-sm-12 col-md-12  col-xs-12 col-lg-12 modalInfo  my-modal-font">
+
+            <br>
+            <p>
+                Thank you for approving your recent session!
+            </p>
+            <br>
+            <div *ngIf="showData" style="min-height: 100px">
+                <p *ngIf="count > 0">
+                    As a reminder, {{Data.firstName |titlecase}} has {{count}} pending or upcoming
+                    session{{count > 1 ? 's' : ''}}. Keep
+                    up the great work!
+                </p>
+
+                <p *ngIf="count == 0">
+                    As a reminder, {{Data.firstName |titlecase}} has no pending or upcoming sessions. Book more
+                    today to stay on the path to success!
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="justify-content-center mb-4" style="text-align: center">
+        <button (click)="closeDialog()" class="loginButton">OK
+        </button>
+    </div>
+</mat-dialog-content>

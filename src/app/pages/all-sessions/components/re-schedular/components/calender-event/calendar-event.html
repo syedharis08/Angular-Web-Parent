@@ -1,0 +1,94 @@
+<div class="main-cal">
+    <div class="calendar-box" [ngStyle]="visbiltyUpdate && {'visibility': 'visible'}">
+
+        <div class="row calendar-header">
+            <div class="col-lg-9 col-md-9 col-sm-8 col-xs-8 cal-small-center">
+                <div class="calendar-header-right-box">
+                    <div class="calendar-right-content" [ngClass]="calendar.changeView=='day'?'cal-active':''" (click)="changeViewCal('day')">Day</div>
+                    <div class="calendar-right-content " [ngClass]="calendar.changeView=='week'?'cal-active':''" (click)="changeViewCal('week')">Week</div>
+
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 cal-small-center">
+                <div class="calendar-header-right-box">
+                    <!-- <button (click)="prvData()"> < </button>
+                   <button (click)="nextData()"> > </button> -->
+                </div>
+            </div>
+        </div>
+
+        <div class="cell-outer-day" *ngIf="calendar.changeView == 'day'">
+            <ng-container *ngIf="calendar.dayDataCal">
+                <div class="cell-inner-day cal-cell-border-left">
+                    <div class="cal-cell-head-day" style="line-height: 3">
+                        <div class="proxBold">{{ (calendar.dayDataCal && calendar.dayDataCal.fulldate != undefined) ? (calendar.dayDataCal.fulldate | datex: "dddd, MMM. D, YYYY") : '' }}</div>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+        <!-- week view -->
+        <div class="cell-outer-week" style="margin-left:18%" *ngIf="calendar.changeView == 'week'">
+            <div class="cell-inner-week" *ngFor="let data of calendar.weekDataCal; let i = index" [attr.data-index]="i" [ngClass]="i==0?'cal-cell-border-left':''">
+                <div class="cal-cell-head-week">
+                    <div>{{data.date}}</div>
+                    <div>{{data.day}}</div>
+                </div>
+            </div>
+        </div>
+        <div class="cal-body" [ngClass]="calendar.changeView=='day'?'calday':(calendar.changeView=='week'?'calweek':'calmonth')">
+            <div class="full-cal" id="scrollUpReschedule">
+                <div class="cal-left">
+                    <div class="cell-outer-side">
+                        <div class="cell-inner-side">
+                            <!-- <div class="cal-cell-head-side">
+
+                            </div> -->
+                            <div class="cal-cell-side" *ngFor="let item of calendarConst.timeAMPM">
+                                <div class="cell-margin">{{item}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cal-right">
+                    <div class="inner-right">
+                        <!--==========day view==============-->
+                        <div class="cell-outer-day" *ngIf="calendar.changeView == 'day'">
+                            <div class="cell-inner-day cal-cell-border-left">
+                                <!-- <div class="cal-cell-head-day">
+                                    <div>{{calendar.dayDataCal.date}}</div>
+                                    <div>{{calendar.dayDataCal.day}} &nbsp;</div>
+                                </div> -->
+                                <div class="cal-cell-day pointer" *ngFor="let item of calendar.dayDataCal.slot;let index = index" [attr.data-index]="index" [ngClass]="getClass(item.status, item._id)" (click)="showEvent(item,index, calendar.dayDataCal.slot, 0 , calendar)"></div>
+                            </div>
+                        </div>
+                        <!--==========week view==============-->
+                        <div class="cell-outer-week" *ngIf="calendar.changeView == 'week'">
+                            <div class="cell-inner-week" *ngFor="let data of calendar.weekDataCal; let i = index" [attr.data-index]="i" [ngClass]="i==0?'cal-cell-border-left':''">
+                                <!-- <div class="cal-cell-head-week">
+                                    <div>{{data.date}}</div>
+                                    <div>{{data.day}}</div>
+                                </div> -->
+
+                                <!-- <div *ngIf="checkWeekDay(data.day)"> -->
+                                <div class="cal-cell-week pointer" *ngFor="let item of data.slot let index = index;" [attr.data-index]="index" [ngClass]="getClass(item.status, item._id)" (click)="showEvent(item,index , data.slot, 1, data)"></div>
+                                <!-- </div>
+                                <div *ngIf="!checkWeekDay(data.day)"></div> -->
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="status-msg">
+        <ul>
+            <li class="statusMsgFont">Available</li>
+            <li class="statusMsgFont">Selected</li>
+            <li class="statusMsgFont">Busy</li>
+        </ul>
+    </div>
+</div>

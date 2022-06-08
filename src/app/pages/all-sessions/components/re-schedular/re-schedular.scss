@@ -1,0 +1,105 @@
+@import "../../../../theme/sass/conf/conf";
+
+.first.row {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    p {
+        width: 500px;
+        margin: 0 auto;
+        color: #222e82;
+        word-spacing: 1px;
+        line-height: 20px;
+    }
+}
+
+.second.row {
+    display: flex;
+    justify-content: center;
+    margin-top: 0%;
+    h2 {
+        font-size: 28px;
+        text-align: center;
+        font-weight: 100;
+        color: #222e82;
+        margin-bottom: 30px;
+        opacity: 0.7;
+    }
+    .calenderComponent,
+    .schedularComponent {
+        background: #f2f2f2;
+        padding: 20px;
+        margin: 14px;
+    }
+}
+
+.date-content.row {
+    display: flex;
+    justify-content: center;
+    padding: 30px 0;
+    font-size: 20px;
+    color: #231f20;
+    @media only screen and (max-width: 767px) {
+        font-size: 17px;
+    }
+}
+
+.third.row {
+    display: flex;
+    justify-content: center;
+    padding: 10px 0 25px 0;
+    button {
+        border-radius: 22px;
+        width: 281px;
+        background-color: $main-green;
+        color: white;
+        border: none;
+        // padding: 10px 25px 12px 35px;
+        font-size: 18px;
+        line-height: 16px;
+        height: 44px;
+        cursor: pointer;
+        .btn-arrow {
+            color: white;
+            position: relative;
+            top: 0px;
+            left: 10px;
+            .fa-arrow-right {
+                // position: absolute;
+                // left: 8px;
+                // top: 4px;
+                font-size: 15px;
+            }
+        }
+    }
+    button:disabled {
+        background: #c5c5c5;
+        cursor: initial;
+    }
+}
+
+.headerBooking {
+    margin-left: -22%;
+    margin-right: -22%;
+    background-color: #5a5a5a;
+    margin-bottom: 2%;
+    height: 25px;
+}
+
+.greenColor {
+    background: $main-green;
+}
+
+.headerContent {
+    padding: 4px;
+    display: flex;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #ffffff;
+}

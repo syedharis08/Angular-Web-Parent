@@ -1,0 +1,1209 @@
+@import "~normalize.css";
+@import "theme/theme";
+// @import "../../node_modules/primeng/resources/themes/omega/theme.css";
+// @import "theme/sass/primeng.min.scss";
+@import '~css-star-rating/scss/star-rating';
+
+@font-face {
+    font-display: swap;
+    font-family: 'ProximaNova-Reg';
+    src: url('../assets/fonts/ProximaNova-Reg.woff')
+}
+
+@font-face {
+    font-display: swap;
+    font-family: 'ProximaNova-Bold';
+    src: url('../assets/fonts/ProximaNova-Bold.woff')
+}
+
+@font-face {
+    font-display: swap;
+    font-family: 'ProximaNova-SemiBold1';
+    src: url('../b2a6341ae7440130ec4b4b186aff8413.woff2')
+}
+
+@font-face {
+    font-display: swap;
+    font-family: 'ProximaNova-SemiBold2';
+    src: url('../af7ae505a9eed503f8b8e6982036873e.woff2')
+}
+
+@font-face {
+    font-display: swap;
+    font-family: 'ProximaNova-SemiBold';
+    src: url('../assets/fonts/proxima-nova-semibold-webfont.woff')
+}
+
+@font-face {
+    font-family: 'JennaSue';
+    font-display: swap;
+    src: url('../assets/fonts/JennaSue.woff')
+}
+
+@font-face {
+    font-display: swap;
+    font-family: 'ProximaNova-Light';
+    src: url('../assets/fonts/ProximaNova-Light.woff')
+}
+
+// .comma:not(:last-child):after {
+//     content: ",";
+// }
+.fa-lg {
+    vertical-align: 0px;
+}
+
+// .overflow-check {
+//     max-width: 100%;
+//     overflow: auto;
+//     word-wrap: break-word;
+// }
+// .textOverflow {
+// text-overflow: ellipsis;
+// overflow: hidden;
+// display: block;
+// width: 400px;
+// height: 3rem;
+// line-height: 1.5rem;
+// white-space: nowrap;
+// }
+#filterSection {
+    .mat-form-field-placeholder {
+        width: 100%;
+        font-size: 14px;
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        color: #34495e;
+        font-family: 'ProximaNova-Reg';
+    }
+}
+
+.view-detail {
+    position: relative;
+    border-radius: 22px;
+    font-size: 16px;
+    // font-weight: bold;
+    font-family: 'ProximaNova-Reg';
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    // letter-spacing: 0.3px;
+    background-color: $main-green;
+    width: 165px !important;
+    // min-height: 44px;
+    color: white;
+    text-align: center;
+    height: 39px;
+}
+
+.view-detail-arrow {
+    position: absolute;
+    right: 10px;
+    top: 13px;
+}
+
+.dialogText {
+    text-align: center;
+    font-size: 22px;
+    font-family: 'ProximaNova-Reg';
+    font-weight: lighter;
+    color: #232f84;
+}
+
+.margin-auto {
+    margin: auto;
+}
+
+.mat-button-focus-overlay,
+.mat-button-ripple {
+    background-color: transparent;
+}
+
+.mat-expansion-panel {
+    box-shadow: none !important;
+}
+
+.mat-button .mat-button-focus-overlay {
+    background-color: transparent;
+}
+
+.error-message {
+    color: #e1134f !important;
+    text-align: left;
+}
+
+.myContainer {
+    padding-left: 15%;
+    padding-right: 15%;
+}
+
+.grey-text {
+    font-family: 'ProximaNova-Reg';
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.79;
+    letter-spacing: normal;
+    text-align: left;
+    color: #34495e;
+}
+
+.right-arrow {
+    position: absolute;
+    right: 30px;
+    top: 16.16px;
+    font-size: 14px;
+}
+
+.arrow-right-btn {
+    position: absolute;
+    margin-left: 80px;
+}
+
+// .arrow-btn {
+//     position: relative;
+//     font-weight: normal !important;
+//     .fa-arrow-right {
+//         position: absolute;
+//         right: 30px;
+//         top: 16.16px;
+//         font-size: 14px;
+//     }
+//     .fa-arrow-left {
+//         position: absolute;
+//         left: 30px;
+//         top: 16.16px;
+//         font-size: 14px;
+//     }
+// }
+.font-15 {
+    font-size: 15px !important;
+}
+
+.font-14 {
+    font-size: 14px !important;
+}
+
+.tutor-details-text {
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.81;
+    letter-spacing: normal;
+    text-align: left;
+    color: #34495e;
+}
+
+.expansion-height {
+    max-height: 50px !important;
+    height: 50px !important;
+}
+
+.font-18 {
+    font-size: 18px !important;
+}
+
+.font-30 {
+    font-size: 30px;
+}
+
+.mt-1px {
+    margin-top: 1px !important;
+}
+
+.font-28 {
+    font-size: 28px !important;
+}
+
+.proximanova-bold {
+    font-family: 'ProximaNova-Bold' !important;
+}
+
+.proximanova-light {
+    font-family: 'ProximaNova-Light' !important;
+}
+
+.proximanova-reg {
+    font-family: 'ProximaNova-Reg' !important;
+}
+
+.proximanova-semibold {
+    font-family: 'ProximaNova-SemiBold' !important;
+}
+
+.font-16 {
+    font-size: 16px !important;
+}
+
+.tutor-name {
+    color: #116DB4;
+    font-family: 'ProximaNova-Bold';
+    font-weight: bold;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+}
+
+.font-24 {
+    font-size: 24px;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.stepOneInput {
+    // padding-left: 2%;
+    background: inherit;
+    border: none !important;
+    font-family: 'ProximaNova-Reg';
+    font-size: 15px;
+    letter-spacing: 0.4px;
+    text-align: left;
+    color: #34495e !important;
+    border-radius: 0px;
+    box-shadow: none !important;
+}
+
+.mobile-text-center {
+    @media only screen and (max-width: 767px) {
+        text-align: center;
+    }
+}
+
+.mobile-justify-center {
+    @media only screen and (max-width: 767px) {
+        justify-content: center;
+    }
+}
+
+.mobile-justify-left {
+    // justify-content: left;
+    @media only screen and (max-width: 767px) {
+        justify-content: center;
+    }
+}
+
+.has-success {
+    border-bottom: 2px solid #232f84 !important;
+    box-shadow: none !important;
+}
+
+.mycontainer-fluid {
+    // padding-left: 5%;
+    // padding-right: 5%;
+    padding-bottom: 8%;
+    background-color: #f2f4f5;
+    min-height: 700px;
+    height: auto;
+}
+
+.breadcrumbResult {
+    position: absolute;
+    font-size: 15px;
+    letter-spacing: 2.0px;
+    color: darken($color: #f2f4f5, $amount: 10%);
+    font-family: 'ProximaNova-Light';
+    padding-left: 11.2%;
+    margin-top: -43px;
+    // @media only screen and (min-width: 768px) {
+    //     padding-left: 11.2%;
+    // }
+}
+
+.breadcrumb {
+    background-color: white; // min-height: 80px;
+    margin-top: 2%;
+    margin-left: 2%;
+    font-family: 'ProximaNova-Light';
+    font-size: 18px;
+    color: #34495e;
+    font-weight: 800;
+
+    a:not([href]):not([tabindex]) {
+        text-decoration: underline !important;
+    }
+
+    @media only screen and (max-width: 767px) {
+        font-size: 13px;
+    }
+}
+
+.breadcrumb-item.active {
+    font-family: 'ProximaNova-SemiBold';
+}
+
+.ml-4 {
+    margin-left: 0rem !important;
+}
+
+.mr-4 {
+    margin-right: 0rem !important;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+    content: '>' !important;
+}
+
+// .breadcrumb-item:active {
+//     font-family: 'ProximaNova-Light';
+//     font-size: 18px;
+//     color: darken($color: #34495e, $amount: 10%)
+// }
+.crossButton {
+    float: right;
+    display: flex;
+    margin-top: 0px;
+    color: #f15d25;
+
+    &:hover {
+        background-color: transparent;
+    }
+}
+
+.tutor-place-text {
+    color: #34495e;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: normal;
+    font-family: 'ProximaNova-Reg';
+}
+
+.pinkButton {
+    background-color: #e1134f;
+    color: white;
+    border-radius: 22px;
+    font-family: 'ProximaNova-Reg';
+    min-width: 200px;
+    min-height: 44px;
+    max-height: 44px;
+    max-width: 250px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.ngx-pagination .current {
+    background-color: #e1134f !important;
+}
+
+.ngx-pagination {
+    font-family: 'ProximaNova-Light';
+}
+
+.half-width-btn {
+    width: 50%;
+}
+
+.loginButton {
+    border-radius: 22px;
+    background-color: $main-green;
+    color: white;
+    border-radius: 22px;
+    font-family: 'ProximaNova-Reg';
+    min-width: 200px;
+    min-height: 44px;
+    max-height: 44px;
+    max-width: 300px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.mat-button {
+    background-color: white;
+}
+
+.mat-dialog-title {
+    background-color: white;
+}
+
+// .loginButton:disabled {
+//     background-color: #a9c594;
+// }
+.dropdown-toggle::after {
+    display: none !important;
+}
+
+.heading {
+    color: #232f84;
+    font-size: x-large;
+    text-align: left;
+    font-family: 'ProximaNova-Reg';
+    font-weight: 300;
+}
+
+.mat-tab-body-content {
+    overflow-x: hidden !important;
+}
+
+.table-display {
+    display: table;
+    width: 100%;
+    text-align: left;
+}
+
+.mat-dialog-container {
+    @media screen and (min-width: 768px) and (max-width: 1377px) {
+        height: auto;
+        overflow: scroll;
+    }
+}
+
+.mat-dialog-container {
+    background-color: #ffffff;
+    border-radius: 3px;
+    padding: 0px !important;
+
+    .mat-dialog-content {
+        margin: 0px;
+        min-width: 35vw;
+        background-color: #ffffff;
+        border-radius: 3px;
+        width: 100%;
+        max-width: 50vw; //box-shadow: 0 0 18px 0 rgba(0, 0, 0, 0.11);
+    }
+}
+
+.max-width {
+    // max-width: 1440px;
+    padding-left: 10%;
+    padding-right: 10%;
+    width: 100%;
+}
+
+.notification-family {
+    font-family: 'ProximaNova-Reg' !important;
+    font-style: normal !important;
+    font-size: 12px !important;
+    text-align: left !important;
+}
+
+.perPage {
+    margin: auto;
+    font-family: 'ProximaNova-Reg';
+    font-size: 15px;
+    color: #232f84;
+    line-height: 1.2
+}
+
+.inline-flx {
+    display: inline-flex;
+}
+
+.selectBox {
+    background-color: #ffffff;
+    border: solid 1px #e0e0e0;
+    height: 23px;
+    width: 50px;
+}
+
+.blue-heading {
+    font-family: 'ProximaNova-Light';
+    font-size: 16px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #116DB4;
+}
+
+// .capitalize {
+//     text-transform: capitalize;
+// }
+.status-msg ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin-top: 15px;
+    margin-bottom: 0;
+    list-style: none;
+
+    li {
+        font-size: 14px;
+        position: relative;
+        margin: 0 25px;
+    }
+
+    li:before {
+        content: ' ';
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        position: absolute;
+        background: #000000;
+        left: -30px;
+    }
+
+    li:nth-child(1):before {
+        background: #9acaea;
+    }
+
+    li:nth-child(2):before {
+        background: #232f84;
+    }
+
+    li:nth-child(3):before {
+        background: #f4f4f4;
+    }
+}
+
+.headings {
+    font-size: 30px;
+    font-family: 'ProximaNova-Bold';
+    color: #232f84;
+}
+
+.insideInput {
+    font-family: 'ProximaNova-Reg';
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+    text-align: left;
+    color: #232f84;
+    padding-left: 3%;
+    margin-top: 1%;
+    width: 100%;
+}
+
+// .rating.color-ok .star-container .star svg {
+//     fill: #d9ab28 !important;
+// }
+
+// #starRating2 {
+//     .star-container {
+//         margin-left: 0px !important;
+//     }
+//     .star {
+//         width: 28px !important;
+//         height: 28px !important;
+//         top: -2px !important;
+//         opacity: 1 !important;
+//     }
+// }
+
+// #starRating {
+//     .star {
+//         width: 28px !important;
+//         height: 28px !important;
+//     }
+// }
+
+.inputBox1 {
+    background-color: #ffffff;
+    border: solid 1px #e5e5e5;
+}
+
+.ui-slider-horizontal .ui-slider-handle {
+    top: -5px !important;
+    cursor: pointer !important;
+}
+
+.ui-slider-horizontal {
+    margin-right: 10px;
+    cursor: pointer !important;
+}
+
+.royal-blue-text {
+    color: #116DB4;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 2.0;
+}
+
+.underline-blue {
+    border-bottom: 2px solid #232f84 !important;
+}
+
+#browse-ratings {
+    .mat-checkbox-frame {
+        border-radius: 50%;
+    }
+
+    .mat-checkbox-checked.mat-accent .mat-checkbox-background {
+        border-radius: 50%;
+    }
+
+    .mat-checkbox-label {
+        display: inline-flex !important;
+    }
+}
+
+#filterSec {
+    .mat-form-field-placeholder {
+        font-size: 14px;
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        color: #34495e;
+        // width: 100%;
+        font-family: 'ProximaNova-Reg';
+    }
+
+    .mat-checkbox-layout {
+        vertical-align: top;
+        // display: block;
+    }
+
+    #sub {
+        .mat-checkbox-label {
+            width: 70px;
+            overflow: hidden;
+            word-wrap: break-word;
+            text-overflow: ellipsis;
+            display: contents;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+
+        // .mat-checkbox-layout {
+        //     display: contents;
+        // }
+        .mat-checkbox-inner-container {
+            margin-top: 5px !important;
+        }
+
+        // .mat-checkbox {
+        //     display: inline-flex;
+        // }
+    }
+
+    #browseSubjects {
+        .mat-checkbox-layout {
+            // cursor: inherit;
+            // align-items: baseline;
+            // vertical-align: middle;
+            // display: inline-flex;
+            white-space: unset !important;
+        }
+
+        .mat-expansion-panel-body {
+            overflow: hidden;
+            margin: 0 10px 16px;
+        }
+    }
+
+    // #stars {
+    //     .mat-expansion-panel-body {
+    //         // overflow: hidden;
+    //         margin: 0 10px 16px;
+    //     }
+    // }
+}
+
+.profile-text {
+    font-family: 'ProximaNova-Reg';
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.71;
+    letter-spacing: normal;
+    text-align: left;
+    color: #34495e;
+}
+
+.font-22 {
+    font-size: 22px !important;
+}
+
+.pinkText {
+    font-family: 'ProximaNova-Reg';
+    font-size: 16px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 2.0;
+    color: #e1134f;
+}
+
+.close-btn {
+    cursor: pointer !important;
+}
+
+.loginButton:hover,
+.loginButton:focus {
+    color: #ffffff;
+    text-decoration: none;
+    cursor: pointer;
+    // background: lighten(#92db59, 10%);
+;
+}
+
+.mat-checkbox-ripple {
+    left: 0px !important;
+    top: 0px !important;
+    right: 0px !important;
+    bottom: 0px !important;
+}
+
+.pinkButton:hover,
+.pinkButton:focus {
+    color: #ffffff;
+    text-decoration: none;
+    cursor: pointer;
+    cursor: pointer;
+    background: lighten(#e1134f, 10%);
+}
+
+.fa-lg {
+    font-size: 15px !important;
+    // line-height: 0.70em !important;
+}
+
+.edit {
+    background-color: #209e91;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    border-style: none;
+
+    &:hover .alt {
+        display: block;
+    }
+}
+
+.all {
+    width: 50px;
+    height: 50px !important;
+}
+
+// .fa {
+//     //color: white;
+//     font-size: 20px;
+// }
+
+.underline-red {
+    border-bottom: 2px solid red !important;
+}
+
+.has-input-error:focus {
+    box-shadow: none !important;
+}
+
+.alt {
+    display: none;
+}
+
+.edit {
+    position: relative;
+    cursor: pointer;
+    display: inline-block;
+    border-bottom: 1px dotted #666666;
+    /* If you want dots under the hoverable text */
+}
+
+a {
+    cursor: pointer;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.tooltip-inner {
+    margin-top: 5px !important;
+    background-color: #232f84 !important;
+    color: white;
+}
+
+.arrow {
+    // margin-top: 10px;
+    background-color: #232f84 !important;
+}
+
+.tooltip {
+    position: absolute !important;
+    // z-index: 4000 !important;
+
+}
+
+// .bs-tooltip-bottom {
+//     top: 30px !important;
+// }
+// .tooltip {
+//     top: 30px !important;
+// }
+// .show {
+//     top: 30px !important;
+// }
+
+/* Tooltip text */
+
+.edit .tooltiptext {
+    visibility: hidden;
+    width: 37px;
+    height: 30px;
+    background-color: #666666;
+    color: #fff;
+    text-align: center; //  padding: 2px 0;
+    border-radius: 3px;
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 1;
+}
+
+// @media screen and (min-width:1200px) and (max-width:1500px) {
+//     .star {
+//         margin-left: 0px !important;
+//         margin-right: 0px !important;
+//     }
+// }
+
+.text-left {
+    text-align: left;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.text-left-address {
+    text-align: left;
+    @media only screen and (max-width: 767px) {
+        text-align: center;
+    }
+}
+
+.text-right-address {
+    text-align: right;
+    @media only screen and (max-width: 767px) {
+        text-align: center;
+    }
+}
+
+
+/* Show the tooltip text when you mouse over the tooltip container */
+
+.edit:hover .tooltiptext {
+    visibility: visible;
+}
+
+.fa-3xCross {
+    font-size: 1.5em;
+}
+
+@media only screen and (min-width: 769px) and (max-width: 1024px) {
+    .view-detail {
+        min-width: 170px;
+    }
+}
+
+// .mat-dialog-title .button {
+//     background-color: white
+// }
+@media only screen and (max-width: 767px) {
+    // .view-detail {
+    //     font-size: 16px !important;
+    // }
+    // .loginButton {
+    //     font-size: 16px !important;
+    // }
+    .padding-l-r {
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+    }
+    .mat-dialog-container {
+        // overflow: visible !important;
+        max-height: 80vh;
+
+        .mat-dialog-content {
+            max-width: 100vw; //box-shadow: 0 0 18px 0 rgba(0, 0, 0, 0.11);
+        }
+    }
+    .pagination {
+        margin-top: 10px;
+        display: -webkit-box;
+    }
+    .headings {
+        font-size: 25px;
+    }
+    .dialogText {
+        font-size: 20px;
+    }
+    .crossButton {
+        margin-right: -28px;
+        margin-top: -5px;
+    }
+    // .loginButton {
+    //     border-radius: 12px;
+    //     font-size: 10px;
+    //     height: 30px;
+    //     width: 150px;
+    //     min-width: 120px;
+    // }
+    .mycontainer-fluid {
+        // padding-left: 4%;
+        // padding-right: 4%;
+        padding-bottom: 4%;
+    }
+    .myContainer {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    // .pinkButton {
+    //     background-color: #e1134f;
+    //     color: white;
+    //     border-radius: 12px;
+    //     font-family: 'ProximaNova-Reg';
+    //     font-size: 10px;
+    //     height: 30px;
+    //     min-height: 32px;
+    //     min-width: 130px;
+    //     width: 147px;
+    // }
+}
+
+// #grades,
+// #sub {
+//     .mat-checkbox-frame {
+//         border-radius: 50%;
+//         border-color: #f0f0f0;
+//     }
+//     .mat-checkbox-checked.mat-accent .mat-checkbox-background {
+//         border-radius: 50%;
+//     }
+// }
+#stars {
+    .mat-radio-container {
+        width: 12px;
+        height: 12px;
+    }
+
+    .mat-expansion-panel-body {
+        // overflow: hidden;
+        margin: 0 10px 16px;
+    }
+}
+
+button {
+    border: none;
+    outline: none;
+    background: none;
+}
+
+.fa-size {
+    font-size: 15px;
+}
+
+.mt-4_0 {
+    margin-top: 4.0rem;
+}
+
+.common-btn {
+    max-width: 300px;
+    width: 100%;
+    font-size: 18px;
+    min-height: 44px;
+    max-height: 44px;
+    border-radius: 22px;
+    background-color: $main-green;
+    color: #ffffff;
+    font-family: 'ProximaNova-Reg';
+}
+
+@media(min-width: 1000px) {
+    .familyWidth {
+        max-width: 60vw;
+        min-width: 45vw;
+    }
+    .innerDetail {
+        max-width: 90%;
+    }
+}
+
+.back-btn {
+    max-width: 281px;
+    width: 100%;
+    font-size: 18px;
+    min-height: 44px;
+    max-height: 44px;
+    cursor: pointer;
+    border-radius: 22px;
+    background-color: $main-green;
+    color: #ffffff;
+    font-family: 'ProximaNova-Reg';
+    @media only screen and (max-width: 767px) {
+        // max-width: inherit;
+        width: 100%;
+    }
+}
+
+.tooltip {
+    position: absolute !important;
+    z-index: 9999 !important;
+    pointer-events: none;
+
+}
+
+::ng-deep .ngb-tp-minute input {
+    width: 50px !important;
+}
+
+::ng-deep .dropdown-backdrop {
+    position: static !important;
+}
+
+//progess bars
+::ng-deep .progress .progress-bar {
+    background-color: #d9ab28 !important;
+}
+
+//  #starRatingDown
+// {
+//     .star {
+//         opacity: 1 !important;
+//         top: -3px !important;
+//     }
+// }
+
+// ::ng-deep .star i {
+//     color: #d9ab28 !important;
+//     font-size: 19px !important;
+// }
+// ::ng-deep .rating.color-negative .star-container .star {
+//     svg {
+//       fill:  #d9ab28 !important;
+//     }
+//     i {
+//       color:  #d9ab28;;
+//     }
+//   }
+
+//   ::ng-deep .rating.color-ok .star-container .star {
+//     svg {
+//         fill:  #d9ab28 !important;
+//     }
+//     i {
+//         color: #d9ab28 !important;
+//     }
+//   }
+
+//   ::ng-deep .rating.color-positive .star-container .star {
+//     svg {
+//         fill:  #d9ab28 !important;
+//     }
+//     i {
+//         color: #d9ab28 !important;
+
+//     }
+//   }
+
+//   ::ng-deep .rating.color-default .star-container .star {
+//     svg {
+//         fill:  #d9ab28 !important;
+//     }
+//     i {
+//       color: #d9ab28 !important;
+//     }
+//   }
+//   ::ng-deep .star.disabled, .rating.disabled .star-container .star {
+//     opacity: 1 !important;
+// }
+
+
+.review-text {
+    color: #34495e;
+    opacity: 0.4;
+    margin-top: 4.5px;
+    margin-left: 6px;
+    font-family: 'ProximaNova-Reg';
+    font-size: 16px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+}
+
+.desktop-icons-l {
+    text-align: right !important;
+}
+
+.desktop-icons-r {
+    text-align: left !important;
+    font-size: 17px;
+}
+
+@media only screen and (max-width: 467px) {
+    .desktop-icons-l {
+        margin-top: 3px;
+    }
+}
+
+//
+
+.red-btn {
+    margin: 15px 10px;
+    border-radius: 22px;
+    background-color: #e1134f;
+    color: white;
+    border-radius: 22px;
+    font-family: 'ProximaNova-Reg';
+    min-height: 44px;
+    max-height: 44px;
+    font-size: 18px;
+    cursor: pointer;
+    padding: 0px 26px;
+}
+
+.main-green-color {
+    color: $main-green;
+}
+
+.green-btn {
+    margin: 15px 10px;
+    border-radius: 22px;
+    background-color: $main-green;
+    color: white;
+    border-radius: 22px;
+    font-family: 'ProximaNova-Reg';
+    min-height: 44px;
+    max-height: 44px;
+    font-size: 18px;
+    cursor: pointer;
+    padding: 0px 26px;
+}
+
+.mobileBtn .red-btn {
+    font-size: 15px;
+    min-width: 255px;
+}
+
+.mobileBtn .green-btn {
+    font-size: 15px;
+    min-width: 255px;
+}
+
+.big-modal-font {
+    font-size: 27px !important;
+}
+
+.my-modal-font {
+    font-size: 18px !important;
+}
+
+.top-data {
+    float: right;
+    padding: 0;
+    margin-bottom: 0
+}
+
+.card-image{
+    width: 39px !important;
+}
+
+.my-disable-btn{
+        background: #afafaf;
+}
+
+.open-link{
+    color: #116DB4 !important;
+}
+

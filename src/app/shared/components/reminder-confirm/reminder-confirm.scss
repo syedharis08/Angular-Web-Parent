@@ -1,0 +1,19 @@
+.myContainerReminder {
+    width: 685px;
+    padding: 0 40px 0 !important;
+    text-align: center;
+    @media only screen and (max-width: 769px) {
+        width: auto;
+        padding: 1%;
+    }
+}
+
+.modalInfo {
+    text-align: center;
+    color: #232f84;
+}
+
+.modalInfo p {
+    font-size: 22px;
+}
+

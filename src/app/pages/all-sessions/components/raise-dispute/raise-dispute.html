@@ -1,0 +1,50 @@
+<div style="float:right;padding:0px;margin-bottom:0px" class="row" mat-dialog-title>
+    <button (click)="closeDialog()" style="border:none" class="close-btn" mat-button mat-dialog-close="true">
+            <img src="assets/img/close.png">
+        </button>
+</div>
+<mat-dialog-content>
+    <!-- <div style="float:right" mat-dialog-title>
+            <button (click)="closeDialog()" style="border:none" mat-button mat-dialog-close="true">
+                    <i class="fa fa-times fa-fw fa-3xCross crossButton" aria-hidden="true"> </i>
+                </button>
+        </div> -->
+    <div style="padding-left:15%;padding-right:15%;" class="padding-l-r mb-4 mr-4 ml-4">
+        <h2 class="headings text-center" *ngIf='!disputeRaised'>Raise a Dispute</h2>
+        <h2 class="headings text-center" *ngIf='disputeRaised'>Dispute Raised</h2>
+
+        <div class="col-sm-12  col-md-12  col-xs-12 col-lg-12 mt-4 mb-4" *ngIf='disputeRaised'>
+            Your dispute reference number is {{caseId}}. We apologize that you’ve had to raise a dispute! We’ll get back to you within 48 hours.
+        </div>
+
+        <div id="disputeDialog" class="row flex mt-4 mb-2" style="width:100%;margin:0px" *ngIf='!disputeRaised'>
+
+            <mat-form-field *ngIf="disputereasons != undefined" class='raisedispute'>
+                <mat-select placeholder="Select Reason"  [formControl]="reasonValue"  required>
+                    <mat-option *ngFor="let reason of disputereasons" [value]="reason.text">
+                        {{reason.text}}
+                    </mat-option>
+                </mat-select>
+                <mat-error *ngIf="reasonError">Please choose dispute reason</mat-error>
+            </mat-form-field>
+        </div>
+        <div class="row flex freetext additionalDetailDiv mt-4 mb-2" *ngIf='!disputeRaised'>
+            <label class="additionalDetailLabel">Additional Details</label>
+            <textarea maxlength="750" class="textareaContact" [(ngModel)]="message" placeholder="Please type your message here..."></textarea>
+        </div>
+
+        <div class="flex row mt-4 mb-4">
+            <button *ngIf='!disputeRaised' (click)="sendContactTutor()" class="pinkButton half-width-btn arrow-btn">Submit
+                    <!-- <span style="color:white;margin-right:6px;float:right"> -->
+                        <i class="fa fa-lg fa-arrow-right" aria-hidden="true"></i>
+                    <!-- </span> -->
+                </button>
+            <button *ngIf='disputeRaised' (click)="closeIt()" class="pinkButton half-width-btn arrow-btn">OK
+                    <!-- <span style="color:white;margin-right:6px;float:right"> -->
+                        <i class="fa fa-lg fa-arrow-right" aria-hidden="true"></i>
+                    <!-- </span> -->
+                </button>
+        </div>
+
+    </div>
+</mat-dialog-content>

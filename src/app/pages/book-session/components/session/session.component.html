@@ -1,0 +1,851 @@
+<div class="container mobileDesign">
+    <div class="heading text-center">
+        <h1 class="font-30 mt-4 proximanova-semibold">{{sessionHeading}}</h1>
+    </div>
+    <div [ngClass]="{'mt-6':(web==true)}">
+        <mat-horizontal-stepper [linear]="false" #stepper class="mb-2">
+            <mat-step [editable]="edit1" [completed]="complete1" [stepControl]="form">
+
+                <form [formGroup]="form" *ngIf="parentData && parentData !=undefined">
+                    <div *ngIf="!web" id="childMat" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt-6">
+                        <label class="session-title proximanova-light"> Select a child </label>
+                        <a (click)="addChild()" class="mr-4 addMore"
+                           style="float:right;font-family: 'ProximaNova-Light'; font-size:16px;color: #34495e;display:block;cursor: pointer; color: #ee6239; padding-top: 10px;">
+                            <img src="/assets/img/ic-add.svg"> <span *ngIf="web">Add</span> </a>
+                        <div id="childd"
+                             [ngClass]="{'underline-red': ( (form.controls['child'].errors?.required) && (!form.controls['child'].pristine||  submitted) ) }">
+                            <div class="session-border session-border-new" #panel>
+
+                                <mat-chip-list [formControl]="child"
+                                               *ngIf="parentData.students && parentData.students !=undefined&& parentData.students.length>0"
+                                               id="chips" #chipList>
+                                    <mat-chip style="position: relative; height: 70px;"
+                                              [ngStyle]="{'background': child.selected || (sessionService.selectedChild && sessionService.selectedChild._id !=undefined && sessionService.selectedChild !=undefined  && sessionService.selectedChild._id === child.data._id)  ? '#227B14' : '' }"
+                                              *ngFor="let child of children" [selected]="child.selected"
+                                              [removable]="true"
+                                              (click)="select(children, child)" (remove)="remove(child)">
+                                        <!-- <span>
+                                            <span class="session-child-name"
+                                                [ngStyle]="{'color': child.selected || (sessionService.selectedChild && sessionService.selectedChild !=undefined  && sessionService.selectedChild._id !=undefined && sessionService.selectedChild._id === child.data._id)  ? '#ffffff' : '' }"
+                                                style="margin-right:5px"> {{child.data? child.data.firstName :'' }} {{(child.data && child.data.lastName) ?
+                                            (child.data.lastName.substr(0,1) +'.') : ''}} </span>
+                                            <br>
+                                            <span class="grade-color"
+                                                [ngStyle]="{'color': child.selected || (sessionService.selectedChild && sessionService.selectedChild !=undefined && sessionService.selectedChild._id !=undefined && sessionService.selectedChild._id === child.data._id)   ? '#ffffff' : '' , opacity: child.selected || (sessionService.selectedChild && sessionService.selectedChild !=undefined && sessionService.selectedChild._id !=undefined && sessionService.selectedChild._id === child.data._id)   ? '0.8' : '0.3' }">
+                                                Grade Level &nbsp; </span>
+                                            <span class="grade-text"
+                                                [ngStyle]="{'color': child.selected || (sessionService.selectedChild && sessionService.selectedChild !=undefined && sessionService.selectedChild._id !=undefined && sessionService.selectedChild._id === child.data._id)? '#ffffff' : '' }">
+                                                {{(child.data && child.data.gradeLevel) ? child.data.gradeLevel : ''}}</span>
+
+                                        </span> -->
+                                        <span style="margin-top: 14px; max-width:85%;margin-right:5px; display: block;"
+                                              class="session-child-name"
+                                              [ngStyle]="{'color': child.selected || (sessionService.selectedChild && sessionService.selectedChild !=undefined  && sessionService.selectedChild._id !=undefined && sessionService.selectedChild._id === child.data._id)  ? '#ffffff' : '' }">
+                                            {{child.data ? child.data.firstName : '' }} {{(child.data && child.data.lastName) ?
+                                            (child.data.lastName.substr(0, 1) + '.') : ''}} </span>
+                                        <div
+                                            [ngStyle]="{'background': child.selected || (sessionService.selectedChild && sessionService.selectedChild !=undefined  && sessionService.selectedChild._id !=undefined && sessionService.selectedChild._id === child.data._id)  ? '#6EAD3D' : '' }"
+                                            class="innerCircle">
+                                            <span
+                                                [ngStyle]="{'color': child.selected || (sessionService.selectedChild && sessionService.selectedChild !=undefined  && sessionService.selectedChild._id !=undefined && sessionService.selectedChild._id === child.data._id)  ? '#ffffff' : '' }"
+                                                class="innerCirlceContent">{{child.data.gradeLevel}}</span>
+                                            <span
+                                                [ngStyle]="{'color': child.selected || (sessionService.selectedChild && sessionService.selectedChild !=undefined  && sessionService.selectedChild._id !=undefined && sessionService.selectedChild._id === child.data._id)  ? '#ffffff' : '' }"
+                                                class="innerCirlceContentSmall">Grade</span>
+                                        </div>
+                                    </mat-chip>
+
+                                </mat-chip-list>
+                                <a *ngIf="hideArrow" class=" hidden-sm-down  mt-2" id="left-side-grade"
+                                   (click)="shiftLeft()"
+                                   style="float:left;font-family: 'ProximaNova-Light'; font-size:16px;color: #227B14;display:block;cursor:pointer;">
+                                    <i class="fa fa-lg fa-arrow-left" aria-hidden="true"></i>
+                                </a>
+                                <a id="right-side-grade" *ngIf="children.length > 3" (click)="shiftRight()"
+                                   class="mr-4  hidden-sm-down mt-2"
+                                   style="float:right;font-family: 'ProximaNova-Light'; font-size:16px;color: #227B14;display:block;cursor:pointer;">
+                                    <i class="fa fa-lg fa-arrow-right" aria-hidden="true"></i>
+                                </a>
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div *ngIf="web" id="childMat" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt-6">
+                        <label class="session-title proximanova-light"> Select a child </label>
+                        <a (click)="addChild()" class="mr-4 addMore"
+                           style="float:right;font-family: 'ProximaNova-Light'; font-size:16px;color: #34495e;display:block;cursor: pointer; color: #ee6239; padding-top: 10px;">
+                            <img src="/assets/img/ic-add.png"> Add </a>
+                        <div id="childd"
+                             [ngClass]="{'underline-red': ( (form.controls['child'].errors?.required) && (!form.controls['child'].pristine||  submitted) ) }">
+                            <div class="session-border session-border-new" #panel>
+
+                                <!--                                {{child?.value |json}}-=-=-=-->
+                                <mat-chip-list [formControl]="child"
+                                               *ngIf="parentData.students && parentData.students !=undefined&& parentData.students.length>0"
+                                               id="chips" #chipList>
+                                    <!--                                        -->
+                                    <mat-chip *ngFor="let child of children" [selected]="child.selected"
+                                              [removable]="true"
+                                              [ngStyle]="{'background': child.selected || (sessionService.selectedChild && sessionService.selectedChild._id !=undefined && sessionService.selectedChild !=undefined  && sessionService.selectedChild._id === child.data._id)  ? '#227B14' : '' }"
+                                              (click)="select(children, child)" (remove)="remove(child)">
+
+                                        <!--                                        {{child.selected}}-->
+                                        <span>
+                                            <span class="session-child-name"
+                                                  [ngStyle]="{'color': child.selected || (sessionService.selectedChild && sessionService.selectedChild !=undefined  && sessionService.selectedChild._id !=undefined && sessionService.selectedChild._id === child.data._id)  ? '#ffffff' : '' }"
+                                                  style="margin-right:5px"> {{child.data ? child.data.firstName : '' }} {{(child.data && child.data.lastName) ?
+                                                (child.data.lastName.substr(0, 1) + '.') : ''}} </span>
+                                            <!-- <span class="lineBreak"></span> -->
+                                            <br>
+                                            <span class="grade-color"
+                                                  [ngStyle]="{'color': child.selected || (sessionService.selectedChild && sessionService.selectedChild !=undefined && sessionService.selectedChild._id !=undefined && sessionService.selectedChild._id === child.data._id)   ? '#ffffff' : '' , opacity: child.selected || (sessionService.selectedChild && sessionService.selectedChild !=undefined && sessionService.selectedChild._id !=undefined && sessionService.selectedChild._id === child.data._id)   ? '0.8' : '0.3' }">
+                                                Grade Level &nbsp; </span>
+                                            <span class="grade-text"
+                                                  [ngStyle]="{'color': child.selected || (sessionService.selectedChild && sessionService.selectedChild !=undefined && sessionService.selectedChild._id !=undefined && sessionService.selectedChild._id === child.data._id)? '#ffffff' : '' }">
+                                                {{(child.data && child.data.gradeLevel) ? child.data.gradeLevel : ''}}</span>
+
+                                        </span>
+
+                                        <mat-icon matChipRemove *ngIf="removable"></mat-icon>
+                                    </mat-chip>
+
+                                </mat-chip-list>
+                                <a *ngIf="hideArrow" class=" hidden-sm-down  mt-2" id="left-side-grade"
+                                   (click)="shiftLeft()"
+                                   style="float:left;font-family: 'ProximaNova-Light'; font-size:16px;color: #227B14;display:block;cursor:pointer;">
+                                    <i class="fa fa-lg fa-arrow-left" aria-hidden="true"></i>
+                                </a>
+                                <a id="right-side-grade" *ngIf="children.length > 3" (click)="shiftRight()"
+                                   class="mr-4  hidden-sm-down mt-2"
+                                   style="float:right;font-family: 'ProximaNova-Light'; font-size:16px;color: #227B14;display:block;cursor:pointer;">
+                                    <i class="fa fa-lg fa-arrow-right" aria-hidden="true"></i>
+                                </a>
+
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div id="addAddress" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt-6">
+                        <label class="session-title proximanova-light"> Where would you like to hold the session?
+                        </label>
+                        <div
+                            [ngClass]="{'underline-red': ( (form.controls['address'].errors?.required) && (!form.controls['address'].pristine||  submitted) ) }">
+                            <div id="addressMat" class="session-border session-border-new">
+                                <div style="display:flex;">
+                                    <mat-chip-list style="overflow-x:hidden;" [formControl]="address"
+                                                   *ngIf="addresses && addresses !=undefined" id="chipsAddress">
+                                        <!-- //forOnlineBooking -->
+
+                                        <!--                                        {{onlineBookingTab}}1-->
+                                        <mat-chip *ngIf="onlineBookingTab"
+                                                  (click)="selectAddress(addresses,  addresses[0], true)"
+                                                  [ngStyle]="{'background': (addresses[0]?.selected && onlineBooking) || sessionService?.onlineBooking     ? '#227B14' : '' }">
+                                            <span class="session-child-name" [ngStyle]="{'color':  (addresses[0]?.selected && onlineBooking) || sessionService?.onlineBooking
+                                           ? '#ffffff' : '' }">
+                                                <span>
+                                                </span>Online</span>
+                                        </mat-chip>
+
+                                        <ng-container *ngIf="!showNationWide">
+                                            <mat-chip
+                                                [ngStyle]="{'background': (address.selected  || (sessionService.selectedAddress_id && sessionService.selectedAddress_id !=undefined && sessionService.selectedAddress_id === address.data._id)) && !onlineBooking      ? '#227B14' : '' }"
+                                                *ngFor="let address of addresses" [selected]="address.selected"
+                                                (selectionChange)="chipSelectionChangesAddress($event, address)"
+                                                [removable]="true" (click)="selectAddress(addresses, address,false)"
+                                                (remove)="removeAddress(address)">
+
+                                            <span class="session-child-name" [ngStyle]="{'color': (address.selected || (sessionService.selectedAddress_id && sessionService.selectedAddress_id !=undefined && sessionService.selectedAddress_id === address.data._id))  && !onlineBooking
+                                     ? '#ffffff' : '' }"> {{address.data ? address.data.label : '' }} </span>
+                                            </mat-chip>
+
+
+                                            <mat-chip (click)="addNewAddress()"
+                                                      *ngIf="userData?.data?.marketData?.marketName !='Nationwide'">
+                                            <span class="add-new-address">
+                                                <span>
+                                                    <i class="fal fa-plus fa fa2x"></i>
+                                                </span> Add new address</span>
+                                            </mat-chip>
+                                        </ng-container>
+
+                                    </mat-chip-list>
+
+                                </div>
+                                <div *ngIf="addresses && addresses !=undefined && clickedAddress"
+                                     style=" padding-left:2%;margin-top:1%;">
+                                    <span class="address-text capitalize">
+                                        <span>
+                                            <img
+                                                src="/assets/img/loc.png"> {{(checkedaddress?.data && checkedaddress?.data?.addressLine1) ? checkedaddress?.data?.addressLine1
+                                            : ''}} </span>
+                                    </span>
+
+                                    <span class="address-text capitalize" style="padding-left:2.2%;"
+                                          *ngIf="checkedaddress?.data?.addressLine2"> <br> {{(checkedaddress?.data && checkedaddress?.data?.addressLine2 && checkedaddress?.data?.addressLine2
+                                        != undefined) ? checkedaddress?.data?.addressLine2 : ''}} </span>
+
+                                    <span class="address-text capitalize" style="padding-left:2.2%;"> <br>
+                                        {{(checkedaddress?.data && checkedaddress?.data?.city) ? (checkedaddress?.data?.city + ',') : ''}}
+                                        {{(checkedaddress?.data && checkedaddress?.data?.state) ? checkedaddress?.data?.state : ''}}
+                                        {{(checkedaddress?.data && checkedaddress?.data?.zipCode) ? checkedaddress?.data?.zipCode :
+                                            ''}}
+                                    </span>
+                                </div>
+                                <a *ngIf="hideArrowAddress" class="mt-2 hidden-sm-down" id="prv-testimonialw"
+                                   (click)="shiftLeftAddress()"
+                                   style="float:left;font-family: 'ProximaNova-Light'; font-size:16px;color: #227B14;display:block;cursor:pointer">
+                                    <i class="fa fa-lg fa-arrow-left" aria-hidden="true"></i>
+                                </a>
+                                <a id="prv-testimonial" *ngIf="addresses?.length > 3" (click)="shiftRightAddress()"
+                                   class="mr-4 mt-2 hidden-sm-down"
+                                   style="float:right;font-family: 'ProximaNova-Light'; font-size:16px;color: #227B14;display:block;cursor:pointer">
+                                    <i class="fa fa-lg fa-arrow-right" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 mt-4">
+                        <p class="text-center" style="color:#222e82; font-size: 15px;"
+                           *ngIf="onlineBooking && onlineBookingTab">Session will be delivered online. The address for
+                            the session will be set as your home address.</p>
+                    </div>
+                    <div class="col-12 mt-6">
+                        <mat-checkbox [formControl]="checkFlexibility">
+                            <span class="proximanova-light" style="white-space: normal; font-size: 19px; "> Check here
+                                if you are flexible on your session
+                                location.</span>
+                        </mat-checkbox>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt-6">
+                        <label class="session-title proximanova-light"> Select Subjects </label>
+                        <a (click)="addSubject()" class="mr-4 addMore"
+                           style="float:right;font-family: 'ProximaNova-Light'; font-size:16px;color: #34495e;display:block;cursor: pointer; color: #ee6239; padding-top: 10px;">
+                            <img src="/assets/img/ic-add.svg"> <span *ngIf="web">Add</span> </a>
+                        <div
+                            [ngClass]="{'underline-red': ( (form.controls['subjectControl'].errors?.required) && (!form.controls['subjectControl'].pristine||  submitted) ) }">
+                            <div class="session-border session-border-new">
+                                <mat-chip-list [formControl]="subjectControl" [multiple]="true" *ngIf="subjectsAdded "
+                                               id="subjectsChip">
+                                    <mat-chip [ngStyle]=" { 'background': true ? '#227B14' : '' } "
+                                              *ngFor="let subject of subjectsAdded;let i=index " [selected]="true "
+                                              [removable]="true ">
+
+                                        <span class="address-text subjectHeader" style="color:#ffffff ">
+                                            {{(subject && subject.subCategoryName) ? subject.subCategoryName : '' }}
+                                        </span>
+                                        <span (click)="removeSubject(subject)" class="ml-4 new-ml-4">
+                                            <i class="fa fa-times" style="  color: #f15d25;font-size:15px;"
+                                               aria-hidden="true"></i>
+                                        </span>
+                                    </mat-chip>
+
+                                </mat-chip-list>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt-6 ">
+                        <label class="session-title proximanova-light "> Tell your tutor more about your child and his
+                            or her tutoring needs </label>
+                        <div class="session-border  session-border-new session-padding">
+
+                            <textarea maxlength="400" [formControl]="childInfo " class="child-detials-text "
+                                      placeholder="Please specify any additional requirements or instructions. ">
+                            </textarea>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt-6">
+                        <label class="session-title proximanova-light ">How many sessions would you like to
+                            request?</label>
+                        <div class="session-border  session-border-new session-padding1 fix-height">
+                            <div class=" mySelectOption">
+                                <label for="sessionLength" class="insideInput"></label>
+                                <mat-select class="disabledText" [formControl]="sessionLength"
+                                            (change)="sessionLengthValue($event)"
+                                            [ngClass]="{'has-input-error': (!sessionLength.valid && (sessionLength.touched || submitted)),'has-success': (sessionLength.valid && sessionLength.touched)}">
+                                    <mat-option disabled value="select"> Choose Session</mat-option>
+                                    <mat-option [value]="data" *ngFor="let data of sessionDropDownData">
+                                        {{data}}
+                                    </mat-option>
+                                </mat-select>
+                                <div class="error-message sub-little-text"
+                                     *ngIf="form.controls['sessionLength'].errors?.required && form.controls['sessionLength'].dirty">
+                                    Please select option
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt-6">
+                        <label class="session-title proximanova-light"> Please choose the session length (in hours)
+                        </label>
+                        <div id="slide" class="session-border  session-border-new" style="padding-top:0px;">
+
+                            <ng-container>
+                                <mat-slider [formControl]="duration" style="width:100%" thumbLabel tickInterval="1"
+                                            min="0.5" max="3" step="0.5" (change)="durationHours($event)"
+                                            [disabled]="isRateChargeSuppress">
+                                </mat-slider>
+                                <label class="mr-10 mt-4"> 0.5 </label>
+                                <label class="mr-10 mt-4"> 1 </label>
+                                <label class="mr-10 mt-4"> 1.5 </label>
+                                <label class="mr-10 mt-4"> 2 </label>
+                                <label class="mr-10 mt-4"> 2.5 </label>
+                                <label class=" mt-4"> 3 </label>
+                            </ng-container>
+
+                            <!--                            <ng-container *ngIf="isRateChargeSuppress">-->
+                            <!--                                <mat-slider [formControl]="duration" style="width:100%" thumbLabel tickInterval="1"-->
+                            <!--                                            min="0.5" max="3" step="0.5" (change)="durationHours($event)"-->
+                            <!--                                            [disabled]="true">-->
+                            <!--                                </mat-slider>-->
+                            <!--                                <label class="mr-10 mt-4"> 0.5 </label>-->
+                            <!--                                <label class="mr-10 mt-4"> 1 </label>-->
+                            <!--                                <label class="mr-10 mt-4"> 1.5 </label>-->
+                            <!--                                <label class="mr-10 mt-4"> 2 </label>-->
+                            <!--                                <label class="mr-10 mt-4"> 2.5 </label>-->
+                            <!--                                <label class=" mt-4"> 3 </label>-->
+                            <!--                            </ng-container>-->
+
+                        </div>
+                    </div>
+
+                    <!-- <div class="col-12 col-lg-6 text-center"> -->
+                    <!-- <button class="common-btn pointer confirm-btn media325" type="button"
+                                (click)="goToConfirmPayment()" style="width:102%"> Confirm and Review Payment
+                                <i class="fa fa-lg fa-arrow-right " aria-hidden="true "></i>
+                            </button>
+     -->
+                    <!-- </div> -->
+                    <div class="text-center mt-4">
+                        <button (click)="submit()" type="button" class="common-btn pointer "
+                                [ngClass]="{'my-disable-btn':!this.sessionDropDownData.length}"
+                        > Next
+                            <i class="fa fa-size arrow-right-btn fa-arrow-right "></i>
+
+                            <!-- <i class="fa fa-lg right-arrow"></i> -->
+                        </button>
+                    </div>
+
+                </form>
+
+            </mat-step>
+            <!-- step2 -->
+            <mat-step [editable]="edit2" [completed]="complete2">
+                <!-- <div class="text-center">
+                    <h1 class='headings'>My Schedule </h1>
+                    <label class="address-text text-center" style="font-size:17px;color:#232f84; opacity: 1;">  Use the calender below to indicate when you are available for tutoring sessions.Select a date and than click or tap a time slot to mark it available
+                    (OR click again to mark it unavailable) </label>
+                </div> -->
+                <!-- <schedule class="positionR"></schedule>
+                <div class="text-center ">
+                    <button mat-button class="loginButton positionA backButton" matStepperPrevious> Back </button> -->
+                <div class="container-fluid" style="position: relative;text-align: center;">
+                    <schedule *ngIf="showSchedular" class="positionR"></schedule>
+                    <!-- <div class="text-center"> -->
+                    <button *ngIf="!web" mat-button class="back-btn positionA pointer backButton mb-3" type="button"
+                            (click)="scroollTop()" matStepperPrevious>
+                        <i class="fa fa-lg fa-arrow-left " aria-hidden="true "></i>
+                        &nbsp;&nbsp;&nbsp;Back
+                    </button>
+                    <button *ngIf="web" mat-button class="back-btn positionA pointer backButton" type="button"
+                            (click)="scroollTop()" matStepperPrevious>
+                        <i class="fa fa-lg fa-arrow-left " aria-hidden="true "></i>
+                        &nbsp;&nbsp;&nbsp;Back
+                    </button>
+                    <!-- </div>  -->
+                </div>
+                <p x-ms-format-detection="none"
+                   style="color: #222e82;font-size: 17px;text-align: center;margin: 20px; padding: 0 4%; line-height: 1.5;">
+                    If you would
+                    like to schedule a session to occur within the next 24 hours, please contact our Customer Success
+                    Team at {{parentContact}} for additional assistance.</p>
+            </mat-step>
+
+            <!-- step3 -->
+
+            <mat-step>
+
+                <div class="last-step-outer-div mt-4 mb-4" *ngIf="tutor && tutor !=undefined && web">
+                    <div class="row mb-2 pt-4 pb-4">
+                        <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 text-center">
+                            <div class=" justify-content-center ">
+                                <img
+                                    [(src)]="(tutor.profilePicture && tutor.profilePicture != null && tutor.profilePicture.thumbnail !=null) ? tutor.profilePicture.thumbnail:tutor_image"
+                                    class="roundImage-tutor">
+                            </div>
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 last-step-outer-div-inner fix-content">
+                            <div class="row text-left-address">
+                                <h2 class="tabh2" style="margin-top:0px">
+                                    <span class="tutor-name step3-tutor-name" style="font-size:24px;margin-right:5px">
+                                        {{tutor.firstName }} {{tutor.lastName ? (tutor.lastName.substr(0, 1) + '.') : ''}}
+                                    </span>
+                                    <div class="badges">
+                                        <span class="mr-2">
+                                            <img class="certificate-icons verticalAlign" [(src)]="certi_bgCheck">
+                                        </span>
+                                        <span
+                                            *ngIf="tutor.tutor && tutor.tutor.educationalDegrees && tutor.tutor.educationalDegrees.length>0"
+                                            class="mr-2">
+                                            <img class="certificate-icons verticalAlign" [(src)]="certi_degCheck">
+                                        </span>
+                                        <span *ngIf="tutor.tutor && tutor.tutor.sylvanSyncEnabled == true" class="mr-2">
+                                            <img class="certificate-icons verticalAlign" [(src)]="certi_sylCheck">
+                                        </span>
+                                        <span *ngIf="tutor.tutor && tutor.tutor.adminCertified == true" class="mr-2">
+                                            <img class="certificate-icons verticalAlign" [(src)]="certi_stateCheck">
+                                        </span>
+                                        <span *ngIf="tutor.tutor && tutor.tutor.isTutorOfferOnlineClasses == true"
+                                              class="mr-2">
+                                            <img class="certificate-icons verticalAlign" [(src)]="onlineSessions">
+                                        </span>
+                                    </div>
+                                </h2>
+
+                                <!-- <span> <img [(src)]="/assets/img/degree-icon-1.png" > </span> -->
+                            </div>
+                            <div class="row mobile-justify-center tutor-details-text">
+                                <span style="    width: 100%;
+                                word-wrap: break-word;"
+                                      class="proximanova-reg font-14"> {{(tutor.tutor && tutor.tutor.profileHeadLine != undefined) ? tutor.tutor.profileHeadLine
+                                    : ''}} </span>
+                            </div>
+                            <div class="row mobile-justify-center">
+                                <div
+                                    *ngIf="tutor.tutor && tutor.tutor != undefined &&  tutor.tutor.ratedCount != undefined && tutor.tutor.ratedCount >0"
+                                    id="starRating3" class="setSideWidth mobile-justify-center"
+                                    style="margin-top: -0.5em; line-height: 1">
+
+                                    <ng-template #t let-fill=" fill">
+                                        <span class="starStep3" [class.full]="fill === 100">
+                                            <span class="halfStep3" [style.width.%]="fill">&#9733;</span>&#9733;
+                                        </span>
+                                    </ng-template>
+
+                                    <ngb-rating [rate]="roundOff(tutor.tutor.avgRating)" [starTemplate]="t"
+                                                [readonly]="true" max="5">
+                                    </ngb-rating>
+                                    <!-- <star-rating style="margin-left: -5px;" [showHalfStars]="true" [disabled]="true"    [starType]="'svg'" [rating]="tutor.tutor.avgRating"></star-rating> -->
+                                    <span
+                                        *ngIf="tutor.tutor && tutor.tutor != undefined &&  tutor.tutor.ratedCount != undefined && tutor.tutor.ratedCount >0"
+                                        class="pinkText" style="margin-top: -4px"> (
+                                        {{tutor.tutor ? tutor.tutor.ratedCount : ''}} {{ (tutor.tutor.ratedCount > 1) ? 'Reviews'
+                                            : 'Review'}} ) </span>
+                                </div>
+                                <!-- <star-rating-comp
+                                    *ngIf="tutor.tutor && tutor.tutor != undefined &&  tutor.tutor.ratedCount != undefined && tutor.tutor.ratedCount >0"
+                                    [readOnly]="true" [staticColor]="'ok'" [starType]="'icon'"
+                                    [rating]="tutor.tutor.avgRating"></star-rating-comp>
+                                <span
+                                    *ngIf="tutor.tutor && tutor.tutor != undefined &&  tutor.tutor.ratedCount != undefined && tutor.tutor.ratedCount >0"
+                                    class="pinkText" style="margin-top: -4px"> (
+                                    {{tutor.tutor ? tutor.tutor.ratedCount : ''}} {{ (tutor.tutor.ratedCount > 1)? 'Reviews'
+                                    : 'Review'}} ) </span> -->
+                            </div>
+
+                            <!-- <div class="row mobile-justify-center tutor-place-text">
+                                {{(tutor.tutor && tutor.tutor.locationDetails && tutor.tutor.locationDetails.city != undefined) ? (tutor.tutor.locationDetails.city+ ',') : '' }} {{(tutor.tutor && tutor.tutor.locationDetails) ? tutor.tutor.locationDetails.state : '' }}
+                            </div> -->
+
+                            <div class="row mobile-justify-center text-center display_none_amount">
+                                <ng-container *ngIf="!isRateChargeSuppress">
+                                    <h2 class="priceText">
+                                    <span class="tutor-name" style="font-size: 18px;">
+                                        ${{(tutor.tutor && tutor.tutor.hourlyRate != undefined) ? (this.hourlyRate.toFixed(2)) : ''}}
+                                        /hr
+                                    </span>
+                                    </h2>
+                                </ng-container>
+                            </div>
+
+                            <div class="row mobile-justify-center subjects-text "
+                                 style=" display:inline-block; text-align:left;padding-left: 0px;">
+                                <!-- Subjects Offered: -->
+                                <span *ngIf="tutor.tutor.subjects && tutor.tutor.subjects.length >0"
+                                      style="color: #34495e; opacity: 0.3; text-align:center;font-weight:800;font-family: 'ProximaNova-Bold';">
+                                    Subjects Offered: &nbsp;</span>
+                                <span style="color:#231f20"
+                                      *ngFor="let subject of tutor.tutor.subjects;let lastSub =last">
+                                    <span *ngFor="let subsubject of subject.subcategories;let lastsubSub =last"
+                                          class="tutor-place-text ">
+                                        {{subsubject.name}}{{lastsubSub && lastSub ? '' : ', '}} </span>
+                                </span>
+                            </div>
+                        </div>
+
+
+                        <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 text">
+                            <div class="row mobile-justify-center text-center display_none_amount1">
+                                <ng-container *ngIf="!isRateChargeSuppress">
+                                    <h2 class="priceText">
+                                    <span class="tutor-name" style="font-size: 18px;">
+                                        ${{(tutor.tutor && tutor.tutor.hourlyRate != undefined) ? (this.hourlyRate.toFixed(2)) : ''}}
+                                        /hr
+                                    </span>
+                                    </h2>
+                                </ng-container>
+                            </div>
+
+                            <div class="ribbon display_none">
+                                <span style="margin:auto"> Tutor Selected </span>
+                            </div>
+
+
+                            <!-- <div class="row justify-content-center mt-4 mr-2">
+                                <button class="loginButton half-width-btn" (click)="tutorDetails(tutor._id)" routerLink="/home/tutor-details">View Details  </button>
+                            </div> -->
+                        </div>
+                        <div class="ribbon display_small">
+                            <span style="margin:auto"> Tutor Selected </span>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div *ngIf="tutor && tutor !=undefined && !web" style="position: relative;">
+                    <div class="ribbonM display_mobile">
+                        <span style="margin:auto"> Tutor Selected </span>
+                    </div>
+                    <div class="tutorCard mb-3">
+
+                        <div class="row">
+                            <div class="col-4 col-md-2 mt-3">
+                                <img
+                                    [(src)]="(tutor.profilePicture && tutor.profilePicture != null && tutor.profilePicture.thumbnail !=null) ? tutor.profilePicture.thumbnail:tutor_image"
+                                    class="mobileImg">
+                            </div>
+                            <div class="col-8 mt-3">
+                                <span (click)="tutorDetails(tutor._id,tutor.tutor.tutorId)"
+                                      style="cursor: pointer;word-break: break-all;" class="nText proximanova-bold">
+                                    {{tutor.firstName  }}
+                                    {{tutor.lastName ? (tutor.lastName.substr(0, 1) + '.') : ''}}</span>
+                                <br>
+
+                                <ng-container *ngIf="!isRateChargeSuppress">
+                                    <p class="hText proximanova-bold mt-2">
+                                        ${{(tutor.tutor && tutor.tutor.hourlyRate != undefined) ? (this.hourlyRate).toFixed(2) : ''}}
+                                        /hr
+                                    </p>
+                                </ng-container>
+
+
+                                <div *ngIf="tutor.tutor.ratedCount >0">
+                                    <ng-template #t let-fill="fill">
+                                        <span class="starBrowseMobile" [class.full]="fill === 100">
+                                            <span class="halfBrowseMobile" [style.width.%]="fill">&#9733;</span>&#9733;
+                                        </span>
+                                    </ng-template>
+
+                                    <ngb-rating *ngIf="tutor.tutor.ratedCount >0"
+                                                [rate]="roundOff(tutor.tutor.avgRating)" [starTemplate]="t"
+                                                [readonly]="true"
+                                                max="5">
+                                    </ngb-rating>
+                                    <span style="font-size: 12px;"
+                                          *ngIf="tutor.tutor && tutor.tutor != undefined && tutor.tutor.ratedCount != undefined && tutor.tutor.ratedCount > 0">
+                                        &nbsp;{{tutor.tutor.avgRating | number:'1.1-1'}}
+                                        ({{tutor.tutor.ratedCount}})
+                                    </span>
+                                </div>
+                                <span style="display:inline-block; margin-top: 5px;">
+                                    <span class="mr-2 tutorAchivment"> <img class="certificate-iconsM"
+                                                                            [(src)]="certi_bgCheck">
+                                    </span>
+                                    <span
+                                        *ngIf="tutor.tutor && tutor.tutor.educationalDegrees && tutor.tutor.educationalDegrees.length>0"
+                                        class="mr-2 tutorAchivment"> <img class="certificate-iconsM"
+                                                                          [(src)]="certi_degCheck">
+                                    </span>
+                                    <span *ngIf="tutor.tutor && tutor.tutor.sylvanSyncEnabled == true"
+                                          class="mr-2 tutorAchivment"> <img class="certificate-iconsM"
+                                                                            [(src)]="certi_sylCheck">
+                                    </span>
+                                    <span *ngIf="tutor.tutor && tutor.tutor.adminCertified == true"
+                                          class="mr-2 tutorAchivment">
+                                        <img class="certificate-iconsM" [(src)]="certi_stateCheck"> </span>
+                                    <span *ngIf="tutor.tutor && tutor.tutor.isTutorOfferOnlineClasses == true"
+                                          class="mr-2 tutorAchivment">
+                                        <img class="certificate-iconsM" [(src)]="onlineSessions">
+                                    </span>
+
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SESSION DETAILS -->
+                <div *ngIf="bookingDetails && bookingDetails !=undefined">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 multiple-students"
+                         style="border-radius: 3.8px;background-color: #ffffff;" [ngStyle]="web && {
+                        'box-shadow': '0 0 6px 0 rgba(0, 0, 0, 0.09)'}">
+                        <div class="tutor-name" style="padding-left:4%;padding-top: 4%;">
+                            <h2 class="tabh2 step3-tutor-name"
+                                *ngIf="bookingDetails.steponeData && bookingDetails.steponeData  !=undefined && bookingDetails.steponeData.child && bookingDetails.steponeData.child  !=undefined ">
+                                {{bookingDetails.steponeData.child.firstName}}
+                                {{bookingDetails.steponeData.child.lastName ? (bookingDetails.steponeData.child.lastName.substr(0, 1) + '.') : ''}}
+                            </h2>
+                        </div>
+                        <div *ngIf="web" style="padding:4%;padding-top:0">
+                            <!-- <table style="width:100%;" *ngIf="bookingDetails.steponeData && bookingDetails.steponeData  !=undefined && bookingDetails.step2Data && bookingDetails.step2Data  !=undefined"> -->
+                            <table style="width:100%;" class="tutor-details-table"
+                                   *ngIf="bookingDetails.steponeData && bookingDetails.steponeData  !=undefined && bookingDetails.step2Data && bookingDetails.step2Data  !=undefined">
+                                <tr
+                                    *ngIf="bookingDetails.steponeData.subjectControl && bookingDetails.steponeData.subjectControl  !=undefined">
+                                    <td class="tutor-name font16 wid-25">
+                                        Subjects Selected:
+                                    </td>
+                                    <td>
+                                        <span class="comma td-text "
+                                              *ngFor="let subjects of bookingDetails.steponeData.subjectControl; let last = last">
+                                            {{subjects.subCategoryName}}{{ last ? '' : ', ' }}
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr
+                                    *ngIf="bookingDetails.steponeData.address && bookingDetails.steponeData.address !=undefined">
+                                    <td class="tutor-name font16 wid-25">
+                                        Location Details:
+                                    </td>
+                                    <td>
+                                        <span
+                                            class=" td-text capitalize">{{bookingDetails.steponeData.address.addressLine1 ? bookingDetails.steponeData.address.addressLine1
+                                            : ''}} </span>
+
+                                        <span *ngIf="bookingDetails.steponeData.address.addressLine2 && bookingDetails.steponeData.address.addressLine2
+                                        != undefined " class=" td-text capitalize"> <br>
+                                            {{(bookingDetails.steponeData.address.addressLine2 && bookingDetails.steponeData.address.addressLine2
+                                                != undefined) ? bookingDetails.steponeData.address.addressLine2 : '' }}</span>
+                                        <span
+                                            class=" td-text capitalize"> <br>{{bookingDetails.steponeData.address.city ? (bookingDetails.steponeData.address.city
+                                            + ',') : ''}}
+                                            {{bookingDetails.steponeData.address.state ? (bookingDetails.steponeData.address.state) : '' }} {{bookingDetails.steponeData.address.zipCode ? (bookingDetails.steponeData.address.zipCode
+                                            ) : '' }}</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="tutor-name font16 wid-25">
+                                        Online Session:
+                                    </td>
+                                    <td>
+                                        <span class="comma td-text ">
+
+                                            {{bookingDetails.steponeData.isSessionOnline ? 'Yes' : 'No'}}
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr *ngIf="bookingDetails.step2Data.sessionsData  && bookingDetails.step2Data.sessionsData  !=undefined"
+                                    class="show-desktop">
+                                    <td></td>
+                                    <td>
+                                        <table class="table1 table-bordered">
+                                            <thead class="tutor-name font16 wid-25">
+                                            <tr>
+                                                <th style="padding:8px">Session</th>
+                                                <th>Date</th>
+                                                <th>Time</th>
+                                                <th *ngIf="!isRateChargeSuppress">Total</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr
+                                                *ngFor="let data of bookingDetails.step2Data.sessionsData; let index = index;">
+                                                <td style="padding:8px">{{index + 1}}</td>
+                                                <td>{{data.date}}</td>
+                                                <td>{{data.time}}</td>
+                                                <td *ngIf="!isRateChargeSuppress">
+                                                    ${{ ((((tutor.tutor.hourlyRate) ? this.hourlyRate : 0) * ((bookingDetails.steponeData.duration)
+                                                    ? bookingDetails.steponeData.duration : 0))).toFixed(2)  }}
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr *ngIf="bookingDetails.step2Data.sessionsData  && bookingDetails.step2Data.sessionsData  !=undefined"
+                                    class="show-mobile">
+                                    <td colspan="2">
+                                        <table class="table1 table-bordered">
+                                            <thead class="tutor-name font16 wid-25">
+                                            <tr>
+                                                <th>Session</th>
+                                                <th>Date</th>
+                                                <th>Time</th>
+                                                <td *ngIf="!isRateChargeSuppress">
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr
+                                                *ngFor="let data of bookingDetails.step2Data.sessionsData; let index = index;">
+                                                <td>{{index + 1}}</td>
+                                                <td>{{data.date}}</td>
+                                                <td>{{data.time}}</td>
+                                                <td *ngIf="!isRateChargeSuppress">
+                                                    ${{ ((((tutor.tutor.hourlyRate) ? this.hourlyRate : 0) * ((bookingDetails.steponeData.duration)
+                                                    ? bookingDetails.steponeData.duration : 0))).toFixed(2)  }}
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <!-- <tr *ngIf="bookingDetails.steponeData.duration && bookingDetails.steponeData.duration !=undefined && tutor && tutor.tutor !=undefined ">
+                                    <td class="tutor-name font16 wid-25">
+                                        Total:
+                                    </td>
+                                    <td>
+                                        <span class=" td-text"> ${{ (( ((tutor.tutor.hourlyRate) ? tutor.tutor.hourlyRate : 0 )* ((bookingDetails.steponeData.duration)
+                                            ? bookingDetails.steponeData.duration : 0) )).toFixed(2)  }} </span>
+                                    </td>
+                                </tr> -->
+
+                                <ng-container *ngIf="!isRateChargeSuppress">
+                                    <tr class="show-desktop">
+                                        <td></td>
+                                        <td class="text-center">
+                                        <span class=" td-text">
+                                            On the next page, referral discounts are automatically applied, and if you
+                                            have a promo code, you can add it in the Promo Code box.
+                                        </span>
+                                        </td>
+                                    </tr>
+                                    <tr class="show-mobile">
+                                        <td colspan="2" class="text-center">
+                                        <span class=" td-text">
+                                            On the next page, referral discounts are automatically applied, and if you
+                                            have a promo code, you can add it in the Promo Code box.
+                                        </span>
+                                        </td>
+                                    </tr>
+                                </ng-container>
+
+                            </table>
+                        </div>
+
+                        <div class="col-12" *ngIf="!web">
+                            <div class="row">
+                                <div class="subjectHead col-5" style="padding-right: 0;">Subject(s) Selected:</div>
+                                <div class="col-7" style="padding-left: 0; word-break: break-all;"> <span
+                                    class="subjectText"
+                                    *ngFor="let subjects of bookingDetails.steponeData.subjectControl; let last = last">
+                                        {{subjects.subCategoryName}}{{ last ? '' : ', ' }}
+                                    </span>
+                                </div>
+                                <div class="col-5 subjectHead" style="padding-right: 0;">Location:</div>
+                                <div class="col-7" style="padding-left: 0;"> <span
+                                    class=" subjectText capitalize">{{bookingDetails.steponeData.address.addressLine1 ? bookingDetails.steponeData.address.addressLine1
+                                    : ''}} </span>
+                                    <span *ngIf="bookingDetails.steponeData.address.addressLine2 && bookingDetails.steponeData.address.addressLine2
+                                != undefined " class="capitalize subjectText"> <br>
+                                        {{(bookingDetails.steponeData.address.addressLine2 && bookingDetails.steponeData.address.addressLine2
+                                            != undefined) ? bookingDetails.steponeData.address.addressLine2 : '' }}</span>
+                                    <span
+                                        class="capitalize subjectText"> <br>{{bookingDetails.steponeData.address.city ? (bookingDetails.steponeData.address.city
+                                        + ',') : ''}}
+                                        {{bookingDetails.steponeData.address.state ? (bookingDetails.steponeData.address.state) : '' }} {{bookingDetails.steponeData.address.zipCode ? (bookingDetails.steponeData.address.zipCode
+                                        ) : '' }}</span></div>
+                                <div class="col-5 subjectHead" style="padding-right: 0;">Online Session:</div>
+                                <div class="col-7" style="padding-left: 0;"> <span
+                                    class=" subjectText capitalize">{{bookingDetails.steponeData.isSessionOnline ? 'Yes' : 'No'}}</span>
+                                </div>
+
+
+                                <div class="col-12 text-center mt-4 mb-4" style="padding: 0;">
+                                    <div style="
+                                border-radius: 3.8px;
+                                box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.09);
+                                background-color: #ffffff; margin-right: auto;margin-left: auto;  padding: 3%;">
+                                        <div style="text-align: left;" class="row"
+                                             *ngFor="let data of bookingDetails.step2Data.sessionsData; let index = index;">
+                                            <hr *ngIf="index" style="width: 90%; margin: 10px auto;">
+
+                                            <div class="col-8">
+                                                <p
+                                                    style=" color: #9b9b9b;font-size: 11.3px;letter-spacing: 0.28px; margin-bottom: 4px;">
+                                                    Session
+                                                    {{index + 1}}</p>
+                                                <p class="sessionText" style="white-space: nowrap;">{{data.date}} |
+                                                    {{data.time}}</p>
+                                            </div>
+                                            <div class="col-4 ">
+                                                <p></p>
+                                                <ng-container *ngIf="!isRateChargeSuppress">
+                                                    <p class="sessionPrice">
+                                                        ${{ ((((this.hourlyRate) ? this.hourlyRate : 0) * ((bookingDetails.steponeData.duration)
+                                                        ? bookingDetails.steponeData.duration : 0))).toFixed(2)  }}
+                                                    </p>
+                                                </ng-container>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                                <div class="col-12 text-center mt-3 mb-4" *ngIf="!isRateChargeSuppress">
+                                    <p class="sessionText" style="font-size: 12px; white-space: normal;"> On the next
+                                        page, referral
+                                        discounts are automatically applied, and if you
+                                        have a promo code, you can add it in the Promo Code box.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12  text-center justify-content-center">
+                        <!-- <mat-checkbox [formControl]="checkFlexibility">
+                            <span class="blue-text-check"> Check here if you are flexible on your session
+                                location.</span>
+                        </mat-checkbox> -->
+                    </div>
+                </div>
+                <div class="row justify-content-center mt-4 mb-4 finalsubmission">
+                    <div class="col-12 col-lg-6 text-center confirmBtn ">
+
+
+                        <ng-container *ngIf="!isRateChargeSuppress">
+                            <button style="width:300px !important;"
+                                    class="common-btn pointer confirm-btn media325 mb-2 "
+                                    type="button" (click)="goToConfirmPayment(true)"> Confirm and Review Payment
+                                <!-- <span style="color:white;margin-right:6px;float:right "> -->
+                                <i class="fa fa-lg fa-arrow-right " aria-hidden="true "></i>
+                            </button>
+                        </ng-container>
+
+                        <ng-container *ngIf="isRateChargeSuppress">
+                            <!--                            completeBooking-->
+                            <button style="width:300px;" (click)='goToConfirmPayment(false)'
+                                    class="loginButton pointer">
+                                Send Request(s) to Tutor
+                                <span style="color:white;margin-right:6px;float:right">
+                                    <i aria-hidden="true" class="fa fa-lg fa-arrow-right"></i>
+                                </span>
+                            </button>
+                        </ng-container>
+
+                    </div>
+                    <div class="col-12 col-lg-6 text-center confirmBtn2 " style="bottom:2px">
+                        <button style="max-width:300px;width:300px !important;" mat-button
+                                class="back-btn pointer backBtnLast" type="button" (click)="scroollTop2()"
+                                matStepperPrevious>
+                            <i class="fa fa-lg fa-arrow-left " aria-hidden="true "></i>
+                            &nbsp;&nbsp;&nbsp;Back
+                        </button>
+                    </div>
+
+
+                </div>
+                <!-- <div class="row justify-content-center mt-4 mb-4 text-center ">
+                </div> -->
+            </mat-step>
+
+        </mat-horizontal-stepper>
+    </div>
+</div>

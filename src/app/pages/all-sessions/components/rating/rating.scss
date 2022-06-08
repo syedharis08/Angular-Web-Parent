@@ -1,0 +1,87 @@
+@import "src/app/theme/sass/conf/variables";
+
+.myContainerContact {
+    width: 550px;
+    padding: 25px 40px 0;
+    max-height: 80vh !important;
+    @media only screen and (max-width: 769px) {
+        width: auto;
+        padding: 1%;
+    }
+}
+
+.bookinginfo {
+    text-align: center;
+    color: #232f84;
+}
+
+.bookinginfo p {
+    margin-bottom: 2px;
+    font-size: 16px;
+}
+
+ngb-rating:focus {
+    outline: none;
+    .star1:focus {
+        outline: none;
+    }
+}
+
+.textareaContact1 {
+    resize: none;
+    width: 100%;
+    padding: 10px;
+    height: 100px;
+    border-color: $main-green;
+    border-radius: 4px;
+    font-size: 13px;
+}
+
+.flexvertical {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.content-justify {
+    text-align: center;
+    color: #232f84;
+}
+
+.freetext {
+    font-size: 12px;
+    text-align: center;
+    color: #231f20;
+}
+
+.flex {
+    display: flex;
+    justify-content: center;
+}
+
+.raisedispute {
+    width: 100%;
+}
+
+label {
+    font-size: 14px;
+    color: #232f84;
+}
+
+.star1 {
+    padding-right: 3px;
+    padding-left: 3px;
+    font-size: 1.5rem;
+    color: #b0c4de;
+    font-size: 34px;
+    line-height: 34px;
+}
+
+.filled {
+    color: #d9ac3c;
+}
+.topSpace
+{
+    @media only screen and (max-width: 769px) {
+       margin-top: 34px !important;   }
+}

@@ -1,0 +1,418 @@
+<div class="container-fluid" *ngIf="userCards">
+
+    <div class="container payments" *ngIf="!addCardCheck;else addcard">
+        <div class="col-md-12 paddLeftSmall">
+            <div class="row">
+                <div class="offset-md-1 col-md-10">
+                    <h2 class="proximanova-light font-28">Select Payment Method</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-10 offset-md-1">
+
+                    <mat-radio-group>
+                        <div class="row">
+                            <div class="col-md-6  mt-3 mb-3" *ngFor="let data of userCards ; let i = index">
+                                <div class=" setBorderCard" style="padding:3.5%;">
+                                    <div class="row right">
+                                        <div class="col-md-2 col-2 col-sm-2 align-radio">
+                                            <mat-radio-button name="addresses" [value]="data._id"
+                                                [checked]="data.isDefault == true" (click)="onRadioClick(data._id)">
+                                            </mat-radio-button>
+
+                                        </div>
+
+                                        <div class="col-md-10 col-10 col-sm-10 left ">
+                                            <div class="row">
+                                                <div class="col-8 nopadding">
+                                                    <p class="cardSelect">XXXX XXXX XXXX {{data.last4Digits}}</p>
+                                                </div>
+                                                <div class="col-4 text-right" style="margin-top:-6px">
+                                                    <img src="./assets/img/icon_visa.png" *ngIf="data.brand == 'Visa'">
+                                                    <img src="./assets/img/icon_mastercard.png"
+                                                        *ngIf="data.brand == 'MasterCard'">
+                                                    <img src="./assets/img/icon_american.png"
+                                                        *ngIf="data.brand == 'American Express'">
+                                                    <img src="./assets/img/icon_discover.png"
+                                                        *ngIf="data.brand == 'Discover'">
+                                                    <img src="./assets/img/icon_maestro.png"
+                                                        *ngIf="data.brand == 'Maestro'">
+                                                    <img src="./assets/img/icon_dinner_club.png"
+                                                        *ngIf="data.brand == 'Diners Club'">
+                                                    <img src="./assets/img/jcb.jpg" *ngIf="data.brand == 'JCB'">
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div *ngIf="(data.expMonth-1!=4)" class="col-8 nopadding">
+                                                    <p class="holderName">Expiration Date: {{
+                                                        this.monthArray[data.expMonth-1].substring(0,3)+'.' }}
+                                                        {{data.expYear }}</p>
+                                                </div>
+                                                <div *ngIf="(data.expMonth-1==4)" class="col-8 nopadding">
+                                                    <p class="holderName">Expiration Date: {{
+                                                        this.monthArray[data.expMonth-1].substring(0,3)+' ' }}
+                                                        {{data.expYear }}</p>
+                                                </div>
+
+                                                <div class="col-4 text-right nopadding">
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <div class="col-md-6 mt-3 mb-3">
+                                <div class="setBorderCard" style='text-align: center;' id="el">
+
+                                    <img style="cursor: pointer;" (click)="onAddNewCardClick()"
+                                        src="./assets/img/addCard1.png" alt="add_card" class="card-image">
+                                    <label class="pt-2 addNewCard" (click)="onAddNewCardClick()">Add New Card</label>
+
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="row">
+                            <div *ngIf="showEmptyError" class="col-md-12 col-12 mt-3 mb-3 pinkText  text-left">
+                                Please add a payment method in order to send your session request.
+
+                            </div>
+                        </div>
+                    </mat-radio-group>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="offset-md-1 col-md-10 ">
+                    <h2>Payment Summary</h2>
+                </div>
+            </div>
+            <div class=" row ">
+                <div class="col-md-11 offset-md-1">
+                    <table class="table table-bordered table-responsive">
+                        <thead class="tutor-name">
+                            <tr>
+                                <th>Date and Time</th>
+                                <th *ngIf="!hidePromo" class="btn-th-width">Promo Code</th>
+                                <th *ngIf="!hidePromo">Promo Discount</th>
+                                <th>Referral Discount</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="text-align-class">{{startTime}} {{endTime ? '-' : ''}} {{endTime}} </td>
+                                <td *ngIf="!hidePromo">
+
+                                    <mat-form-field class="payment-full-width" id="promo-input">
+                                        <input matInput class="promoCodeField set-border" [(ngModel)]="promocode"
+                                            type="text" (keypress)="_keyPressAlpha1($event)" oncopy="return false;"
+                                            onpaste="return false;" oncut="return false;">
+                                        <a (click)="applyPromoCode(promocode);">
+                                            <span class="addon2 ">
+                                                <span class="apply-promo pr-2"> Apply </span>
+                                                <i class="fa fa-arrow-circle-right arrowColor promo-arrow-size"></i>
+                                            </span>
+                                        </a>
+                                    </mat-form-field>
+                                </td>
+                                <td *ngIf="!hidePromo">
+                                    <span class="promo-values"> ${{ (discount !=undefined && discount >0 ) ?
+                                        (discount | number:'1.2-2') : 0 }}</span>
+                                </td>
+                                <td>
+                                    <span class="promo-values"> ${{ (referalAmount && referalAmount !=undefined) ?
+                                        (referalAmount | number:'1.2-2') : 0 }} </span></td>
+                                <td>
+                                    <!-- <span *ngIf="data.total_amount == ''" class="promo-values">  ${{ (totalValue >= 0  && totalValue != undefined) ? (totalValue | number:'1.2-2') : 0 }} </span> -->
+                                    <!-- <span *ngIf="data.isPromoValid== 0" class="promo-values"> ${{ (data.total_amount >=
+                                        0 && data.total_amount != undefined) ? (data.total_amount | number:'1.2-2') :
+                                        '0' }} </span>-->
+                                    <span class="promo-values"> ${{ (totalProjected >=
+                                        0) ? (totalProjected | number:'1.2-2') : 0 }} </span>
+                                </td>
+
+
+                            </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="offset-md-1 col-md-10 ">
+                    <h2 style="padding:0px;"></h2>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="offset-md-1 mt-2 col-md-10">
+                    <p class="hoursText">
+                        *Final cost will be calculated based on the finished session’s actual time (rounded to the nearest 15 minutes) entered by the tutor. Once a session is completed, you will receive a session summary that reflects the final cost, including additional charges for longer sessions, to review and approve.
+                    </p>
+
+                </div>
+            </div>
+
+            <!-- WIP for back Handelling  -->
+            <div class="row justify-content-center mt-4 mb-4 ">
+
+                <div class="col-12 text-center mb-2 col-lg-6">
+                    <button style="min-width:270px;" (click)="goBackToDetails()" class="loginButton pointer">
+                        <span style="color:white">
+                            <i aria-hidden="true" class="fa fa-lg fa-arrow-left"></i>
+                        </span> &nbsp;&nbsp; Cancel
+                    </button>
+                </div>
+                <div class="col-12 text-center mb-2 col-lg-6">
+                    <button style="min-width:270px;" (click)='completeBooking()' class="loginButton pointer">Accept
+                        Session Request
+                        <span style="color:white;margin-right:6px;float:right">
+                            <i aria-hidden="true" class="fa fa-lg fa-arrow-right"></i>
+                        </span>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <ng-template #addcard>
+        <div class="container payments">
+
+            <div class="row">
+                <div class="offset-md-1 col-md-10 ">
+                    <h2>Add New Card</h2>
+                </div>
+
+            </div>
+
+            <form [formGroup]="form" (ngSubmit)="onSubmit(form.value,$event)">
+                <div class="row">
+                    <div class="col-md-10 offset-md-1">
+                        <div class="row rowPadding">
+                            <div class="col-md-6">
+                                <mat-form-field class="payment-full-width">
+                                    <input autocomplete="off" matInput [formControl]="cardHolderName" type="text"
+                                        id="cardHolderName" placeholder="Cardholder Name"
+                                        (keypress)="_keyPressAlpha($event)">
+                                    <mat-error
+                                        *ngIf="form.controls['cardHolderName'].errors?.required && !form.controls['cardHolderName'].pristine">
+                                        Cardholder name is required.
+                                    </mat-error>
+                                </mat-form-field>
+
+                            </div>
+                            <div class="col-md-6">
+                                <mat-form-field class="payment-full-width">
+                                    <input autocomplete="off" matInput [formControl]="cardNumber" type="text"
+                                        [readonly]='cardEditcheck'
+                                        (keypress)="cc_format(cardNumber);_keyPressAlphaNumber($event)" id="cardNumber"
+                                        placeholder="Card number">
+                                    <mat-error
+                                        *ngIf="form.controls['cardNumber'].errors?.required && !form.controls['cardNumber'].pristine">
+                                        Card number is required.
+                                    </mat-error>
+                                    <mat-error
+                                        *ngIf="form.controls['cardNumber'].errors?.minlength && !form.controls['cardNumber'].pristine">
+                                        Card number entered must be minimum 14 digits.
+                                    </mat-error>
+                                </mat-form-field>
+
+                            </div>
+                        </div>
+                        <div class="row rowPadding">
+                            <div class="col-md-4">
+                                <mat-form-field class="payment-full-width">
+                                    <mat-select placeholder="Expiration Month" [formControl]="expiryMonth" required>
+                                        <mat-option *ngFor="let month of monthArray" [value]="month">
+                                            {{month}}
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-error
+                                        *ngIf="form.controls['expiryMonth'].errors?.required && !form.controls['expiryMonth'].pristine">
+                                        Expiration month is required.
+                                    </mat-error>
+                                </mat-form-field>
+
+                            </div>
+                            <div class="col-md-4">
+                                <mat-form-field class="payment-full-width">
+                                    <mat-select placeholder="Expiration Year" [formControl]="expiryYear" required>
+                                        <mat-option *ngFor="let year of yearArray" [value]="year">
+                                            {{year}}
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-error
+                                        *ngIf="form.controls['expiryYear'].errors?.required && !form.controls['expiryYear'].pristine">
+                                        Expiration year is required.
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-4">
+
+                                <mat-form-field class="payment-full-width">
+                                    <input autocomplete="off" matInput [formControl]="cvv" type="text" class="expDate"
+                                        [readonly]='cardEditcheck' (keypress)="_keyPressAlphaNumber($event)" id="cvv"
+                                        placeholder="CVV">
+                                    <mat-error
+                                        *ngIf="form.controls['cvv'].errors?.required && !form.controls['cvv'].pristine">
+                                        Please enter the 3-4 digit security code.
+                                    </mat-error>
+                                    <mat-error
+                                        *ngIf="form.controls['cvv'].errors?.minlength && !form.controls['cvv'].pristine">
+                                        CVV entered must be minimum 3 digits
+                                    </mat-error>
+                                    <mat-error
+                                        *ngIf="form.controls['cvv'].errors?.maxlength && !form.controls['cvv'].pristine">
+                                        CVV entered must be maximum 4 digits
+                                    </mat-error>
+                                </mat-form-field>
+
+                            </div>
+                        </div>
+
+
+
+                        <!-- <div class="col-md-12 pr-0 mt-4" *ngIf="errorMessageCard">
+                            <p class="cardError">{{errorMessageCard}}</p>
+                        </div> -->
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="offset-md-1 col-md-10 ">
+                        <h2>Add Billing Address</h2>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-10 offset-md-1">
+                        <div class="row rowPadding">
+                            <div class="col-md-6">
+                                <mat-checkbox (change)="setBaseAddress($event)" class="example-margin mobileFont"
+                                    [formControl]="defaultAddress">Billing address is same as home address
+                                </mat-checkbox>
+                            </div>
+                        </div>
+                        <div class="row rowPadding">
+                            <div class="col-md-6">
+                                <mat-form-field class="payment-full-width">
+                                    <input autocomplete="off" matInput [formControl]="addressLine1" type="text"
+                                        id="addressLine1" placeholder="Address Line 1">
+                                    <mat-error
+                                        *ngIf="form.controls['addressLine1'].errors?.required && !form.controls['addressLine1'].pristine">
+                                        Address is required.
+                                    </mat-error>
+                                </mat-form-field>
+
+                            </div>
+                        </div>
+                        <div class="row rowPadding">
+                            <div class="col-md-6">
+                                <mat-form-field class="payment-full-width">
+                                    <input autocomplete="off" matInput [formControl]="addressLine2" type="text"
+                                        id="addressLine2" placeholder="Address Line 2 (Optional)">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row rowPadding">
+                            <div class="col-md-6">
+                                <mat-form-field class="payment-full-width">
+                                    <input autocomplete="off" matInput [formControl]="city" type="text" id="city"
+                                        placeholder="City">
+                                    <mat-error
+                                        *ngIf="form.controls['city'].errors?.required && !form.controls['city'].pristine">
+                                        City is required.
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row rowPadding">
+                            <div class="col-md-3">
+                                <mat-form-field class="payment-full-width">
+                                    <input autocomplete="off" matInput [formControl]="state" type="text" id="state"
+                                        placeholder="State">
+                                    <mat-error
+                                        *ngIf="form.controls['state'].errors?.required && !form.controls['state'].pristine">
+                                        State is required.
+                                    </mat-error>
+                                </mat-form-field>
+
+                            </div>
+                            <div class="col-md-3">
+                                <mat-form-field class="payment-full-width">
+                                    <input autocomplete="off" matInput [formControl]="zipcode" type="text" id="zipcode"
+                                        placeholder="Zip Code" (keypress)="_keyPressAlphaNumber($event)" minlength="5"
+                                        maxlength="5">
+                                    <mat-error
+                                        *ngIf="form.controls['zipcode'].errors?.required && !form.controls['zipcode'].pristine">
+                                        Zip code is required.
+                                    </mat-error>
+                                    <mat-error
+                                        *ngIf="form.controls['zipcode'].errors?.maxlength && !form.controls['zipcode'].pristine">
+                                        Zip code must be maximum 5 digits.
+                                    </mat-error>
+                                    <mat-error
+                                        *ngIf="form.controls['zipcode'].errors?.minlength && !form.controls['zipcode'].pristine">
+                                        Zip code must be minimum 5 digits.
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                        </div>
+                        <div class="row rowPadding" style='border-top: 2px solid #ebebeb;'>
+                            <div class="col-md-6">
+                                <mat-checkbox class="example-margin" [formControl]="defaultCard">Default Card
+                                </mat-checkbox>
+                                <br>
+                                <span class='default-text default-text-mobile'>Check this box to set this card as the
+                                    default card. Uncheck it to not set it as the default card.</span>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12 mb-4">
+                                <div class="row pt-4 submit-center mobileButton">
+                                    <div class="col-lg-4 col-12 cancelPaymentadd">
+                                        <!--cancelAdding-->
+                                        <button *ngIf='!cardEditcheck' (click)="cancelAdding()"
+                                            class="loginButton pointer danger">Cancel
+                                            <span style="color:white;margin-right:6px;float:right">
+                                            </span>
+                                        </button>
+                                    </div>
+                                    <div class="col-lg-4 col-12 paddLeftSmall ">
+                                        <button type="submit" *ngIf='!cardEditcheck'
+                                            class="loginButton pointer arrow-btn">Save
+                                            Card
+                                            <!-- <span style="color:white;margin-right:6px;float:right"> -->
+                                            <i aria-hidden="true" class="fa fa-lg fa-arrow-right"></i>
+                                            <!-- </span> -->
+                                        </button>
+                                        <button [disabled]='!form.valid' type="submit" *ngIf='cardEditcheck'
+                                            class="loginButton pointer arrow-btn">Update
+                                            Card
+                                            <!-- <span style="color:white;margin-right:6px;float:right"> -->
+                                            <i aria-hidden="true" class="fa fa-lg fa-arrow-right"></i>
+                                            <!-- </span> -->
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </form>
+
+        </div>
+    </ng-template>
+
+</div>

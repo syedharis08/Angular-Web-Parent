@@ -1,0 +1,25 @@
+<div style="float:right;padding:0px" class="row" mat-dialog-title>
+    <button (click)="closeDialog()" style="border:none" class="close-btn pointer" mat-button mat-dialog-close="true">
+        <img (click)="closeDialog()" src="assets/img/close.png">
+    </button>
+</div>
+<mat-dialog-content>
+    <div class="myContainer">
+        <h3 class="headings text-center">No Result Found!</h3>
+        <div class="col-sm-12  col-md-12  text-center col-xs-12 col-lg-12">
+            <label class="mt-4 dialogText">
+              There are no sessions found using this criteria. Please adjust your options and try again.
+            </label>
+
+        </div>
+        <div class="row text-center mt-4 mb-4">
+
+            <div class=" col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <button mat-dialog-close="true" style="max-width:230px" class="pinkButton half-width-btn arrow-btn"
+                        style="font-size: 16px" (click)="closeDialog()">OK
+                </button>
+            </div>
+        </div>
+
+    </div>
+</mat-dialog-content>

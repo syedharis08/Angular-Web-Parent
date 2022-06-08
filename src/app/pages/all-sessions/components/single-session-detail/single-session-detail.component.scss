@@ -1,0 +1,128 @@
+@import "../../../../theme/sass/conf/conf";
+
+.status-row {
+    min-height: 32px;
+}
+
+.book-session {
+    text-align: right;
+    @media only screen and (max-width: 767px) {
+        text-align: left;
+    }
+}
+
+.outer-div {
+    border: solid 1px #dcdcdc;
+}
+
+#hideDiv {
+    .blue-heading {
+        font-family: 'ProximaNova-Bold';
+        font-size: 16px;
+        font-weight: bold;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        text-align: left;
+        color: #116DB4;
+    }
+}
+
+.padding-left {
+    padding-left: 10%;
+    @media only screen and (max-width: 767px) {
+        padding-left: 0%;
+    }
+}
+
+.booking-text {
+    font-family: 'ProximaNova-Reg';
+    font-size: 17px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    vertical-align: baseline;
+    color: #34495e;
+    @media only screen and (max-width: 767px) {
+        font-size: 14px;
+    }
+}
+
+.margin-top-session {
+    margin-top: -50px !important;
+}
+
+.ratingTutor {
+    color: #e1134f;
+    font-family: 'ProximaNova-Bold';
+    font-size: 15px;
+}
+
+
+.greenButton {
+    background-color: $main-green;
+    color: white;
+    cursor: pointer;
+    border-radius: 22px;
+    font-family: 'ProximaNova-Reg';
+    min-width: 200px;
+    min-height: 40px;
+    max-height: 40px;
+    max-width: 260px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+@media (max-width: 460px) {
+    .nopadding {
+        padding: 0px !important
+    }
+    .outer-div {
+        padding: 10px !important
+    }
+}
+
+@media screen and (min-width: 461px) and (max-width: 768px) {
+}
+
+::ng-deep div.star {
+    opacity: 1 !important;
+    top: 3px !important;
+
+}
+
+::ng-deep .rating {
+    display: inline-block !important;
+    justify-content: left !important;
+}
+
+.starSessionDetail {
+    line-height: 1.2;
+    position: relative;
+    display: inline-block;
+    color: #d3d3d3;
+    font-size: 1.2rem;
+    outline: none !important;
+}
+
+.full {
+    color: #d9ab28;
+
+}
+
+.halfSessionDetail {
+    position: absolute;
+    display: inline-block;
+    overflow: hidden;
+    color: #d9ab28 !important;
+}
+
+.right-arrow-icon {
+    color: white;
+    margin-right: 6px;
+    float: right;
+}

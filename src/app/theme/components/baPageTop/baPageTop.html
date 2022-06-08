@@ -1,0 +1,143 @@
+<nav *ngIf="login" class="navbar navbar-toggleable-md navbar-light bg-faded main-header myNavbar">
+    <button class="navbar-toggler navbar-toggler-right burgerBtn" type="button" (click)='collapseNavFunction()'
+            style="margin-top: 1%"
+            data-toggle="collapse" data-target="#navbarNavDropdownButonLogin1"
+            aria-controls="navbarNavDropdownButonLogin1" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <a (click)="browseTutor()" class="navbar-brand">
+        <!--        <img src="assets/img/logo.png" alt="Sylvan" title="Sylvan"/> -->
+
+        <img [src]="commonService.CONSTANT.headerLogo" alt="{{commonService.CONSTANT.PROJECT_NAME}}"
+             title="{{commonService.CONSTANT.PROJECT_NAME}}" class="top-header-logo"/>
+    </a>
+
+    <div class="collapse navbar-collapse navBack z-index" id="navbarNavDropdownButonLogin">
+        <ul class="navbar-nav navpadding ">
+            <li class="nav-item active ">
+                <a class="nav-link" (click)="browseTutor()">Browse Tutors <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" (click)="goToBookSesssion()">Book a Session</a>
+            </li>
+
+
+            <li class="nav-item  dropdown ">
+
+                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink1" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    My Sessions
+                    <span class="caret"></span>
+                    <!-- <span> <i  class="fa fa-fw fa-chevron-down"> </i></span> -->
+                </a>
+                <div class="dropdown-menu custommargin" aria-labelledby="navbarDropdownMenuLink1">
+
+                    <a class="dropdown-item" (click)="goToChildSession()">My Child’s Sessions</a>
+                    <a class="dropdown-item" (click)="goToFeedback()">Session Feedback</a>
+                    <a class="dropdown-item" (click)="goToSessionInvoice()">Invoice</a>
+                    <!--                     <a class="dropdown-item" (click)="goToDispute()">All Disputes</a>-->
+                </div>
+
+
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" (click)="closeMenu()" (click)="referFriend()">Refer a Friend</a>
+            </li>
+        </ul>
+
+
+        <ul class="navbar-nav ml-auto  rightPadding ">
+            <li class="nav-item dropdown ">
+                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+
+
+                    <img [(src)]="profilePicture" class="roundNavbar">
+                    <!-- <img *ngIf="sp_image" style="width:100px;height:100px;border-radius: 50%;"> -->
+                    <span *ngIf="name" class="elips"> {{name}} </span>
+                    <!-- <span> <i class="fa fa-fw fa-lg fa-chevron-down"> </i></span> -->
+                    <span class="caret"></span>
+                </a>
+                <div class="dropdown-menu custommargin" aria-labelledby="navbarDropdownMenuLink">
+
+                    <a class="dropdown-item" (click)="goToParentProfile()">My Profile</a>
+                    <a class="dropdown-item" (click)="goToPayments()">My Wallet</a>
+                    <a class="dropdown-item" (click)="goToContact()">Contact Us</a>
+                    <a class="dropdown-item" (click)="logout()">Sign Out</a>
+                </div>
+            </li>
+            <!-- <li class="nav-item active ">
+                <a class="nav-link" routerLink="/pages/profile/parent-profile">Profile <span class="sr-only">(current)</span></a>
+            </li> -->
+            <li class="nav-item ">
+
+
+                <a class="nav-link">
+                    <top-notification></top-notification>
+
+                </a>
+
+
+            </li>
+
+            <li class="nav-item ">
+
+
+                <a class="nav-link" (click)="faq()"> <span> <i class="fa fa-question-circle-o" aria-hidden="true"></i> Help </span>
+                </a>
+
+
+            </li>
+
+        </ul>
+    </div>
+</nav>
+
+<nav *ngIf="!login" class="navbar navbar-toggleable-md navbar-light bg-faded main-header myNavbar">
+    <button class="navbar-toggler navbar-toggler-right burgerBtn" type="button" data-toggle="collapse"
+            data-target="#navbarNavDropdownButton" aria-controls="navbarNavDropdownButton" aria-expanded="false"
+            aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <a (click)="browseTutor()" class="navbar-brand">
+        <!--        <img src="assets/img/logo.png" alt="Sylvan" title="Sylvan"/>-->
+        <img [src]="commonService.CONSTANT.headerLogo" alt="{{commonService.CONSTANT.PROJECT_NAME}}"
+             title="{{commonService.CONSTANT.PROJECT_NAME}}" class="top-header-logo"/>
+
+    </a>
+    <div class="collapse navbar-collapse navBack z-index" id="navbarNavDropdownButton">
+        <ul class="navbar-nav navpadding ">
+            <li class="nav-item active ">
+                <a class="nav-link" (click)="goToParentPanel()">Find a Tutor <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" (click)="becomeTutor()">Become a Tutor </a>
+            </li>
+            <li class="nav-item dropdown ">
+                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink2" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    How It Works
+                    <span class="caret"></span>
+                    <!-- <span> <i  class="fa fa-lg fa-fw fa-chevron-down"> </i></span> -->
+                </a>
+                <div class="dropdown-menu custommargin" aria-labelledby="navbarDropdownMenuLink2">
+                    <a class="dropdown-item" (click)="sylvanMethod()">The Sylvan Method</a>
+                    <a class="dropdown-item" (click)="parent()">Parent</a>
+                    <a class="dropdown-item" (click)="tutor()">Tutor</a>
+                </div>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" (click)="subjects()">Our Subjects</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav ml-auto rightPadding ">
+            <li class="nav-item active ">
+                <a class="nav-link" (click)="goToOnboard()">Sign In <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item  ">
+                <button class=" signUp pointer" (click)="goToSignup() "> Sign Up</button>
+            </li>
+
+        </ul>
+    </div>
+</nav>

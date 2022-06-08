@@ -1,0 +1,101 @@
+<div style="float:right;padding:0px;margin-bottom:0px" class="row" mat-dialog-title>
+    <button (click)="closeDialog()" style="border:none" class="close-btn pointer" mat-button mat-dialog-close="true">
+        <img src="assets/img/close.png">
+    </button>
+</div>
+<mat-dialog-content id="addr-dialog">
+    <!-- <div style="float:right" mat-dialog-title>
+        <button mat-button mat-dialog-close="true" style="border:none;background-color:white">
+        <i class="fa fa-times fa-fw fa-3xCross crossButton" aria-hidden="true"> </i>
+    </button>
+    </div> -->
+    <div id="addressDialog">
+
+        <h2 class="headings text-center">Confirm Location Details</h2>
+        <form [formGroup]="addressForm">
+            <div class="row">
+                <div class="col-12 col-lg-8 offset-lg-2 mt-4 ">
+                    <div class="inputBox1" [ngClass]="{'underline-red': ( (addressForm.controls['locationLabel'].errors?.required) && (!addressForm.controls['locationLabel'].pristine)) }">
+                        <label for="labelName" class="insideInput">Location Label</label>
+                        <!-- <input readonly *ngIf="addressesLength != undefined && addressesLength === 0   " ng style="border:none" [formControl]="locationLabel" type="text" class="form-control" class="form-control stepOneInput" /> -->
+                        <input autocomplete="off" [formControl]="locationLabel" type="text" [ngClass]="{'has-input-error': (!locationLabel.valid && (locationLabel.touched || submitted)),'has-success': (locationLabel.valid && locationLabel.touched)}" class="form-control" class="form-control stepOneInput"
+                        />
+                    </div>
+                    <!-- <div class="inputBox1" *ngIf="localStoragePresent">
+                        <label for="labelName" class="insideInput">Location Label</label>
+                        <input autocomplete="off" readonly *ngIf="canEdit " ng style="border:none" [formControl]="locationLabel" type="text" class="form-control" class="form-control stepOneInput" />
+                    </div> -->
+                    <div class="error-message sub-little-text" *ngIf="checkvalueError">
+                        You cannot set Label as Home
+                    </div>
+                    <div class="error-message sub-little-text" *ngIf="addressForm.controls['locationLabel'].errors?.required && !addressForm.controls['locationLabel'].pristine">
+                        Please enter a Location Label.
+                    </div>
+                </div>
+                <div class="col-12 col-lg-8 offset-lg-2 mt-4 ">
+                    <div class="inputBox1" [ngClass]="{'underline-red': ( (addressForm.controls['streetAdress1'].errors?.required) && (!addressForm.controls['streetAdress1'].pristine)) }">
+                        <label for="streetAdress1" class="insideInput">Street Address Line 1</label>
+                        <input autocomplete="off" ng style="border:none" [formControl]="streetAdress1" type="text" [ngClass]="{'has-input-error': (!streetAdress1.valid && (streetAdress1.touched || submitted)),'has-success': (streetAdress1.valid && streetAdress1.touched)}" class="form-control"
+                            class="form-control stepOneInput" />
+
+                    </div>
+                    <div class="error-message sub-little-text" *ngIf="addressForm.controls['streetAdress1'].errors?.required && !addressForm.controls['streetAdress1'].pristine">
+                        Street Field is required
+                    </div>
+                </div>
+                <div class="col-12 col-lg-8 offset-lg-2 mt-4 ">
+                    <div class="inputBox1">
+                        <label for="streetAdress2" class="insideInput">Street Address Line 2 (Optional)</label>
+                        <input autocomplete="off" [formControl]="streetAdress2" type="text" class="form-control stepOneInput" />
+                    </div>
+                </div>
+                <div class="col-12 col-lg-8 offset-lg-2 mt-4 ">
+                    <div class="inputBox1" [ngClass]="{'underline-red': ( (addressForm.controls['city'].errors?.required) && (!addressForm.controls['city'].pristine)) }">
+                        <label for="city" class="insideInput">City</label>
+                        <input autocomplete="off" style="border:none;" [formControl]="city" type="text" [ngClass]="{'has-input-error': (!city.valid && (city.touched || submitted)),'has-success': (city.valid && city.touched)}" class="form-control stepOneInput" />
+
+                    </div>
+                    <div class="error-message sub-little-text" *ngIf="addressForm.controls['city'].errors?.required && !addressForm.controls['city'].pristine">
+                        City is required
+                    </div>
+                </div>
+                <div class="col-12 col-lg-8 offset-lg-2 mt-4 ">
+                    <div class="row">
+                        <div class="col-12 col-lg-6">
+                            <div class="inputBox1" [ngClass]="{'underline-red': ( (addressForm.controls['state'].errors?.required) && (!addressForm.controls['state'].pristine)) }">
+                                <label style="padding-left:4%" for="state" class="insideInput">State</label>
+                                <input autocomplete="off" style="border:none;" [formControl]="state" [ngClass]="{'has-input-error': (!state.valid && (state.touched || submitted)),'has-success': (state.valid && state.touched)}" type="text" class="form-control stepOneInput" />
+
+                            </div>
+                            <div class="error-message sub-little-text" *ngIf="addressForm.controls['state'].errors?.required && !addressForm.controls['state'].pristine">
+                                State is required
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6">
+                            <div class="inputBox1" [ngClass]="{'underline-red': ( (addressForm.controls['zipCode'].errors?.required) && (!addressForm.controls['zipCode'].pristine)) }">
+                                <label style="padding-left:4%" for="Username" class="insideInput">Zip Code</label>
+                                <input maxlength="5" autocomplete="off" style="border:none;" [ngClass]="{'has-input-error': (!zipCode.valid && (zipCode.touched || submitted)),'has-success': (zipCode.valid && zipCode.touched)}" [formControl]="zipCode" type="text" class="form-control stepOneInput"
+                                />
+
+                            </div>
+                            <div class="error-message sub-little-text" *ngIf="addressForm.controls['zipCode'].errors?.required && !addressForm.controls['zipCode'].pristine">
+                                Zipcode is required
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+
+            </div>
+            <div class="row mt-4 mb-4 text-center">
+                <div class="col-12 col-lg-12">
+                    <button (click)="onSubmit2(addressForm.value)" class="loginButton arrow-btn pointer">Save Location &nbsp;
+                        <!-- <span style="color:white;margin-right:4px;float:right" class="hide"> -->
+                            <i class="fa fa-lg fa-arrow-right addressDialogArrow" aria-hidden="true"></i>
+                        <!-- </span> -->
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</mat-dialog-content>

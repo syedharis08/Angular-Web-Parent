@@ -1,0 +1,133 @@
+<div class="container mt-5" id="reschedule-detail">
+    <div class="last-step-outer-div" *ngIf="rescheduledBookingDetails && rescheduledBookingDetails !=undefined">
+
+
+        <!-- <div class="row justify-content-center mt-4 mb-4 status" [ngStyle]="{'background':  bookingDetails.status == 'NEW' ? '#d9ab28' : ( (bookingDetails.status === ('CANCELLED_BY_PARENT' || 'CANCELLED_BY_ADMIN' || 'CANCELLED_BY_TUTOR') ) ? '#e1134f' : '#227B14' ) }"
+            style="min-height:30px;color:white">
+            <label style="margin:auto"> {{bookingDetails.status ? (bookingDetails.status == 'NEW' ? 'PENDING' :( (bookingDetails.status === ('CANCELLED_BY_PARENT' || 'CANCELLED_BY_ADMIN' || 'CANCELLED_BY_TUTOR') ) ? 'CANCELLED' : bookingDetails.status ) ) :bookingDetails.status }} </label>
+        </div> -->
+
+
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"
+             style="background-color: #ffffff; border: solid 1px #dcdcdc;width:100%;">
+
+            <div style="padding:4%">
+                <table style="width:100%;">
+
+                    <tr *ngIf="rescheduledBookingDetails.studentId && rescheduledBookingDetails.studentId !=undefined">
+                        <td class="tutor-name-res">
+                            Child Name:
+                        </td>
+                        <td>
+                            <span class="comma"
+                                  class=" td-text capitalize">{{rescheduledBookingDetails.studentId.firstName  }} {{rescheduledBookingDetails.studentId.lastName ? ( rescheduledBookingDetails.studentId.lastName.substr(0, 1) + '.' ) : ''}} </span>
+                        </td>
+                    </tr>
+
+                    <tr *ngIf="rescheduledBookingDetails.tutorId && rescheduledBookingDetails.tutorId !=undefined">
+                        <td class="tutor-name-res">
+                            Tutor Name:
+                        </td>
+                        <td>
+                            <span
+                                class=" td-text capitalize">{{rescheduledBookingDetails.tutorId.firstName  }} {{rescheduledBookingDetails.tutorId.lastName ? ( rescheduledBookingDetails.tutorId.lastName.substr(0, 1) + '.' ) : ''}}</span>
+
+                        </td>
+                    </tr>
+
+                    <ng-container *ngIf="!rescheduledBookingDetails?.isBookingUseCredits">
+                        <tr *ngIf="rescheduledBookingDetails.payments && rescheduledBookingDetails.payments !=undefined">
+                            <td class="tutor-name-res">
+                                Total:
+                            </td>
+                            <td>
+                            <span
+                                class=" td-text"> ${{rescheduledBookingDetails.payments ? ( rescheduledBookingDetails.payments.total ).toFixed(2) : '0'}} </span>
+                            </td>
+                        </tr>
+                    </ng-container>
+
+                </table>
+            </div>
+
+        </div>
+
+
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"
+             style="background-color: #ffffff; border: solid 1px #dcdcdc;width:100%;">
+
+            <div style="padding:4%;">
+                <table style="width:100%;">
+                    <tr *ngIf="rescheduledBookingDetails.startTime && rescheduledBookingDetails.startTime !=undefined &&  rescheduledBookingDetails.endTime && rescheduledBookingDetails.endTime !=undefined">
+                        <td class="tutor-name-res font16" style="vertical-align:top; ">
+                            Date and Time:
+                        </td>
+                        <td>
+                    <tr>
+                        <td><span style="color:#116DB4">  Original:&nbsp; </span></td>
+                        {{rescheduledBookingDetails.startTime | datex: "MMM. D, YYYY"}} {{rescheduledBookingDetails.startTime | datex:"h:mmA"}}
+                        -{{rescheduledBookingDetails.endTime | datex:"h:mmA"
+                        }}
+                    </tr>
+                    <tr *ngIf="reschedule_startTime != undefined && reschedule_endTime != undefined">
+                        <td><span style="color:#116DB4">  Proposed:&nbsp; </span></td>
+                        <span
+                            class="comma  pinkText"> {{reschedule_startTime}}{{reschedule_startTime ? '-' : ''}}{{reschedule_endTime }} </span>
+                    </tr>
+                    </td>
+                    </tr>
+                    <tr>
+                        <td class="tutor-name-res">
+                            Subjects:
+                        </td>
+                        <td>
+                            <span *ngFor="let subjects of rescheduledBookingDetails.subjects;let comma=last;"
+                                  class=" td-text">
+                                    <span *ngIf="subjects.subcategories && subjects.subcategories.length>0">    <span
+                                        *ngFor="let subSubjects of subjects.subcategories;let i=index;let last =last; "
+                                        class="">
+                                         {{subSubjects.name}}{{( last && comma ) ? '' : ','}}&nbsp;  </span>
+                            </span>
+                            </span>
+                        </td>
+                    </tr>
+
+                    <tr *ngIf="rescheduledBookingDetails.locationDetails && rescheduledBookingDetails.locationDetails !=undefined">
+                        <td class="tutor-name-res" style="vertical-align: top;
+                        padding-top: 0.8%;">
+                            Location:
+                        </td>
+                        <td>
+                            <span class=" td-text">{{rescheduledBookingDetails.locationDetails.addressLine1}}</span>
+                            <br>
+                            <span class=" td-text">{{rescheduledBookingDetails.locationDetails.addressLine2}}</span>
+                            <br>
+
+                            <span class=" td-text"> {{rescheduledBookingDetails.locationDetails.city}}
+                                , {{rescheduledBookingDetails.locationDetails.state}} {{rescheduledBookingDetails.locationDetails.zipCode}} </span>
+                        </td>
+                    </tr>
+                    <ng-container *ngIf="!rescheduledBookingDetails?.isBookingUseCredits">
+                        <tr *ngIf="rescheduledBookingDetails.payments && rescheduledBookingDetails.payments !=undefined">
+                            <td class="tutor-name-res">
+                                Total:
+                            </td>
+                            <td>
+                            <span
+                                class=" td-text"> ${{rescheduledBookingDetails.payments ? ( rescheduledBookingDetails.payments.total ).toFixed(2) : '0'}} </span>
+                            </td>
+                        </tr>
+                    </ng-container>
+
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row justify-content-center mt-4 mb-4">
+        <button style="width: 300px" class="loginButton   " (click)="confirmRescheduling()"> Confirm Reschedule Request
+            <span style="color:white;margin-right:6px;float:right "> <i class="fa fa-lg fa-arrow-right "
+                                                                        aria-hidden="true "></i></span></button>
+    </div>
+</div>

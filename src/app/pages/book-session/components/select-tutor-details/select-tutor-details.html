@@ -1,0 +1,415 @@
+<div class="container-fluid mt-4 mycontainer-fluid" style="padding-left:7%;padding-right:7%; padding-top:2%;">
+
+
+    <div *ngIf="tutor_details" class="mb-2 tutor_details_1"
+         style="background-color:white;box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.11);padding-right:2rem">
+        <div class="row myRow tutor_details_1_inner">
+            <!-- tutors detials -->
+            <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12 mt-4 mb-4 text-center">
+                <div class=" justify-content-center ">
+                    <img
+                        [(src)]="(tutor_details.profilePicture && tutor_details.profilePicture.thumbnail) ?tutor_details.profilePicture.thumbnail: tutor_image"
+                        class="roundImage-tutor">
+                </div>
+            </div>
+            <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12 mt-4 mb-4 ">
+                <div class="row myRow">
+                    <h2 class="select-tutor-detail-heading select-tutor-detail-heading-new" style="text-align:left">
+                        <span class="tutor-name  proximanova-bold font-24 "> {{tutor_details ? tutor_details.firstName
+                            : 'N/A'}} {{tutor_details.lastName ? ( tutor_details.lastName.substr(0, 1) + '.' ) : ''}}&nbsp;
+                        </span>
+                        <span placement="bottom" [ngbTooltip]="bgCheck" class="mr-2"> <img class="certificate-icons"
+                                                                                           [(src)]="certi_bgCheck"> </span>
+                        <span placement="bottom" [ngbTooltip]="degreeCheck"
+                              *ngIf="tutor_details.tutor && tutor_details.tutor.educationalDegrees && tutor_details.tutor.educationalDegrees.length>0"
+                              class="mr-2"> <img class="certificate-icons" [(src)]="certi_degCheck"> </span>
+                        <span placement="bottom" [ngbTooltip]="syncEnable"
+                              *ngIf="tutor_details.tutor && tutor_details.tutor.sylvanSyncEnabled == true" class="mr-2">
+                            <img class="certificate-icons" [(src)]="certi_sylCheck"> </span>
+                        <span placement="bottom" [ngbTooltip]="adminCertified"
+                              *ngIf="tutor_details.tutor && tutor_details.tutor.adminCertified == true"
+                              class="mr-2"> <img
+                            style="margin-top: 3px;" class="certificate-icons" [(src)]="certi_stateCheck"> </span>
+                        <span placement="bottom" [ngbTooltip]="onlineSessionD"
+                              *ngIf="tutor_details.tutor && tutor_details.tutor.isTutorOfferOnlineClasses == true"
+                              class="mr-2"> <img class="certificate-icons" [(src)]="onlineSessions"> </span>
+
+                    </h2>
+
+
+                </div>
+                <ng-template #bgCheck class="mt-2 p-4">
+                    <h2 class="font-16"> Background Check</h2>
+                    <p class="font-14">
+                        We require every tutor to successfully pass a secure, third-party background check prior to
+                        becoming a {{commonService.CONSTANT.PROJECT_NAME}} tutor. We also re-check each tutor every year.
+                    </p>
+                </ng-template>
+                <ng-template #degreeCheck class="mt-2 p-4">
+                    <h2 class="font-16"> Degrees</h2>
+                    <p class="font-14">
+                        All of our tutors have at least a four-year college degree. Review each tutor's profile to see
+                        his or her educational background and degree credentials.
+                    </p>
+                </ng-template>
+                <ng-template #syncEnable class="mt-2 p-4">
+                    <h2 class="font-16"> Certified in the Sylvan Method</h2>
+                    <p class="font-14">
+                        Tutors who are Certified in the Sylvan Method have completed additional product training and
+                        have access to SylvanSync, our digital learning platform, which provides personalized and
+                        adaptive learning targeted to your child’s needs in reading and math.
+                    </p>
+                </ng-template>
+                <ng-template #adminCertified class="mt-2 p-4">
+                    <h2 class="font-16"> Teacher State Certification</h2>
+                    <p class="font-14">
+                        Tutors with a state teaching certification have the distinction of meeting strict
+                        qualifications in the state where they hold their certificate. State teaching certificates
+                        ensure a standard of teaching expertise and experience.
+                    </p>
+                </ng-template>
+                <ng-template #onlineSessionD class="mt-2 p-4">
+                    <h2 class="font-16">Offers Online Tutoring</h2>
+                    <p class="font-14">
+                        This tutor provides live 1:1 online instruction. Online sessions are delivered through a
+                        reliable and proven platform.
+                    </p>
+                </ng-template>
+                <div id="starRating2" class="row myRow mobile-justify-center mt-2 "
+                     *ngIf="tutor_details.tutor && tutor_details.tutor.ratedCount != undefined">
+                    <!-- <star-rating-comp *ngIf="tutor_details.tutor.ratedCount >0" [readOnly]="true" [staticColor]="'ok'"
+                        [starType]="'svg'" [rating]="roundOff(tutor_details.tutor.avgRating)"></star-rating-comp> -->
+                    <!-- <ngb-rating (click)="moveToRating()" *ngIf="tutor_details.tutor.ratedCount >0"
+                        class="filter-stars starsInside" [rate]="roundOff(tutor_details.tutor.avgRating)" [max]="5"
+                        [readonly]="true"></ngb-rating> -->
+                    <ng-template #t let-fill="fill">
+                        <span class="starSelectDetails" [class.full]="fill === 100">
+                            <span class="halfSelectDetails" [style.width.%]="fill">&#9733;</span>&#9733;
+                        </span>
+                    </ng-template>
+
+                    <ngb-rating (click)="moveToRating()" class="starsInside"
+                                [rate]="roundOff(tutor_details.tutor.avgRating)" [starTemplate]="t" [readonly]="true"
+                                max="5">
+                    </ngb-rating>
+                    <!-- <star-rating style="margin-left: -5px;" [showHalfStars]="true" [disabled]="true"    [starType]="'svg'" [rating]="tutor_details.tutor.avgRating"></star-rating> -->
+
+                    <span (click)="moveToRating()"
+                          style="margin-top: -2px; margin-left: 5px; cursor: pointer; color:black"
+                          *ngIf="tutor_details.tutor && tutor_details.tutor != undefined && tutor_details.tutor.ratedCount >0 "
+                          class="pinkText marginMobileDetails ">{{tutor_details.tutor.avgRating | number:'1.1-1'}}
+                        ({{tutor_details.tutor.ratedCount}})
+                    </span>
+                    <!-- <span *ngIf="tutor_details.tutor && tutor_details.tutor != undefined && (!tutor_details.tutor.ratedCount)" class="pinkText ">   ( No Reviews ) </span> -->
+
+                </div>
+                <div class="row myRow tutor-place-text mobile-justify-center mt-2 proximanova-semibold font-16">
+                    {{( tutor_details.tutor && tutor_details.tutor.locationDetails &&
+                    tutor_details.tutor.locationDetails.city != undefined ) ? ( tutor_details.tutor.locationDetails.city +
+                    ',' ) : '' }} {{( tutor_details.tutor && tutor_details.tutor.locationDetails ) ?
+                    tutor_details.tutor.locationDetails.state
+                    : '' }}
+                </div>
+                <div class="row myRow tutor-details-text proximanova-reg mobile-justify-center  ">
+                    <span style="    width: 100%;
+                    word-wrap: break-word;" class=" proximanova-reg font-16">
+                        <strong>Travel Policy:</strong> <span class="tutor-details-text font-15 proximanova-reg "> I
+                            will travel up to {{tutor_details.tutor ? tutor_details.tutor.maxDistance : 'N/A'}} miles.
+                        </span> </span>
+                </div>
+                <div class="row myRow tutor-details-text proximanova-reg font-15 mobile-justify-center mt-2 ">
+                    <span> {{( tutor_details.tutor && tutor_details.tutor.profileHeadLine != undefined ) ?
+                        tutor_details.tutor.profileHeadLine : ''}} </span>
+                </div>
+
+            </div>
+            <div class="col-lg-3 col-md-5 col-sm-12 col-xs-12 mt-4 mb-4" style="padding-right:2%">
+                <div class="row myRow text-center" *ngIf="!isRateChargeSuppressNow">
+                    <h2 class="tutor-detail-heading" style="text-align:right">
+                        <span *ngIf="!hasPartnerCode"
+                              class="tutor-name proximanova-bold font-24 "> ${{( tutor_details.tutor &&
+                            tutor_details.tutor.hourlyRate != undefined ) ? ( tutor_details.tutor.hourlyRate ).toFixed(2) :
+                            'N/A'}}/hr </span>
+                        <span *ngIf="hasPartnerCode"
+                              class="tutor-name proximanova-bold font-24 "> ${{( hourlyRate ).toFixed(2)}}/hr </span>
+                    </h2>
+                </div>
+                <!-- <div *ngIf="tutor_details.tutor && tutor_details.tutor != undefined && tutor_details.tutor.subjects && tutor_details.tutor.subjects != undefined && tutor_details.tutor.subjects.length >0 " style="margin-top:.5rem;margin-bottom:.5rem;float:right;padding-right: 1rem;"
+                    class="row myRow">
+                    <div class="row" style="display: block;text-align:right;">
+                        <span *ngIf="tutor_details.tutor.subjects && tutor_details.tutor.subjects.length >0" style="color: #232f84; width:auto;text-align:right;; letter-spacing: 0.4px;" class="proximanova-semibold font-16"> Subjects Tutored:&nbsp; </span>
+                        <span *ngFor="let subject of tutor_details.tutor.subjects;let comma=last; " class="word-break " style="width:auto;line-height:1.5">
+                            <span *ngIf="subject && subject.subcategories != undefined" style=" text-align:right;letter-spacing: 0.4px;" >
+                                    <span style="color:#231f20;width:auto;" *ngFor="let subsubject of subject.subcategories;let i= index;let last=last" class="proximanova-semibold font-16">
+
+                                            {{subsubject? subsubject.name :'' }}{{(last && comma)?'':','}}&nbsp;
+
+                                        </span>
+
+
+                        </span>
+                        </span>
+
+                    </div>
+                </div> -->
+                <div class="row myRow justify-content-center float-right">
+                    <button class="loginButton half-width-btn pointer mobileGoButton" (click)="selectTutor()">Select
+                        Tutor<span style="color:white;margin-right:6px;float:right"> <i class="fa fa-lg fa-arrow-right"
+                                                                                        aria-hidden="true"></i></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="row myRow ">
+            <div class=" offset-md-1 offset-lg-2 col-lg-5 col-md-5 col-xs-12 col-sm-12">
+                <div class="row myRow mt-4">
+                    <h5>
+                        <span class="tutor-name proximanova-bold  font-16"> About Me</span>
+                    </h5>
+
+                    <span class="tutor-details-text proximanova-reg font-15"
+                          style=" max-width: 100%; word-wrap: break-word;">
+                        {{( tutor_details.tutor && tutor_details.tutor.aboutMe != undefined ) ?
+                        tutor_details.tutor.aboutMe : 'N/A'}} </span>
+
+                </div>
+                <div class="row myRow mt-4">
+                    <div style="display:grid">
+
+
+                        <h5><span class="tutor-name font-16 proximanova-bold">Qualifications & Offerings</span></h5>
+                        <span class="mr-2 mt-2"> <img class="certificate-icons mt-1px" [(src)]="certi_bgCheck"> <span
+                            class="tutor-details-text proximanova-reg font-15"> Background Check </span> </span>
+                        <span
+                            *ngIf="tutor_details.tutor && tutor_details.tutor.educationalDegrees && tutor_details.tutor.educationalDegrees.length>0"
+                            class="mr-2 mt-2 tutor-details-text  proximanova-reg font-15"> <img
+                            class="certificate-icons mt-1px" [(src)]="certi_degCheck">
+                            <span style="font-weight:bold;" class="tutor-details-text  proximanova-reg font-15">
+                                Education </span> <br>
+                            <!-- <span style="font-family: 'ProximaNova-Light';padding-left:2%;" *ngFor=" let degree of tutor_details.tutor.educationalDegrees ">
+                                {{degree.intstitutionName ? degree.intstitutionName + '' : ''}} &  {{degree.degree ? degree.degree : ''}}
+
+
+                        </span> -->
+                            <span *ngFor=" let degree of tutor_details.tutor.educationalDegrees ">
+                                <span class="display-list proximanova-reg font-15"
+                                      style="width: 100%;margin-bottom:10px;">
+                                    {{degree.intstitutionName ? degree.intstitutionName : ''}} <br>
+                                    {{degree.degree ? ( degree.degree + ', ' ) : ''}} {{degree.subject ? degree.subject :
+                                    ''}}
+
+
+                                </span>
+                            </span>
+                        </span>
+                        <span *ngIf="tutor_details.tutor && tutor_details.tutor.sylvanSyncEnabled == true"
+                              class="mr-2 mt-2">
+                            <img class="certificate-icons mt-1px" [(src)]="certi_sylCheck"> <span
+                            class="tutor-details-text proximanova-reg font-15">
+                                Certified in the Sylvan Method </span> </span>
+                        <span *ngIf="tutor_details.tutor && tutor_details.tutor.adminCertified == true"
+                              class="mr-2 mt-2">
+                            <img class="certificate-icons mt-1px" [(src)]="certi_stateCheck"> <span
+                            class="tutor-details-text proximanova-reg font-15">
+                                State Certified Teacher </span> </span>
+                        <span *ngIf="tutor_details.tutor && tutor_details.tutor.isTutorOfferOnlineClasses == true"
+                              class="mr-2 mt-2">
+                            <img class="certificate-icons" [(src)]="onlineSessions"> <span
+                            class="tutor-details-text font-15 proximanova-reg">
+                                Offers Online Tutoring </span> </span>
+                    </div>
+
+                </div>
+                <!-- <div class="row myRow mt-4">
+                    <h5>
+                        <span class="tutor-name proximanova-bold font-16"> Travel Policy</span>
+                    </h5>
+
+                    <span class="tutor-details-text proximanova-reg font-15">  I will travel up to  {{tutor_details.tutor ? tutor_details.tutor.maxDistance : 'N/A'}} miles.  </span>
+
+                </div> -->
+                <br>
+                <br>
+
+
+            </div>
+            <div class="  col-lg-3 col-md-5 col-xs-12 col-sm-12">
+
+                <div
+                    *ngIf="tutor_details.tutor && tutor_details.tutor != undefined && tutor_details.tutor.subjects && tutor_details.tutor.subjects.length >0  && tutor_details.tutor.subjects != undefined"
+                    class="row myRow mt-4 ">
+                    <h5><span class="tutor-name proximanova-bold font-16"> Subjects Tutored:</span></h5>
+                    <div>
+                        <span *ngFor="let subject of tutor_details.tutor.subjects;let comma=last" class=""> <span
+                            *ngIf="subject && subject.subcategories != undefined" style="line-height:1.71">
+                                <span class=" " *ngFor="let subsubject of subject.subcategories; let last=last"
+                                      class="proximanova-reg font-15">
+                                    {{subsubject ? subsubject.name : '' }}{{( last && comma ) ? '' : ',' }}&nbsp;
+                                </span>
+                            </span>
+                        </span>
+
+                    </div>
+                    <!-- <span *ngFor="let subject of tutor_details.tutor.subjects" class="bold-text">  <span *ngIf="subject && subject.subcategories != undefined">
+                        <span class="bold-text comma capitalize"  *ngFor="let subsubject of subject.subcategories" >
+                            {{subsubject? subsubject.name :'' }}
+                        </span>
+                    </span>
+                    </span> -->
+
+
+                </div>
+                <div class="row myRow mt-4">
+                    <h5><span class="tutor-name proximanova-bold font-16" style=""> Grades Tutored</span></h5>
+                    <div>
+                        <span class=" proximanova-reg font-15 "
+                              *ngFor="let grade of tutor_details.tutor.gradeLevel;let last=last">
+                            {{ grade ? grade : 'N/A' }}{{last ? '' : ','}}&nbsp; </span>
+
+                    </div>
+
+                </div>
+                <!-- <div class="row myRow mt-4">
+                    <h5> <span class="tutor-name proximanova-bold font-16" style=""> Other Location Options</span> </h5>
+                    <div class="comma proximanova-reg font-15 " style="width: 100%;display: block;    line-height: 1.5;" *ngFor="let address of tutor_details.tutor.publicAddresses; let i = index"> {{ address.label ? address.label : 'N/A' }} </div>
+
+                </div> -->
+                <div class="row myRow mt-4 ">
+                    <h5><span class="tutor-name proximanova-bold font-16"> Cancelation Policy </span></h5>
+
+
+                    <span class="proximanova-reg font-15" style="line-height:1.5"
+                          *ngIf="!isRateChargeSuppressNow"
+                    > {{tutor_details.tutor &&
+                    tutor_details.tutor.cancellationPolicy ? tutor_details.tutor.cancellationPolicy.text : ''}}
+                    </span>
+
+                    <span class="tutor-details-text font-15 proximanova-reg " style="line-height:1.5"
+                          *ngIf="isRateChargeSuppressNow">
+                        Per the parent employer agreement, if a parent cancels a scheduled session within
+                        {{tutor_details?.tutor?.cancellationPolicy?.cancelsLessThan}} hours of
+                        the start time, or the student is a no show with no prior communication,
+                        the entire tutoring hour will be considered used.
+                    </span>
+
+
+                </div>
+
+
+            </div>
+        </div>
+        <br>
+
+        <br>
+        <br>
+        <div id="starRatingDown" *ngIf="tutor_details.tutor && tutor_details.tutor.avgRating !=undefined "
+             class="row myRow mt-4 ">
+            <div class="offset-lg-2 offset-md-4 offset-2 thisPlace" style="display:inline-flex;padding-left:1%;">
+                <!-- <star-rating-comp *ngIf="tutor_details.tutor.ratedCount >0 && tutor_details.tutor.avgRating !=undefined"
+                    [readOnly]="true" [staticColor]="'ok'" [starType]="'svg'" [rating]="roundOff(tutor_details.tutor.avgRating)"></star-rating-comp> -->
+                <!-- <ngb-rating *ngIf="tutor_details.tutor.ratedCount >0" class="filter-stars1"
+                    [rate]="roundOff(tutor_details.tutor.avgRating)" [max]="5" [readonly]="true"></ngb-rating> -->
+
+
+                <ng-template #t let-fill="fill">
+                    <span class="starSelectDetailsDown" [class.full]="fill === 100">
+                        <span class="halfSelectDetailsDown" [style.width.%]="fill">&#9733;</span>&#9733;
+                    </span>
+                </ng-template>
+
+                <ngb-rating [rate]="roundOff(tutor_details.tutor.avgRating)" [starTemplate]="t" [readonly]="true"
+                            max="5">
+                </ngb-rating>
+                <!-- <star-rating style="margin-left: -5px;" [showHalfStars]="true" [disabled]="true"    [starType]="'svg'" [rating]="tutor_details.tutor.avgRating"></star-rating> -->
+                <span *ngIf="tutor_details.tutor.ratedCount && tutor_details.tutor.ratedCount >0 "
+                      class="pinkText proximanova-reg font-15 marginMobileDetails1"
+                      style="margin-top: -3px; margin-left: 4px; color:black">
+                    {{tutor_details.tutor.avgRating | number:'1.1-1'}} ({{tutor_details.tutor.ratedCount}})</span>
+            </div>
+        </div>
+        <div *ngIf="tutor_details_ratings && tutor_details_ratings !=undefined" class="row myRow mt-4 ">
+            <div *ngFor=" let review of tutor_details_ratings "
+                 class=" offset-md-2 offset-lg-2 col-lg-9 col-md-9 col-xs-12 col-sm-12 mt-4">
+                <div class="row myRow mt-2 mb-2">
+                    <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12 col-4">
+                        <div
+                            *ngIf="review.parentId && review.parentId != undefined && review.parentId.profilePicture && review.parentId.profilePicture !=undefined"
+                            class=" justify-content-center ">
+                            <img *ngIf="review.parentId.profilePicture.thumbnail != null"
+                                 [(src)]="review.parentId.profilePicture.thumbnail" class="roundImage-tutor-review">
+                            <img *ngIf="review.parentId.profilePicture.thumbnail === null" [(src)]="tutor_image"
+                                 class="roundImage-tutor-review">
+                        </div>
+                    </div>
+                    <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 col-8" style="padding-left:3%">
+                        <div class="row myRow">
+                            <h4>
+                                <span class="tutor-name-review" style="  font-family: 'ProximaNova-Reg';
+                                font-size: 15px;
+                                font-weight: bold;
+                                font-style: normal;
+                                font-stretch: normal;
+                                line-height: 1.88;
+                                letter-spacing: normal;
+                                text-align: left;
+                                color: #34495e;">
+                                    {{review.parentId ? review.parentId.firstName : '' }} {{review.parentId ?
+                                    review.parentId.lasttName : '' }}</span>
+                            </h4>
+                        </div>
+                        <div class="row myRow">
+                            <h4>
+                                <span class="tutor-name-review" style="color:#34495e; font-family:'ProximaNova-Reg';
+                                font-size: 14px;
+                                font-weight: normal;
+                                font-style: normal;
+                                font-stretch: normal;
+                                line-height: normal;
+                                letter-spacing: normal;
+                                text-align: left;
+                                opacity: 0.4;
+                               ">
+                                    {{review.updatedAt ? ( review.updatedAt | datex: "MMM. D, YYYY" ) : ''}} |
+                                    {{review.updatedAt ? ( review.updatedAt | datex:"h:mmA" ) : ''}} </span>
+                            </h4>
+                        </div>
+                        <div id="starRatingDown" class="row myRow">
+                            <!-- <star-rating-comp style="margin-left:-1%;" [readOnly]="true" [staticColor]="'ok'"
+                                [starType]="'svg'" [rating]="review.rating"></star-rating-comp> -->
+                            <!-- <ngb-rating class="filter-stars1" [rate]="review.rating" [max]="5" [readonly]="true">
+                            </ngb-rating> -->
+                            <ng-template #t let-fill="fill">
+                                <span class="starSelectDetailsDown" [class.full]="fill === 100">
+                                    <span class="halfSelectDetailsDown" [style.width.%]="fill">&#9733;</span>&#9733;
+                                </span>
+                            </ng-template>
+
+                            <ngb-rating [rate]="review.rating" [starTemplate]="t" [readonly]="true" max="5">
+                            </ngb-rating>
+                            <!-- <star-rating style="margin-left: -5px;" [showHalfStars]="true" [disabled]="true"    [starType]="'svg'" [rating]="review.rating"></star-rating> -->
+                        </div>
+                        <div class="row myRow">
+                            <span class="tutor-details-text"> {{review.feedback}}
+                            </span>
+                        </div>
+
+
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+        <br>
+        <div [hidden]="tutorLength === count" class="mt-4 text-center">
+            <button (click)="loadMore()" class="load-more"> Load More</button>
+        </div>
+
+        <br>
+    </div>
+
+
+</div>
+<router-outlet></router-outlet>

@@ -1,0 +1,96 @@
+@import "../../../../theme/sass/conf/conf";
+
+.session-all {
+    background-color: #f2f4f5;
+    // margin-top: -70px;
+    min-height: 490px;
+}
+
+.blue-text-bold {
+    font-size: 17px;
+}
+
+.status-details {
+    background-color: #ffffff;
+}
+
+.mat-card-title {
+    margin-bottom: 0px;
+}
+
+.pagination {
+    display: inline-flex;
+}
+
+.greenButton {
+    background-color: $main-green;
+    color: white;
+    border-radius: 22px;
+    font-family: 'ProximaNova-Reg';
+    min-width: 200px;
+    min-height: 40px;
+    max-height: 40px;
+    max-width: 260px;
+    font-size: 18px;
+    line-height: 1.7;
+    cursor: pointer;
+}
+
+.notification-head {
+    opacity: 0.6;
+    // font-family: 'ProximaNova-Reg';
+    font-size: 14px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.4;
+    letter-spacing: normal;
+    text-align: left;
+    color: #0c0c0c;
+}
+
+.tutor-place-text-notification {
+    font-family: 'ProximaNova-Reg';
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.4;
+    letter-spacing: normal;
+    text-align: left;
+    color: #231f20;
+}
+
+.status-data {
+    font-family: 'ProximaNova-Reg';
+    font-size: 15px;
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #232f84;
+}
+
+.status-title {
+    font-family: 'ProximaNova-Light';
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #000000;
+}
+
+@media (max-width:768px) {
+    .displaySmall {
+        position: absolute;
+        right: 20px;
+        top: 24px;
+    }
+}
+
+@media (min-width:769px) and (max-width:1024px) {}

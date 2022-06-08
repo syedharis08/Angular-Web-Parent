@@ -1,0 +1,35 @@
+<div style="float:right;padding:0px" class="row" mat-dialog-title>
+    <button (click)="closeDialog()" style="border:none" class="close-btn" mat-button mat-dialog-close="true">
+        <img src="assets/img/close.png">
+    </button>
+</div>
+<mat-dialog-content>
+    <!-- <div style="float:right" mat-dialog-title>
+        <button (click)="closeDialog()" style="border:none" mat-button mat-dialog-close="true">
+            <i class="fa fa-times fa-fw fa-3xCross crossButton" aria-hidden="true"> </i>
+        </button>
+    </div> -->
+    <div class="myContainer">
+                <h3 class="headings text-center">Oops! We still need some more information in your profile in order to book a session.</h3>
+        <div class="col-sm-12  col-md-12  text-center col-xs-12 col-lg-12">
+<!--            <label class="mt-4 dialogText">Oops! We still need some more information in your profile in order to book a-->
+<!--                session.</label>-->
+
+            <!--            <label class="mt-4 dialogText"> Please visit My Profile to complete and continue booking.</label>-->
+            <label class="mt-4 dialogText" style="font-weight: normal">Please visit My Profile to provide all required information, including home
+                address and details about your child. Once your profile is complete, you may continue booking!</label>
+
+        </div>
+        <div class="row text-center mt-4 mb-4">
+
+            <div class=" col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <button (click)="goToProfile()" style="max-width:230px" class="pinkButton half-width-btn arrow-btn">OK
+                    <!-- <span style="color:white;margin-right:6px;float:right"> -->
+                    <i class="fa fa-lg fa-arrow-right" aria-hidden="true"></i>
+                    <!-- </span> -->
+                </button>
+            </div>
+        </div>
+
+    </div>
+</mat-dialog-content>

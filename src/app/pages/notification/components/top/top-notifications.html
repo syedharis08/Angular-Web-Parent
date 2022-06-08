@@ -1,0 +1,65 @@
+<ul class="clearfix top-notification">
+    <li class="dropdown">
+        <a href class="dropdown-toggle" id="msg-dd1" data-toggle="dropdown" aria-expanded="false">
+            <span> <i
+                class="fa fa-fw fa-lg fa fa-envelope"> </i>({{ unreadNotificationCount ? unreadNotificationCount : 0 }}) </span>
+        </a>
+
+        <div class="top-dropdown-menu dropdown-menu custommargin" aria-labelledby="msg-dd1">
+            <i class="dropdown-arr"></i>
+
+            <div class="header clearfix">
+                <strong>Notifications</strong>
+                <!-- <a style="cursor: pointer" (click)="clearAllNotification()">Clear All Notifications</a> -->
+                <!-- <a href>Settings</a> -->
+            </div>
+            <div style="cursor: pointer" class="msg-list">
+                <a *ngFor="let msg of allComingNotifications" class="clearfix" (click)="read(msg)"
+                   [ngStyle]="{'background': (msg && msg !=undefined &&  msg.isRead ) ? '#f7f7f7' : '#116DB4' }">
+                    <div class="msg-area">
+                        <div class="col-12 col-sm-12">
+                            <div class="row">
+
+                                <div style="display: flex; padding: 0 10px" class="col-12 col-sm-12">
+                                    <div style="margin: auto 0; text-align: justify">
+                                        <span class="capitalize notification-family"
+                                              [ngStyle]="{'color': (msg && msg !=undefined &&  msg.isRead ) ? '#232f84' : '#ffffff' }">  {{msg.header}} </span>
+                                        <div style="margin-top: -1px;padding-top: 3px;" class="smallNotification"
+                                             [ngStyle]="{'color': (msg && msg !=undefined &&  msg.isRead ) ? '#232f84' : '#ffffff' }">
+                                            <!-- <img class="_10cu img _8o _8r img" src="https://static.xx.fbcdn.net/rsrc.php/v3/yj/r/AN4PFNRulRD.png" alt=""> -->
+                                            {{( msg.createdAt| datex:"MMM. D" ) + ' at ' + ( msg.createdAt| datex:"h:mmA" )}}
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <!--                <span style="max-width: 100%">{{ msg.createdAtFormatted }}</span> -->
+
+                </a>
+
+            </div>
+
+            <a *ngIf="allComingNotifications && allComingNotifications.length == 0" class="clearfix"
+               style="cursor: default; background-color: transparent">
+                <div class="msg-area">
+                    <div class="col-12 col-sm-12">
+                        <div class="row">
+                            <div style="display: flex; padding: 0" class="col-12 col-sm-12">
+                                <div style="margin: auto; text-align: justify">
+                                    No notifications found.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+            <a style="font-weight: 500; color: white;background-color:#116DB4" (click)="goToAllNotification()">See
+                all</a>
+        </div>
+    </li>
+</ul>

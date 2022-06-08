@@ -1,0 +1,123 @@
+<div style="float:right;padding:0px;margin-bottom:0px" class="row" mat-dialog-title>
+    <button (click)="closeDialog()" style="border:none" class="close-btn" mat-button mat-dialog-close="true">
+        <img src="assets/img/close.png">
+    </button>
+</div>
+<mat-dialog-content>
+
+    <div class="myContainerContact mb-4" *ngIf="Data && Data !=undefined">
+        <h2 *ngIf="!ratedTutor && (this.notificationType === 'FINISHED') " style="margin-top: 34px;"
+            class="headings topSpace text-center mb-4">Session Summary <br> Review and Approve</h2>
+        <h2 *ngIf="!ratedTutor && (this.notificationType === 'COMPLETED') " class="headings text-center mb-4"> Rate Your
+            Tutor</h2>
+
+        <div class="col-sm-12  col-md-12   col-xs-12 col-lg-12 mt-4 bookinginfo">
+            <p> {{originalStartTime}}-{{originalEndTime}}</p>
+            <p *ngIf="Data.student && Data.student !=undefined " class="capitalize">
+                Child: {{Data.student.firstName }} {{Data.student.lastName ? Data.student.lastName : ''}}</p>
+            <p *ngIf="Data.tutor && Data.tutor !=undefined " class="capitalize">
+                Tutor: {{Data.tutor.firstName }} {{Data.tutor.lastName ? Data.tutor.lastName : ''}}</p>
+            <p *ngIf="Data.booking && Data.booking !=undefined ">Subject:
+                <span *ngFor="let subjects of Data.booking.subjects;let comma=last" class="status-data  font-16 ">
+                    <span class="status-data font-16   "
+                          *ngIf="subjects.subcategories && subjects.subcategories.length>0">
+                        <span *ngFor="let subSubjects of subjects.subcategories;let i=index;let last=last; "
+                              class="status-data font-16 "> {{subSubjects.name}}{{( last && comma ) ? '' : ', '}}&nbsp; </span>
+                    </span>
+                </span>
+            </p>
+            <p>Start Time: {{startTime }}</p>
+            <p>End Time: {{endTime}}</p>
+            <p>Actual Session Length: {{sessionlength}} {{hours}} </p>
+
+            <!--            {{Data?.booking?.payments?.paymentStatus}}-=- -->
+
+<!--            {{Data?.booking?.isBookingUseCredits|json}}0-0- -->
+            <ng-container *ngIf="!Data?.booking?.isBookingUseCredits">
+                <p>Total Amount: ${{totalAmount.toFixed(2)}} </p>
+            </ng-container>
+
+
+
+        </div>
+        <div *ngIf="!ratedTutor" [hidden]="this.notificationType === 'DISPUTE_RAISED'"
+             class="col-sm-12 col-md-12  col-xs-12 col-lg-12 mt-4 flexvertical">
+
+            <h2 class="headings text-center mb-2" style='font-size: 30px;'>Feedback</h2>
+            <br>
+            <p style="font-size: 13px;">
+                <strong>Would you hire this tutor again or recommend him or her to a friend? Your rating will appear
+                    on {{Data.tutor.firstName }} {{Data.tutor.lastName ? ( Data.tutor.lastName.substr(0, 1) + '.' ) : ''}}
+                    's profile page.</strong>
+            </p>
+            <ngb-rating [(rate)]="currentRate" max="5">
+                <ng-template let-fill="fill" let-index="index">
+                    <span class="star-rating" (click)="checkRating()" [class.filled]="fill === 100">&#9733;</span>
+                </ng-template>
+            </ngb-rating>
+            <br>
+            <p style="font-size: 13px;">
+                <strong>Would you like to share a review on our site to support your local tutor and help other families
+                    find the right tutor for their child?
+
+                </strong>
+            </p>
+
+        </div>
+
+        <div *ngIf="!ratedTutor" [hidden]="this.notificationType === 'DISPUTE_RAISED'"
+             class="col-sm-12  col-md-12  col-xs-12 col-lg-12 mt-1 mb-4">
+            <textarea maxlength="500" class="textareaContact1" [(ngModel)]="message"
+                      placeholder="Not sure what to say? No problem! Here’s an example of what another parent wrote: “My son loved working with Kristen. She was fun, engaging, and managed to teach a good bit of math while playing games and keeping it light. We will be booking again!”"></textarea>
+        </div>
+        <!-- <div [hidden]="this.notificationType === 'DISPUTE_RAISED'" *ngIf="showError" class="flex error-message sub-little-text mt-4 mb-2">
+            Please give ratings to approve tutor
+        </div> -->
+
+        <div [hidden]="this.notificationType === 'DISPUTE_RAISED'" *ngIf="showError2"
+             class="flex error-message sub-little-text mt-4 mb-2">
+            Oops! Please select a star rating to submit your feedback.
+        </div>
+        <div [hidden]="this.notificationType === 'DISPUTE_RAISED'"
+             *ngIf="!ratedTutor && (this.notificationType === 'FINISHED') "
+             class="flex mt-4 mb-2">
+            <button (click)="rateTutor()" class="loginButton">Approve & Submit
+                <span style="color:white;margin-right:6px;float:right">
+                <i class="fa fa-lg fa-arrow-right" aria-hidden="true"></i>
+                </span>
+            </button>
+
+        </div>
+        <div *ngIf="!ratedTutor && (this.notificationType === 'COMPLETED') " class="flex mt-4 mb-4">
+            <button (click)="onlyRateTutor()" class="loginButton">Submit
+                <span style="color:white;margin-right:6px;float:right">
+                    <i class="fa fa-lg fa-arrow-right" aria-hidden="true"></i>
+                </span>
+            </button>
+
+        </div>
+        <div *ngIf="!ratedTutor && (this.notificationType != 'COMPLETED') "
+             [hidden]="this.notificationType === 'DISPUTE_RAISED'"
+             class="flex freetext mt-4 mb-2">
+            After you click approve, your card will be charged for your session total. If you do not approve within 24
+            hours, your card
+            will be charged. If you need to dispute any of the session details, please click below to raise a dispute
+            and
+            the Sylvan team will respond as soon as possible.
+        </div>
+        <div *ngIf="Data.booking != undefined && !ratedTutor &&  (this.notificationType != 'COMPLETED')"
+             class="flex mt-2  mb-2" style="height: 70px;">
+            <a [hidden]="this.notificationType === 'DISPUTE_RAISED'" (click)="raiseDispute(Data.booking._id)"
+               class="blue-heading" style="color:#e1134f;margin:auto; font-family:'ProximaNova-Bold';font-size:18px;">
+                Raise Dispute</a>
+
+        </div>
+        <div *ngIf="ratedTutor" class="justify-content-center mt-4" style="text-align: center">
+            <button (click)="closeDialog()" class="pinkButton mt-4 arrow-btn">OK
+                <!-- <span style="color:white;margin-right:6px;float:right"> </span> -->
+                <i class="fa fa-lg fa-arrow-right" aria-hidden="true"></i>
+            </button>
+        </div>
+
+    </div>
+</mat-dialog-content>

@@ -1,0 +1,12 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "npm",
+			"script": "push",
+			"problemMatcher": [],
+			"label": "npm: push",
+			"detail": "npm run lint && git add . && git commit -am 'no show reason will show after session starttime'  && git push origin dev2.0"
+		}
+	]
+}

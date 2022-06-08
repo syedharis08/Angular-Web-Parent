@@ -1,0 +1,116 @@
+@import "../../../../theme/sass/conf/conf";
+
+.session-all {
+    background-color: #f2f4f5;
+    // margin-top: -70px;
+    min-height: 490px;
+}
+
+.blue-text-bold {
+    font-size: 17px;
+}
+
+.status-details {
+    background-color: #ffffff;
+}
+
+.mat-card-title {
+    margin-bottom: 0px;
+}
+
+.pagination {
+    display: inline-flex;
+}
+
+.BookingText2 {
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #2e292a;
+    font-weight: 600;
+}
+
+.bookingSubHeading {
+    padding-left: 25%;
+    font-size: 15px;
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    opacity: 0.6;
+    // line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #000000;
+}
+
+.border-status-unresolved {
+    border: 1px solid #7d7d7d;
+    padding: 3%;
+    background: white;
+    background: transparent;
+    border-radius: 30px;
+    color: #7d7d7d;
+    font-family: 'ProximaNova-Reg';
+}
+
+.hour-rate {
+    font-family: 'ProximaNova-Reg';
+    font-size: 20px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.2;
+    letter-spacing: normal;
+    text-align: left;
+    color: #222e82;
+}
+
+.border-status {
+    border: 1px solid $main-green;
+    padding: 3%;
+    background: white;
+    background: transparent;
+    border-radius: 30px;
+    color: $main-green;
+    font-family: 'ProximaNova-Reg';
+}
+
+.status-data {
+    font-family: 'ProximaNova-Reg';
+    font-size: 15px;
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #232f84;
+}
+
+.status-title {
+    font-family: 'ProximaNova-Light';
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #000000;
+}
+
+@media (max-width: 460px) {
+    .text-disputes {
+        text-align: left !important
+    }
+}
+
+@media screen and (min-width: 461px) and (max-width: 768px) {
+    .text-disputes {
+        text-align: left !important
+    }
+}

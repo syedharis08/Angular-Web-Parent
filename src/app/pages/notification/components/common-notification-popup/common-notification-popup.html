@@ -1,0 +1,66 @@
+<div style="float:right;padding:0px;margin-bottom:0px" class="row" mat-dialog-title>
+    <button (click)="closeDialog()" style="border:none" class="close-btn" mat-button mat-dialog-close="true">
+        <img src="assets/img/close.png">
+    </button>
+</div>
+<mat-dialog-content>
+    <!-- <div style="float:right" mat-dialog-title>
+        <button style="border:none" mat-button mat-dialog-close="true">
+                    <i class="fa fa-times fa-fw fa-3xCross crossButton" aria-hidden="true"> </i>
+                </button>
+    </div> -->
+    <div *ngIf="notificationData && notificationData !=undefined" class=" mb-4">
+        <h2 class="headings text-center">{{notificationData.header}} </h2>
+        <br *ngIf="notificationData.type !='ADMIN_UPDATE_SESSION_TIMES_PARENT'">
+        <div class="row text-center"
+            *ngIf="notificationData.message && notificationData.message != undefined && notificationData.type ==='ADMIN_NOTIFICATION'">
+            <div class="col-12 col-sm-12 notification-data "> {{notificationData.message}} </div>
+        </div>
+        <div class="row text-center"
+            *ngIf="notificationData.message && notificationData.message != undefined && notificationData.type ==='ADMIN_UPDATE_SESSION_TIMES_PARENT'">
+            <div class="col-12 col-sm-12 notification-data "> {{notificationData.message}} </div>
+        </div>
+
+        <div *ngIf="notificationData && notificationData !=undefined" class="text-center">
+            <div *ngIf="notificationData.type !='ADMIN_UPDATE_SESSION_TIMES_PARENT'">
+                <div class="row" *ngIf="notificationData.tutor && notificationData.tutor != undefined ">
+                    <div class="col-12 col-sm-12 notification-data capitalize"> Tutor:
+                        {{notificationData.tutor.firstName }}
+                        {{notificationData.tutor.lastName? (notificationData.tutor.lastName.substr(0,1) +'.') : ''}}
+                    </div>
+                </div>
+                <div class="row" *ngIf="notificationData.student && notificationData.student != undefined ">
+                    <div class="col-12 col-sm-12 notification-data capitalize"> Child:
+                        {{notificationData.student.firstName}}
+                        {{notificationData.student.lastName? (notificationData.student.lastName.substr(0,1) +'.') : ''}}
+                    </div>
+                </div>
+                <div *ngIf="notificationData.booking && notificationData.booking != undefined " class="row">
+                    <div class="col-12 col-sm-12 notification-data"> Date & Time:
+                        {{startTime }}{{endTime? '-' : '' }}{{ endTime }} </div>
+
+                </div>
+
+                <div *ngIf="notificationData.booking && notificationData.booking !=undefined && notificationData.booking.subjects && notificationData.booking.subjects !=undefined"
+                    class="row ">
+                    <div class="col-12 col-sm-12 comma  notification-data "> Subjects:
+                        <span *ngFor="let subjects of notificationData.booking.subjects;let comma=last;">
+                            <span *ngIf="subjects.subcategories && subjects.subcategories.length>0">
+                                <span *ngFor="let subSubjects of subjects.subcategories;let i=index;let last=last; "
+                                    class="status-data ">
+                                    {{subSubjects.name}}{{(last && comma)? '': ','}}&nbsp; </span>
+                            </span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <button (click)="closeDialog()" class="pinkButton mt-4 arrow-btn">OK
+                <!-- <span style="color:white;margin-right:6px;float:right"> </span> -->
+                <i class="fa fa-lg fa-arrow-right" aria-hidden="true"></i>
+            </button>
+            <br>
+
+
+        </div>
+    </div>
+</mat-dialog-content>

@@ -1,0 +1,195 @@
+<div class="text-center session-all " id="notifications" style="padding-bottom:14%;">
+    <div *ngIf="notificationsArray && notificationsArray !=undefined" class="container " style="padding-top:1%;">
+
+
+        <mat-card class="mt-4 mb-4 "
+            *ngFor="let notification of notificationsArray | paginate: { itemsPerPage: limit, currentPage: page, totalItems: count }">
+            <mat-card-header>
+
+                <mat-card-title *ngIf="notification  && notification.notifications != undefined" class="blue-heading">
+                    <span class="blue-text-bold proximanova-light"> </span> {{notification.notifications.message}}
+                </mat-card-title>
+            </mat-card-header>
+            <mat-card-content
+                [hidden]="notification.notifications && notification.notifications.type === 'ADMIN_NOTIFICATION' "
+                (click)="getDetails(notification.notifications.booking._id)" style=" padding:2%">
+
+                <!-- copied -->
+                <div class="row mt-1">
+                    <div class="col-12 col-lg-5">
+                        <div class="row">
+                            <div class="col-4 text-left">
+                                <span class="notification-head proximanova-bold  ">Child:</span>
+                                <br>
+                                <br>
+                                <span class="notification-head proximanova-bold  ">Tutor:</span>
+                                <br>
+                                <br>
+                                <span class="notification-head proximanova-bold  "> Date and Time:</span>
+                                <br>
+                                <br>
+                                <span class="notification-head proximanova-bold ">Subjects:</span>
+                            </div>
+                            <div class="col-8 text-left">
+                                <span
+                                    *ngIf="notification.notifications && notification.notifications.student != undefined  "
+                                    class="tutor-place-text-notification ">
+                                    {{notification.notifications.student.firstName ? notification.notifications.student.firstName :''}}
+                                    {{notification.notifications.student.lastName ? ((notification.notifications.student.lastName.substr(0,1)) +'.') : ''}}
+                                </span>
+
+                                <br>
+                                <br>
+                                <span
+                                    *ngIf="notification.notifications && notification.notifications.tutor != undefined  "
+                                    class="tutor-place-text-notification ">
+                                    {{notification.notifications.tutor.firstName ? notification.notifications.tutor.firstName :''}}
+                                    {{notification.notifications.tutor.lastName ? ((notification.notifications.tutor.lastName.substr(0,1)) +'.') : ''}}
+                                </span>
+                                <br>
+                                <br>
+                                <span
+                                    *ngIf="notification && notification.startTime != undefined && notification.endTime !=undefiend "
+                                    class=" capitalize tutor-place-text-notification ">
+                                    {{notification.startTime ? notification.startTime : '' }}{{notification.startTime? '-' : '' }}{{ notification.endTime ? notification.endTime : '' }}
+                                </span>
+
+                                <br>
+                                <br>
+
+
+                                <span
+                                    *ngIf="notification.notifications.booking && notification.notifications.booking !=undefined && notification.notifications.booking.subjects && notification.notifications.booking.subjects !=undefined">
+                                    <span
+                                        *ngFor="let subjects of notification.notifications.booking.subjects;let comma=last"
+                                        class="tutor-place-text-notification comma"> <span
+                                            *ngIf="subjects.subcategories && subjects.subcategories.length>0"> <span
+                                                *ngFor="let subSubjects of subjects.subcategories;let i=index;let last=last "
+                                                class="tutor-place-text-notification">
+                                                {{subSubjects.name}}{{(last && comma)? '':','}}&nbsp; </span>
+                                        </span>
+                                    </span>
+                                </span>
+
+
+
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-12 col-lg-5">
+                        <div class="row">
+                            <div class="col-4  text-left">
+                                <span class="notification-head proximanova-bold ">Location:</span>
+
+                            </div>
+                            <div class="col-8 text-left"
+                                *ngIf="notification.notifications.booking && notification.notifications.booking != undefined && notification.notifications.booking.locationDetails && notification.notifications.booking.locationDetails !=undefined">
+                                <span class="tutor-place-text-notification capitalize"><span
+                                        class="tutor-place-text-notification ">
+                                        {{notification.notifications.booking.locationDetails.addressLine1 }} </span>
+                                    <br>
+                                    <span
+                                        *ngIf="notification.notifications.booking.locationDetails.addressLine2  != undefined"
+                                        class="tutor-place-text-notification ">
+                                        {{notification.notifications.booking.locationDetails.addressLine2  }} </span>
+                                    <br>
+                                    <span
+                                        class="tutor-place-text-notification ">{{notification.notifications.booking.locationDetails.city ? (notification.notifications.booking.locationDetails.city+ ',') :''}}
+                                        {{notification.notifications.booking.locationDetails.state?notification.notifications.booking.locationDetails.state :''   }}
+                                        {{notification.notifications.booking.locationDetails.zipCode?notification.notifications.booking.locationDetails.zipCode :''   }}</span></span>
+
+
+
+                            </div>
+                            <div class="col-4 text-left mt-3">
+                                <span class="notification-head proximanova-bold ">Online Session:</span>
+                            </div>
+                            <div class="col-8 text-left mt-3">
+                                <span
+                                    class="tutor-place-text-notification ">{{notification?.notifications?.booking?.isSessionOnline?'Yes':'No'}}</span>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-12 col-lg-2">
+                        <div style="margin-top: 20px">
+                            <div
+                                *ngIf="notification.notifications.booking && notification.notifications.booking != undefined">
+                                <button class="greenButton full-width-btn "
+                                    (click)='contactTutor(notification.notifications.booking._id)'
+                                    style="min-width:170px;">Contact Tutor<span
+                                        style="color:white;margin-right:6px;float:right"> <i
+                                            class="fa fa-lg fa-arrow-right" aria-hidden="true"></i></span> </button>
+
+                            </div>
+
+
+                        </div>
+                        <br>
+                        <br>
+
+                    </div>
+
+                </div>
+                <div class="col-12 col-lg-2" style="float:right">
+                    <div class="row mt-2" *ngIf="notification.notifications && notification.notifications != undefined"
+                        class="blue-heading" style="text-align:center">
+                        <!-- <img class="_10cu img _8o _8r img" src="https://static.xx.fbcdn.net/rsrc.php/v3/yj/r/AN4PFNRulRD.png" alt=""> -->
+                        {{(notification.notifications.createdAt| datex:"MMM. D")+' at '+ (notification.notifications.createdAt| datex:"h:mmA")}}
+                    </div>
+                </div>
+
+            </mat-card-content>
+
+
+            <mat-card-content
+                *ngIf="notification.notifications && notification.notifications.type === 'ADMIN_NOTIFICATION' "
+                style=" padding:2%">
+
+                <!-- copied -->
+
+                <div class="col-12 col-lg-2" style="float:right">
+                    <div class="row mt-2" *ngIf="notification.notifications && notification.notifications != undefined"
+                        class="blue-heading">
+                        <!-- <img class="_10cu img _8o _8r img" src="https://static.xx.fbcdn.net/rsrc.php/v3/yj/r/AN4PFNRulRD.png" alt=""> -->
+                        {{(notification.notifications.createdAt| datex:"MMM. D")+' at '+ (notification.notifications.createdAt| datex:"h:mmA")}}
+                    </div>
+                </div>
+
+            </mat-card-content>
+
+        </mat-card>
+        <div style="float:right;">
+
+
+            <div *ngIf="count >=5" class="col-lg-12 pagination col-sm-12 col-md-12 col-xs-12  mb-2">
+                <span class="perPage">Show &nbsp;</span>
+                <span class="perPage">
+                    <select class="selectBox" (change)="selectNo(device.value)" #device>
+                        <option value="5">5</option>
+                        <option selected value="10">10</option>
+                        <option value="15">15</option>
+                        <option value="20">20</option>
+                    </select>
+                </span>
+                <span class="perPage">&nbsp;items per page</span>
+                <span class="perPage">
+                    <pagination-controls class="inline-flx" (pageChange)="pageChanged($event)" maxSize="5"
+                        directionLinks="true" autoHide="false" previousLabel="Previous" nextLabel="Next"
+                        screenReaderPaginationLabel="Pagination" screenReaderPageLabel="page"
+                        screenReaderCurrentLabel="You're on page"></pagination-controls>
+                </span>
+            </div>
+
+
+
+        </div>
+
+    </div>
+    <div *ngIf="notificationsArray.length === 0">
+        No notifications found.
+
+    </div>
+</div>
